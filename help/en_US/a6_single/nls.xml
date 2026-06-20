@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="nls" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>nls </refname>
+               <refpurpose>non linear least squares </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rnls]=nls(eq [,option_1,...,option_n])</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> eq </term> =   a string representing the equation to estimate</para></listitem>
+<listitem><para>*  <term> option_i </term> =  </para></listitem>
+<listitem><para>&#160;&#160;-&#160;'coef=[namecoef1;namecoef2;...;namecoefn]'&#160;with&#160;namecoefi&#160;=&#160;name&#160;of&#160;the&#160;coefficient&#160;#&#160;i&#160;(default&#160;coef=['a1';'a2';...;'an'])</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'init=[init1;init2;...;intin]&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;give&#160;starting&#160;values</para></listitem>
+<listitem><para>&#160;&#160;-&#160;any&#160;option&#160;of&#160;maxlik&#160;(see&#160;maxlik()&#160;for&#160;a&#160;list)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rnsls</term>  =   a tlist with</para></listitem>
+<listitem><para>&#160;  - rnls('meth')  = 'nls'</para></listitem>
+<listitem><para>&#160;  - rnls('beta')  = bhat</para></listitem>
+<listitem><para>&#160;  - rnls('nobs')  = nobs</para></listitem>
+<listitem><para>&#160;  - rnls('nvar')  = nvars</para></listitem>
+<listitem><para>&#160;  - rnls('beta')  = bhat</para></listitem>
+<listitem><para>&#160;  - rnls('resid') = residuals</para></listitem>
+<listitem><para>&#160;  - rnls('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;  - rnls('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - rnls('sigu')  = sum of squared residuals</para></listitem>
+<listitem><para>&#160;  - rnls('ser')  = standard error of the regression</para></listitem>
+<listitem><para>&#160;  - rnls('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;  - rnls('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;  - rnls('dw')    = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;  - rnls('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;  - rnls('namey') = the equation</para></listitem>
+<listitem><para>&#160;  - rnls('namex') = name of the coefficients</para></listitem>
+<listitem><para>&#160;  - rnls('bounds') = if there is a timeseries in the regression, the bounds of the regression</para></listitem>
+<listitem><para>&#160;  - rnls('ropt') = the output tlist from maxlik (see maxlik for the list of arguments)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Provides the non linear least squares estimation of a regression, which is given by the string eq. This string must have the form: 'lhs(y,x1,...,xk, coef1, coef2,..., coefn) = rhs(coef1,x1,...,xk,coef2,..., coefn)'. y,x1,...,xk are respectively the endogenous variable and the exogenous ones. They can be time series or vectors. In the first case, the user can have specified the bounds; if she has not, then they are chosen to cover the longest time span. In the second case, vectors must have the same length.  The equation must be the first argument of nls. All other arguments can be given in whatever order.  The user can specify the name of the coefficients. In that case, the string 'coef = [namecoef1;namecoef2;...;namecoefn]' must be entered in nls. If the user has not given the names of her coefficients, the function assumes that all variables beginning with the character 'a' are coefficients, that the first one is named a1 and that the following ones are a2,... without any discontinuity: you can name your coefficients a1,a2,a3; but not a1,a2,a4. The user can specify starting values for the maximisation program. In that case, the parameter 'init = [init_1;init_2;...;inti_n]' must be entered in nls. If the user does not give starting values, they are drawn from a normal law.  Lastly, the user can give all maxlik() options as in maxlik().
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/smpt.dat')
+r=nls('smptr/lagts(smptr)-1=a1+a2*(lagts(smptr)/lagts(2,smptr)-1-a1)')
+// provide the estimation of the equation 'smptr/lagts(smptr)-1=a1+a2*(lagts(smptr)/lagts(2,smptr)-1-a1)'
+// over the period 1980-1999 (note that since there are 2 lags in the equation, the bounds are adjusted
+// to withdraw the first 2 years of smptr), starting with random values (note the double quotes
+// before and the triple quotes after normal).
+ 
+r=nls('smptr/lagts(smptr)-1=b1+b2*(lagts(smptr)/lagts(2,smptr)-1-b1)','coef=[b1 ;b2])' )
+// the same as above, except that the names of the coefficients are not numbered 'a', so must be declared
+ 
+r=nls('smptr/lagts(smptr)-1=a1+a2*(lagts(smptr)/lagts(2,smptr)-1-a1)','init=rand(2,1),''normal''')
+// the same as above, except that the names of the coefficients are not numbered 'a', so must be declared
+ 
+bounds('1980a','1999a');
+r=nls('smptr/lagts(smptr)-1=a1+a2*(lagts(smptr)/lagts(2,smptr)-1-a1)')
+// same as before except that the bounds are explicitely defined
+ 
+[r]=nls('smptr/lagts(smptr)-1=a1+a2*(lagts(smptr)/lagts(2,smptr)-1-a1)','init=[0.5;0.5]','maxit=1000')
+// same as before except that starting values are set to [0.5 ;0.5] and that the maximum # of iterations is set to 1000.
+ 
+s=series(smptr) ; s0=s(3:22) ; s1=s(2:21) ; s2=s(1:20) ;r=nls('s0./s1-1=a1+a2*(s1./s2-1-a1)'
+// same as before except that it uses the vector representation of the ts (trickier, but quicker).
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

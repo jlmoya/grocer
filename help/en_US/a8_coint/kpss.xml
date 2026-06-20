@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="kpss" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>kpss </refname>
+               <refpurpose>KPSS unit root test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[result]=kpss(namey,t,l)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term>namey</term>= a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term>t</term>= order of time polynomial in the null-hypothesis</para></listitem>
+<listitem><para>&#160;&#160;-&#160;t&#160;=&#160;0,&#160;for&#160;constant&#160;term</para></listitem>
+<listitem><para>&#160;&#160;-&#160;t&#160;=&#160;1,&#160;for&#160;constant&#160;plus&#160;time-trend</para></listitem>
+<listitem><para>*  <term> l</term>= (optional) truncation lag of the Newey-West window (default: l  =   floor(5*nobs^0.25))</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =   optional arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> results </term> =   a results tlist with:</para></listitem>
+<listitem><para>&#160;&#160;- result('meth') = 'kpss'</para></listitem>
+<listitem><para>&#160;&#160;- result('namey') = namey</para></listitem>
+<listitem><para>&#160;&#160;- result('y') = y</para></listitem>
+<listitem><para>&#160;&#160;- result('t') = t</para></listitem>
+<listitem><para>&#160;&#160;- result('lag(N_W)') = l</para></listitem>
+<listitem><para>&#160;&#160;- result('test_value') = lm</para></listitem>
+<listitem><para>&#160;&#160;- result('prests') = prests</para></listitem>
+<listitem><para>&#160;&#160;- result('bounds') = bounds</para></listitem>
+<listitem><para>&#160;&#160;- result('dropna') = boolean indicating if NAs have been droped</para></listitem>
+<listitem><para>&#160;&#160;- result('nonna') = vector indicating position of non-NA values (if the option 'dropna' was active)</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes Kwiatkowski, Phillips, Schmidt, Shin stationarity test.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+bounds('1964q3','1989q2');
+kpss('lm1',0)
+kpss('lm1',1)
+// Examples taken from function kpss_d. Provide KPSS test for variable lm1 taken from data base hendryericsson,
+// with no time trend and a simple time trend respectively.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2007
+        </refsection>
+</refentry>

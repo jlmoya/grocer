@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="norm_rnd" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>norm_rnd  </refname>
+               <refpurpose>normal random draws </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[y]=norm_rnd(sig)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> sig </term> =    a square-symmetric covariance matrix</para></listitem>
+<listitem><para>*  <term> n</term>  =    # of vectors drawn</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term> y </term> =    (n x m) matrix composed of n (1 x m) random vector normal draws with mean 0, var-cov(sig)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Produces a random multivariate random vector based on (mxm) var-cov matrix sig.
+<para>NOTE: for mean b, var-cov sig use: b + norm_rnd(sig)  </para>
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+x=norm_rnd([1 0.5 ;0.5 2],1000)
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

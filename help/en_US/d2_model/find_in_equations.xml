@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="find_in_equations" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:23-Juin-2018$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>find_in_equations</refname>
+               <refpurpose>in a model, finds the equations where an object is used </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>find_in_equations(model,object,output)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+  
+          <term>Input</term>
+   
+ 
+<listitem><para>*  <term>model</term> = a model typed list created by the function create_model</para></listitem>
+<listitem><para>*  <term>object</term> = the name of the object to search</para></listitem>
+<listitem><para>*  <term>output</term> = the file wherer to save the results (optional; default: the working space)</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+
+          <term>Output</term>
+ 
+<listitem><para>* nothing: the result is displayed on the screen</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+In a model, finds the equations where an object (endogenous, exogenous, residual, coefficient) can be found.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+
+global GROCERDIR ; 
+load(GROCERDIR+'\data\small.dat');// load the mesange model
+// display all equations with the variable td_p3m_d1
+find_in_equations(small,'td_p3m_d1')
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2018
+        </refsection>
+</refentry>

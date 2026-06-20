@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="hpfilter" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>hpfilter </refname>
+               <refpurpose>Hodrick Prescott filter </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[hpy]=hpfilter(y,lambda)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> y </term> =   either</para></listitem>
+<listitem><para>&#160; - &#160;a&#160;time&#160;series,&#160;or</para></listitem>
+<listitem><para>&#160; - &#160;a&#160;real&#160;(nx1)&#160;vector,&#160;or</para></listitem>
+<listitem><para>&#160; - &#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nx1)&#160;real&#160;vector&#160;between&#160;quotes</para></listitem>
+<listitem><para>*  <term> lambda </term> =   the smoothing parameter</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> hpy</term>  =   the smoothed filtered series of the same type than y (if y is not a string) or evstr(y) (if y is a string) </para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Hodrick-Prescott filter.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data\Fra_GDP.dat')
+Xf=hpfilter('Fra_GDP',1600)
+// This example provides the traditional Hodrick-Prescott filtering of a the French quarterly GDP with parameter lambda=1600.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2003
+        </refsection>
+</refentry>

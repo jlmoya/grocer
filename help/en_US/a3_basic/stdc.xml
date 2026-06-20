@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="stdc" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>stdc</refname>
+               <refpurpose>mimics gauss function stdc </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>v=stdc(mat)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> mat </term> =    a (nxp) matrix</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> v </term> =    a (px1) vector</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Function that mimics gauss function stdc: takes the standard deviations of each column of a matrix and stores them in a column 
+
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/macros/grocer/db/bdhenderic.dat') ; mat=explox(['delts(lm1)','delts(lp)','delts(ly)','rnet'],'',[]);v=stdc(mat)//returns:
+//  v  =//!    .0205913 !//!    .0141534 !//!    .0142649 !//!    .0376221 !
+
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2003
+        </refsection>
+</refentry>

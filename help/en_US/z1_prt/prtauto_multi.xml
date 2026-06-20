@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="prtauto_multi" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>prtauto_multi </refname>
+               <refpurpose>prints some automatic() results </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>prtauto_multi(results,namemod,test,path,out)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> results </term> =    a tlist provided by function automatic</para></listitem>
+<listitem><para>*  <term> namemod </term> =    the name of the sub-results to print in the results tlist ('stage 1 models' or 'stage 2 models')</para></listitem>
+<listitem><para>*  <term> test </term> =    %t if the user wants to print the specification tests results ; %f if not</para></listitem>
+<listitem><para>*  <term> path </term> =    %t if the user wants to print the name of the successively eliminated variables that lead to the printed models</para></listitem>
+<listitem><para>*  <term> out </term> =    the file where the results are printed</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing, just print the results</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Prints the sub-results named namemod in a tlist provided by automatic when there can be several regressions in the corresponding field (i.e stage 1 or 2 models).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/bdhenderic.dat') ;
+ 
+bounds('1964q3','1989q2')
+// column HE in table 9 of Hendry and Krozlig paper
+//r=ols('delts(lm1-lp)','lagts(lm1-lp-ly)','delts(lp)','rnet','delts(lagts(lm1-lp-ly))','cte')
+ 
+// this example allows the user to recover
+// the results of columns Final model A and Final model B
+// in table 9 of Hendry and Krozlig paper
+ 
+[r1]=automatic('delts(lm1-lp)','lagts(lm1-lp-ly)',...
+'delts(lp)',...
+'rnet',...
+'delts(lagts(lm1-lp))','delts(lagts(2,lm1-lp))','delts(lagts(3,lm1-lp))','delts(lagts(4,lm1-lp))',...
+'delts(ly)','delts(lagts(1,ly))','delts(lagts(2,ly))','delts(lagts(3,ly))','delts(lagts(4,ly))',...
+'delts(delts(lp))','delts(delts(lagts(1,lp)))','delts(delts(lagts(2,lp)))','delts(delts(lagts(3,lp)))','delts(delts(lagts(4,lp)))',...
+'delts(rnet)','delts(lagts(1,rnet))','delts(lagts(2,rnet))','delts(lagts(3,rnet))','delts(lagts(4,rnet))',...
+'const','prt=nothing')
+ 
+prtauto_multi(r1,'stage 1 models',%t,%t)
+// displays on screen (no fifth argument) stage 1 models results including specification tests,
+// and the path corresponding to the models.
+ 
+prtauto_multi(r,'stage 2 models',%t,%f)
+// Displays on screen (no fifth argument) stage 2 models results including specification tests,
+but without giving the path corresponding to the models.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

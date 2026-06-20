@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="rolvar_granger" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:15-Fév-2014$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>rolvar_granger</refname>
+               <refpurpose>Granger (non-)causality tests for a rolling VAR </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=rolvar_granger(res_rolvar,causing,caused,noprint)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> res_rolvar </term> =    a 'rolling var' results tlist</para></listitem>
+<listitem><para>*  <term> option </term> =    the result the user wants to plot ('chi2 stat', 'chi2 pvalue', 'Fisher stat' or 'Fisher pvalue')</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  rvar </term> =    a results tlist with:</para></listitem>
+<listitem><para>&#160;   * rvar('meth') = 'rolling var Granger causality'</para></listitem>
+<listitem><para>&#160;   * rvar('rolvar res') = the input 'rolling var' results tlist</para></listitem>
+<listitem><para>&#160;   * rvar('causing') = the index vector of the supposed causing variables</para></listitem>
+<listitem><para>&#160;   * rvar('caused') = the index vector of the supposed caused variables</para></listitem>
+<listitem><para>&#160;   * rvar('chi2 stat') = the vector of rolling Wald statistics of non-causality</para></listitem>
+<listitem><para>&#160;   * rvar('chi2 pvalue') = their p-values</para></listitem>
+<listitem><para>&#160;   * rvar('Fisher stat') = the vector of rolling statistics of non-causality in Fisher form</para></listitem>
+<listitem><para>&#160;   * rvar('Fisher pvalue') = their p-values</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs Ganger (non-)causality tests for a rolling VAR.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+global GROCERDIR;
+load(GROCERDIR+'\data\france_maunf_survey.dat')
+bounds()
+resrolvar=rolvar(6,'endo=fra_past_output;fra_exp_output','nper=120','start_firstbound=1990m1','end_firstbound=2004m1')
+resrolgranger=rolvar_granger(resrolvar,'fra_exp_output','fra_past_output')
+// Example taken from function rovar_d; provides Granger non-causality test from France expected output balance to France past output balance
+// using tlist result resrolvar
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2014
+        </refsection>
+</refentry>

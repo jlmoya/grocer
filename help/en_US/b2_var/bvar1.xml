@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="bvar1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:28-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>bvar1</refname>
+               <refpurpose>low level estimation of a bayesian VAR model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rbvar=bvar1(nlag,tight,weight,decay,y,x)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> nlag </term> =    the lag length of the VAR</para></listitem>
+<listitem><para>*  <term> tight </term> =    Litterman's tightness hyperparameter</para></listitem>
+<listitem><para>*  <term> weight </term> =    Litterman's weight (matrix or scalar)</para></listitem>
+<listitem><para>*  <term> decay </term> =    Litterman's lag decay  =    lag^(-decay)</para></listitem>
+<listitem><para>*  <term> y </term> =    (nobs x neqs) matrix of endogenous variables</para></listitem>
+<listitem><para>*  <term> x </term> =    (nobs x nx) matrix of exogenous variables (optional)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rbvar </term> =    a results tlist with:</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('meth')&#160;&#160;=&#160;'bvar'</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('y')&#160;&#160;&#160;&#160;&#160;=&#160;y&#160;data&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('x')&#160;&#160;&#160;&#160;&#160;=&#160;x&#160;data&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('nvar')&#160;&#160;=&#160;#&#160;exogenous&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('nobs')&#160;&#160;=&#160;#&#160;observations</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('neqs')&#160;&#160;=&#160;#&#160;endogenous&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('nlag')&#160;&#160;=&#160;#&#160;lags</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('tight')&#160;&#160;=&#160;Litterman's&#160;tightness&#160;hyperparameter</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('weight')&#160;&#160;=&#160;Litterman's&#160;weight&#160;(matrix&#160;or&#160;scalar)</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('decay')&#160;&#160;=&#160;Litterman's&#160;lag&#160;decay&#160;=&#160;lag^(-decay)</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('beta')&#160;&#160;=&#160;bhat,&#160;with&#160;rbvar('beta')(:,i):&#160;coefficients&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('tstat')&#160;=&#160;t-stats,&#160;with&#160;rbvar('tstat')(:,i):&#160;t-stat&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('pvalue')=&#160;pvalue&#160;of&#160;the&#160;betas,&#160;with&#160;rbvar('pvalue')(:,i):&#160;p-value&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('resid')&#160;=&#160;residuals,&#160;with&#160;rbvar('resid')(:,i):&#160;residuals&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('yhat')&#160;=&#160;yhat,&#160;with&#160;rbvar('yhat')(:,i):&#160;residuals&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('sige')&#160;&#160;=&#160;estimated&#160;variances&#160;rbvar('sige')(i):&#160;variance&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('ser')&#160;&#160;&#160;=&#160;standard&#160;errors&#160;of&#160;the&#160;regression&#160;with&#160;rbvar('ser')(i):&#160;standard&#160;error&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('dw')&#160;&#160;&#160;&#160;=&#160;Durbin-Watson&#160;Statistic,&#160;with:&#160;rbvar('dw')(i):&#160;DW&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('rsqr')&#160;&#160;=&#160;rsquared,&#160;with&#160;rbvar('rsqr')(i)&#160;:&#160;rsquared&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('rbar')&#160;&#160;=&#160;rbar-squared</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('sigma')&#160;=&#160;(neqs&#160;x&#160;neqs)&#160;var-covar&#160;matrix&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('nx')&#160;=&#160;#&#160;exogenous&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('prescte')&#160;=&#160;boolean&#160;indicating&#160;the&#160;presence&#160;or&#160;absence&#160;of&#160;a&#160;constant&#160;in&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rbvar('xpxi)&#160;&#160;&#160;=&#160;inv(x'*x)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Estimates a bayesian VAR of order p. Applies when the variables are already in matrix form. Does note display any result on screen (see bvar for a more complete function).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/datajpl.dat') // load Le Sage matlab data
+y=explone(list('illinos','indiana','kentucky','michigan','ohio','pennsyvlania','tennesse','westvirginia'))
+// stores the data into matrix y
+rbvar = bvar1(2,0.1,1,0.5,y)
+// This function should be mainly be used in other functions.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

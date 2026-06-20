@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="olsc1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>olsc1 </refname>
+               <refpurpose>Cochrane-Orcutt estimation of an autocorrelated model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rolsc=olsc1(y,x,maxit,crit)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> y </term> =    real (nx1) vector of an endogenous variable</para></listitem>
+<listitem><para>*  <term> x </term> =    real (nxk) vector of an exogenous variable</para></listitem>
+<listitem><para>*  <term> maxit </term> =    a scalar, the maximum # of authorized  iterations</para></listitem>
+<listitem><para>*  <term> crit </term> =    a scalar, the convergence criterionused to assess if the difference between successive values of the autocorrelation coefficient is significant</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rolsc </term> =    a results tlist with</para></listitem>
+<listitem><para>&#160;  - rolsc('meth')  = 'Cochrane-Orcutt'</para></listitem>
+<listitem><para>&#160;  - rolsc('y')     = y data vector</para></listitem>
+<listitem><para>&#160;  - rolsc('x')     = x data matrix</para></listitem>
+<listitem><para>&#160;  - rolsc('nobs')  = # observations</para></listitem>
+<listitem><para>&#160;  - rolsc('nvar')  = # variables</para></listitem>
+<listitem><para>&#160;  - rolsc('beta')  = bhat</para></listitem>
+<listitem><para>&#160;  - rolsc('yhat')  = yhat</para></listitem>
+<listitem><para>&#160;  - rolsc('resid') = residuals</para></listitem>
+<listitem><para>&#160;  - rolsc('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;  - rolsc('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - rolsc('sigu')  = sum of squared residuals</para></listitem>
+<listitem><para>&#160;  - rolsc('ser')  = standard error of the regression</para></listitem>
+<listitem><para>&#160;  - rolsc('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;  - rolsc('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;  - rolsc('dw')    = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;  - rolsc('condindex') = multicolinearity cond index</para></listitem>
+<listitem><para>&#160;  - rolsc('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;  - rolsc('rsqr')  = rsquared</para></listitem>
+<listitem><para>&#160;  - rolsc('rbar')  = rbar-squared</para></listitem>
+<listitem><para>&#160;  - rolsc('f')    = F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;  - rolsc('pvaluef') = its significance level</para></listitem>
+<listitem><para>&#160;  - rolsc('bounds') = if there is a timeseries in the regression, the bounds of the regression</para></listitem>
+<listitem><para>&#160;  - rolsc('rho') = estimated first order autocorrelation of residuals</para></listitem>
+<listitem><para>&#160;  - rolsc('trho') = its Student t</para></listitem>
+<listitem><para>&#160;  - rolsc('iterout') = a (niter x 3) matrix giving for each</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes Cochrane-Orcutt ols regression for AR1 errors. This is a more constrainted version than olsc: endogenous variables and exogenous ones are given in a matrix form; the maximum number of iterations and the criterion must be given. No result is displayed on screen.
+ 
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+x=grand(15,3,'nor',0,1)
+y=x*ones(3,1)+autocum(grand(15,1,'nor',0,1),0.8)
+rolsc=olsc1(y,x,100,%eps^(1/3))
+//In this example, the maximum # of iterations is set to 100 and the convergence criterion to %eps^(1/3).
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2005
+        </refsection>
+</refentry>

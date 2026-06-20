@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="brybos" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:14-Mar-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>brybos</refname>
+               <refpurpose>Bry-Boshan turning points datation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rbb=brybos(namey,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =   a ts or a string representing the name of a ts</para></listitem>
+<listitem><para>*  <term> argi </term> =   an optional argument that can be</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'M=xx'&#160;&#160;&#160;&#160;&#160;&#160;with&#160;xx&#160;=&#160;&#160;minimal&#160;duration&#160;Peaks-Peaks&#160;or&#160;Trought-Trought</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'e=xx'&#160;&#160;with&#160;xx&#160;=&#160;min&#160;#&#160;of&#160;periods&#160;separating&#160;a&#160;turn&#160;form&#160;borders</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'m=xx'&#160;&#160;with&#160;xx&#160;=&#160;minimal&#160;phase</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'k=xx'&#160;&#160;with&#160;xx&#160;=&#160;window&#160;of&#160;time&#160;over&#160;which&#160;the&#160;local&#160;peaks/troughs&#160;are&#160;computed&#160;in&#160;each&#160;side&#160;of&#160;a&#160;given&#160;date.&#160;Exemple:&#160;if&#160;k=2,&#160;then&#160;date&#160;t&#160;is&#160;a&#160;peak&#160;in&#160;t&#160;if&#160;{x(t-2)&lt;x(t),&#160;x(t-1)&lt;x(t),&#160;x(t+1)&lt;x(t),&#160;x(t+2)&lt;x(t)}.</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'ma=xx&#160;&#160;to&#160;use&#160;filtered&#160;data&#160;by&#160;a&#160;moving&#160;xx-centered&#160;moving&#160;average</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'spenc1'&#160;to&#160;filter&#160;data&#160;by&#160;a&#160;Spencer&#160;curve</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'proc&#160;=''bb'''&#160;to&#160;perform&#160;Bry-Boschan&#160;specific&#160;procedure&#160;(otherwise&#160;performs&#160;Harding-Pagan&#160;dating&#160;rules&#160;('proc&#160;=''hp'''))</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'mcd&#160;=&#160;xx'&#160;with&#160;xx&#160;=&#160;&#160;user&#160;defined&#160;month&#160;of&#160;cyclical&#160;dominance&#160;for&#160;bry-boschan&#160;procedure</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* <term>rbb</term> = a results tlist with:</para></listitem>
+<listitem><para>&#160;  - rbb('meth')    = method used ('bb' or 'hp')                 </para></listitem>
+<listitem><para>&#160;  - rbb('P')        = dates of peaks                 </para></listitem>
+<listitem><para>&#160;  - rbb('T')      = dates of troughts                </para></listitem>
+<listitem><para>&#160;  - rbb('DPP)        = average duration from peak to peak</para></listitem>
+<listitem><para>&#160;  - rbb('DTT')        = average duration from trough to trough</para></listitem>
+<listitem><para>&#160;  - rbb('DPT')    = average duration from peak to trough</para></listitem>
+<listitem><para>&#160;  - rbb('DTP')    = average duration from trough to peak</para></listitem>
+<listitem><para>&#160;  - rbb('APT')    = average amplitude from peak to trough</para></listitem>
+<listitem><para>&#160;  - rbb('ATP')    = average amplitude from trough to peak</para></listitem>
+<listitem><para>&#160;  - rbb('filter') = if filtered the data before analysis</para></listitem>
+<listitem><para>&#160;   - rbb('ind_peaks') = indexes of the peaks</para></listitem>
+<listitem><para>&#160;   - rbb('ind_troughs') = indexes of the troughs</para></listitem>
+<listitem><para>&#160;   - rbb('phases') = a (nobs x 1) vector equal to 0 in recessions and 1 in expansions</para></listitem>
+<listitem><para>&#160;  - rbb('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;  - rbb('namey')  = name of the y variable</para></listitem>
+<listitem><para>&#160;  - rbb('bounds') = if there is a timeseries in the regression, the bounds of the regression </para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes Bry-Boshan or Harding and Pagan turning points dating rules. Stores various satistics relating to the cycle so determinated. Note that at the installation the convention regarding the location of the peaks and troughs is that peaks bekong to the expansion phases and trough to the recession ones. This convention can be changed with the function define_recession.
+ 
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'\macros\grocer\db\pigiron.dat');
+rbb1 = brybos('log(lpigiron)','proc=''bb''');
+ 
+// Provides the Bry-Boschan dating procedure on the Pig-Iron series taken from Fig 1. (p. 27)
+// in Mark. W. Watson (1993), "Business Cycle Durations and Postwar Stabilization of the U.S. Economy",
+// American Economic Review, Vol. 84, 1, pp. 24-46 (see demo function bbq_d).
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2005
+        </refsection>
+</refentry>

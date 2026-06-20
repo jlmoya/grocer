@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="gmm" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>gmm </refname>
+               <refpurpose>Generalized Method of Moments </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>gmmout =gmm(namey,gmmopt,arg1,....,argn,)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =    dependent variable vector (nobs x 1)</para></listitem>
+<listitem><para>*  <term> gmmopt </term> = a tlist (with 'gmm' as type) wich argument can be [default]:</para></listitem>
+<listitem><para>&#160; - gmmopt('momt') = filename&#160;of&#160;moment&#160;conditions&#160;REQUIRED</para></listitem>
+<listitem><para>&#160; - gmmopt('jake') = filename&#160;of&#160;Jacobian&#160;of&#160;moment&#160;condition&#160;['numz0']</para></listitem>
+<listitem><para>&#160; - gmmopt('namep') = a&#160;vector&#160;containing&#160;the&#160;name&#160;of&#160;the&#160;parameters&#160;(optional)</para></listitem>
+<listitem><para>&#160; - gmmopt('gmmit') = number&#160;of&#160;GMM&#160;iterations&#160;[2]</para></listitem>
+<listitem><para>&#160; - gmmopt('maxit') = cap&#160;on&#160;number&#160;of&#160;GMM&#160;iterations&#160;[25]</para></listitem>
+<listitem><para>&#160; - gmmopt('tol') = convergence&#160;criteria&#160;for&#160;iterated&#160;GMM&#160;[1e-7]</para></listitem>
+<listitem><para>&#160; - &#160;gmmopt('W0')&#160;=&#160;initial&#160;GMM&#160;weighting&#160;matrix&#160;['Z'],</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 'I'&#160;=&#160;identity</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 'Z'&#160;=&#160;instruments&#160;(Z'Z)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 'C'&#160;=&#160;calculate&#160;from&#160;b</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 'Win'&#160;=&#160;Fixed&#160;passed&#160;as&#160;Win</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. myfile&#160;=&#160;user's&#160;own&#160;sci-file</para></listitem>
+<listitem><para>&#160; - gmmopt('W') = subsequent GMM weighting matrix ['S'], inverse spectral density from gmmS</para></listitem>
+<listitem><para>&#160; - gmmopt('S') = type of spectral density matrix ['NW'],</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 'W'=White</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 'NW'=Newey-West&#160;(Bartlett)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 'G'=Gallant&#160;(Parzen)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 'H'=Hansen&#160;(truncated)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 'AM'=Andrews-Monahan</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 'P'=Plain&#160;(OLS)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 'myfile'&#160;=&#160;user's&#160;sci-file</para></listitem>
+<listitem><para>&#160; - gmmopt('aminfo')&#160;=&#160;tlist&#160;if&#160;gmmopt('S')='AM'&#160;(see&#160;gmmAndMon.sci)</para></listitem>
+<listitem><para>&#160; - gmmopt('lags')&#160;=&#160;lags&#160;used&#160;in&#160;truncated&#160;kernel&#160;for&#160;S&#160;[nobs^(1/3)]</para></listitem>
+<listitem><para>&#160; - gmmopt('wtvec')&#160;=&#160;user-defined&#160;weights&#160;for&#160;Hansen&#160;matrix&#160;allows&#160;for&#160;seasonals,&#160;etc&#160;(eg.&#160;wtvec&#160;=&#160;[1&#160;0&#160;1])</para></listitem>
+<listitem><para>&#160; - gmmopt('Strim')&#160;=&#160;controls&#160;demeaning&#160;of&#160;moments&#160;in&#160;calculus&#160;of&#160;S&#160;[1],</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 0&#160;=&#160;none</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 1&#160;=&#160;demean&#160;e</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 2&#160;=&#160;demean&#160;Z'e</para></listitem>
+<listitem><para>&#160; - gmmopt('Slast')&#160;=&#160;1&#160;to&#160;recalculate&#160;S&#160;at&#160;final&#160;parameters&#160;estimate,&#160;2&#160;updates&#160;W&#160;[1]</para></listitem>
+<listitem><para>&#160; - gmmopt('null')&#160;=&#160;vector&#160;of&#160;null&#160;hypotheses&#160;for&#160;t-satistics&#160;[0]</para></listitem>
+<listitem><para>&#160; - gmmopt('plt)&#160;=&#160;1&#160;if&#160;the&#160;user&#160;want&#160;to&#160;graph&#160;the&#160;weights&#160;of&#160;GMM&#160;matrix&#160;[0]</para></listitem>
+<listitem><para>&#160; - gmmopt('prt')&#160;=&#160;1&#160;if&#160;the&#160;user&#160;want&#160;to&#160;print&#160;the&#160;optimization&#160;steps&#160;[0]</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =    arguments that can be:</para></listitem>
+<listitem><para>&#160; - the&#160;string&#160;'exo=[var1,var2,...,varm]'&#160;where&#160;var1,&#160;var2,...,&#160;varm&#160;are&#160;the&#160;exogenous&#160;variables.&#160;Write&#160;'exo=[''var1'',''var2'',...,''varm'']'&#160;to&#160;keep&#160;variables&#160;names</para></listitem>
+<listitem><para>&#160; - the&#160;string&#160;'ivar=[ivar1,ivar2,...,ivarm]'&#160;where&#160;ivar1,&#160;ivar2,...,&#160;ivarm&#160;are&#160;the&#160;instruments&#160;(same&#160;as&#160;for&#160;exo&#160;to&#160;keep&#160;the&#160;variable&#160;names)</para></listitem>
+<listitem><para>&#160; - the&#160;string&#160;'parm0&#160;=[p1;p2;...;pm]'&#160;where&#160;p1,&#160;p2,...,&#160;pm&#160;are&#160;the&#160;initial&#160;condition&#160;for&#160;he&#160;parameters</para></listitem>
+<listitem><para>&#160; - &#160;Win&#160;user-defined&#160;initial&#160;weighting&#160;matrix&#160;(optionnal).&#160;&#160;To&#160;use&#160;a&#160;function&#160;to&#160;calculate&#160;W0,&#160;don't&#160;use&#160;Win,&#160;but&#160;set&#160;gmmopt('W0')&#160;to&#160;gmmopt('U')&#160;and&#160;give&#160;the&#160;sci-file&#160;name&#160;in&#160;gmmopt('W')</para></listitem>
+<listitem><para>&#160; - 'noprint'&#160;if&#160;the&#160;user&#160;does&#160;not&#160;want&#160;to&#160;print&#160;the&#160;results</para></listitem>
+ 
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term>gmmout</term> = a tlist with:</para></listitem>
+<listitem><para>&#160;  - gmmout('meth') = 'GMM'</para></listitem>
+<listitem><para>&#160;  - gmmout('y') = y data vector</para></listitem>
+<listitem><para>&#160;  -  gmmout('x') = x data matrix</para></listitem>
+<listitem><para>&#160;  -  gmmout('z') = instruments data matrix</para></listitem>
+<listitem><para>&#160;  -  gmmout('f') = function value</para></listitem>
+<listitem><para>&#160;  -  gmmout('nobs') = number of observations</para></listitem>
+<listitem><para>&#160;  -  gmmout('varn') = number of parameters to estimate</para></listitem>
+<listitem><para>&#160;  -  gmmout('north') = number of orthogonality conditions</para></listitem>
+<listitem><para>&#160;  -  gmmout('neq') =  number of equations</para></listitem>
+<listitem><para>&#160;  -  gmmout('nz') =  number of instruments</para></listitem>
+<listitem><para>&#160;  -  gmmout('J') = chi-square stat for model fit</para></listitem>
+<listitem><para>&#160;  -  gmmout('pvalue fit') = p-value for model fit</para></listitem>
+<listitem><para>&#160;  -  gmmout('beta') = coefficient estimates</para></listitem>
+<listitem><para>&#160;  -  gmmout('se') = standard errors of parameters</para></listitem>
+<listitem><para>&#160;  -  gmmout('vcovar') = cov matrix of parameter estimates</para></listitem>
+<listitem><para>&#160;  -  gmmout('tstat') = t-satistics for parms = null hypotheses</para></listitem>
+<listitem><para>&#160;  -  gmmout('pvalue') = p-values for coefficients</para></listitem>
+<listitem><para>&#160;  -  gmmout('m') = value moments</para></listitem>
+<listitem><para>&#160;  -  gmmout('M') = value of jacobian of moments conditions</para></listitem>
+<listitem><para>&#160;  -  gmmout('mse') =  standard errors of moments</para></listitem>
+<listitem><para>&#160;  -  gmmout('varm') = covariance matrix of moments</para></listitem>
+<listitem><para>&#160;  -  gmmout('m tstat') = t-satistics for moments = 0</para></listitem>
+<listitem><para>&#160;  -  gmmout('m pvalue') = p-values for moments</para></listitem>
+<listitem><para>&#160;  -  gmmout('nz') =  number of instruments</para></listitem>
+<listitem><para>&#160;  -  gmmout('nvar') =  number of parameters</para></listitem>
+<listitem><para>&#160;  -  gmmout('df') = degrees of freedom for model</para></listitem>
+<listitem><para>&#160;  -  gmmout('null') = vector of null hypotheses for parameter values</para></listitem>
+<listitem><para>&#160;  -  gmmout('W0 type') = type of initial weighting matrix</para></listitem>
+<listitem><para>&#160;  -  gmmout('W type') = type of weighting matrix</para></listitem>
+<listitem><para>&#160;  -  gmmout('W') = weighting matrix</para></listitem>
+<listitem><para>&#160;  -  gmmout('S type') = type of spectral density matrix</para></listitem>
+<listitem><para>&#160;  -  gmmout('S') = spectral density matrix</para></listitem>
+<listitem><para>&#160;  -  gmmout('eflag') = error flag for spectral density matrix</para></listitem>
+<listitem><para>&#160;  - gmmout('namey') = name of "endogenous" variables</para></listitem>
+<listitem><para>&#160;  - gmmout('namex') = name of "exogenous" variables</para></listitem>
+<listitem><para>&#160;  - gmmout('namez') = name of instruments</para></listitem>
+<listitem><para>&#160;  - gmmout('prests') = boolean indicating presence of time series</para></listitem>
+<listitem><para>&#160;  - gmmout('bounds') = if there is a times series in the  regression, the bounds of the regression</para></listitem>
+ 
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs Generalized Method of Moments estimation.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+X = [ones(1000,1) grand(1000,1,'nor',0,1) grand(1000,1,'nor',0,1)];
+b = [0;1;-1];
+e = grand(1000,1,'nor',0,1);
+y = X*b + e;
+ 
+gmmopt = tlist(['gmm';'momt';'jake';'prt';'gmmit';'S']);
+gmmopt('prt')=1;
+gmmopt('gmmit') = 1;
+gmmopt('S')='W';
+gmmopt('momt')='gmmLinM';
+gmmopt('jake')='gmmLinJ';
+ 
+b0=zeros(3,1);
+ 
+ uout=gmm('y',gmmopt,'exo=''X''','ivar=''X''','parm0=b0');
+// Example taken from gmmLin_d():
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2007
+        </refsection>
+</refentry>

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="param_g" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>param_g </refname>
+               <refpurpose>determines the font parameters </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>param_g(ref_nbinter,thresh,font_axis)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> ref_nbinter </term> =    # of chars that can be drawn on the x axis</para></listitem>
+<listitem><para>*  <term> thresh </term> =    # of chars in the title that causes a decline of 1 unit in the title font</para></listitem>
+<listitem><para>*  <term> font_axis</term>  =    font of the axes</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing: the parameters in saved in a scilab database</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ Set the values useful to set titles and axes that are readable. Default values suitable for one type of screen cannot be so for others: if this is the case, the user has to enter, by trial and error, the values suitable to her.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+param_g(60,12,11,4)
+// Set the default values.
+param_g(40,9,8,3)
+// Set values suitable for smaller screens.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

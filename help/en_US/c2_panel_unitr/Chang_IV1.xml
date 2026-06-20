@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="Chang_IV1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:24-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>Chang_IV1 </refname>
+               <refpurpose>Chang Panel Unit Root Test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res = Chang_IV1(Y,t_order,LagOrders,pmax,IGF,signif)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> Y </term> =   matrix (T,N) of observations</para></listitem>
+<listitem><para>&#160;&#160;The data matrix may be unbalanced.</para></listitem>
+<listitem><para>&#160;&#160;Missing Values must be specified as %nan      </para></listitem>
+<listitem><para>*  <term> t_order </term> =   -1 : no individual effect</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160; 0 : individual effects (Default)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160; 1 : individual effects and time trends</para></listitem>
+<listitem><para>*  <term> LagOrders </term> =  </para></listitem>
+<listitem><para>&#160;&#160;-&#160;%nan&#160;if&#160;the&#160;user&#160;wants&#160;the&#160;program&#160;to&#160;determine&#160;the&#160;optimal&#160;lag&#160;order&#160;for&#160;each&#160;country&#160;(pmax=12&#160;or&#160;T/4)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;vector&#160;(N&#160;x&#160;1)&#160;or&#160;(1&#160;x&#160;N)&#160;of&#160;optimal&#160;lags&#160;for&#160;all&#160;the&#160;individuals&#160;of&#160;the&#160;panel</para></listitem>
+<listitem><para>*  <term> pmax </term> =   Maximum of the lag order authorized</para></listitem>
+<listitem><para>* <term>IGF </term> (Instrument Generating Function) function</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; =   1 : F(x)  =  x*exp(-ci*|x|) (Default)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; = 2 : F(x) =  I(|x|&lt;K) Trimmed OLS on [-K,K]</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; = 3 : F(x)  =  I(|x|&lt;K)*x</para></listitem>
+<listitem><para>*  <term> signif </term> =   significance level for the individual ADF tests (0.05, 0.01 or 0.1)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* <term>res</term>= a results tlist with:</para></listitem>
+<listitem><para>&#160;  - res('meth') = 'Chang IV'</para></listitem>
+<listitem><para>&#160;   - res('t_order') = the trend order (-1, 0 or 1)</para></listitem>
+<listitem><para>&#160;   - res('t_orderlit') = the trend order in plain english</para></listitem>
+<listitem><para>&#160;   - res('y') = (T x k) matrix of data</para></listitem>
+<listitem><para>&#160;   - res('Sn') = Average IV t-ratio statistic (distributed as N(0,1) under H0)</para></listitem>
+<listitem><para>&#160;   - res('Sn_critical') = Critical Values of normal N(0,1) at 1%, 5% and 10%</para></listitem>
+<listitem><para>&#160;   - res('Sn_pvalue') = Pvalue of the average IV t-ratio statistic</para></listitem>
+<listitem><para>&#160;   - res('Zi') = Individual IV t-ratio statistics</para></listitem>
+<listitem><para>&#160;   - res('Zi_critical') = Critical Values of normal N(0,1) at 1%, 5% and 10%</para></listitem>
+<listitem><para>&#160;   - res('Zi_pvalue') = Pvalue of the individual IV t-ratio statistics</para></listitem>
+<listitem><para>&#160;   - res('pi') = Individual lag orders</para></listitem>
+<listitem><para>&#160;   - res('ADF') = Individual ADF statistics for comparison</para></listitem>
+<listitem><para>&#160;   - res('AR_IV_ind') = Individual IV estimates of the autoregressive parameter</para></listitem>
+<listitem><para>&#160;   - res('var_resIV') = Variance of Residuals of IV estimates for each unit</para></listitem>
+<listitem><para>&#160;   - res('var_IV') = Variance of the IV estimator of the autoregressive parameter</para></listitem>
+<listitem><para>&#160;   - res('IGF') = Instrument Generating Function used</para></listitem>
+<listitem><para>&#160;   - res('K') = Constant K of IGF function (IGF 2 and 3 only)</para></listitem>
+<listitem><para>&#160;   - res('ci') = Factor ci for IGF 1 : F(x)=x*exp(-ci*|x|)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Chang (2002) Unit Root Tests on Panel Data (ref: Chang (2002): "Nonlinear IV unit root test in panels with cross sectional dependency", Journal of Econometrics, 110, 261-292), vol. 108, pp. 1&#150;24).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/gdpan_oecd.dat');
+Y=explone(dblist(GROCERDIR+'/data/gdpan_oecd.dat'));
+// extract matrix of data present in database
+res=Chang_IV1(log(Y),0,%nan,5,1,0.05)
+// Provides the Chang test for all (logartithm of) Y columns,
+// with a constant but not trend (arg # 2 = 0),
+// the Lag order to be determined by the program (arg # 3 = %nan),
+// the maximum number of lags set to 5  (arg # 4 = 5),
+// the function F(x)=x*exp(-ci*|x|) used as an instrument generating function (arg # 5 set to 1)
+// and a 5% significance level (arg # 5 set to 0.05).
+ 
+res = Chang_IV1(Y,1,2*ones(size(Y,2),1),%nan,2,0.1)
+// Provides the Chang test for all (logartithm of) Y columns,
+// with a constant and a trend (arg # 2 = 1),
+// the Lag order set to 2 for all variables,
+// the maximum number of lags set to %nan because it is irrelevant (arg # 4 = %nan),
+// the function F(x)=I(|x|&lt;K) used as an instrument generating function (arg # 5 set to 2)
+// and a 10% significance level (arg # 6 set to 0.1).
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Christophe Hurlin 2004 / Eric Dubois 2008
+        </refsection>
+</refentry>

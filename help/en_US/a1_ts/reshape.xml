@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="reshape" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>reshape </refname>
+               <refpurpose>creation of a ts from a vector </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>ts=reshape(mat,datin,indw)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> mat </term> =     a (1 x nobs) or (nobs x 1) vector </para></listitem>
+<listitem><para>*  <term> datin </term> =     a date string</para></listitem>
+<listitem><para>*  <term> indw </term> =     'w' if the time series is weekly (optional)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> ts </term> =     the corresponding time series</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Creates a time series from a vector of values and a beginning date.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+x = reshape([21:44],'1a') // creates an annual ts, from the year 1 to the year 24, with values 21 to 44.
+x = reshape([1:24]','1985q1') // creates a quarterly ts, from the first quarter of 1985 to the last quarter of 2000, with values 1 to 24
+x = reshape(grand(365,1,'nor',0,1),'1985/12/01') // creates a daily ts, from 1985/12/01 to 1986/11/30, with random normal values
+x = reshape(grand(365,1,'nor',0,1),'1985/12/01','w') // creates a weekly ts, from the first week of december 1985 to the third week of november 1992, with random normal values
+ 
+// Note that the data are given as a row vector in example 1 and a column vector in example 2: it doesn't matter, provided that you don't give a matrix with more than one dimension.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2007
+        </refsection>
+</refentry>

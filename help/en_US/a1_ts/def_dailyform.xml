@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="def_dailyform" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>def_dailyform </refname>
+               <refpurpose>creation of the data base for the format of daily dates </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>def_dailyform(y,m,d,dailysep)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> y </term> =     place of the year in the dates</para></listitem>
+<listitem><para>*  <term> m </term> =     place of the month in the dates</para></listitem>
+<listitem><para>*  <term> d </term> =     day of the year in the dates</para></listitem>
+<listitem><para>*  <term> dailysep </term> =     separator between the day, month and year</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing: data are saved into the file SCI\macros\grocer\db\basets.dat</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Creates the data base for the format of daily dates.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+def_dailyform(1,2,3,'/')
+// taken from function def0_basets. Dates will have the format year/month/day.
+ 
+def_dailyfomr(3,2,1,'-')
+// Dates have here the format day-month-year.
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2007
+        </refsection>
+</refentry>

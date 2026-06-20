@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="prtsys" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>prtsys </refname>
+               <refpurpose>prints sur estimation results </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>prtsys(res,out)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> res </term> =    a tlist provided by a sur, twosls or threesls function</para></listitem>
+<listitem><para>*  <term> out </term> =    the file where the results are printed (optional; default: %io(2), i.e the screen)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing, just print the results</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Prints results of a sur estimation saved in tlist res.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/grun.dat')
+// grunfeld investment data
+// see page 650, Green 1997
+ 
+ige  = grun(:,1); // general electric
+fge = grun(:,2);
+cge = grun(:,3);
+ 
+iwest  = grun(:,4); // westinghouse
+fwest = grun(:,5);
+cwest = grun(:,6);
+ 
+igm  = grun(:,7); // general motors
+fgm = grun(:,8);
+cgm = grun(:,9);
+ 
+ich  = grun(:,10); // chrysler
+fch = grun(:,11);
+cch = grun(:,12);
+ 
+iuss  = grun(:,13); // us steel
+fuss = grun(:,14);
+cuss = grun(:,15);
+ 
+// (order follows that in Green, 1997)
+ 
+eq1='igm=a1*fgm+a2*cgm+a3'
+eq2='ich=a4*fch+a5*cch+a6'
+eq3='ige=a7*fge+a8*cge+a9'
+eq4='iwest=a10*fwest+a11*cwest+a12'
+eq5='iuss=a13*fuss+a14*cuss+a15'
+ 
+r=sur(eq1,eq2,eq3,eq4,eq5,'noprint')
+ 
+prtsys(r,%io(2))
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

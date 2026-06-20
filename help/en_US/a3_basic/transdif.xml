@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="transdif" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>transdif</refname>
+               <refpurpose>differenciation and Box-Cox transformation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[yt]=transdif(y,lambda,d,ds,s)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> y </term> =    (nxk) data matrix</para></listitem>
+<listitem><para>*  <term> lambda </term> =    a scalar, parameter of the Box-Cox transformation</para></listitem>
+<listitem><para>*  <term> d </term> =    a scalar, the number of regular differences (1-B)^d</para></listitem>
+<listitem><para>*  <term> ds </term> =    (Sx1) matrix containing the number of seasonal differences</para></listitem>
+<listitem><para>*  <term> s </term> =    (rx1) matrix containing the seasonal periods</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> yt </term> =   (n-d-sum(ds*s))xk matrix of transformed data</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Function that mimics matlab function transdif: forms the string matrix  
+
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/varma_d.dat');
+elec_cons = transdif(seriesa,0,1,1,12);   // Example taken from varma function varma_d1(). Elec_cons is equal to (1-L)(1-L^12)log(seriesa).
+s = transdif(seriesa,-1,0,0,12);//returns the box-cox transformation of seriesa with lambda = -1 (that is 1-1/seriesa)
+
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Jaime Terceiro, 1997/ Eric Dubois 2004
+        </refsection>
+</refentry>

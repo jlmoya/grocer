@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="drawy" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>drawy </refname>
+               <refpurpose>draw a readable y axis </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>y0=drawy(y,font_axis,y0,x0,dircar,just_scale,rev,sep)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> y </term> =    the y matrix of the graph</para></listitem>
+<listitem><para>*  <term> font_axis </term> =    size of characters on the axis</para></listitem>
+<listitem><para>*  <term> y0 </term> =    value of the y axis where to draw the x axis or [] if  the user wants to put the x axis at the minimum y value</para></listitem>
+<listitem><para>*  <term> x0 </term> =    value of the y axis where to draw the x axis (default: 1)</para></listitem>
+<listitem><para>*  <term> dircar</term>  =    the tics direction (default: 'l'; see drawaxis for details)</para></listitem>
+<listitem><para>*  <term> just_scale </term> =    a boolean which is:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;-&#160;%T&#160;if&#160;you&#160;want&#160;the&#160;y&#160;scale&#160;to&#160;be&#160;exactly&#160;the&#160;length&#160;[min(y),max(y)]</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;-&#160;%F&#160;if&#160;you&#160;want&#160;the&#160;y&#160;scale&#160;to&#160;begin&#160;and&#160;end&#160;with&#160;rounded&#160;numbers&#160;(default)</para></listitem>
+<listitem><para>*  <term> rev </term> =    a boolean which is:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;-&#160;%T&#160;if&#160;you&#160;want&#160;the&#160;y&#160;scale&#160;to&#160;be&#160;drawn&#160;in&#160;reverse&#160;order</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;-&#160;%F&#160;if&#160;you&#160;want&#160;the&#160;y&#160;scale&#160;to&#160;be&#160;drawn&#160;in&#160;standard&#160;order&#160;(default)</para></listitem>
+<listitem><para>*  <term> sep </term> =    the decimal separator the user wants to use for the plotting (default  =   '.')</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> y0</term>  =   value of the y axis where to draw the x axis</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Draws an y axis which remains readable whatever number of values it contains. Must be used after a 2D graphic instruction (such as plot2d).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+y0=drawy([sqrt([1:12])' log([1:12])'],3,[],0,'l')
+ 
+// Example draws an y axis associated with the values of the matrix [sqrt([1:12] log([1:12]).
+// The font size is 3 and the axis is located at x=0, the direction of the tics is the left one. Lastly, drawy calculates the
+// minimum y value to feed frunction drawx.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2008
+        </refsection>
+</refentry>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="shiftr" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>shiftr</refname>
+               <refpurpose>mimics gauss function shiftr </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[matout]=shiftr(matin,shifts,val)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> matin </term> =    input (mxn) matrix</para></listitem>
+<listitem><para>*  <term> shifts </term> =    (mx1) vectors of shifting values</para></listitem>
+<listitem><para>*  <term> val </term> =    value to fill the holes</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> matout </term> =    (mxn) transformed matrix</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Function that mimics gauss function shiftr: shifts rows of a matrix according to a vector of shifts and fills the holes with a prespecified value. 
+
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+A = matrix([1:15],3,5);B=shiftr(A,[2 3 -2],0)// returns:
+// B  =//!   0.    0.     1.     4.    7. !//!   0.    0.     0.     2.    5. !//!   9.    12.    15.    0.    0. !
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2004
+        </refsection>
+</refentry>

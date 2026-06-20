@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="bkfilter" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>bkfilter </refname>
+               <refpurpose>Baxter-King filter </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[fX,AA]=bkfilter(namey,pl,pu,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =    a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> pl </term> =    minimum period of oscillation of desired component</para></listitem>
+<listitem><para>*  <term> pu </term> =    maximum period of oscillation of desired component (2&lt;  =   pl&lt;pu&lt;infinity)</para></listitem>
+<listitem><para>*  <term> nfix </term> =    - length of the fixed filter (if typ  =    'sym')</para></listitem>
+<listitem><para>&#160;&#160;-&#160;or:&#160;dropped&#160;observations&#160;at&#160;the&#160;beginning&#160;and&#160;end&#160;of&#160;resulting&#160;variable</para></listitem>
+<listitem><para>*  <term> typ </term> =    'fixed' for a fixed length filter (default) or 'vari' for a variable length filter</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> fX </term> =    (nX1) vector containing filtered data</para></listitem>
+<listitem><para>*  <term> AA </term> =    filtering matrix</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Baxter-King filter.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/macros/grocer/db/bkfilter.dat');
+[gdp_f,A]=bkfilter(gdp,2,8,'root=1','drift=1','asym')
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2004
+        </refsection>
+</refentry>

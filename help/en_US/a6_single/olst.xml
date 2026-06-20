@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="olst" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>olst </refname>
+               <refpurpose>ols with t-distributed errors</refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rolst]=olst(namey,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =   a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> argi </term> =   an argument which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx1)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nxk)&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nxk)&#160;real&#160;vector&#160;or&#160;matrix&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;list&#160;of&#160;such&#160;elements</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;display&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rolst </term> =   a tlist with</para></listitem>
+<listitem><para>&#160;  - rolst('meth')  = 'olst'</para></listitem>
+<listitem><para>&#160;  - rolst('y')     = y data vector</para></listitem>
+<listitem><para>&#160;  - rolst('x')     = x data matrix</para></listitem>
+<listitem><para>&#160;  - rolst('nobs')  = nobs</para></listitem>
+<listitem><para>&#160;  - rolst('nvar')  = nvars</para></listitem>
+<listitem><para>&#160;  - rolst('beta')  = bhat</para></listitem>
+<listitem><para>&#160;  - rolst('yhat')  = yhat</para></listitem>
+<listitem><para>&#160;  - rolst('resid') = residuals</para></listitem>
+<listitem><para>&#160;  - rolst('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;  - rolst('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - rolst('ser')  = standard error of the regression</para></listitem>
+<listitem><para>&#160;  - rolst('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;  - rolst('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;  - rolst('dw')    = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;  - rolst('namey') = name of the y variable</para></listitem>
+<listitem><para>&#160;  - rolst('namex') = name of the x variables</para></listitem>
+<listitem><para>&#160;  - rolst('bounds') = if there is a timeseries in the regression, the bounds of the regression</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes ols with t-distributed errors, using iterated re-weighted least-squares to find maximum likelihood estimates. Endogenous variable must be given first, as a vector, a ts, between quotes (if the user wants to keep the name of the variable in the tlist result and for the printings) or not. Exogenous variables are given after, in one of the formats authorized for the endogenous one, or in matrix format. The program displays on screen various results (coefficients, tstat, R², Durbin and Watson, first order autocorrelation of residuals,...) except if the user has entered the argument 'noprint' anywhere after the first argument.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+b = ones(5,1);
+xmat = rand(100,4,'n');
+exo = [ones(100,1),xmat];
+// generate t-distributed errors
+ 
+evec = tdis_rnd(100,2)*.5;
+endo = exo*b+evec;
+// do robust t-distributed errors regression
+lresult = olst('endo','exo','maxit=1000','crit=.0001');
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2004
+        </refsection>
+</refentry>

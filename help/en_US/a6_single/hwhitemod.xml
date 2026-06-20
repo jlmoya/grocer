@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="hwhitemod" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:25-Mars-2019$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>hwhitemod</refname>
+               <refpurpose>White's adjusted heteroscedastic estimation for a model equation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[model2,rh1,...,rhn]=hwhitemod(model,tsmat,indeq,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>model</term> = a model tlist</para></listitem>
+<listitem><para>*  <term>tsmat</term> = a tsmat containing all data needed for estimating the equation (should be the tsmat associated to the model, created by function create_dbmod)</para></listitem>
+<listitem><para>*  <term>indeq</term> = optional arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;&#160;- a string, the name of the equation to estimate or the keyword 'all' (to estimate all equations)</para></listitem>
+<listitem><para>&#160;&#160;&#160;- or an integer, the # of the equation in the model</para></listitem>
+<listitem><para>*  <term>arg1,...,argn</term> = optional arguments</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'noprint' if the user does not want to print the result (default: results are displayed on screen)</para></listitem>
+<listitem><para>&#160;&#160;&#160;- the string 'save=%t' if the user wants to save the estimated coefficients in the model tlist</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>model2</term> = the model tlist, with the estimated coefficients if the option save has been swtiched to %t</para></listitem>
+<listitem><para>*  <term>rh1,...,rhn</term> = a variable number of hwhite results tlists, each one corresponding to the results of the corresponding estimated equation</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes White's adjusted heteroscedastic consistent Least-squares Regression for equations of a model.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+global GROCERDIR
+// load the model small:
+ load(GROCERDIR+'data\small.dat')
+ // load the database small_db:
+ load(GROCERDIR+'data\small_db.dat')
+ // set the bounds:
+ bounds('1980q1','2005q4');
+// In the small model, estimate by ols the equation td_p3m_d1, with T-statistics corrected for heteroskedasticity by White's method.
+// Save the estimated coefficients in the model tlist small
+// and store into tlist rp3m_d1 the whole estimation results:
+ [small,rp3m_d1]=hwhitemod(small,small_db,'td_p3m_d1','save=%t');
+// In the small model, estimate by ols the equation td_p3m_d1, with T-statistics corrected for heteroskedasticity by White's method.
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2019
+        </refsection>
+</refentry>

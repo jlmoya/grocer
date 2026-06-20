@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="vare" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:28-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>vare</refname>
+               <refpurpose>residuals from a VAR estimation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[resid]=vare(y,nlag,x)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> y </term> =    an (nobs x neqs) matrix of y-vectors</para></listitem>
+<listitem><para>*  <term> nlag </term> =    the lag length</para></listitem>
+<listitem><para>*  <term> x </term> =    optional matrix of variables (nobs x nx)</para></listitem>
+<listitem><para> (NOTE: constant vector automatically included)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> resid </term> =    matrix of residuals (nobs x neqs)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs vector autogressive estimation and returns only residuals. Old function (but could be useful).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/lutk1.dat')
+bounds()
+y=explone(['log(rfa_inv)';'log(rfa_inc)';'log(rfa_cons)')
+trend=[1:size(y,1)]'
+resid=vare(y,2,x)
+ 
+// In this example, residuals from a VAR estimated with 2 lags, a trend and a constant as exogenous variables are calculated.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

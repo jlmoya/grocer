@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="BNG_ur1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:24-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>BNG_ur1 </refname>
+               <refpurpose>Bai and Ng Panel Unit Root Test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res = BNG_ur1(Y,t_order,typeoflag,pmax,kmax,criteria,signif)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> Y </term> =   matrix (T,N) of observations</para></listitem>
+<listitem><para>&#160;&#160; The data matrix may be unbalanced.</para></listitem>
+<listitem><para>&#160;&#160; Missing Values must be specified as %nan      </para></listitem>
+<listitem><para>*  <term> t_order </term> =   -1 : no individual effect</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 0 : individual effects (Default)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 1 : individual effects and time trends</para></listitem>
+<listitem><para>*  <term> typeoflag </term> =   the string:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'common'&#160;if&#160;the&#160;lag&#160;order&#160;is&#160;common&#160;to&#160;all&#160;variables&#160;(in&#160;that&#160;case,&#160;the&#160;lag&#160;order&#160;is&#160;determined&#160;as&#160;in&#160;Bai&#160;and&#160;Ng,&#160;2004)</para></listitem>
+<listitem><para>&#160;&#160;- 'individual'&#160;if&#160;the&#160;lag&#160;order&#160;is&#160;optimally&#160;chosen&#160;for&#160;each&#160;variable</para></listitem>
+<listitem><para>*  <term> pmax </term> =   Maximum of the lag order authorized for the individual ADF tests</para></listitem>
+<listitem><para>*  <term> kmax </term> =   The maximum number of common factors used to compute the criterion functions for the estimation of r, the number of common factors. It is not specified rmax  =  min(N,T)</para></listitem>
+<listitem><para>*  <term> criteria </term> =   Criteria used to estimate the number of common factors</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;=   'IC1', 'IC2', 'IC3', 'PC1', 'PC2', 'PC3', 'AIC3', 'BIC3' (see Bai and Ng (2002))</para></listitem>
+<listitem><para>*  <term> signif </term> =   significance level for the individual ADF tests (0.05, 0.01 or 0.1)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* <term>res</term>= a results tlist with:</para></listitem>
+<listitem><para>&#160;&#160;  - res('meth') = 'BNG panel ur test'</para></listitem>
+<listitem><para>&#160;&#160;   - res('y') = (T x k) matrix of data</para></listitem>
+<listitem><para>&#160;&#160;   -  res('t_order') = the trend order (0 or 1)</para></listitem>
+<listitem><para>&#160;&#160;   -  res('t_orderlit') = the trend order in plain english</para></listitem>
+<listitem><para>&#160;&#160;   - res('ratio1') = Variance of idiosyncratic component divised by the variance observed data (both in first differences)</para></listitem>
+<listitem><para>&#160;&#160;   - res('Rratio2') = Variance of residuals of common components divised by variance on idiosyncratic component</para></listitem>
+<listitem><para>&#160;&#160;   - res('ADFe') = Individual ADF statistics on idiosyncratic component : ADFe(i)</para></listitem>
+<listitem><para>&#160;&#160;   - res('ADFe_pvalue') = Individual ADF statistics on idiosyncratic component : ADFe(i)</para></listitem>
+<listitem><para>&#160;&#160;   - res('ADFe_pi') = Number of ADF terms in ADF tests on e(i,t)</para></listitem>
+<listitem><para>&#160;&#160;   - res('pmax') = Maximum Lag Order for individual ADF regressions on e(i,t)</para></listitem>
+<listitem><para>&#160;&#160;   - res('ADFe_Ti') = Adjusted time dimension for ADF tests on e(i,t)</para></listitem>
+<listitem><para>&#160;&#160;   - res('nbfactors') = Estimated number of common factors</para></listitem>
+<listitem><para>&#160;&#160;   - res('khat') = Estimated Numbers of Factor with IC1, IC2, IC3, PC1, PC2, PC3, AIC3 and BIC3</para></listitem>
+<listitem><para>&#160;&#160;   - res('criteria') = Criteria used to estimate the number of common factors. Default value = 1 (IC1)</para></listitem>
+<listitem><para>&#160;&#160;   - res('IC') = IC1, IC2 and IC3 Information criterions for r=1,...,kmax</para></listitem>
+<listitem><para>&#160;&#160;   - res('PC') = PC1, PC2 and PC3 Information criterions for r=1,...,kmax</para></listitem>
+<listitem><para>&#160;&#160;   - res('BIC3') = BIC3 Information criterion for k=1,...,kmax (only BIC criteria function of N and T)</para></listitem>
+<listitem><para>&#160;&#160;   - res('AIC3') = AIC3 Information criterion (only AIC criteria function of N and T) : it tends to overestimate r</para></listitem>
+<listitem><para>&#160;&#160;   - res('kmax') = Maximum number of common factors authorized</para></listitem>
+<listitem><para>When there is one common factor (r =  1):</para></listitem>
+<listitem><para>&#160;&#160;      **************************************</para></listitem>
+<listitem><para>&#160;&#160;   - res('BNG.ADF_F') = ADF statistic on common factor: ADFf</para></listitem>
+<listitem><para>&#160;&#160;   - res('BNG.ADF_F_pvalue') = Pvalue associated to ADFf</para></listitem>
+<listitem><para>&#160;&#160;   - res('ADF_F_pi') = Number of ADF terms in ADF tests on e(i,t)</para></listitem>
+<listitem><para>&#160;&#160;   - res('ADF_F_Ti') = Adjusted time dimension for ADF tests on e(i,t)</para></listitem>
+<listitem><para>When there is more than one common factor (r &gt; 1):</para></listitem>
+<listitem><para>&#160;&#160;      ************************************************</para></listitem>
+<listitem><para>&#160;&#160;   - res('MQc') = MQc(m) Statistics with critical values at 1%, 5% and 10% for m=r,...,1</para></listitem>
+<listitem><para>&#160;&#160;   - res('MQf') = MQf(m) Statistics with critical values at 1%, 5% and 10% for m=r,...,1</para></listitem>
+<listitem><para>&#160;&#160;   - res('MQc_r1') = Number of Common Stochastic Trends at 1%, 5% and 10% (MQc Test)</para></listitem>
+<listitem><para>&#160;&#160;   - res('MQf_r1') = Number of Common Stochastic Trends at 1%, 5% and 10% (MQf Test)</para></listitem>
+<listitem><para>&#160;&#160;   - res('MQf_p') = Optimal lag order for the VAR(p) on dYc (MQf test)</para></listitem>
+<listitem><para>If t_order =   1:</para></listitem>
+<listitem><para>&#160;&#160;      ****************</para></listitem>
+<listitem><para>&#160;&#160;   - res('PCe_Choi') = Pooled test standardized statistic (Choi 2001) on idiosyncratic components e: N(0,1) under H0</para></listitem>
+<listitem><para>&#160;&#160;   - res('PCe_Choi_critical') = Critical Values of the pooled test statistic (Choi, 2001) at 1%, 5% and 10%</para></listitem>
+<listitem><para>&#160;&#160;   - res('PCe_Choi_pvalue') = Pvalue Pooled test statistic (Choi 2001)</para></listitem>
+<listitem><para>&#160;&#160;   - res('PCe_MW') = Pooled test statistic (Maddala Wu 1999) on idiosyncratic components e : X(2N) under H0</para></listitem>
+<listitem><para>&#160;&#160;   - res('PCe_MW_critical') = Critical Values of the pooled test statistic (Maddala Wu 1999) at 1%, 5% and 10%</para></listitem>
+<listitem><para>&#160;&#160;   - res('PCe_MW_pvalue') = Pvalue Pooled test statistic (Maddala Wu 1999)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Bai and Ng (2004) test of unit root (ref: "A PANIC attack on unit root and cointegration", Econometrica, vol. 72, n.4, p.1127-1177).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/gdpan_oecd.dat');
+Y=explone(dblist(GROCERDIR+'/data/gdpan_oecd.dat'));
+// extract matrix of data present in database
+res=BNG_ur1(log(Y),0,'common',4,5,'BIC3',0.05)
+ 
+// Example provides the BNG_ur test for all (logarithm of) Y columns,
+// with a constant but not trend (arg # 2 = 0),
+// the Lag order common to all variables (arg # 3 = 'common'),
+// the maximum number of lags in the ADF test set to 4 (arg # 4 = 4),
+// the maximum number of factors set to 5 (arg # 5 = 5),
+// the criteria to determine the number of factors set to the BIC criteria proposed by Bai and Ng (2002) (arg # 6 set to 'BIC3')
+// and the signficance level for the ADF tests set to 0.05 (arg # 7 = 0.05).
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Christophe Hurlin 2004 / Eric Dubois 2008
+        </refsection>
+</refentry>

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="pltdensbma_g" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>pltdensbma_g </refname>
+               <refpurpose>plots the posterior density function of coefficients in a BMA regression </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>pltdensbma_g(res)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> res </term> =    the results typed list of a Bayesian Model Averaging regression </para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing (printed on a graphic window)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Plots posterior density function of coefficients in a BMA regression.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/crime.dat')
+ 
+// take log of data
+listn = ['crime';'m';'ed';'po1';'po2';'lf';'mf';'pop';'nw';'u1';'u2';'gdp';'ineq';'prob';'time'] ;
+for i =1:size(listn,1)
+	execstr('l'+listn(i)+' = log('+listn(i)+')')
+end
+ 
+// BMA estimation without printing the results
+rbma = bma_g('lcrime',30000,'lm','so','led','lpo1','lpo2','llf','lmf','lpop','lnw','lu1','lu2',...
+'lgdp','lineq','lprob','ltime','burnin=10000','mcmc=''mc3''','noprint')
+// now plot the results
+pltdensbma_g(rbma)
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2006
+        </refsection>
+</refentry>

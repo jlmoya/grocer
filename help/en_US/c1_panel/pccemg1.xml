@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="pccemg1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:01-Sept.-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>pccemg1</refname>
+               <refpurpose>Mean group common correlated effects estimator </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>﻿ rp=pccemg1(y,index,x)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> y </term> =    a (nobs*nindiv x 1) matrix of all of the individual's observations vertically concatenated. This matrix must include in the first column the dependent variable, the independent variables must follow accordingly.</para></listitem>
+<listitem><para>*  <term> index </term> =    index vector that identifies each observation with an individual e.g. 1 (first 2 observations for individual # 1) 1 2 (next 1 observation for individual # 2) 3 (next 3 observations for individual # 3) 3 3</para></listitem>
+<listitem><para>*  <term> x </term> =    (nobs*nindinv x k) matrix of exogeneous variables</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  res </term> =    a tlist with</para></listitem>
+<listitem><para>&#160;&#160;-rp('meth') =   'CCEMG'</para></listitem>
+<listitem><para>&#160;&#160;- rp('y') =    y data vector</para></listitem>
+<listitem><para>&#160;&#160;-rp('x') =    x data matrix</para></listitem>
+<listitem><para>&#160;&#160;-rp('nobs') =    nobs</para></listitem>
+<listitem><para>&#160;&#160;-rp('nvar') =    nvars</para></listitem>
+<listitem><para>&#160;&#160;-rp('beta') =    bhat</para></listitem>
+<listitem><para>&#160;&#160;-rp('betai') =    individual regression coefficients</para></listitem>
+<listitem><para>&#160;&#160;-rp('w') =    vector of individual weights</para></listitem>
+<listitem><para>&#160;&#160;-rp('yhat') =    yhat</para></listitem>
+<listitem><para>&#160;&#160;-rp('resid') =    residuals</para></listitem>
+<listitem><para>&#160;&#160;-rp('vcovar') =    estimated variance-covariance matrix of the CCCEP estimators</para></listitem>
+<listitem><para>&#160;&#160;-rp('sige') =    estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;&#160;-rp('sigu') =    sum of squared residuals</para></listitem>
+<listitem><para>&#160;&#160;-rp('ser') =    standard error of the regression</para></listitem>
+<listitem><para>&#160;&#160;-rp('tstat') =    t-stats (CCEP estimators and fixed effects)</para></listitem>
+<listitem><para>&#160;&#160;-rp('pvalue') =    pvalue of the betas</para></listitem>
+<listitem><para>&#160;&#160;-rp('condindex') =    multicolinearity cond index</para></listitem>
+<listitem><para>&#160;&#160;-rp('prescte') =    boolean indicating the presence or absence of a constant in the regression</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Pesaran's common correlated effects mean group estimator for heterogeneous panel models.
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2013
+        </refsection>
+</refentry>

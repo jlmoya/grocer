@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="multilogit1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>multilogit1 </refname>
+               <refpurpose>multivariate logit regression </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res = multilogit1(y,x,bet0,maxit,tol)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> y </term> =  response variable vector (nobs x 1)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;response&#160;variable&#160;should&#160;be&#160;coded&#160;sequentially&#160;from&#160;0&#160;to&#160;ncat,&#160;i.e.,&#160;y&#160;in&#160;(0,1,2,...,ncat)&#160;entries</para></listitem>
+<listitem><para>*  <term> x </term> =  matrix of covariates (nobs x nvar)</para></listitem>
+<listitem><para>*  <term> bet0 </term> =  optional starting values for bet (nvar x ncat+1) (default = 0)</para></listitem>
+<listitem><para>*  <term> maxit </term> =  optional maximum number of iterations (default = 100)</para></listitem>
+<listitem><para>*  <term> tol </term> =  optional convergence tolerance (default = 1e-6)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> res </term> =  a results tlist with</para></listitem>
+<listitem><para>&#160;  - res('meth') = 'multilogit'</para></listitem>
+<listitem><para>&#160;  - res('beta') = (nvar x ncat) matrix of bet coefficients: [bet_1 bet_2 ... bet_ncat] under the normalization bet_0 = 0</para></listitem>
+<listitem><para>&#160;  - res('coeff') = (nvar*ncat x 1) vector of beta coefficients: [beta_1 ; beta_2 ; ... ; beta_ncat] under normalization beta_0 = 0</para></listitem>
+<listitem><para>&#160;  - res('covb') = (nvar*ncat x nvar*ncat) covariance matrix of coefficients</para></listitem>
+<listitem><para>&#160;  - res('tstat') = (nvar*ncat x 1) vector of t-statistics</para></listitem>
+<listitem><para>&#160;  - res('pvalue') = (nvar*ncat x 1) vector of corresponding p-values</para></listitem>
+<listitem><para>&#160;  - res('y') = (nobs x ncat+1) matrix of data</para></listitem>
+<listitem><para>&#160;  - res('yhat') = (nobs x ncat+1) matrix of fitted values  probabilities: [P_0 P_1 ... P_ncat] where P_j = [P_1j ; P_2j ; ... ; P_nobsj]</para></listitem>
+<listitem><para>&#160;  - res('llike') = unrestricted log likelihood</para></listitem>
+<listitem><para>&#160;  - res('lratio') = LR test statistic against intercept-only model (all bets=0), distributed chi-squared with (nvar-1)*ncat degrees of freedom</para></listitem>
+<listitem><para>&#160;  - res('nobs') = number of observations</para></listitem>
+<listitem><para>&#160;  - res('nvar') = number of variables</para></listitem>
+<listitem><para>&#160;  - res('ncat') = number of categories of dependent variable (including the reference category j = 0)</para></listitem>
+<listitem><para>&#160;  - res('count') = vector of counts of each value taken by y, i.e., couunt = [#y=0 #y=1 ... #y=ncat]</para></listitem>
+<listitem><para>&#160;  - res('r2mf') = McFadden pseudo-R^2</para></listitem>
+<listitem><para>&#160;  - res('rsqr') = Estrella pseudo-R^2</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes multivariate logit Regression.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+res = multilogit1(y,x,grocer_init,grocer_maxit,grocer_tol)
+// Example taken from multilogit.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2007
+        </refsection>
+</refentry>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="archz" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>archz </refname>
+               <refpurpose>ARCH test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rarch]=archz(results,p,np)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> results </term> =   results tlist from a first stage estimation</para></listitem>
+<listitem><para>*  <term> p </term> =   # of lag of squared residuals in the second stage estimation</para></listitem>
+<listitem><para>*  <term> np </term> =   'noprint' if the user does not want to print the results</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rarch</term>  =   a typed list with :</para></listitem>
+<listitem><para>&#160;  - rarch('meth') = 'arch'</para></listitem>
+<listitem><para>&#160;  - rarch('r1st') = results of the first step regression (allows the traceability" of the results)</para></listitem>
+<listitem><para>&#160;  - rarch('chistat') = the value of the chi2 statistics</para></listitem>
+<listitem><para>&#160;  - rarch('chi_pvalue') = the corresponding p-value</para></listitem>
+<listitem><para>&#160;  - rarch('chi_df') = the corresponding degrees of freedom</para></listitem>
+<listitem><para>&#160;  - rarch('fstat') = the value of the Fisher statistics</para></listitem>
+<listitem><para>&#160;  - rarch('pfstat') = the corresponding p-value</para></listitem>
+<listitem><para>&#160;  - rarch('dfnum') = degrees of freedom of the numerator</para></listitem>
+<listitem><para>&#160;  - rarch('dfden') = degrees of freedom of the denominator</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ Computes a test for AutoRegressive Conditional Heteroskedasticty (ARCH) of order p. Results are stored in a tlist and displayed on screen.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+bounds('1964q3','1989q2');
+rols=ols('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet', 'lagts(1,lm1-lp-ly)', 'const');
+//performs ols for Hendry and Ericsson (1991) equation 6
+rarch=archz(rols,4)
+// Example taken from function hendryericsson.
+// Provides the ARCH test of order 4 for Hendry and Ericsson equation 6,
+// whose estimation result has been saved in tlist rols.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

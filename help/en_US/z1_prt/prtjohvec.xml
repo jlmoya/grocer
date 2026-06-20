@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="prtjohvec" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>prtjohvec </refname>
+               <refpurpose>prints Johansen cointegration vectors </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>prtjohvec(res,nbr,out)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> res </term> =    a tlist provided by function johansen</para></listitem>
+<listitem><para>*  <term> nbr </term> =    # cointegration vectors selected</para></listitem>
+<listitem><para>*  <term> out </term> =    the file where the results are printed (optional; default: %io(2), i.e the screen)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing, just print the results</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Prints on the file out the first nbr vectors from a Johansen cointegration test.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'\data\juselius.dat')
+bounds()
+dum75q4=dummy(['1973q1';'2003q1'],'1975q4')-0.5*dummy(['1973q1';'2003q1'],['1976q1';'1976q2']);
+dum76q4=dummy(['1973q1';'2003q1'],'1976q4');
+dum83q2=dummy(['1973q1';'2003q1'],'1983q2');
+dum83q1=dummy(['1973q1';'2003q1'],'1983q1');
+rj1=johansen(1,'dnk_Lm3rC','dnk_Lyr','dnk_DLpy','dnk_Rm','dnk_Rb',...
+'exo_lt=trend^1;post(1983q1)','exo_st=const;dum75q4;dum76q4;dum83q1','noprint')
+ 
+// print all cointegration vectors
+prtjohvec(rj1,5)
+ 
+// now normalize the vectors and print the first 3 ones
+rj1b=johansen_normalize(rj1,[3,1,4,2,5])
+prtjohvec(rj1b,3)
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="critecm" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:08-Mar-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>critecm</refname>
+               <refpurpose>critical values and p-values for the error correction test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[crit,pval] = critecm(t,k,d,T,h)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> t </term> =    t-value on the error correction term</para></listitem>
+<listitem><para>*  <term> k </term> =    size of the cointegrationg vector</para></listitem>
+<listitem><para>*  <term> d </term> =    type of deterministic variables</para></listitem>
+<listitem><para>&#160;&#160;-&#160;d&#160;=&#160;-1,&#160;no&#160;deterministic&#160;part</para></listitem>
+<listitem><para>&#160;&#160;-&#160;d&#160;=&#160;0,&#160;for&#160;constant&#160;term</para></listitem>
+<listitem><para>&#160;&#160;-&#160;d&#160;=&#160;1,&#160;for&#160;constant&#160;plus&#160;time-trend</para></listitem>
+<listitem><para>&#160;&#160;-&#160;d&#160;=&#160;2,&#160;for&#160;costant&#160;plus&#160;quadratic&#160;time-trend</para></listitem>
+<listitem><para>*  <term> T </term> =    Estimation sample size</para></listitem>
+<listitem><para>*  <term> h </term> =    total number of regressors in the ECM (that is, of unrestricted coefficients)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term>  crit </term> =    critical value of the test</para></listitem>
+<listitem><para>*  <term>  pval </term> =    p-value of the test</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes critical values and p-values using the response surfaces in Ericsson and MacKinnon (1999)
+as implemented in the program ECMtest.xls (version 1.0)
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2007-2013
+        </refsection>
+</refentry>

@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="schmiphi" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>schmiphi </refname>
+               <refpurpose>computes Schmidt-Phillips test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[resulsp]=schmiphi(namey,t,varargin)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>* <term>namey</term>= a time series, a real (nx1) vector or a   string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>* <term>t</term>= order of time polynomial in the null-hypothesis</para></listitem>
+<listitem><para>&#160;&#160;-&#160;t&#160;=&#160;&#160;0,&#160;for&#160;constant&#160;term</para></listitem>
+<listitem><para>&#160;&#160;-&#160;t&#160;=&#160;&#160;1,&#160;for&#160;constant&#160;plus&#160;time-trend</para></listitem>
+<listitem><para>&#160;&#160;-&#160;t&#160;=&#160;2,3&#160;or&#160;4&#160;for&#160;higher&#160;order&#160;time&#160;trend&#160;polynomial</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* <term>result</term>= results tlist with:</para></listitem>
+<listitem><para>&#160;  - result('meth') = 'schmiphi'</para></listitem>
+<listitem><para>&#160;  - result('namey') = name of the tested variable</para></listitem>
+<listitem><para>&#160;  - result('y') = (nobsx1) vector of endogenous variables</para></listitem>
+<listitem><para>&#160;  - result('namey') = name of the tested variable</para></listitem>
+<listitem><para>&#160;  - result('nobs') = # of observations</para></listitem>
+<listitem><para>&#160;  - result('t') = order of the polynomial trend</para></listitem>
+<listitem><para>&#160;  - result('lag(NW)') = # of lags of the Newey-West window</para></listitem>
+<listitem><para>&#160;  - result('phi') = value of the phi test</para></listitem>
+<listitem><para>&#160;  - result('rho') = rho statistics</para></listitem>
+<listitem><para>&#160;  - result('tau') = tau statisctics</para></listitem>
+<listitem><para>&#160;  - result('v_rho_1%') = critical value of the rho-test at the 1% level</para></listitem>
+<listitem><para>&#160;  - result('v_rho_5%') = critical value of the rho-test at the 5% level</para></listitem>
+<listitem><para>&#160;  - result('v_rho_10%') = critical value of the rho-test at the 10% level</para></listitem>
+<listitem><para>&#160;  - result('v_tau_1%') = critical value of the tau-test at the 1% level</para></listitem>
+<listitem><para>&#160;  - result('v_tau_5%') = critical value of the tau-test at the 5% level</para></listitem>
+<listitem><para>&#160;  - result('v_tau_10%') = critical value of the tau-test at the 10% level</para></listitem>
+<listitem><para>&#160;  - result('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;  - result('bounds') = if there is a timeseries in the regression, the bounds of the regression</para></listitem>
+ 
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes Schmidt-Phillips test.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+bounds('1964q3','1989q2');
+r=schmiphi('lm1',1)
+// Example taken from function schmiphi_d. Tests if variable lm1 from data base hendryericsson() is trend stationary or has a unit root.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="johansen_known_beta" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>johansen_known_beta </refname>
+               <refpurpose>impose and test restrictions on the cointegration relations </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[res]=johansen_known_beta(res,nbrel,b,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> res </term> =   a johansen result tlist</para></listitem>
+<listitem><para>*  <term> nbrel </term> =   a scalar, the # cointegration relations </para></listitem>
+<listitem><para>*  <term> b </term> =   a matrix, the imposed cointegration relations </para></listitem>
+<listitem><para>* <term>argi</term> = arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'NBoot=n'&#160;where&#160;n&#160;is&#160;the&#160;number&#160;of&#160;bootstrap&#160;draws&#160;(default:&#160;999)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;the&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> res </term> =  a results tlist:</para></listitem>
+<listitem><para>&#160;   -res('namey') = the name of the variables (m x 1)</para></listitem>
+<listitem><para>&#160;   -res('y') = matrix of values for the variables (m x 1)</para></listitem>
+<listitem><para>&#160;   -res('namexo_lt') = the names of the exogenous variables in the cointegrating vectors</para></listitem>
+<listitem><para>&#160;   -res('exo_lt') = the matrix of the exogenous variables in the cointegrating vectors</para></listitem>
+<listitem><para>&#160;   -res('namexo_st') = the names of the exogenous variables in the short run dynamics of the VAR</para></listitem>
+<listitem><para>&#160;   -res('exo_st') = the matrix of the exogenous variables in the short run dynamics of the VAR</para></listitem>
+<listitem><para>&#160;   -res('dy') = the matrix of the differentiated endogenous variables</para></listitem>
+<listitem><para>&#160;   -res('exo') = the matrix of the variables in the short run dynamics (lagged differentiated endogenous variables + short run exogenous variables)</para></listitem>
+<listitem><para>&#160;   -res('lagy') = the matrix of the variables in the cointegrating relations (lagged endogenous variables + long run exogenous variables)</para></listitem>
+<listitem><para>&#160;   -res('nobs') = # of observations</para></listitem>
+<listitem><para>&#160;   -res('nvar') = # of variables</para></listitem>
+<listitem><para>&#160;   -res('nlags') = # of lags of the VAR</para></listitem>
+<listitem><para>&#160;   -res('eig') = eigenvalues (m x 1)</para></listitem>
+<listitem><para>&#160;   -res('evec') = eigenvectors (m x m)</para></listitem>
+<listitem><para>&#160;   -res('pi') = coefficients of the short run dynamics</para></listitem>
+<listitem><para>&#160;   -res('lr1') = likelihood ratio trace statistic for r=0 to m-1 (m x 1) vector</para></listitem>
+<listitem><para>&#160;   -res('lr2') = maximum eigenvalue statistic for r=0 to m-1 (m x 1) vector</para></listitem>
+<listitem><para>&#160;   -res('dropna') = boolean indicating if NAs have been dropped</para></listitem>
+<listitem><para>&#160;   -res('nonna') = vector indicating position of non-NA values (if the option 'dropna' was active)</para></listitem>
+<listitem><para>&#160;   -res('max non zeros') = maximum number of zeros a variable had to be considered as a dummy</para></listitem>
+<listitem><para>&#160;   -res('NBoot') = # of bootstrap draws</para></listitem>
+<listitem><para>&#160;   -res('alpha') = value of the error correction coefficients</para></listitem>
+<listitem><para>&#160;   -res('cvt') = critical values for trace statistic (m x 3) vector [90% 95% 99%]</para></listitem>
+<listitem><para>&#160;   -res('cvm') = critical values for max eigen value statistic (3 x m) vector [90% 95% 99%]</para></listitem>
+<listitem><para>&#160;   -res('p trace') = p-value for the trace statistic calculated with the standard bootstrap method</para></listitem>
+<listitem><para>&#160;   -res('p lmax') = p-value for the lambda-max statistic calculated with the standard bootstrap method</para></listitem>
+<listitem><para>&#160;   -res('p double trace') = p-value for the trace statistic calculated with the double bootstrap method</para></listitem>
+<listitem><para>&#160;   -res('p double lmax') = p-value for the lambda-max statistic calculated with the double bootstrap method</para></listitem>
+<listitem><para>&#160;   -res('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;   -res('bounds') = if there is a time series in the regression, the bounds of the regression</para></listitem>
+<listitem><para>&#160;   - res('nb of cointegration relations') = # of cointegration relations used for the test</para></listitem>
+<listitem><para>&#160;   - res('test type') = 'some ec vectors imposed'</para></listitem>
+<listitem><para>&#160;   - res('test stat') = value of the statistical test</para></listitem>
+<listitem><para>&#160;   - res('bootstrap test pvalue') = the p-value of the test statistic calculated with the standard bootstrap method</para></listitem>
+<listitem><para>&#160;   - res('fast double bootstrap test pvalue')= the p-value of the test statistic calculated with the double bootstrap method</para></listitem>
+<listitem><para>&#160;   - res('b') = matrix of the known cointegrating parameters</para></listitem>
+<listitem><para>&#160;   - res('test nb of draws') = NBoot</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+In the Johansen procedure, impose and test that some columns of the alpha coefficients (the error corrections) are known.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'\data\juselius.dat')
+// create dummies used for regression p.111-112
+post83q1=dummy(['1973q1';'2003q1'],['1983q1';'2003q1']);
+dum75q4=dummy(['1973q1';'2003q1'],'1975q4')-0.5*dummy(['1973q1';'2003q1'],['1976q1';'1976q2']);
+dum76q4=dummy(['1973q1';'2003q1'],'1976q4');
+dum83q2=dummy(['1973q1';'2003q1'],'1983q2');
+dum83q1=dummy(['1973q1';'2003q1'],'1983q1');
+rj2=johansen(1,'dnk_Lm3rC','dnk_Lyr','dnk_DLpy','dnk_Rm','dnk_Rb',...
+'exo_lt=post(1983q1)','exo_st=const;dum75q4;dum76q4;dum83q1')
+ 
+rjtest11=johansen_known_beta(rj2,3,[0;0;1;0;-1;0])
+// Example taken from function johansen_d().
+// The first argument is the name of the result tlist stemming from a johansen estimation on Danish data.
+// The number of cointegration relations is set to 3. The known cointegration vector is [0;0;1;0;-1;0].
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2009
+        </refsection>
+</refentry>

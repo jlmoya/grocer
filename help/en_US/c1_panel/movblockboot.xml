@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="movblockboot" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:01-Sept.-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>movblockboot</refname>
+               <refpurpose>Moving-block bootstrap </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>﻿ [ovb,selb,k,re]=movblockboot(T,l,B)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> T </term> =    sample size</para></listitem>
+<listitem><para>*  <term> l </term> =    block length</para></listitem>
+<listitem><para>*  <term> B </term> =    number of bootstrap replications</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  ovb </term> =    (l x T/l) matrix that decomposes the initial sample into l overlapping blocks</para></listitem>
+<listitem><para>*  <term>  selb </term> =    (T/l x B) matrix that randomly selects the overlapping blocks</para></listitem>
+<listitem><para>*  <term>  k </term> =    number of blocks</para></listitem>
+<listitem><para>*  <term>  re </term> =    size of the last block if T/l not an integer</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+In a moving-block bootstrap, gives the matrix that decomposes the initial sample into overlapping block and the matrix that randomly selects them.
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2012
+        </refsection>
+</refentry>

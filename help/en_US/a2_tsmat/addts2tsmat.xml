@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="addts2mat" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:16-Juin-2018$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>addts2tsmat</refname>
+               <refpurpose>adds a ts to a tsmat </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>tsmat=addts2tsmat(tsmat,names)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  tsmat = a tsmat</para></listitem>
+<listitem><para>*  names = a string vector, collecting the names of the ts to add to the tsmat</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>tsmat = the original tsmat extended with the new ts</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Adds a timeseries to a tsmat.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/bdhenderic.dat') // trasnforms Hendry and Ericsson database 
+tsmat=db2tsmat(GROCERDIR+'/data/bdhenderic.dat');// trasnforms Hendry and Ericsson database into a tsmat
+m1=exp(lm1) // calculate m1 from lm1
+tsmat2=addts2tsmat(tsmat,'m1') // add m1 to the tsmat
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2018
+        </refsection>
+</refentry>

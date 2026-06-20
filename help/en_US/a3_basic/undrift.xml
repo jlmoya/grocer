@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="undrift" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>undrift</refname>
+               <refpurpose>removes the drift or a linear time trend </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[xun]=undrift(x)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> x </term> =   </para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;data&#160;matrix&#160;x&#160;where&#160;columns&#160;represent&#160;different&#160;variables,&#160;x&#160;is&#160;(T&#160;x&#160;#&#160;variables).</para></listitem>
+<listitem><para>&#160;&#160;-&#160;or&#160;a&#160;ts</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> xun </term> =   </para></listitem>
+<listitem><para>&#160;  - if x is a matrix, then a data matrix of the same size as x with a different drift/trend removed from each variable</para></listitem>
+<listitem><para>&#160;  - a ts with drift/trend removed if x is a ts</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Function that removes the drift or a linear time trend 
+
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+undrift([1:15]')// returns ones(15,1) 
+
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2004
+        </refsection>
+</refentry>

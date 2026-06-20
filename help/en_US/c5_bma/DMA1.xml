@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="DMA1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:25-Août-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>DMA1</refname>
+               <refpurpose>Dynamic model averaging </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>r=DMA1(y,z,x,lamda,alpha,nxmax,PRM,PRV,prefix_db)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>y</term> =  a (nobs x 1) vector of endogenous variables</para></listitem>
+<listitem><para>*  <term>z</term> =  a (nobs x nZ) vector of compulsory exogenous variables</para></listitem>
+<listitem><para>*  <term>x</term> =  a (nobs x nx) vector of potential exogenous variables</para></listitem>
+<listitem><para>*  <term>lamda</term> =  a scalar, the forgetting factor for past observations in the calculation of the time-varying coefficients</para></listitem>
+<listitem><para>*  <term>alpha</term> =  a scalar, the forgetting factor of past performance (a forecast k periods old have a weight equal to k^alpha)</para></listitem>
+<listitem><para>*  <term>nxmax</term> =  the maximum # of non zero optional coefficients in any model</para></listitem>
+<listitem><para>*  <term>PRM</term> =  a (nx+nz x 1) vector of prior expectation for the coefficents of the x exogenous variables</para></listitem>
+<listitem><para>*  <term>PRV</term> =  a (nx+nz x 1) vector of prior values for the variancce of these priors</para></listitem>
+<listitem><para>*  <term>prefix_db</term> =  the prefix of the database where big volume data will be stored</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>rdma</term>  =  a results tlist with:</para></listitem>
+<listitem><para>&#160;   - rdma('meth') = 'DMA'</para></listitem>
+<listitem><para>&#160;   - rdma('y') = (nobs x 1) vector of endogenous variables</para></listitem>
+<listitem><para>&#160;   - rdma('x fixed') = (nobs x nZ) matrix of compulsory exogenous variables</para></listitem>
+<listitem><para>&#160;   - rdma('x variable') = (nobs x nZ) matrix of potential exogenous variables</para></listitem>
+<listitem><para>&#160;   - rdma('lamda') = a scalar, the forgetting factor for past observations in the calculation of the time-varying coefficients</para></listitem>
+<listitem><para>&#160;   - rdma('alpha') = a scalar, the forgetting factor of past performance (a forecast k periods old have a weight equal to k^alpha)</para></listitem>
+<listitem><para>&#160;   - rdma('nx max') = the maximum # of non zero coefficients in any model</para></listitem>
+<listitem><para>&#160;   - rdma('vars proba') = a (nx x nobs) matrix giving the probability assigned to each variable at each date</para></listitem>
+<listitem><para>&#160;   - rdma('global forecast') = a (nobs x 1) vector giving the weighted forecast of all possible models</para></listitem>
+<listitem><para>&#160;   - rdma('best model') = a (nobs x 1) vector giving the index of the the best model at each date</para></listitem>
+<listitem><para>&#160;   - rdma('best model forecast') = a (nobs x 1) vector giving the forecast by the best model at each date</para></listitem>
+<listitem><para>&#160;   - rdma('combinations') = a (K x (nZ+nx)) matrix indicating for each model which variables are in the model (1 value in corresponding column) and which variables are not in the model (0 value in corresponding column)</para></listitem>
+<listitem><para>&#160;   - rdma('library') = name of the library where big volume results are stored</para></listitem>
+<listitem><para>&#160;   - rdma('n db') = # of corresponding databases</para></listitem>
+<listitem><para>&#160;   - rdma('exp # of models') = (nobs x 1) vector of # of expected models at each date</para></listitem>
+<listitem><para>&#160;   - rdma('exp theta') = (nobs x (N+nZ)) vector of expected values at each date for each variable</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Prediction using Dynamic model averaging. This function is a low level function that works only on matrices.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'\data\us_modinf.dat')
+bounds('1960q3','2008q2')
+// recover the endogenous, compulsory and optional arguments matrices from selected variables in database us_modinf.dat
+ [mats,names]=explon(list('100*lagts(-1,delts(log(GDPDEFL)))',['const';'100*delts(log(GDPDEFL))';'100*lagts(delts(log(GDPDEFL)))'],...
+['UNRATE';'100*delts(log(PCECC96))';'100*delts(log(PRFI))';'100*delts(log(GDPC96))';'log(HOUST)']),...
+['endogenous' 'fixed exogenous' 'variable exogenous'],[],%t,%t);
+y=mats(1);
+zf=mats(2);
+zv=mats(3);
+// run a DMA1 estimation with matrices y, zf,zv, maximum number of optional argument set to 5 (i.e the number
+// of optional variables), forgetting factor for past observations in the calculation of the time-varying coefficients set to 0.99,
+// forgetting factor of past performance set to 0.99 and default values for other parameters,
+// prior values set to 0 for all coefficients, prior variances set to 100 for all coefficients,
+// and big volume information saved into files gdpdefl1.dat, gdpdefl2.dat,... in folder 'c:/mydma'
+ 
+resdma=DMA1(y,zf,zv,0.99,0.99,5,zeros(1,8),100*ones(1,8),'c:/mydma/gdpdefl')
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2012
+        </refsection>
+</refentry>

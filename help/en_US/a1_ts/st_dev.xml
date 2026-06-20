@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="st_dev" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>st_dev </refname>
+               <refpurpose>standard deviation of a vector or a ts </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>sd=st_dev(x,cr)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> x </term> =     a time series or a matrix</para></listitem>
+<listitem><para>*  <term> cr</term>  =     (only if x is a matrix and even in thta case optional)</para></listitem>
+<listitem><para>&#160;&#160;.&#160;'r'&#160;or&#160;1&#160;for&#160;rowwise&#160;standard&#160;deviation</para></listitem>
+<listitem><para>&#160;&#160;.&#160;'c'&#160;or&#160;2&#160;for&#160;columnwise&#160;standard&#160;deviation</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> s </term> =     the vector of the time series values</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Calculates the standard deviation of a vector or a timeseries.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/bdhenderic.dat') // load Hendry and Ericsson database
+y=st_dev(lm1)
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Philippe.Castagliola Ecole des Mines de Nantes Eric Dubois 2002 for the part regarding ts
+        </refsection>
+</refentry>

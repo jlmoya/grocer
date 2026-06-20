@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="msvar_draw" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:05-Sept.-2015$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>msvar_draw</refname>
+               <refpurpose>simulate an artifical MS-VAR process </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>y_artificial=msvar_draw(T,nb_endo,nlag,nb_states,switching_V,typemod,y0,trans_prob,Const,CMatrix,sigma)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> T </term> =    a scalar, the # of observations</para></listitem>
+<listitem><para>*  <term> nb_endo </term> =    a scalar, the number of endogenous variables</para></listitem>
+<listitem><para>*  <term> nlag </term> =    a scalar, the number of lags in the VAR</para></listitem>
+<listitem><para>*  <term> nb_states </term> =    a scalar, the number of states</para></listitem>
+<listitem><para>*  <term> switching_V </term> =    a scalar, either 1 or the # of states, depending on whether the variance matrix switches or not</para></listitem>
+<listitem><para>*  <term> typemod </term> =    either 'const' ('cte') or 'all', depending on whether the VAR model should have only the constant or all coefficients in the VAR switch</para></listitem>
+<listitem><para>*  <term> y0 </term> =    a (nlags x nb_endo) vector of starting values for the endogenous variables in the VAR</para></listitem>
+<listitem><para>*  <term> trans_prob </term> =    a (nb_states x nb_states) matrix of transition probabilities</para></listitem>
+<listitem><para>*  <term> Const </term> =    a (nb_endo x nb_states) matrix of constant coefficients</para></listitem>
+<listitem><para>*  <term> Cmatrix </term> =    either a (nb_endo x (nlag*nb_endo) x nb_states) or (nb_endo x (nlag*nb_endo)) matrix of coefficients non constant coefficients, depending on whether the non constant coefficients switch or not</para></listitem>
+<listitem><para>*  <term> sigma </term> =    either a (nb_endo x (nlag*nb_endo) x nb_states) or (nb_endo x (nlag*nb_endo)) matrix of coefficients non constant coefficients, depending on whether the non constant coefficients switch or not</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  y_artificial </term> =    a (T x nb_endo) matrix of artifical values drawn from the Markov-switching model given as an input</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Produces an artificial Markov switching VAR process.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+T=1000;
+nb_endo=2;
+nb_states=2;
+p=2;
+C=matrix([0.5 0.3 0.4 0.2 ; 0.7 -0.5 0.2 -0.1  ; 0.1 0.6 0.8 -0.6 ; 0.1 0.2 0.5 -0.6 ],2,4,2);
+cte=[0 1 ; 0.4 -0.4 ];
+y0=grand(p,nb_endo,'nor',0,1);
+ 
+y=msvar_draw(T,nb_endo,p,nb_states,1,'all',y0,[0.8 0.15 ; 0.2 0.85],cte,C,[0.2 0.1 ; 0.1 0.3]);
+// an artifical msvar with 2 endogenous, 2 states, 2 lags, all coefficients switching,
+// transition probabilities matrix = [0.8 0.15 ; 0.2 0.85], variances not switching and
+// =[0.8 0.15 ; 0.2 0.85]
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois - Stefan Fiesel 2015
+        </refsection>
+</refentry>

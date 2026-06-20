@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="Moon_Perron1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:24-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>Moon_Perron1 </refname>
+               <refpurpose>Moon and Perron Panel Unit Root Test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res = Moon_Perron1(Y,t_order,kmax,criteria,bandwidth,kern)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> Y </term> =   matrix (T,N) of observations</para></listitem>
+<listitem><para>&#160;&#160;The data matrix may be unbalanced.</para></listitem>
+<listitem><para>&#160;&#160;Missing Values must be specified as %nan      </para></listitem>
+<listitem><para>*  <term> t_order </term> =   -1 : no individual effect</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;0 : individual effects (Default)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;1 : individual effects and time trends</para></listitem>
+<listitem><para>*  <term> LagOrders </term> =  </para></listitem>
+<listitem><para>&#160;&#160;-&#160;%nan&#160;if&#160;the&#160;user&#160;wants&#160;the&#160;program&#160;to&#160;determine&#160;the&#160;optimal&#160;lag&#160;order&#160;for&#160;each&#160;country&#160;(pmax=12&#160;or&#160;T/4)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;vector&#160;(N&#160;x&#160;1)&#160;or&#160;(1&#160;x&#160;N)&#160;of&#160;optimal&#160;lags&#160;for&#160;all&#160;the&#160;individuals&#160;of&#160;the&#160;panel</para></listitem>
+<listitem><para>*  <term> pmax </term> =   Maximum of the lag order authorized</para></listitem>
+<listitem><para>*  <term> bandwidth </term> =   'C' (Default) common lag troncature for the Bartlett kern (Moon and Perron 2003)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'N' for the Newey-West (1994)'s non parametric bandwidth parameter</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'A' for the Andrews (1991) automatic bandwidth paramete     r selection with AR(1) structure</para></listitem>
+<listitem><para>*  <term> kern </term> =   'B' for Bartlett (Default)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;'QS' for Quadratic Spectral (not possible when bandwidth =   'C')</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para><term>res</term> = a results tlist with:</para></listitem>
+<listitem><para>&#160;  - res('meth') = 'Levin-Lin'</para></listitem>
+<listitem><para>&#160;   - res('y') = (T x k) matrix of data</para></listitem>
+<listitem><para>&#160;   -  res('t_order') = the trend order (-1, 0 or 1)</para></listitem>
+<listitem><para>&#160;   -  res('t_orderlit') = the trend order in plain English</para></listitem>
+<listitem><para>&#160;   -  res('ta_star') = Statistic ta_star</para></listitem>
+<listitem><para>&#160;   -  res('tb_star') = Statistic tb_star</para></listitem>
+<listitem><para>&#160;   -  res('ta_pvalue') = Pvalue for the statistics ta_star</para></listitem>
+<listitem><para>&#160;   -  res('tb_pvalue') = Pvalue for the statistics tb_star</para></listitem>
+<listitem><para>&#160;   -  res('critical') = Normal Critical Values for the statistics ta_star and tb_star at 1%, 5% and 10%</para></listitem>
+<listitem><para>&#160;   -  res('rho_pool') = Pooled OLS estimator on initial series</para></listitem>
+<listitem><para>&#160;   -  res('rho_star') = Modified pooled OLS estimator using de-factored data</para></listitem>
+<listitem><para>&#160;   -  res('khat') = Estimated numbers of Factor with IC1, IC2, IC3, PC1, PC2, PC3, AIC3 and BIC3</para></listitem>
+<listitem><para>&#160;   -  res('criteria') = Criteria used to estimate the number of common factors. Default value = 1 (IC1)</para></listitem>
+<listitem><para>&#160;   -  res('IC') = IC1, IC2 and IC3 Information criterions for r=1,...,rmax</para></listitem>
+<listitem><para>&#160;   -  res('PC') = PC1, PC2 and PC3 Information criterions for r=1,...,rmax</para></listitem>
+<listitem><para>&#160;   -  res('BIC3') = BIC3 Information criterion for k=1,...,kmax (only BIC criteria function of N and T)</para></listitem>
+<listitem><para>&#160;   -  res('AIC3') = AIC3 Information criterion (only AIC criteria function of N and T): it tends to overestimate k</para></listitem>
+<listitem><para>&#160;   -  res('kmax') = Maximum number of common factors authorized</para></listitem>
+<listitem><para>&#160;   -  res('h') = Values of individual bandwidth parameters</para></listitem>
+<listitem><para>&#160;   -  res('LRV') = Estimated of Individual Long Run Variances</para></listitem>
+<listitem><para>&#160;   -  res('TLRV') = Estimated of Individual Temporal Long Run Variances</para></listitem>
+<listitem><para>&#160;   -  res('kernel') = kern function used</para></listitem>
+<listitem><para>&#160;   -  res('bandwidth') = Method to fix the bandwidth parameter</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Moon and Perron (2003) Unit Root Tests on Panel Data (ref: "Testing for a Unit Root in Panels with Dynamic Factors", Journal of Econometrics, Elsevier, vol. 122(1), p. 81-126, September).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/gdpan_oecd.dat');
+Y=explone(dblist(GROCERDIR+'/data/gdpan_oecd.dat'));
+// extract matrix of data present in database
+res=Moon_Perron1(log(Y),0,5,'BIC3','n','qs')
+// Provides the Moon and Perron test for all (logarithm of) Y columns, with a constant but not trend (arg # 2 = 0),
+// the maximum # of factors allowed set to 5 (arg # 3 = 5),
+// the number of factors determined by the criteria 'BIC3' proposed by Bai an Ng (arg # 4 = 'BIC3'),
+// the Newey-West bandwidth (arg # 5 = 'n'), and the Quadratic Spectral kernel (arg # 6 = qs').
+ 
+res=Moon_Perron1(log(Y),1,5,'AIC1','n','b')
+// provides the Moon and Perron test for all (logarithm of) Y columns, with individual constants and trend (arg # 2 = 1),
+// the maximum # of factors allowed set to 5 (arg # 3 = 5),
+// the number of factors determined by the criteria 'AIC1' proposed by Bai an Ng (arg # 4 = 'AIC1'),
+// the Newey-West bandwidth (arg # 5 = 'n'), and the Barlett kernel (arg # 6 = b').
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Christophe Hurlin 2004 / Eric Dubois 2008
+        </refsection>
+</refentry>

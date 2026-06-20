@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Scilab ( http://www.scilab.org/ ) - This file is part of Scilab
+ * Copyright (C) 2018 - Stéphane MOTTELET
+ *
+ * This file is hereby licensed under the terms of the GNU GPL v2.0,
+ * For more information, see the COPYING file which you should have received
+ * along with this program.
+ *
+ -->
+<refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" xmlns:scilab="http://www.scilab.org" xml:lang="en" xml:id="xlread_data">
+    <refnamediv>
+        <refname>xlread_data</refname>
+        <refpurpose>Auxiliary function used by xlread</refpurpose>
+    </refnamediv>
+    <refsynopsisdiv>
+        <title>Syntax</title>
+        <synopsis>
+          [data,isText,isNum,custom] = xlread_data(file_path)
+          [data,isText,isNum,custom] = xlread_data(file_path,sheet)
+          [data,isText,isNum,custom] = xlread_data(file_path,sheet,range)
+          [data,isText,isNum,custom] = xlread_data(file_path,sheet,range,processFun)
+        </synopsis>
+          </refsynopsisdiv>
+    <refsection>
+        <title>Arguments</title>
+        <variablelist>
+          <varlistentry>
+              <term>file_path,sheet,range,processFun</term>
+              <listitem>
+                  <para>Input parameters are described on the help page of <link linkend="xlread">xlread</link>
+                  </para>
+              </listitem>
+          </varlistentry>
+          <varlistentry>
+                <term>data</term>
+                <listitem>
+                    <para>a cell array containing the raw data found in the sheet at specfied range. Empty cells
+                        are represented by <literal>NaN</literal> values.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                  <term>isText</term>
+                  <listitem>
+                      <para>A matrix of boolean values with the same size as <term>data</term>. <literal>isText(i,j)</literal> is true when <literal>data{i,j}</literal> is a string.
+                      </para>
+                  </listitem>
+              </varlistentry>
+              <varlistentry>
+                    <term>isNum</term>
+                    <listitem>
+                        <para>A matrix of boolean values with the same size as <term>data</term>. <literal>isNum(i,j)</literal> is true when <literal>data{i,j}</literal> is a number.
+                        </para>
+                    </listitem>
+                </varlistentry>
+              <varlistentry>
+                <term>custom</term>
+                <listitem>
+                    <para>contains the eventual second output from <term>processFun</term>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </refsection>
+    <refsection>
+        <title>Description</title>
+        <para>
+          This low level function is called by the main <term>xlread</term> function (see the dedicated <link linkend="xlread">help page</link>) but it can be used to process the raw data independently. The optional outputs <term>isText</term>, <term>isNum</term> and <term>custom</term> can be used to this purpose. 
+        </para>
+    </refsection>
+    <refsection role="see also">
+        <title>See also</title>
+        <simplelist type="inline">
+          <member>
+              <link linkend="xlread">xlread</link>
+          </member>
+          <member>
+              <link linkend="xlread_scan">xlread_scan</link>
+          </member>
+          <member>
+              <link linkend="xlwrite">xlwrite</link>
+          </member>
+          <member>
+              <link linkend="xlinfo">xlinfo</link>
+          </member>
+        </simplelist>
+    </refsection>
+    <refsection>
+        <title>Bibliography</title>
+        <para>This function is based on POI library (<ulink url="http://poi.apache.org/">http://poi.apache.org/</ulink>).
+        </para>
+    </refsection>
+</refentry>
+

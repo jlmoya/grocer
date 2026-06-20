@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="litterman1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>litterman1 </refname>
+               <refpurpose>Temporal disaggregation using the Litterman method </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[y,res]=litterman1(Y,x,ta,s,delta,typemin,optfunc,opt_optim)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> Y</term>  =  a (N x 1) vector of low frequency data</para></listitem>
+<listitem><para>*  <term> x </term> =  a (n x p) matrix of high frequency indicators (without intercept)</para></listitem>
+<listitem><para>*  <term> ta </term> =  type of disaggregation</para></listitem>
+<listitem><para>&#160;&#160;-&#160;ta=-1&#160;---&gt;&#160;sum&#160;(flow)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;ta=0&#160;---&gt;&#160;average&#160;(index)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;ta=i&#160;---&gt;&#160;i&#160;th&#160;element&#160;(stock)&#160;---&gt;&#160;interpolation</para></listitem>
+<listitem><para>*  <term> s</term> =  number of high frequency data points for each low frequency data points</para></listitem>
+<listitem><para>&#160;&#160;-&#160;s=&#160;4&#160;---&gt;&#160;annual&#160;to&#160;quarterly</para></listitem>
+<listitem><para>&#160;&#160;-&#160;s=12&#160;---&gt;&#160;annual&#160;to&#160;monthly</para></listitem>
+<listitem><para>&#160;&#160;-&#160;s=&#160;3&#160;---&gt;&#160;quarterly&#160;to&#160;monthly</para></listitem>
+<listitem><para>*  <term> delta</term> =  the increment used for numerical derivation</para></listitem>
+<listitem><para>*  <term> typemin</term> =  estimation method:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;typemin='wls'&#160;---&gt;&#160;weighted&#160;least&#160;squares</para></listitem>
+<listitem><para>&#160;&#160;-&#160;typemin='llike'&#160;---&gt;&#160;maximum&#160;likelihood</para></listitem>
+<listitem><para>*  <term> optfunc </term> =  a string, the name of the optimisation function ('optim' or 'optimg')</para></listitem>
+<listitem><para>*  <term> sopt_optim </term> =  a tlist, collecting the options to the optimisation function</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> y </term> =  High frequency estimate</para></listitem>
+<listitem><para>*  <term> res </term> =  a results tlist with:</para></listitem>
+<listitem><para>&#160;   - res('meth')      = 'Litterman'</para></listitem>
+<listitem><para>&#160;   - res('typemod')   = type of the model for the high frequency innovations</para></listitem>
+<listitem><para>&#160;   - res('ta')        = type of disaggregation</para></listitem>
+<listitem><para>&#160;   - res('nobs_lf')   = nobs. of low frequency data</para></listitem>
+<listitem><para>&#160;   - res('nobs_hf')   = nobs. of high-frequency data</para></listitem>
+<listitem><para>&#160;   - res('pred')      = number of extrapolations</para></listitem>
+<listitem><para>&#160;   - res('s')         = frequency conversion between low and high freq.</para></listitem>
+<listitem><para>&#160;   - res('p')         = number of regressors (including intercept)</para></listitem>
+<listitem><para>&#160;   - res('y')         = high frequency estimate</para></listitem>
+<listitem><para>&#160;   - res('y_lf')         = low frequency data</para></listitem>
+<listitem><para>&#160;   - res('indicator')    = high frequency indicators</para></listitem>
+<listitem><para>&#160;   - res('y_dt')      = high frequency estimate: standard deviation</para></listitem>
+<listitem><para>&#160;   - res('y_up')      = high frequency estimate: sd + sigma</para></listitem>
+<listitem><para>&#160;   - res('y_lo')      = high frequency estimate: sd - sigma</para></listitem>
+<listitem><para>&#160;   - res('resid')     = high frequency residuals</para></listitem>
+<listitem><para>&#160;   - res('resid_lf')   = low frequency residuals</para></listitem>
+<listitem><para>&#160;   - res('beta')      = estimated model parameters</para></listitem>
+<listitem><para>&#160;   - res('sd')        = standard deviation of the estimated model parameters</para></listitem>
+<listitem><para>&#160;   - res('tstat')     = estimated model parameters: t ratios</para></listitem>
+<listitem><para>&#160;   - res('rho')       = innovational parameter</para></listitem>
+<listitem><para>&#160;   - res('aic')       = Information criterion: AIC</para></listitem>
+<listitem><para>&#160;   - res('bic')       = Information criterion: BIC</para></listitem>
+<listitem><para>&#160;   - res('llike')     = Objective function used by the estimation method</para></listitem>
+<listitem><para>&#160;   - res('typemin')   = method of estimation</para></listitem>
+<listitem><para>&#160;   - res('llike')     = Log-likelihood at the estimated parameters</para></listitem>
+<listitem><para>&#160;   - res('sigma')     = Variance at the estimated parameters</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Temporal disaggregation using the Litterman method of temporal disaggregation (low level function that works only with matrices or ts and all parameters must be given).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'\data\xesp.dat')
+opt=tlist(['optim options';'optim';'optim ineq';'nelmead';'convg'],...
+[',''ar'',1e4,1e4'],',''b'',-0.99,0.99',',2*%eps,1000',1e-5)
+[y,res] = litterman1(Y,x,-1,4,1e-5,'wls','optimg',opt);
+// With Y and x taken from the database GROCERDIR+'\macros\grocer\db\xesp.dat',
+// provides quarterly disaggregation of (22 x 1) matrix Y (representing annual Spanih exportations) with (88 x 1) matrix x.
+// Annual series are built by summing quarterly series (3rd arg. set to -1);
+// the order of aggregation is 4 (4th arg. set to 4);
+// the increment used for the numerical derivation is 1e-5 (5th arg. set to 1e-5)
+// and the estimation method is weigthed least squares (6th arg. set to 'wls').
+// Optimization function is Grocer 'optimg' with parameters entered in tlist opt.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2005
+        </refsection>
+</refentry>

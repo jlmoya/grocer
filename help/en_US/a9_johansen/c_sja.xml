@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="c_sja" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>c_sja </refname>
+               <refpurpose>critical values for Johansen maximum eigenvalue statistic </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[jc]=c_sja(n,p)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>* <term>n</term>= number of zero eigenvalues under the null hypothesis</para></listitem>
+<listitem><para>* <term>p</term>= order of time polynomial in the null-hypothesis</para></listitem>
+<listitem><para>&#160;&#160;-&#160;p&#160;=&#160;-1,&#160;no&#160;deterministic&#160;part</para></listitem>
+<listitem><para>&#160;&#160;-&#160;p&#160;=&#160;&#160;0,&#160;for&#160;constant&#160;term</para></listitem>
+<listitem><para>&#160;&#160;-&#160;p&#160;=&#160;&#160;1,&#160;for&#160;constant&#160;plus&#160;time-trend</para></listitem>
+<listitem><para>&#160;&#160;-&#160;p&#160;&gt;&#160;&#160;1&#160;&#160;returns&#160;no&#160;critical&#160;values</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* <term>jc</term>= a (3x1) vector of percentiles for the maximum eigenvalue statistic for [90% 95% 99%] </para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Finds critical values for Johansen maximum eigenvalue statistic.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+s = c_sja(4,1)
+// provides Johansen maximum eigenvalue statistic with 4 zero eignevalues and a time trend in the VAR
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

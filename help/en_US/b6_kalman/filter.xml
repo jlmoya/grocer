@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="filter" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>filter </refname>
+               <refpurpose>Kalman filter </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[betat,betaf,sigmatt,sigmatf]=filter(param,func,y,x,F,z)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> param </term> =    a vector of parameters (sqrt of variances)</para></listitem>
+<listitem><para>*  <term> func </term> =    the function which transforms the parameters into the matrix of variances (Q and R) and, if necessary, into the matrices of prior values</para></listitem>
+<listitem><para>*  <term> y </term> =    (nx1) data vector</para></listitem>
+<listitem><para>*  <term> x </term> =    (nxk) data matrix</para></listitem>
+<listitem><para>*  <term> F </term> =    transition matrix</para></listitem>
+<listitem><para>*  <term> z </term> =    (nxl) data matrix</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> betat </term> =    vector of filtered beta at date t with the information available at date t (beta(t|t))</para></listitem>
+<listitem><para>*  <term> betaf </term> =    vector of filtered beta at date t with the information available at date t-1 (beta(t|t-1)</para></listitem>
+<listitem><para>*  <term> ferror </term> =    vector of errors at date t (  =   y-x*beta(t|t))</para></listitem>
+<listitem><para>*  <term> sigmatt </term> =    vector of filtered variances at date t with the information available at date t (sigma(t|t))</para></listitem>
+<listitem><para>*  <term> sigmatf </term> =    vector of filtered variances at date t with the information available at date t-1 (sigma(t|t-1))</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Generates model filtered betas and variance, given values for Q and R in a Kalman model:
+y(t) = X(t)*B(t) + Z(t)*A  + e(t), e(t) = N(0,R)
+B(t) = Z(t)*B(t-1) + v(t),    v(t) = N(0,Q)
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+// Filter is used by the function kalman:
+[betat,betaf,sigmatt,sigmatf]=filter(grocer_param,grocer_func,grocer_y,grocer_x,grocer_F)
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

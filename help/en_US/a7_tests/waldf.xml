@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="waldf" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>waldf </refname>
+               <refpurpose>Wald F-test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[resulwa]=waldf(resultr,resultu,np)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> resultr </term> =    results tlist from ols() restricted regression</para></listitem>
+<listitem><para>*  <term> resultu </term> =    results tlist from ols() unrestricted regression</para></listitem>
+<listitem><para>*  <term> np</term>  =    'noprint' if the user does not want to print the results</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> resulbp </term> =    a results tlist with:</para></listitem>
+<listitem><para>&#160;  - resultbp('meth')   = 'waldf'</para></listitem>
+<listitem><para>&#160;  - resultbp('runcons') = results tlist of the un restricted regression</para></listitem>
+<listitem><para>&#160;  - resultbp('rcons') = results tlist of the restricted regression</para></listitem>
+<listitem><para>&#160;  - resultbp('f') = Wald F-statistic</para></listitem>
+<listitem><para>&#160;  - resultbp('dfnum') = degrees of freedom of the numerator</para></listitem>
+<listitem><para>&#160;  - resultbp('dfden') = degrees of freedom of the denominator</para></listitem>
+<listitem><para>&#160;  - resultbp('f_pvalue') = p-value of the test</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ Computes Wald F-test for two regressions. Results are stored in a tlist and displayed on screen if the user has not given as second argument 'noprint'.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+bounds('1964q3','1989q2');
+r1=ols('delts(lm1-lp)','delts(lagts(1,lm1-lp-ly))', 'lagts(1,lm1-lp-ly)', 'const');
+r2=ols('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet', 'lagts(1,lm1-lp-ly)', 'const');
+rwaldf=waldf(r1,r2)
+ 
+// This example provides the Fisher satistics corresponding to the restriction r1 imposes over r2.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

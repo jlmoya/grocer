@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="reliability" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>reliability  </refname>
+               <refpurpose>reliability of the coefficients in a regression </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=reliability(res,w,p,np)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> res </term> =   the results of a -univariate- regression</para></listitem>
+<listitem><para>*  <term> w </term> =   a (1 x 4) vector of reliability outcome:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;w(1)&#160;=&#160;significant&#160;only&#160;on&#160;a&#160;sub-sample</para></listitem>
+<listitem><para>&#160;&#160;-&#160;w(2)&#160;=&#160;significant&#160;only&#160;on&#160;the&#160;sub-samples</para></listitem>
+<listitem><para>&#160;&#160;-&#160;w(3)&#160;=&#160;significant&#160;only&#160;on&#160;the&#160;whole&#160;sample</para></listitem>
+<listitem><para>&#160;&#160;-&#160;w(4)&#160;=&#160;significant&#160;on&#160;the&#160;whole&#160;sample&#160;and&#160;on&#160;a&#160;sub_sample</para></listitem>
+<listitem><para>*  <term> p </term> =   a size level</para></listitem>
+<listitem><para>*  <term> np </term> =   'noprint' if the user does not want to print the results</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term> res </term> =   a tlist with:</para></listitem>
+<listitem><para>&#160;   - res('meth')='reliability'</para></listitem>
+<listitem><para>&#160;   - res('namey')= a string, the name of the endogenous variable in the regression</para></listitem>
+<listitem><para>&#160;   - res('namex')= the string vector of the names of the exogenous variables in the regression</para></listitem>
+<listitem><para>&#160;   - res('reliab')= the real vector of the reliability of the coefficients</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Estimates the reliability of the coefficients in a regression
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+bounds('1964q3','1989q2');
+rols=ols('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet', 'lagts(1,lm1-lp-ly)', 'const');
+reliability(rols,[0.3 0.6 0.4 0.7],0.05)
+// From Hendry and Ericsson estimation, calculates the reliability of the coefficients at a 5% level,
+// using Hendry and Krolzig proposed parametrisation (w=[0.3 0.6 0.4 0.7]).
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2006
+        </refsection>
+</refentry>

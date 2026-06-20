@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="gmmNlWald" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>gmmNlWald </refname>
+               <refpurpose>Wald test for GMM with nonlinear restrictions </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rwd = gmmNlWald(rgmm,R,np)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> rgmm </term> =    tlist result for unrestricted estimation</para></listitem>
+<listitem><para>*  <term> R </term> =    (s x 1) vector  of nonlinear restriction  of the form R(p)  =   0, example  R  =   ['p1-1/p2';'p5-p3*p4'];</para></listitem>
+<listitem><para>*  <term> np </term> =    'noprint' if the user does not want to print the results</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* <term> rwd</term> = a tlist with:</para></listitem>
+<listitem><para>&#160;  -rwd('chistat') = test statisitc</para></listitem>
+<listitem><para>&#160;  -rwd('pvalue') = pvalue of the test</para></listitem>
+<listitem><para>&#160;  -rwd('df') = number restriction</para></listitem>
+ 
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs Wald test for GMM with nonlinear restrictions
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+X = [ones(1000,1) grand(1000,1,'nor',0,1) grand(1000,1,'nor',0,1)];
+b = [0;1;-1];
+e = grand(1000,1,'nor',0,1);
+y = X*b + e;
+ 
+gmmopt = tlist(['gmm';'momt';'jake';'prt';'gmmit';'S']);
+gmmopt('prt')=1;
+gmmopt('gmmit') = 1;
+gmmopt('S')='W';
+gmmopt('momt')='gmmLinM';
+gmmopt('jake')='gmmLinJ';
+ 
+b0=zeros(3,1);
+ 
+ uout=gmm('y',gmmopt,'exo=''X''','ivar=''X''','parm0=b0');
+ R = 'p1';
+ rw=gmmNlWald(uout,R);
+//Examples taken from gmmLin_d(): Test if the first parameter is null
+ 
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2007
+        </refsection>
+</refentry>

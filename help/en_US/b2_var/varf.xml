@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="varf" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:28-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>varf</refname>
+               <refpurpose>VAR forecasting </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rvarf=varf(namevar,hprev,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> namevar </term> =    the tlist results resulting from a VAR, an ECM, a BVAR or a BECM estimation or the same between quotes (to  have it's name saved)</para></listitem>
+<listitem><para>*  <term> hprev </term> =    the prevision period which can be either</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;[n1&#160;n2]&#160;constant&#160;vector&#160;where&#160;n1&#160;and&#160;n2&#160;are&#160;the&#160;lead&#160;over&#160;the&#160;last&#160;period&#160;of&#160;the&#160;estimation&#160;(n1&lt;=0&#160;means&#160;that&#160;the&#160;forecast&#160;begins&#160;within&#160;the&#160;estimation&#160;period)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;n&#160;constant&#160;which&#160;is&#160;equivalent&#160;to&#160;[1&#160;n]&#160;(forecast&#160;begins&#160;just&#160;after&#160;the&#160;estimation&#160;period)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;[n1&#160;n2]&#160;string&#160;vector&#160;where&#160;n1&#160;and&#160;n2&#160;are&#160;the&#160;time&#160;periods&#160;for&#160;forecasting&#160;(a&#160;posibility&#160;open&#160;only&#160;if&#160;the&#160;VAR&#160;has&#160;been&#160;performed&#160;with&#160;ts)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;n&#160;string&#160;which&#160;is&#160;equivalent&#160;to&#160;[1&#160;n]&#160;(forecast&#160;begins&#160;just&#160;after&#160;the&#160;estimation&#160;period)</para></listitem>
+<listitem><para>*  <term> argi </term> =    an argument which can be</para></listitem>
+<listitem><para>&#160;&#160;-xp=xx'&#160;(necessary&#160;if&#160;the&#160;variables&#160;in&#160;the&#160;VAR&#160;has&#160;been&#160;given&#160;as&#160;a&#160;matrix)&#160;where&#160;xx&#160;is&#160;[#&#160;of&#160;forecasting&#160;dates&#160;;&#160;#&#160;of&#160;exogenous&#160;variables&#160;in&#160;the&#160;var]&#160;for&#160;the&#160;values&#160;of&#160;exogenous&#160;variables&#160;over&#160;the&#160;forecasting&#160;period</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;forecast</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rvarf </term> =    a results tlist with:</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvarf('meth')&#160;&#160;=&#160;'rvarf'</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvarf('rvar')&#160;&#160;=&#160;results&#160;tlist&#160;of&#160;the&#160;originating&#160;var</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvarf('prev')&#160;&#160;=&#160;matrix&#160;of&#160;forecasts</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('prev_namex')&#160;&#160;=&#160;vector&#160;or&#160;ts&#160;of&#160;forecasts&#160;called&#160;by&#160;their&#160;names&#160;preceded&#160;by&#160;'prev_'</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs forecasting by the mean of a vector autogressive estimation and, by default, displays on screen  the estimation results. If the var structure comes from an ecm estimation, then what is stored is the forecasted levels;  if it comes from an ordinary var, then what is stored is the forecasted values of the endogenous variables, as they have  been given by the user (for instance, if she has given one as del(ts), then what is forecasted is del(ts), not ts).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+bounds('1982m7','1994m12');
+illinos=reshape(illinos,'1982m1')
+indiana=reshape(indiana,'1982m1')
+kentucky=reshape(kentucky,'1982m1')
+michigan=reshape(michigan,'1982m1')
+ohio=reshape(ohio,'1982m1')
+pennsyvlania=reshape(pennsyvlania,'1982m1')
+tennesse=reshape(tennesse,'1982m1')
+westvirginia=reshape(westvirginia,'1982m1')
+varjls=VAR(2,'endo=illinos,indiana,kentucky,michigan,ohio,pennsyvlania,tennesse,westvirginia','noprint');
+rf=varf(varjls,'1995m12')
+// Example taken from function varf_d().
+// Forecast is done from the first out-of-sample period (1995m1) until 1995m12.
+ecmjls=ecm(2,'illinos','indiana','kentucky','michigan','ohio','pennsyvlania','tennesse','westvirginia','noprint');
+rf=varf('ecmjls',[-1,12])
+// Now, forecast is done from the last but one period (1994m11) until the 12th out-of-sample period (1995m12).
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

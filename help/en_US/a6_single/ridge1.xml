@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ridge1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:25-Mars-2019$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ridge1</refname>
+               <refpurpose>Hoerl_Kernard ridge regression method </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rridge]=ridge1(y,x,theta)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>y</term> = a (n x 1) vector</para></listitem>
+<listitem><para>*  <term>x</term> = a (n x k) vector</para></listitem>
+<listitem><para>*  <term>theta</term> = a scalar, theta's value</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>* <term>rridge</term> = a tlist with</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('meth') = 'ridge'</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('y') = y data vector</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('x') = x data matrix</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('nobs') = nobs</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('nvar') = nvars</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('beta') = bhat</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('yhat') = yhat</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('resid') = residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('sige') = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rridge('sige') = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('ser') = standard error of the regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('dw') = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('theta') = the scale factor theta</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('rsqr') = rsquared</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('rbar') = rbar-squared</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('f') = F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rridge('pvaluef') = its significance level</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes Hoerl-Kennard Ridge Regression. Low-level function counterpart to the ridge function.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'data\bdhenderic.dat')
+ [y,namey,x]=explouniv('delts(lm1-lp)',['delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet','lagts(1,lm1-lp-ly)','cte'],['1964q3';'1989q2']);
+// perform the ridge regression on the corresponding variables with theta=0.001
+ result=ridge1(y,x,0.001)
+ // display the estimated coefficients:
+ result('beta')
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2019
+        </refsection>
+</refentry>

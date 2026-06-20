@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="logn_cdf" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>logn_cdf </refname>
+               <refpurpose>lognormal cumulative distribution </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[cdf]=logn_cdf(x,a,v)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> x </term> =    variable vector (nx1)</para></listitem>
+<listitem><para>*  <term> a </term> =    mean vector (default  =   0)</para></listitem>
+<listitem><para>*  <term> v </term> =    variance vector (default  =   1)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> cdf </term> =    (nxm) vector containing cdf for each x</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes cdf of the lognormal distribution.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+x=logn_cdf([0.2 0.5 1.5],2*ones(1,3),3*ones(1,3))
+// Provides a (1x3) vector of the cumulative distribution function of a lognormal law with mean log(2) and variance 3 (for the log of the law) at values 0.2, 0.5 and 1.5.
+x=logn_cdf([1:5]')
+// Provides a (5x1) vector of the cumulative distribution function of a lognormal law of mean 0 and variance 1 (for the log of the law) at values 1, 2, 3, 4 and 5.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

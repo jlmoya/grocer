@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="syslist" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>syslist </refname>
+               <refpurpose>recovers objects names in a system of equations </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[lx,listcoef,ncoefeqs,xx,namexos,boundsvarb]=syslist(l,coef,boundsvarb)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> l </term> =    a list of k equations</para></listitem>
+<listitem><para>*  <term> coef </term> =    a (mx1) vector of coefficients names</para></listitem>
+<listitem><para>*  <term> boundsvarb </term> =    a vector of bounds or []</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> lx </term> =    the list of all endogenous variables</para></listitem>
+<listitem><para>*  <term> listcoef </term> =    the list of coefficients</para></listitem>
+<listitem><para>*  <term> ncoefeqs </term> =    the list pf sizes of coefficients for each equation</para></listitem>
+<listitem><para>*  <term> xx </term> =    matrix of exogenous varaibles</para></listitem>
+<listitem><para>*  <term> namexos </term> =    the vector of their names</para></listitem>
+<listitem><para>*  <term> boundsvarb </term> =    the vector of bounds</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Recovers from an equation the name of the endogenous variable, the indexes of the coefficients (in a vector) and the names of the exogenous variables (also in a vector).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+eq1='igm=a1*fgm+a2*cgm+a3'
+eq2='ich=a4*fch+a5*cch+a6'
+eq3='ige=a7*fge+a8*cge+a9'
+[lx,listcoef,ncoefeqs,xx,namexos,boundsvarb]=syslist(list(eq1,eq2,eq3),'a'+string([1:9]'),[])
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

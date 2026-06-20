@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="test_varspec0" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Août-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>test_varspec0</refname>
+               <refpurpose>three default specification tests for VAR estimation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[v,p]=test_varspec0(r)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>r</term> =   a results tlist from a VAR regression</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>v</term>  =   (3 x 1) vector of statistics of specification tests</para></listitem>
+<listitem><para>*  <term>p</term>  =   (3 x 1) vector of p-values of specification tests</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Provides the vectors of 3 statistics of specification tests (the Doornik and Hansen normality test, the Breusch-Pagan autocorrelation test, the heteroscedasticity test, in that order) and their p-values.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+global GROCERDIR;
+load(GROCERDIR+'/data/lutk1.dat')
+bounds('1960q4','1978q4')
+results=VAR(2,'endo=delts(log(rfa_inv));delts(log(rfa_inc));delts(log(rfa_cons))')
+[v,p]=test_varspec0(results)
+// provides the 3 specification tests on Lüktepohl's VAR model.
+// NB: the results show that the normality hypothesis is rejected even at a 1% level (the other tests are accepted even at a 10% level).
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2013
+        </refsection>
+</refentry>

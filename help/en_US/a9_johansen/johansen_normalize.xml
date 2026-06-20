@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="johansen_normalize" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>johansen_normalize </refname>
+               <refpurpose>normalize the eigen vectors and error correction terms </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=johansen_normalize(res,vari)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> res </term> =   a johansen results tlist</para></listitem>
+<listitem><para>*  <term> vari </term> =   a vector indicating the variables used for each normalization</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term> res </term> =   the original tlist except for the 'evec' (eigenvectors) and 'alpha' (error correction terms) fields changed by the normalization.</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Normalizes the eigenvectors and error correction terms from a johansen estimation: for each cointegrating vector, a coefficient equal to 1 is attributed to the variable rank given by the user.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'\data\juselius.dat')
+// create dummies used for regression p.111-112
+post83q1=dummy(['1973q1';'2003q1'],['1983q1';'2003q1']);
+dum75q4=dummy(['1973q1';'2003q1'],'1975q4')-0.5*dummy(['1973q1';'2003q1'],['1976q1';'1976q2']);
+dum76q4=dummy(['1973q1';'2003q1'],'1976q4');
+dum83q2=dummy(['1973q1';'2003q1'],'1983q2');
+dum83q1=dummy(['1973q1';'2003q1'],'1983q1');
+ 
+rj1=johansen(1,'dnk_Lm3rC','dnk_Lyr','dnk_DLpy','dnk_Rm','dnk_Rb','exo_lt=trend^1;post(1983q1)','exo_st=const;dum75q4;dum76q4;dum83q1')
+ 
+rj1b=johansen_normalize(rj1,5,[3,1,4,2,5])
+// Example taken from function johansen_d().
+// The 5 potential cointegrating vectors are normalized by respectively the 3rd ('dnk_DLpy'),
+// the first ('dnk_Lm3rC'), the 4th ('dnk_Rm'), the 2nd ('dnk_Lyr') and the 5th ('dnk_Rb') endogenous variable.
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2009
+        </refsection>
+</refentry>

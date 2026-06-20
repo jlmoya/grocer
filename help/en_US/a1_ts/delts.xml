@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="delts" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>delts </refname>
+               <refpurpose>differentiates a ts </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>tsout=delts(arg1[,arg2])</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> arg1 </term> =     the order of differenciation (optional, set to 1 if not provided, can be &gt; 0,  =    0 or &lt; 0) or a ts</para></listitem>
+<listitem><para>*  <term> arg2 </term> =     a time series if the first argument was set to the order of differentiation</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> tsout </term> =     the differenciated time series</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes x(t)-x(t-n) for a timeseries x. Equivalent, but a little bit quicker than x-lagts(n,x)
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data\bdhenderic.dat')
+y = delts(lm1)
+// simple differentiation of the ts lm1
+y = delts(1,lm1)
+// simple differentiation of the ts lm1
+y = delts(4,lm1)
+// y=lm1-lm1(-4) (i.e: year on year difference)
+y = delts(-3,lm1)
+// y=lm1-lm1(+3)
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

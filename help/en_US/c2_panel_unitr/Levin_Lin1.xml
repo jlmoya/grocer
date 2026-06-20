@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="Levin_Lin1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:24-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>Levin_Lin1 </refname>
+               <refpurpose>Levin and Lin Panel Unit Root Test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res = Levin_Lin1(Y,t_order,LagOrders,pmax,bandwidth,kern,signif)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> Y </term> =   matrix (T,N) of observations</para></listitem>
+<listitem><para>&#160;&#160;The data matrix may be unbalanced.</para></listitem>
+<listitem><para>&#160;&#160;Missing Values must be specified as %nan      </para></listitem>
+<listitem><para>*  <term> t_order </term> =   -1 : no individual effect</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;0 : individual effects (Default)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;1 : individual effects and time trends</para></listitem>
+<listitem><para>*  <term> LagOrders </term> =  </para></listitem>
+<listitem><para>&#160;&#160;-&#160;%nan&#160;if&#160;the&#160;user&#160;wants&#160;the&#160;program&#160;to&#160;determine&#160;the&#160;optimal&#160;lag&#160;order&#160;for&#160;each&#160;country&#160;(pmax=12&#160;or&#160;T/4)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;vector&#160;(N&#160;x&#160;1)&#160;or&#160;(1&#160;x&#160;N)&#160;of&#160;optimal&#160;lags&#160;for&#160;all&#160;the&#160;individuals&#160;of&#160;the&#160;panel</para></listitem>
+<listitem><para>*  <term> pmax </term> =   Maximum of the lag order authorized</para></listitem>
+<listitem><para>*  <term> bandwidth </term> =   'C' (Default) common lag troncature for the Bartlett kernel (Levin and Lin 2003)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'N' for the Newey-West (1994)'s non parametric bandwidth parameter</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'A' for the Andrews (1991) automatic bandwidth parametr selection with AR(1) structure</para></listitem>
+<listitem><para>*  <term> kern </term> =   'B' for Bartlett (Default)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;'QS' for Quadratic Spectral (not possible when bandwidth =   'C')</para></listitem>
+<listitem><para>*  <term> signif </term> =   significance level for the individual ADF tests (0.05, 0.01 or 0.1)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para><term>res</term> = a results tlist with:</para></listitem>
+<listitem><para>&#160;  - res('meth') = 'Levin-Lin'</para></listitem>
+<listitem><para>&#160;   - res('y') = (T x k) matrix of data</para></listitem>
+<listitem><para>&#160;   - res('tstat') = (T x k) matrix of data</para></listitem>
+<listitem><para>&#160;   - res('critical') = Critical Values at 1%, 5% and 10% for the N(0,1) distribution</para></listitem>
+<listitem><para>&#160;   - res('pvalue') = Pvalue for the corrected statistic</para></listitem>
+<listitem><para>&#160;   - res('rho') = Estimate of the common autoRegresive parameter</para></listitem>
+<listitem><para>&#160;   - res('var_rho') = Variance of the estimator of the common autoRegresive parameter</para></listitem>
+<listitem><para>&#160;   - res('mu_star') = Mean Adjustement Factor</para></listitem>
+<listitem><para>&#160;   - res('sig_star') = Variance Adjustement Factor</para></listitem>
+<listitem><para>&#160;   - res('bandwidth') = Method to fix the bandwidth parameter</para></listitem>
+<listitem><para>&#160;   - res('kernel') = kernel function</para></listitem>
+<listitem><para>&#160;   - res('h') = Bandwicth parameter</para></listitem>
+<listitem><para>&#160;   - res('omega') = Individual Long run variances of first differences</para></listitem>
+<listitem><para>&#160;   - res('si') = Individual Ratios of long run standard deviation to the innovation SE</para></listitem>
+<listitem><para>&#160;   - res('pi') = Individual lag order in ADF regressions</para></listitem>
+<listitem><para>&#160;   - res('pmax') = Maximum lag order for ADF individual regressions</para></listitem>
+<listitem><para>&#160;   - res('Ti1') = Auxiliary Regression 1: Adjusted individual size, starting date and ending date</para></listitem>
+<listitem><para>&#160;   - res('Ti2') = Auxiliary Regression 1: Adjusted individual size, starting date and ending date</para></listitem>
+<listitem><para>&#160;   - res('t_order') = the trend order (-1, 0 or 1)</para></listitem>
+<listitem><para>&#160;   - res('t_orderlit') = the trend order in plain english</para></listitem>
+<listitem><para>&#160;   - res('tstat_nc') = Non corrected t-statistic (if t_order == 1 only)</para></listitem>
+<listitem><para>&#160;   - res('pvalue_nc') = Pvalue for non corrected t-statistic (if t_order == 1 only)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Levin and Lin (1992) Unit Root Tests on Panel Data (ref: Levin, Lin and Chu (2002), "Unit Root Tests in Panel Data: Asymptotic and
+Finite-Sample Properties", Journal of Econometrics), vol. 108, pp. 1&#150;24).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/gdpan_oecd.dat');
+Y=explone(dblist(GROCERDIR+'/data/gdpan_oecd.dat'));
+// extract matrix of data present in database
+res=Levin_Lin1(log(Y),0,%nan,5,'C','B',0.05)
+// Provides the Levin and Lin test for all Y columns, with a constant but not trend (arg # 2 = 0),
+// the Lag order to be determined by the program (arg # 3 = %nan),
+// the maximum number of lags set to 5 (arg # 4 = 5).
+ 
+res = Levin_Lin1(Y,1,2*ones(size(Y,2),1),%nan,'N','B',0.05)
+// xample 2 is provides the Levin and Lin test for all Y columns, with a constant and a trend (arg # 2 = 1),
+// the Lag order set to 2 for all variables, the maximum number of lags set to %nan because it is irrelevant (arg # 4 = %nan),
+// with Newey-West bandwidth (arg 5 set to 'N') and Barlett kernel.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Christophe Hurlin 2004 / Eric Dubois 2008
+        </refsection>
+</refentry>

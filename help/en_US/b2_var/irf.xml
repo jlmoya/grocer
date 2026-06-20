@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="irf" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:28-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>irf</refname>
+               <refpurpose>Calculates Impulse Response Function for VAR </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=irf(results,S,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> results </term> =    results tlist returned by VAR</para></listitem>
+<listitem><para>*  <term> S </term> =    scalar for number of periods in IRF</para></listitem>
+<listitem><para>*  <term> argi </term> =    optional argument which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'mres=x'&#160;where:</para></listitem>
+<listitem><para>&#160;*&#160;x&#160;=&#160;chol1&#160;(cholesky&#160;decomposition)</para></listitem>
+<listitem><para>&#160;*&#160;x&#160;=&#160;chol2&#160;(triangular&#160;factorisation)</para></listitem>
+<listitem><para>&#160;*&#160;x&#160;=&#160;original&#160;(original&#160;residuals)</para></listitem>
+<listitem><para> (default = chol1)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'meth=x'&#160;where:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;x&#160;=&#160;asym&#160;(asymptotic&#160;formula)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;x&#160;=&#160;bootstrap&#160;(Bootstrap&#160;simulations&#160;using&#160;draws&#160;from&#160;the&#160;coefficients)</para></listitem>
+<listitem><para> (default = asym)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'niter=x'&#160;where&#160;x=&#160;#&#160;iterations&#160;for&#160;the&#160;Monte-Carlo&#160;simulations&#160;(if&#160;any;&#160;default=1000)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'size=x'&#160;where&#160;x&#160;=&#160;significance&#160;level&#160;for&#160;the&#160;confidence&#160;band&#160;(default&#160;=0.05)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> res </term> =    a results tlist with:</para></listitem>
+<listitem><para>&#160;  - res('meth') = 'irf'</para></listitem>
+<listitem><para>&#160;  - res('mres') = decomposition method</para></listitem>
+<listitem><para>&#160;  - res('T') = # of periods represented</para></listitem>
+<listitem><para>&#160;  - res('IRF') = ((S+1) x T) impulse response functions</para></listitem>
+<listitem><para>&#160;  - res('IRF_LOW') = ((S+1) x T) lower range of impulse response confidence band</para></listitem>
+<listitem><para>&#160;  - res('IRF_UPP') = ((S+1) x T) upper range of impulse response confidence band</para></listitem>
+<listitem><para>&#160;  - res('PHI') = (N*p x T) matrix of coefficients</para></listitem>
+<listitem><para>&#160;  - res('resvar') = results tlist of the originating VAR</para></listitem>
+<listitem><para>&#160;  - res('msg') = message inidicating the nature of the decomposition</para></listitem>
+<listitem><para>&#160;  - res('size') = size of the confidence band</para></listitem>
+<listitem><para>&#160;  - res('ans_vari_to_shockj') = answer of variable  i to schock  j, for i=1:nvariables, j=1:nvariables</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Calculates Impulse Response Function for VAR.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/lutk1.dat')
+bounds('1960q4','1978q4')
+results=VAR(2,'endo=delts(log(rfa_inv));delts(log(rfa_inc));delts(log(rfa_cons))')
+[resirf]=irf(results,10,'mres=chol1','meth=asym')
+[resirf]=irf(results,10,'mres=original','meth=mc1','niter=1000')
+ 
+// Example taken from function var_d(). In the first one, impulse response is calculated for 10 periods, with shocks calculated from a
+// Choleski decomposition, with the asymptotic formula. In the second one, impulse response is calulated for 10 periods, with original
+// unorthogonalized shocks, using 1000 draws from the coefficients estimated law.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

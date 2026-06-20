@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="tsmat_extrap" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:20-Avr.-2019$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>tsmat_extrap</refname>
+               <refpurpose>exatrpolates series in a tsmat </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>tsmat2=tsmat_extrap(tsmat,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>tsmat</term> = a tsmat</para></listitem>
+<listitem><para>*  <term>arg1,...,argn</term> = N sequences variable,bounds,type_extrap,vari_extrap with:</para></listitem>
+<listitem><para>&#160;&#160;&#160;- variable = a string, the names of a variable in the tsmat that will be extrapolated</para></listitem>
+<listitem><para>&#160;&#160;&#160;- bounds = the bounds over which the extrapolation is made</para></listitem>
+<listitem><para>&#160;&#160;&#160;- type_extrap = a string, the way the extrapolation will be made</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160; * 'level' if it is done by entering its values in vari_extrap;</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160; * 'growthr rate' if it is done by applying the growth rate given in vari_extrap to the previous value;</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160; * 'delta rate' if it is done by adding the value(s) given in vari_extrap to the previous one;</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160; * 'av growth rate' is like 'growth rate' but with the average growth rate calculated on the last vari_extrap periods;</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160; * 'series' together with the name of a series vari_extrap existing in the tsmat applies to the extrapolated series the growth rates of the reference series,
+ over the chosen time bounds.</para></listitem>
+<listitem><para>&#160;&#160;&#160;- vari_extrap = a string, a scalar or a vector of the size of the bounds, providing the name of the variables or the svalue(s) or used for extrapolation</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>tsmat2</term> = the original tsmat with the given variables extrapolated</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Extrapolates variables of a tsmat.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+global GROCERDIR;
+// load the database small_db:
+load(GROCERDIR+'\data\small_db.dat')
+// extrapolate variables demmon with a 1% growth rate, time with a 1 increment and trim1
+// (first quarter), with the values [1;0;0;0] over period ['2007q1';'2007q4']:
+small_ext=tsmat_extrap(small_db,'demmon',['2007q1';'2007q4'],'growth rate',0.01,...
+'time',['2007q1';'2007q4'],'delta rate',1,...
+'trim1',['2007q1';'2007q4'],'level',[1;0;0;0],...
+'petfx',['2007q1';'2007q4'],'av growth rate',8,...
+'petfm',['2007q1';'2007q4'],'series','petfx');
+// note here that the values of one variable can be exatrapolated by the values of an extrapolated variable
+// provided that variable used for extrapolation has itself been put before the one to extrapolate
+// check that the new values have been taken into account in the new database and that
+// this is not the case for variable trim2:
+prt_tsmat('level',['2006q1';'2007q4'],list('small_ext'),['demmon';'time';'trim1';'petfx';'petfm';'trim2'])
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2019
+        </refsection>
+</refentry>

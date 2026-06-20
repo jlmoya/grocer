@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="impexc2bd" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>impexc2bd</refname>
+               <refpurpose>importation of a csv excel file </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>impexc2bd(filein,sep,fileout,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> filein </term> =   name of the file to be imported (between quotes)</para></listitem>
+<listitem><para>*  <term> sep </term> =   separator used in the filein (between quotes)</para></listitem>
+<listitem><para>*  <term> fileout </term> =   name of the scilab file where to save the imported data (between quotes)</para></listitem>
+<listitem><para>*  <term> argi </term> =   optional arguments</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'namedat=xxx'&#160;where&#160;xxx&#160;is&#160;the&#160;name&#160;given&#160;to&#160;the&#160;field&#160;dates&#160;in&#160;the&#160;.csv&#160;file&#160;(default:&#160;dates)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'namena=x1;x2;...xn'&#160;where&#160;xi&#160;are&#160;the&#160;values&#160;that&#160;the&#160;Non&#160;Available&#160;data&#160;can&#160;take&#160;in&#160;the&#160;.csv&#160;file&#160;('default:&#160;'&#160;'&#160;and&#160;'#N/A')</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'prefix=xxx'&#160;where&#160;xxx&#160;is&#160;the&#160;prefix&#160;that&#160;will&#160;be&#160;added&#160;to&#160;the&#160;names&#160;of&#160;the&#160;variables&#160;in&#160;the&#160;.csv&#160;database&#160;to&#160;obtain&#160;their&#160;names&#160;in&#160;the&#160;Scilab&#160;.dat&#160;database</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* Nothing: the imported series are saved in the file named fileout </para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Imports an excel file saved under csv format: this is at the very beginning an original scilab function, but improved to be more efficient and extended to deal with ts.
+By default, if one data is named dates or DATES (scilab distinguish capitals from small letters) then the following data are saved as timeseries.
+By default, if a value is lacking or #N/A in a timeseries, it is given a NA value.
+A prefix can be added to the name  of each variable.
+
+
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+impexc2bd(GROCERDIR+'/data/bdhenderic.csv',';','c:/example/bdhenderic.dat')// Provided that the folder 'c:/example/' exists on your computer, provides the importation of date in file data/bdhenderic.csv into the Scilab file 'c:/example/bdhenderic.dat'. The separator is here ' ;'.
+ 
+impexc2bd(GROCERDIR+'/data/bdhenderic.csv',';','c:/example/bdhenderic.dat','namena=:; ','namedat=dates','prefix=uk_')// Allows various options: NA can be blanks or ':'; the dates are labelled dates (equivalent here to the default option, but other names are possible); each variable in the database will be prefixed uk_ (giving uk_lm1, uk_lp, uk_ly, uk_rnet).
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2007
+        </refsection>
+</refentry>

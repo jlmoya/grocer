@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="cadf" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>cadf </refname>
+               <refpurpose>ADF statistic for residuals from a cointegrating regression </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rescadf]=cadf(p,l,namey,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>* <term>p</term>= order of time polynomial in the null-hypothesis</para></listitem>
+<listitem><para>&#160;&#160;-&#160;p&#160;=&#160;-1,&#160;no&#160;deterministic&#160;part</para></listitem>
+<listitem><para>&#160;&#160;-&#160;p&#160;=&#160;&#160;0,&#160;for&#160;constant&#160;term</para></listitem>
+<listitem><para>&#160;&#160;-&#160;p&#160;=&#160;&#160;1,&#160;for&#160;constant&#160;plus&#160;time-trend</para></listitem>
+<listitem><para>&#160;&#160;-&#160;p&#160;&gt;&#160;&#160;1&#160;&#160;returns&#160;no&#160;critical&#160;values</para></listitem>
+<listitem><para>* <term>l</term>= # of lagged changes of the residuals to include in regression</para></listitem>
+<listitem><para>* <term>namey</term>= a time series, a real (nx1) vector or a string equal to the name of a time series  or a (nx1) real vector between quotes</para></listitem>
+ 
+<listitem><para>* <term>argi</term>= arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx1)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nx1)&#160;real&#160;vector&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rcadf</term>  =    a tlist with</para></listitem>
+<listitem><para>&#160;&#160;.&#160;all&#160;of&#160;the&#160;arguments&#160;of&#160;the&#160;second&#160;stage&#160;regression</para></listitem>
+<listitem><para>and:</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rcadf('cointrel')&#160;=&#160;tlist&#160;with&#160;all&#160;the&#160;arguments&#160;of&#160;the&#160;first&#160;stage&#160;regression&#160;(see&#160;ols()&#160;for&#160;a&#160;description&#160;of&#160;all&#160;these&#160;arguments)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes augmented Dickey-Fuller statistic for residuals from a cointegrating regression, allowing for deterministic polynomial trends.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/datajpl.dat')
+r = cadf(0,6,'illinos','indiana')
+// Example taken from function cadf_d. Illinos and indiania are the names of two variables taken from data base jpl.dat
+// and these names will be used for printings. First entry is set to 0, which means that no trend is imposed in the
+// cointegrating regression. second entry is set to 6, which means that there are 6 lags to the residuals in the second
+// stage regression.
+r = cadf(1,4,illinos,indiana)
+// Now, a trend is included in the cointegrating regression, 4 lags on residuals in the second stage
+// regression and the variables are named 'endogenous' and 'exogenous' respectively when the results are printed.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2007
+        </refsection>
+</refentry>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ms_mean_oos" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:05-Sept.-2015$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ms_mean_oos</refname>
+               <refpurpose>run out-of-sample a MS-mean </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res_inp=ms_mean_oos(res_inp,endo,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> res_inp </term> =    a 'ms var' results tlist</para></listitem>
+<listitem><para>*  <term> endo </term> =   </para></listitem>
+<listitem><para>&#160;&#160;-&#160;(T&#160;x&#160;K)&#160;string&#160;matrix&#160;of&#160;endogenous&#160;variables&#160;or:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;list&#160;containing&#160;all&#160;the&#160;endogenous&#160;variables&#160;in&#160;any&#160;of&#160;the&#160;following&#160;form:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;a&#160;real&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;a&#160;string&#160;representing&#160;such&#160;objects</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;the&#160;string&#160;'const'&#160;(for&#160;the&#160;constant&#160;variable)</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =    optional arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'prt=xx'&#160;where&#160;xx='nothing',&#160;'final',&#160;'all'&#160;or&#160;['initial';'final']&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;print&#160;nothing,&#160;only&#160;the&#160;final&#160;results&#160;or&#160;the&#160;final&#160;and&#160;the&#160;initial&#160;results</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'noprint'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;print&#160;nothing&#160;(equivalent&#160;to&#160;'prt=nothing')</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  res_oos </term> =    a results tlist with:</para></listitem>
+<listitem><para>&#160; - res_oos('meth') ='out of sample ms mean'</para></listitem>
+<listitem><para>&#160; - res_oos('typmod') = model numbered type</para></listitem>
+<listitem><para>&#160; - res_oos('y') = a (T x K) matrix of original endogenous variables</para></listitem>
+<listitem><para>&#160; - res_oos('ymat') = (T*K x 1) matrix of stacked endogenous variables</para></listitem>
+<listitem><para>&#160; - res_oos('xmat') = (T*K x sum(n_x)) matrix of switching exogenous variables</para></listitem>
+<listitem><para>&#160; - res_oos('zmat') = the (T x M) matrix of -transformed- non switching regressors</para></listitem>
+<listitem><para>&#160; - res_oos('switching V') = a scalar: - 1 if the variance does not switch with the states - M if the variance switches with the states</para></listitem>
+<listitem><para>&#160; - res_oos('var_opt') = a scalar: - 1 if the variance of residuals is heteroskedastic - 2 if the variance of residuals is homoskedastic - 3 if the variance of residuals is unconstrained</para></listitem>
+<listitem><para>&#160; - res_oos('nobs') = the # of observations</para></listitem>
+<listitem><para>&#160; - res_oos('nendo') = the # of endogenous variables</para></listitem>
+<listitem><para>&#160; - res_oos('nb_states') = the # of states</para></listitem>
+<listitem><para>&#160; - res_oos('coeff') = the (np x 1) vector of parameters</para></listitem>
+<listitem><para>&#160; - res_oos('llike') = the log-likekihood</para></listitem>
+<listitem><para>&#160; - res_oos('grad') = the gradient at the solution</para></listitem>
+<listitem><para>&#160; - res_oos('yhat') = the adjusted y</para></listitem>
+<listitem><para>&#160; - res_oos('filtered resid') = the filtered residuals of the regression</para></listitem>
+<listitem><para>&#160; - res_oos('dll') = the degrees of freedom</para></listitem>
+<listitem><para>&#160; - res_oos('prob_st') = the (M x 1) vector of egodic state probabilities</para></listitem>
+<listitem><para>&#160; - res_oos('ptrans') = the (M x M) matrix of transition probabilities</para></listitem>
+<listitem><para>&#160; - res_oos('sigma') = the (M*M_V x M) variance-covariance matrix of the residuals</para></listitem>
+<listitem><para>&#160; - res_oos('beta_id') = the (1 x sum(n_x)*M) vector of switching parameters</para></listitem>
+<listitem><para>&#160; - res_oos('beta_co') = the (1 x sum(n_z)) vector of non switching parameters</para></listitem>
+<listitem><para>&#160; - res_oos('inv_sigma') = the (K x K) inverse of the variance matrix</para></listitem>
+<listitem><para>&#160; - res_oos('det_inv_sigma') = the determinant of the inverse of the variance matrix</para></listitem>
+<listitem><para>&#160; - res_oos('filtered probs') = the (T x M) vector of filtered probabilities</para></listitem>
+<listitem><para>&#160; - res_oos('smoothed probs') = the (T x M) vector of smoothed probabilities</para></listitem>
+<listitem><para>&#160; - res_oos('n_x') = the (K x 1) vector of the numbers of switching exogenous variables for each endogenous variable</para></listitem>
+<listitem><para>&#160; - res_oos('n_z') = the (K x 1) vector of the numbers of non switching exogenous variables for each endogenous variable</para></listitem>
+<listitem><para>&#160; - res_oos('stderr') = the (np x 1) vector of coefficients standard errors</para></listitem>
+<listitem><para>&#160; - res_oos('hes. delta') = the numerical increment for the calculation of the hessian matrix</para></listitem>
+<listitem><para>&#160; - res_oos('tstat') = the (np x 1) vector of associated t-stats</para></listitem>
+<listitem><para>&#160; - res_oos('pvalue') = the (np x 1) vector of associated p-values</para></listitem>
+<listitem><para>&#160; - res_oos('covbeta') = the (np x np) variance-covariance matrix of the parameters</para></listitem>
+<listitem><para>&#160; - res_oos('corbeta') = the (np x np) correlation matrix of the parameters</para></listitem>
+<listitem><para>&#160; - res_oos('ptrans_tstat') = the (M x 1) vector of t-stats for the transition probabilities</para></listitem>
+<listitem><para>&#160; - res_oos('beta_id_tstat') = the (1 x n_x*K*M) vector of t-stats for switching parameters</para></listitem>
+<listitem><para>&#160; - res_oos('beta_co_tstat') = the (1 x n_z*K) vector of t-stats for non switching parameters</para></listitem>
+<listitem><para>&#160; - res_oos('sigma_tstat') = the (M*M_V x M) matrix of t-stats for the variance-covariance matrix of the residuals</para></listitem>
+<listitem><para>&#160; - res_oos('ptrans_pvalue') = the (M x M) matrix of t-stats for transition probabilities</para></listitem>
+<listitem><para>&#160; - res_oos('beta_id_pvalue') = the (1 x n_x*K*M) vector of t-stats for switching parameters</para></listitem>
+<listitem><para>&#160; - res_oos('beta_co_pvalue') = the (1 x n_z*K) vector of t-stats for non switching parameters</para></listitem>
+<listitem><para>&#160; - res_oos('sigma_pvalue') = the (M*M_V x M) matrix of t-stats for the variance-covariance matrix of the residuals</para></listitem>
+<listitem><para>&#160; - res_oos('smoothed resid') = the smoothed residuals of the regression</para></listitem>
+<listitem><para>&#160; - res_oos('namey') = the (ny x 1) vector of names of the endogenous variables</para></listitem>
+<listitem><para>&#160; - res_oos('namex_id') = the (n_x x 1) vector of names of the switching exogenous variables</para></listitem>
+<listitem><para>&#160; - res_oos('namex_co') = the (n_x x 1) vector of names of the non switching exogenous variables</para></listitem>
+<listitem><para>&#160; - res_oos('apriori') = a scalar - 0 if there is no a priori datation - 1 if there is an a priori datation</para></listitem>
+<listitem><para>&#160; - res_oos('prests') = a boolean indicating whether there are ts in the regression</para></listitem>
+<listitem><para>&#160; - res_oos('prests') = a boolean indicating whether there are ts in the regression</para></listitem>
+<listitem><para>&#160; - res_oos('datation') = the a priori datation if any</para></listitem>
+<listitem><para>&#160; - res_oos('namedat') = the name of the series used for an a priori datation if any</para></listitem>
+<listitem><para>&#160; - res_oos('bounds') = the bounds if there are ts in the regression</para></listitem>
+<listitem><para>&#160; - res_oos('dropna') = boolean indicating if NAs have been dropped</para></listitem>
+<listitem><para>&#160; - res_oos('nonna') = vector indicating position of non-NA values (if the option 'dropna' was active)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Runs out-of-sample an estimated Markov-switching mean process.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+global GROCERDIR;
+load(GROCERDIR+'\data\anas.dat')
+ 
+bounds('1984m2','2001m12')
+nb_states=3
+switch_var=1 // variances are not switching
+var_opt=1 // heteroskedastik var-cov matrix
+ 
+ 
+r1=ms_mean(['delts(log(construc))';'delts(log(ipi))';'delts(log(helpwanted))';'delts(log(revu))'],...
+nb_states,switch_var,var_opt,'datation=datation_bb','opt_func=optim')
+ 
+bounds('2002m1','2003m1')
+r2=ms_mean_oos(r1,['delts(log(construc))';'delts(log(ipi))';'delts(log(helpwanted))';'delts(log(revu))'])
+// the ms_mean result stored in tlist r1 is run on the (out-of-) sample '2002m1' to '2003m1'
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2015
+        </refsection>
+</refentry>

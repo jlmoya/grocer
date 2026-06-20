@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="nwest1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>nwest1 </refname>
+               <refpurpose>Estimation with Newey-West correction on standard errors </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rnwest1]=nwest1(namey,varargin)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> y </term> =     a (nobsx1) vector of an endogenous variable</para></listitem>
+<listitem><para>*  <term> x </term> =     a (nobs x k) matrix of exogenous variables</para></listitem>
+<listitem><para>*  <term> win </term> =     a scalar, the length of the Barlett window (optional; default: floor(5*size(y,1)^0.25))</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rnwest1 </term> =    a results tlist with</para></listitem>
+<listitem><para>&#160;  - rnwest1('meth')  = 'Newey-West''s'</para></listitem>
+<listitem><para>&#160;  - rnwest1('y')     = y data vector</para></listitem>
+<listitem><para>&#160;  - rnwest1('x')     = x data matrix</para></listitem>
+<listitem><para>&#160;  - rnwest1('nobs')  = # observations</para></listitem>
+<listitem><para>&#160;  - rnwest1('nvar')  = # variables</para></listitem>
+<listitem><para>&#160;  - rnwest1('beta')  = bhat</para></listitem>
+<listitem><para>&#160;  - rnwest1('yhat')  = yhat</para></listitem>
+<listitem><para>&#160;  - rnwest1('resid') = residuals</para></listitem>
+<listitem><para>&#160;  - rnwest1('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;  - rnwest1('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - rnwest1('sigu')  = sum of squared residuals</para></listitem>
+<listitem><para>&#160;  - rnwest1('ser')  = standard error of the regression</para></listitem>
+<listitem><para>&#160;  - rnwest1('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;  - rnwest1('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;  - rnwest1('dw')    = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;  - rnwest1('condindex') = multicolinearity cond index</para></listitem>
+<listitem><para>&#160;  - rnwest1('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;  - rnwest1('rsqr')  = rsquared</para></listitem>
+<listitem><para>&#160;  - rnwest1('rbar')  = rbar-squared</para></listitem>
+<listitem><para>&#160;  - rnwest1('f')    = F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;  - rnwest1('pvaluef') = its significance level</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes Newey-West's adjusted heteroscedastic and autocorrelation consistent (HAC) Least-squares Regression. Is a little bit more quick than nwest but works only with matrices.
+ 
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/bdhenderic.dat');
+bounds('1964q3','1989q2');
+rols=ols('del(lm1-lp)','del(lp)','del(lagts(1,lm1-lp-ly))','rnet', 'lagts(1,lm1-lp-ly)', 'const');
+//performs ols for Hendry and Ericsson (1991) equation 6
+r = nwest1(rols('y',rols('x'),8)
+ 
+// Applies the Newet-west correction to Hendry and Ericsson regression with a Barlett Window with a length of 8.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2004
+        </refsection>
+</refentry>

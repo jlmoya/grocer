@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="automatic" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Août-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>automatic</refname>
+               <refpurpose>automatic general to specific regression </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[results]=automatic(namey,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> namey </term> =   a time series, a real (n x 1) vector or a string equal to the name of a time series or a (n x 1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =   arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;*&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;*&#160;a&#160;real&#160;(n&#160;x&#160;1)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;*&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(n&#160;x&#160;1)&#160;real&#160;vector&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'estim=xxx'&#160;where&#160;xxx&#160;is&#160;the&#160;estimation&#160;method&#160;the&#160;user&#160;wants&#160;to&#160;use&#160;(default&#160;ols);&#160;available&#160;methods&#160;in&#160;Grocer&#160;are&#160;'ols',&#160;'nwest',&#160;'probit'&#160;and&#160;'var';&#160;ppooled,&#160;pfixed,;&#160;prandom,&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;use&#160;automatic&#160;with&#160;her&#160;own&#160;method,&#160;say&#160;'mymeth'&#160;she&#160;has&#160;to&#160;write&#160;4&#160;programs:&#160;mymeth4auto-explode,&#160;mymeth4auto_full,&#160;mymeth4auto_part,&#160;mymeth4auto_upd&#160;(see&#160;the&#160;user&#160;manual&#160;chapter&#160;15&#160;for&#160;details)</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'depth=n'&#160;where&#160;n&#160;is&#160;the&#160;number&#160;of&#160;non&#160;significant&#160;variables&#160;that&#160;are&#160;systematically&#160;combinated&#160;before&#160;starting&#160;a&#160;backward&#160;step-wise&#160;alogrithm</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'strategy=liberal'&#160;or&#160;'strategy=conservative'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;use&#160;a&#160;predefined&#160;strategy&#160;(default&#160;=&#160;liberal)</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'descent=n'&#160;where&#160;n&#160;is&#160;the&#160;he&#160;factor&#160;by&#160;which&#160;p-values&#160;of&#160;specifiaction&#160;tests&#160;muts&#160;be&#160;divided&#160;to&#160;obtain&#160;the&#160;new&#160;levels&#160;used&#160;in&#160;the&#160;subsequent&#160;estimations&#160;(default&#160;5)</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'alpha=p'&#160;for&#160;the&#160;simplification&#160;significance&#160;depth&#160;(default&#160;=&#160;set&#160;by&#160;the&#160;chosen&#160;strategy)</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'f0_tdo=p'&#160;for&#160;the&#160;top_down&#160;pre-test&#160;significance&#160;depth&#160;(default&#160;=&#160;set&#160;by&#160;the&#160;chosen&#160;strategy)</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'f0_bup=p'&#160;for&#160;the&#160;bottom-up&#160;pre-test&#160;significance&#160;depth&#160;(default&#160;=&#160;set&#160;by&#160;the&#160;chosen&#160;strategy)</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'eta=p'&#160;for&#160;the&#160;specification&#160;tests&#160;significance&#160;depth&#160;(default&#160;=&#160;0.01)</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'gam=p'&#160;for&#160;the&#160;F-tests&#160;significance&#160;level&#160;(default&#160;=&#160;set&#160;by&#160;the&#160;chosen&#160;strategy)</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'groups_pval=m1;m2;...;mp'&#160;where&#160;the&#160;mi's&#160;are&#160;thresholds:&#160;coefficient&#160;whose&#160;p-values&#160;are&#160;greater&#160;than&#160;a&#160;given&#160;threshold&#160;are&#160;gathered&#160;to&#160;form&#160;a&#160;model&#160;included&#160;in&#160;stage&#160;1&#160;models&#160;(default&#160;=&#160;set&#160;by&#160;the&#160;chosen&#160;strategy)</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'crit=x'&#160;where&#160;x=&#160;aic,&#160;bic,&#160;or&#160;hq&#160;(default&#160;bic)</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'test=x1,...,xp'&#160;where&#160;xi&#160;is&#160;the&#160;name&#160;of&#160;a&#160;test&#160;function</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'newname(x1,x2)'&#160;where&#160;x1&#160;is&#160;the&#160;name&#160;of&#160;a&#160;test&#160;function&#160;and&#160;x2&#160;is&#160;the&#160;corresponding&#160;name&#160;the&#160;user&#160;wants&#160;the&#160;program&#160;to&#160;display</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'comp=x1;...;xn'&#160;where&#160;xi&#160;is&#160;the&#160;name&#160;of&#160;a&#160;variable&#160;that&#160;must&#160;be&#160;in&#160;the&#160;regression&#160;whatever&#160;significance&#160;it&#160;has</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'win=xx'&#160;where&#160;xx&#160;is&#160;the&#160;length&#160;of&#160;the&#160;Bartlett&#160;window&#160;(for&#160;the&#160;Newey-West&#160;estimation)</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'hac=ccm'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;use&#160;a&#160;"clustered"&#160;covariance&#160;matrix&#160;in&#160;panel&#160;methods&#160;ppoled&#160;and&#160;pfixed</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'prt=opt1,opt2,...,optn'&#160;where&#160;opti&#160;is&#160;one&#160;of&#160;the&#160;following&#160;available&#160;options:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;nothing&#160;(nothing&#160;printed&#160;!)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;initial&#160;(results&#160;of&#160;initial&#160;model&#160;printed)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;st0_mod&#160;(results&#160;of&#160;stage&#160;0&#160;model&#160;printed)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;st1_mod&#160;(results&#160;of&#160;stage&#160;1&#160;models&#160;printed)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;st1_union&#160;(results&#160;of&#160;stage&#160;1&#160;union&#160;model&#160;printed)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;st2_mod&#160;(results&#160;of&#160;stage&#160;2&#160;models&#160;printed)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;st2_union&#160;(results&#160;of&#160;stage&#160;2&#160;union&#160;model&#160;printed)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;final&#160;(results&#160;of&#160;final&#160;model&#160;printed)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;test_inter&#160;(results&#160;of&#160;specification&#160;tests&#160;for&#160;the&#160;intermediate&#160;results&#160;printed)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;test_final&#160;(results&#160;of&#160;specification&#160;tests&#160;for&#160;the&#160;final&#160;model&#160;printed)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;test&#160;(specification&#160;tests&#160;printed&#160;for&#160;every&#160;regression&#160;result&#160;printed)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;st1_path&#160;(results&#160;of&#160;stage&#160;1&#160;paths&#160;printed)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;st2_path&#160;(results&#160;of&#160;stage&#160;2&#160;paths&#160;printed)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;all&#160;(all&#160;results&#160;printed:&#160;can&#160;be&#160;very&#160;long&#160;!)</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'test=opt1,opt2,...,optn'&#160;where&#160;opti&#160;is&#160;one&#160;of&#160;the&#160;following&#160;available&#160;options:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;chowtest(p)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;predfailin(p)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;doornhans</para></listitem>
+<listitem><para>&#160;&#160;-&#160;bpagan(p)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;hetero_sq</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  results </term> =   a results tlist with the following fields:</para></listitem>
+<listitem><para>&#160;   * results('meth') = 'automatic'</para></listitem>
+<listitem><para>&#160;   * results('estim') = estimation method (ols, nwest, var, probit or any user defined method)</para></listitem>
+<listitem><para>&#160;   * results('strategy') = estimation strategy (liberal, conservative or expert)</para></listitem>
+<listitem><para>&#160;   * results('alpha') = simplification significance depth (default = set by the chosen strategy)</para></listitem>
+<listitem><para>&#160;   * results('f0_tdo') = top_down pre-test significance depth (default = set by the chosen strategy)</para></listitem>
+<listitem><para>&#160;   * results('f0_bup') = bottom-up pre-test significance depth (default = set by the chosen strategy)</para></listitem>
+<listitem><para>&#160;   * results('gam') = F-tests significance level (default = set by the chosen strategy)</para></listitem>
+<listitem><para>&#160;   * results('eta') = specification tests significance depth (default = 0.01)</para></listitem>
+<listitem><para>&#160;   * results('comp') = matrix of values for the compulsory variables</para></listitem>
+<listitem><para>&#160;   * results('f_test') = the function used to perform the specification tests</para></listitem>
+<listitem><para>&#160;   * results('m_test') = the names of the specification tests</para></listitem>
+<listitem><para>&#160;   * results('initial model') = the estimation results of the unrestricted model</para></listitem>
+<listitem><para>&#160;   * results('ending reason') = the reason why the final model has been chosen</para></listitem>
+<listitem><para>&#160;   * results('final model') = the estimation results of the final model</para></listitem>
+<listitem><para>&#160;   * results('wind length') = the size of the Bartlett window (if the Nwest correction has been used)</para></listitem>
+<listitem><para>&#160;   * results('top-down model') = the top-down model</para></listitem>
+<listitem><para>&#160;   * results('bottom-up model') = the bottom-up model</para></listitem>
+<listitem><para>&#160;   * results('stage 0 model') = the estimation results of the stage 0 restricted model (all variables whose individual tstat depth is lower than 1 and whose joint significance depth is lower than f0_tdo are withdrawn)</para></listitem>
+<listitem><para>&#160;   * results('selected stage 0 model') = the way the stage 0 model has been selected</para></listitem>
+<listitem><para>&#160;   * results('checking process model') = the model resulting from the group checking process</para></listitem>
+<listitem><para>&#160;   * results('stage i models') = the estimation results of the stage i (i=1, 2.0, 2.1) models and the corresponding paths</para></listitem>
+<listitem><para>&#160;   * results('stage i union model') = the estimation results of the model built from the union of stage i (i=1, 2.0, 2.1) models</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs automatic selection of a model by least-squares regressions along the lines suggested by Hendry and Krolzig and Doornik: starting from the list of exogenous variables provided by the user, the function selects the "best" regression, that is one where all variables are significant, all specification tests are passed, and, if more than one regression have these properties, the one with the smallest aic criterion.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/bdhenderic.dat') ;
+bounds('1964q3','1989q2')
+ 
+[r1]=automatic('delts(lm1-lp)','lagts(lm1-lp-ly)','delts(lp)','rnet','delts(lagts(lm1-lp))', 'delts(lagts(2,lm1-lp))','delts(lagts(3,lm1-lp))','delts(lagts(4,lm1-lp))',&133;
+'delts(ly)','delts(lagts(1,ly))', 'delts(lagts(2,ly))','delts(lagts(3,ly))','delts(lagts(4,ly))',&133;
+'delts(delts(lp))','delts(delts(lagts(1,lp)))','delts(delts(lagts(2,lp)))','delts(delts(lagts(3,lp)))','delts(delts(lagts(4,lp)))',&133;
+'delts(rnet)','delts(lagts(1,rnet))','delts(lagts(2,rnet))','delts(lagts(3,rnet))','delts(lagts(4,rnet))','const',&133;
+'prt=initial,final','test=predfailin(0.5),predfailin(0.9),doornhans,arlm(5),hetero_sq','groups_pval=[]')
+// Starts from a rather extensive set of exogenous variables: from 'lagts(lm1-lp-ly)' to 'cte'
+// in examples 1 and 2 and from 'lagts(lm1)' in example 3.
+// Here, the initial model is printed along with the final one; tests are given by the user and
+// models of coefficients with p-value greater than some threshold are not examined.
+ 
+[r2]=automatic('delts(lm1-lp)','lagts(lm1-lp-ly)','delts(lp)','rnet','delts(lagts(lm1-lp))', 'delts(lagts(2,lm1-lp))','delts(lagts(3,lm1-lp))','delts(lagts(4,lm1-lp))',&133;
+'delts(ly)','delts(lagts(1,ly))', 'delts(lagts(2,ly))','delts(lagts(3,ly))','delts(lagts(4,ly))',&133;
+'delts(delts(lp))','delts(delts(lagts(1,lp)))','delts(delts(lagts(2,lp)))','delts(delts(lagts(3,lp)))','delts(delts(lagts(4,lp)))',&133;
+'delts(rnet)','delts(lagts(1,rnet))','delts(lagts(2,rnet))','delts(lagts(3,rnet))','delts(lagts(4,rnet))','const',&133;
+'prt=final','test=predfailin(0.5),predfailin(0.9),doornhans,arlm(5),hetero_sq','strategy=conservative','depth=2')
+ 
+// Same set of variables, but only the final model is printed, tests are given by the user,
+// the strategy is turned from default (liberal) to conservative and the depth is set to 2 (nstead of 1).
+ 
+[r3]=automatic('delts(lm1-lp)','lagts(lm1-lp-ly)','delts(lp)','rnet','delts(lagts(lm1-lp))', 'delts(lagts(2,lm1-lp))','delts(lagts(3,lm1-lp))','delts(lagts(4,lm1-lp))',&133;
+'delts(ly)','delts(lagts(1,ly))', 'delts(lagts(2,ly))','delts(lagts(3,ly))','delts(lagts(4,ly))',&133;
+'delts(delts(lp))','delts(delts(lagts(1,lp)))','delts(delts(lagts(2,lp)))','delts(delts(lagts(3,lp)))','delts(delts(lagts(4,lp)))',&133;
+'delts(rnet)','delts(lagts(1,rnet))','delts(lagts(2,rnet))','delts(lagts(3,rnet))','delts(lagts(4,rnet))','const',&133;
+'prt=initial,final,st2_mod','test=predfailin(0.51),predfailin(0.862),doornhans,arlm(5),hetero_sq','alpha=0.01')
+ 
+// Same set of variables, but  the initial model and all the stage 2 model
+// (among which the final model is selected by the BIC information criterion) are printed along with the final one,
+// tests are again given by the user and the significance level of individual coefficients is set to 0.01.
+ 
+global GROCERDIR;
+load(GROCERDIR+'/data/lutk1.dat')
+bounds('1960q4','1978q4')
+results=automatic(2,'estim=var','endo=delts(log(rfa_inv));delts(log(rfa_inc));delts(log(rfa_cons))','depth=3')
+// This is an example with another method (here a VAR model which is restricted to significant coefficients),
+// and with depth augmented to 3, in order to test a greater number of models
+
+// examples with panel estimation methods 
+load(GROCERDIR+'/panel/Munnellunbal.dat')
+// pooled data(i.e ols)
+automatic('gsp',Munnell_testauto,'estim=ppooled','x=lpcap;private;emp;unemp;const;'+joinstr('rand',string(1:10),';'))
+
+// with "clustered" covariance matrix 
+automatic('gsp',Munnell_testauto,'estim=ppooled','x=lpcap;private;emp;unemp;const;'+joinstr('rand',string(1:10),';'),'hac=ccm')
+
+// fixed effects
+automatic('gsp',Munnell_testauto,'estim=pfixed','x=lpcap;private;emp;unemp;'+joinstr('rand',string(1:10),';'))
+
+// fixed effects at a looser size, which leads rand3 to be selected
+automatic('gsp',Munnell_testauto,'estim=pfixed','x=lpcap;private;emp;unemp;'+joinstr('rand',string(1:10),';'),'alpha=0.1')
+
+// fixed effects with heteroskedasticty and autocrrelation correction
+automatic('gsp',Munnell_testauto,'estim=pfixed','x=lpcap;private;emp;unemp;'+joinstr('rand',string(1:10),';'),'hac=ccm')
+
+// random effects
+automatic('gsp',Munnell_testauto,'estim=prandom','x=lpcap;private;emp;unemp;'+joinstr('rand',string(1:10),';'))
+
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2013
+        </refsection>
+</refentry>

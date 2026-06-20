@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ms_forecast" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:13-Feb-2011$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ms_forecast</refname>
+               <refpurpose>forecast from a Markvov Switching regression model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=ms_forecast(rms,hprev,exo_com,exo_idio)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> rms </term> =  a tlist result from a ms switching estimation</para></listitem>
+<listitem><para>*  <term> hprev </term> =  the prevision period which can be either:</para></listitem>
+<listitem><para>&#160;&#160;- &#160;a&#160;[n1&#160;n2]&#160;constant&#160;vector&#160;where&#160;n1&#160;and&#160;n2&#160;are&#160;the&#160;lead&#160;over&#160;the&#160;last&#160;period&#160;of&#160;the&#160;estimation&#160;(n1&lt;=0&#160;means&#160;that&#160;the&#160;forecast&#160;begins&#160;within&#160;the&#160;estimation&#160;period)</para></listitem>
+<listitem><para>&#160;&#160;- &#160;a&#160;n&#160;constant&#160;which&#160;is&#160;equivalent&#160;to&#160;[1&#160;n]&#160;(forecast&#160;begins&#160;just&#160;after&#160;the&#160;estimation&#160;period)</para></listitem>
+<listitem><para>&#160;&#160;- &#160;a&#160;[n1&#160;n2]&#160;string&#160;vector&#160;where&#160;n1&#160;and&#160;n2&#160;are&#160;the&#160;time&#160;periods&#160;for&#160;forecasting&#160;(a&#160;posibility&#160;open&#160;only&#160;if&#160;the&#160;MS&#160;regression&#160;has&#160;been&#160;performed&#160;with&#160;ts)</para></listitem>
+<listitem><para>&#160;&#160;- &#160;a&#160;n&#160;string&#160;which&#160;is&#160;equivalent&#160;to&#160;[1&#160;n]&#160;(forecast&#160;begins&#160;just&#160;after&#160;the&#160;estimation&#160;period)</para></listitem>
+<listitem><para>*  <term> exo_com </term> =  the data on the forecast horizon for the non switching exogenous variables that can be:</para></listitem>
+<listitem><para>&#160;&#160;- &#160;a&#160;(H&#160;x&#160;n_x)&#160;matrix&#160;with&#160;H&#160;the&#160;number&#160;of&#160;forecasts&#160;and&#160;n_x&#160;the&#160;number&#160;of&#160;non&#160;switching&#160;exogenous&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;- &#160;a&#160;list&#160;of&#160;ts&#160;available&#160;over&#160;the&#160;forecasting&#160;horizon</para></listitem>
+<listitem><para>&#160;&#160;- &#160;a&#160;list&#160;of&#160;(H&#160;x&#160;1)&#160;vectors&#160;and&#160;ts&#160;available&#160;over&#160;the&#160;forecasting&#160;horizon</para></listitem>
+<listitem><para>&#160;&#160;- &#160;a&#160;(H&#160;x&#160;n_x)&#160;string&#160;matrix&#160;of&#160;names&#160;(note:&#160;when&#160;the&#160;ms&#160;tlist&#160;results&#160;comes&#160;from&#160;a&#160;ms-mean&#160;or&#160;a&#160;var&#160;estimation,&#160;the&#160;variables&#160;are&#160;useless&#160;and&#160;can&#160;&#160;therefore&#160;be&#160;omitted)</para></listitem>
+<listitem><para>*  <term> exo_idio </term> =  the data on the forecast horizon for the switching exogenous variables that can be:</para></listitem>
+<listitem><para>&#160;&#160;- &#160;a&#160;(H&#160;x&#160;n_z)&#160;matrix&#160;with&#160;H&#160;the&#160;number&#160;of&#160;forecasts&#160;and&#160;n_z&#160;the&#160;number&#160;of&#160;switching&#160;exogenous&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;- &#160;a&#160;list&#160;of&#160;ts&#160;available&#160;over&#160;the&#160;forecasting&#160;horizon</para></listitem>
+<listitem><para>&#160;&#160;- &#160;a&#160;list&#160;of&#160;(H&#160;x&#160;1)&#160;vectors&#160;and&#160;ts&#160;available&#160;over&#160;the&#160;forecasting&#160;horizon</para></listitem>
+<listitem><para>&#160;&#160;- &#160;a&#160;(H&#160;x&#160;n_x)&#160;string&#160;matrix&#160;of&#160;names&#160;(note:&#160;when&#160;the&#160;ms&#160;tlist&#160;results&#160;comes&#160;from&#160;a&#160;ms-mean&#160;or&#160;a&#160;var&#160;estimation,&#160;the&#160;variables&#160;are&#160;useless&#160;and&#160;can&#160;&#160;therefore&#160;be&#160;omitted)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term>  res </term> =  a results tlist with:</para></listitem>
+<listitem><para>&#160;   - res('meth') = 'msf'</para></listitem>
+<listitem><para>&#160;   - res('r_ms') = the tlist results from the MS estimation</para></listitem>
+<listitem><para>&#160;   - res('pstates') = the (H x nb_states) matrix of the probabilities of the respective states over the forecasting horizon</para></listitem>
+<listitem><para>&#160;   - res('prev_states') = the matrix of forecast of the endogenous variables accross the states</para></listitem>
+<listitem><para>&#160;   - res('prev') = the matrix of forecast of the endogenous variables</para></listitem>
+<listitem><para>&#160;   - res('hprev') = the forecast period</para></listitem>
+ 
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ 
+Forecast with a MS regression model. Note that this only when the model has been estimated as a MS-VAR model that the dynamic of the model is taken into account.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+bounds('1984m2','2003m1');
+r=ms_mean(['delts(log(construc))';'delts(log(ipi))';'delts(log(helpwanted))';'delts(log(revu))'],3,1,1,'transf=stud','datation=datation_bb')
+rf=ms_forecast(r,10)
+f=ms_forecast(r,'2003m11')
+rf=ms_forecast(r,['2003m2' ; '2003m11'])
+// All these examples provide a forecast from 2003m2 to 2003m11 of the ms-mean example
+//  provided in function ms_mean (second example is also in function ms_mean_d).
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2006
+        </refsection>
+</refentry>

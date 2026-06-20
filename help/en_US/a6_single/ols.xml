@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ols" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ols </refname>
+               <refpurpose>ordinary least squares </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rols]=ols(namey,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =   a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> argi </term> =   arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx1)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nxk)&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nxk)&#160;real&#160;vector&#160;or&#160;matrix&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;list&#160;of&#160;such&#160;elemnts</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;display&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'saturate(x)'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;test&#160;breaks&#160;with&#160;impulse&#160;indicator&#160;saturation&#160;at&#160;the&#160;size&#160;x</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rols </term> =   a results tlist with</para></listitem>
+<listitem><para>&#160;  - rols('meth')  = 'ols'</para></listitem>
+<listitem><para>&#160;  - rols('y')     = y data vector</para></listitem>
+<listitem><para>&#160;  - rols('x')     = x data matrix</para></listitem>
+<listitem><para>&#160;  - rols('nobs')  = # observations</para></listitem>
+<listitem><para>&#160;  - rols('nvar')  = # variables</para></listitem>
+<listitem><para>&#160;  - rols('beta')  = bhat</para></listitem>
+<listitem><para>&#160;  - rols('yhat')  = yhat</para></listitem>
+<listitem><para>&#160;  - rols('resid') = residuals</para></listitem>
+<listitem><para>&#160;  - rols('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;  - rols('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - rols('sigu')  = sum of squared residuals</para></listitem>
+<listitem><para>&#160;  - rols('ser')  = standard error of the regression</para></listitem>
+<listitem><para>&#160;  - rols('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;  - rols('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;  - rols('dw')    = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;  - rols('condindex') = multicolinearity cond index</para></listitem>
+<listitem><para>&#160;  - rols('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;  - rols('llike') = the log-likelihood</para></listitem>
+<listitem><para>&#160;  - rols('aic')= the Akaike information criterion</para></listitem>
+<listitem><para>&#160;  - rols('bic')= the Schwarz information criterion</para></listitem>
+<listitem><para>&#160;  - rols('hq')= the Hannan-Quinn information criterion</para></listitem>
+<listitem><para>&#160;  - rols('rsqr')  = rsquared</para></listitem>
+<listitem><para>&#160;  - rols('rbar')  = rbar-squared</para></listitem>
+<listitem><para>&#160;  - rols('f')    = F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;  - rols('pvaluef') = its significance level</para></listitem>
+<listitem><para>&#160;  - rols('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;  - rols('namey') = name of the y variable</para></listitem>
+<listitem><para>&#160;  - rols('namex') = name of the x variables</para></listitem>
+<listitem><para>&#160;  - rols('bounds') = if there is a timeseries in the regression, the bounds of the regression</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ The most general GROCER function performing least-squares regression. Endogenous variable must be given first, as a vector, a ts, between quotes (if the user wants to keep the name of the variable in the tlist result and for the printings) or not. Exogenous variables are given after, in one of the formats authorized for the endogenous one, or in matrix format. The program displays on screen various results (coefficients, tstat, R², Durbin and Watson,...) except if the user has entered the argument 'noprint' anywhere after the first argument.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+bounds('1964q3','1989q2');
+rols=ols('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet', 'lagts(1,lm1-lp-ly)', 'const');
+// performs ols for Hendry and Ericsson (1991) equation 6
+ 
+rols=ols('delts(lm1-lp)',['delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet', 'lagts(1,lm1-lp-ly)','const']);
+// same results as previous call to ols
+ 
+rols=ols(delts(lm1-lp),delts(lp),delts(lagts(1,lm1-lp-ly)),rnet, lagts(1,lm1-lp-ly),const);
+// same results as 2 previous calls to ols, except that the third example does not keep the names of the variables,
+// which are named 'endogenous', 'exogenous # 1', 'exogenous # 2', 'exogenous # 3', 'exogenous # 4', 'exogenous # 5'.
+ 
+rols=ols(delts(lm1-lp),delts(lp),delts(lagts(1,lm1-lp-ly)),rnet, lagts(1,lm1-lp-ly),const, 'noprint');
+// same results as 2 first calls to ols, except that the results are not displayed on screen
+// (this can be done later by typing prtuniv(rols)).
+ 
+y=grand(100,1, 'nor',0,1);
+x=grand(100,4, 'nor',0,1);
+ols('y', 'x')
+ 
+ols(y, x);
+// same results as above, except that the endogenous variables 'endogenous' instead of y and the exogenous variables
+// 'exogenous # 1', 'exogenous # 2', 'exogenous # 3', 'exogenous # 4' instead of 'x_1', 'x_2', 'x_3', 'x_4'.
+ 
+r=ols('lm1-lp','ly','delts(lp)','rnet','lagts(lm1-lp)','lagts(2,lm1-lp)','lagts(rnet)','saturate(0.01)')
+// an example with indicator saturation at size 0.01 (1%)
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2015
+        </refsection>
+</refentry>

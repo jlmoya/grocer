@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="explosys" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>explosys </refname>
+               <refpurpose>Transformation of sur equations </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[x,y,boundsvarb,prests,listcoef,namey,ncoefeqs]=explosys(namecoef,specara,speccarb,uneven,dropna,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> namecoef </term> =   column vector of coefficients name</para></listitem>
+<listitem><para>*  <term> speccara </term> =   column vector of characters that must be found after the name of a coefficient</para></listitem>
+<listitem><para>*  <term> speccarb </term> =   column vector of characters that must befound after the name of a coefficient</para></listitem>
+<listitem><para>*  <term> uneven </term> =   a boolean indicating whether the equations should keep their time bounds or must have common bounds</para></listitem>
+<listitem><para>*  <term> dropna </term> =   a boolean indicating whether the program should keep only lines of matrices y and x with non NA values</para></listitem>
+<listitem><para>*  <term> argi </term> =   an equation containing the coefficients named in namecoef or 'unbal' for un unabalanced panel in a sur estimation (in that case must be in the first position)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> x </term> =   (nobs x k) matrix of exogenous variables in the complete model</para></listitem>
+<listitem><para>*  <term> y </term> =   (nobs x 1) vector of endogenous variables in the complete model</para></listitem>
+<listitem><para>*  <term> boundsvarb </term> =   bounds (if any) of the regression</para></listitem>
+<listitem><para>*  <term> prests </term> =   a boolean indicating the presence or absence of ts in the regressions</para></listitem>
+<listitem><para>*  <term> listcoef </term> =   list of indexes of the coefficients in each equation</para></listitem>
+<listitem><para>*  <term> namey </term> =   column vector of the names of the endogenous variables</para></listitem>
+<listitem><para>*  <term> ncoefeqs </term> =   column vector of the # of coefficients in each equation</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+From a series of equations retrieve the matrix of  exogenous variables, taking into acount the constraints (if any) imposed on the coefficients; the equations must be linear in the coefficients.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/grun.dat')
+// grunfeld investment data
+// see page 650, Green 1997
+ 
+ige  = grun(:,1); // general electric
+fge = grun(:,2);
+cge = grun(:,3);
+ 
+iwest  = grun(:,4); // westinghouse
+fwest = grun(:,5);
+cwest = grun(:,6);
+ 
+igm  = grun(:,7); // general motors
+fgm = grun(:,8);
+cgm = grun(:,9);
+ 
+ich  = grun(:,10); // chrysler
+fch = grun(:,11);
+cch = grun(:,12);
+ 
+iuss  = grun(:,13); // us steel
+fuss = grun(:,14);
+cuss = grun(:,15);
+ 
+ 
+eq1='igm=a1*fgm+a2*cgm+a3'
+eq2='ich=a4*fch+a5*cch+a6'
+eq3='ige=a7*fge+a8*cge+a9'
+eq4='iwest=a10*fwest+a11*cwest+a12'
+eq5='iuss=a13*fuss+a14*cuss+a15'
+ 
+[x,y,grocer_boundsvarb,grocer_prests,listcoef,namey,ncoefeqs]=explosys('a'+string([1:15]'),['+' ; '-' ; '*' ; '/' ; ')'],...
+                                                              ['=' ; '+' ; '(' ; '-' ; '*'],%f,%f,eq1,eq2,eq3,eq4,eq5)
+ 
+[x,y,grocer_boundsvarb,grocer_prests,listcoef,namey,ncoefeqs]=...
+explosys(grocer_namecoef,grocer_speccara,grocer_speccarb,varargin(:))
+// This example is adapted from function sur_d, applying the sur method to Greene textbook example.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2006
+        </refsection>
+</refentry>

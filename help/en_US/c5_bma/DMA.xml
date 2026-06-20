@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="DMA" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:25-Août-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>DMA</refname>
+               <refpurpose>Dynamic model averaging </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rdma=DMA(namey,exof,exonf,lamda,alpha,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>namey</term> =    a (nobs x 1) vector of endogenous variables</para></listitem>
+<listitem><para>*  <term>exof</term> =    a (nobs x nz) vector of compulsory exogenous variables</para></listitem>
+<listitem><para>*  <term>exonf</term> =    a (nobs x nx) vector of potential exogenous variables</para></listitem>
+<listitem><para>*  <term>lamda</term> =    a scalar, the forgetting factor for past observations in the calculation of the time-varying coefficients</para></listitem>
+<listitem><para>*  <term>alpha</term> =    a scalar, the forgetting factor of past performance (a forecast k periods old have a weight equal to k^alpha)</para></listitem>
+<listitem><para>*  <term>arg1,...,argn</term>: optional arguments that can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'prefix_db=xx'&#160;where&#160;xx&#160;is&#160;the&#160;prefix&#160;(folder&#160;and&#160;start&#160;of&#160;the&#160;file)&#160;of&#160;the&#160;database&#160;where&#160;data&#160;with&#160;a&#160;big&#160;volume&#160;(probabilities&#160;and&#160;coefficient&#160;updates,&#160;forecast&#160;of&#160;each&#160;model)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'dropna=%t'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;work&#160;with&#160;all&#160;dates&#160;with&#160;non&#160;NA&#160;values</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'nxmax=xx'&#160;where&#160;xx&#160;is&#160;the&#160;the&#160;maximum&#160;#&#160;of&#160;variables&#160;allowed&#160;in&#160;a&#160;model&#160;(default:&#160;no&#160;constraint)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'PRM=xx'&#160;where&#160;xx&#160;is&#160;either&#160;a&#160;scalar&#160;or&#160;a&#160;(N&#160;x&#160;1)&#160;vectors&#160;of&#160;a&#160;priori&#160;values&#160;for&#160;the&#160;coefficients</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'PRV='&#160;thewhere&#160;xx&#160;is&#160;either&#160;a&#160;scalar&#160;or&#160;a&#160;(N&#160;x&#160;1)&#160;vectors&#160;of&#160;a&#160;priori&#160;values&#160;for&#160;their&#160;variance</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>rdma</term>  =    a results tlist with:</para></listitem>
+<listitem><para>&#160;   - rdma('meth') = 'DMA'</para></listitem>
+<listitem><para>&#160;   - rdma('y') = (nobs x 1) vector of endogenous variables</para></listitem>
+<listitem><para>&#160;   - rdma('x fixed') = (nobs x nZ) matrix of compulsory exogenous variables</para></listitem>
+<listitem><para>&#160;   - rdma('x variable') = (nobs x nZ) matrix of potential exogenous variables</para></listitem>
+<listitem><para>&#160;   - rdma('lamda') = a scalar, the forgetting factor for past observations in the calculation of the time-varying coefficients</para></listitem>
+<listitem><para>&#160;   - rdma('alpha') = a scalar, the forgetting factor of past performance (a forecast k periods old have a weight equal to k^alpha)</para></listitem>
+<listitem><para>&#160;   - rdma('nx max') = the maximum # of non zero coefficients in any model</para></listitem>
+<listitem><para>&#160;   - rdma('vars proba') = a (nx x nobs) matrix giving the probability assigned to each variable at each date</para></listitem>
+<listitem><para>&#160;   - rdma('global forecast') = a (nobs x 1) vector giving the weighted forecast of all possible models</para></listitem>
+<listitem><para>&#160;   - rdma('best model') = a (nobs x 1) vector giving the index of the the best model at each date</para></listitem>
+<listitem><para>&#160;   - rdma('best model forecast') = a (nobs x 1) vector giving the forecast by the best model at each date</para></listitem>
+<listitem><para>&#160;   - rdma('combinations') = a (K x (nZ+nx)) matrix indicating for each model which variables are in the model (1 value in corresponding column) and which variables are not in the model (0 value in corresponding column)</para></listitem>
+<listitem><para>&#160;   - rdma('library') = name of the library where big volume results are stored</para></listitem>
+<listitem><para>&#160;   - rdma('n db') = # of corresponding databases</para></listitem>
+<listitem><para>&#160;   - rdma('exp # of models') = (nobs x 1) vector of # of expected models at each date</para></listitem>
+<listitem><para>&#160;   - rdma('exp theta') = (nobs x (N+nZ)) vector of expected values at each date for each variable</para></listitem>
+<listitem><para>&#160;   - rdma('namey') = name of the y variable</para></listitem>
+<listitem><para>&#160;   - rdma('fixed namex') = name of the compulsory exogenous variables</para></listitem>
+<listitem><para>&#160;   - rdma('variable namex') = name of the potential exogenous variables</para></listitem>
+<listitem><para>&#160;   - rdma('dropna') = boolean indicating if NAs have been dropped</para></listitem>
+<listitem><para>&#160;   - rdma('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;   - rdma('bounds') = if there is a time series in the regression, the bounds of the regression</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Prediction using Dynamic model averaging. This function is a high level function that works with ts, vectors, matrices.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'\data\us_modinf.dat')
+bounds('1960q3','2008q2')
+// make a dynamic model averaging estimation with '100*lagts(-1,delts(log(GDPDEFL)))' as endogenous
+// variable, 'const', '100*delts(log(GDPDEFL))' and '100*lagts(delts(log(GDPDEFL)))' as imposed exogenous variables
+// 'UNRATE', '100*delts(log(PCECC96))', '100*delts(log(PRFI))', 100*delts(log(GDPC96))' and 'log(HOUST) as free
+// exogenous variables, forgetting factor for past observations in the calculation of the time-varying coefficients set to 0.99,
+// forgetting factor of past performance set to 0.99 and default values for other parameters
+resdma=DMA('100*lagts(-1,delts(log(GDPDEFL)))',['const';'100*delts(log(GDPDEFL))';'100*lagts(delts(log(GDPDEFL)))'],...
+['UNRATE';'100*delts(log(PCECC96))';'100*delts(log(PRFI))';'100*delts(log(GDPC96))';'log(HOUST)'],0.99,0.99)
+ 
+// plot the number of expected variables
+pltdma_expnbvar(resdma)
+// plot the probabilities and expected coefficients
+// of all variables
+pltdma_probvar(resdma,'all')
+// display the best model at some dates
+prtdma_bestmodel(resdma,['1988q2';'1993q2';'1998q2';'2003q2';'2008q2'],%io(2))
+ 
+// makes a dynamic model averaging estimation with the same variables, but with forgetting factors now set to 0.95
+// and big volume information saved into files gdpdefl1.dat, gdpdefl2.dat,... in folder 'c:/mydma'
+resdma=DMA('100*lagts(-1,delts(log(GDPDEFL)))',['const';'100*delts(log(GDPDEFL))';'100*lagts(delts(log(GDPDEFL)))'],...
+['UNRATE';'100*delts(log(PCECC96))';'100*delts(log(PRFI))';'100*delts(log(GDPC96))';'log(HOUST)'],0.95,0.95,'prefix_db=c:/mydma/gdpdefl')
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2012
+        </refsection>
+</refentry>

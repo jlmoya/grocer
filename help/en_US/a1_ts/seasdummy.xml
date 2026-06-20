@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="seasdummy" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>seasdummy </refname>
+               <refpurpose>create a seasonal dummy variable </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>dum=seasdummy(boun,subperiod)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> boun </term> =     a (2x1) string vector of dates</para></listitem>
+<listitem><para>*  <term> subperiod </term> =     a scalar corresponding the yearly period when the dummy variables is set to 1 (for instance 3 for a march-june-september-december dummy with monthly data)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> dummy </term> =     a ts equal to 1 for the chosen season, O otherwise</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Creates a seasonal dummy variable equal to 1 over a define season, 0 over the rest of the period.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+m3=seasdummy(['1970m1';'2007m3'],3) //  creates a seasonal dummy variable on the period going
+// from the 1st month of 1970 until the the 3rd month of 2007, equal to 1 every third month
+// of the year (on march therefore!) and 0 elsewhere.
+q1=seasdummy(['1970q1';'2007q4'],1) // creates a seasonal dummy variable on the period going
+// from the 1st quarter of 1970 until the the last quarter of 2007, equal to 1 every first quarter and 0 elsewhere
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2007
+        </refsection>
+</refentry>

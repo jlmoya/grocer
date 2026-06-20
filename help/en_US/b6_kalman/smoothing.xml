@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="smoothing" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>smoothing </refname>
+               <refpurpose>Kalman smoother </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[betas,sigmas]=smoothing(F,betat,betaf,sigmat,sigmaf, begsmooth)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> F </term> =    transition matrix</para></listitem>
+<listitem><para>*  <term> betat </term> =    vector of filtered beta at date t with the information available at date t (beta(t|t))</para></listitem>
+<listitem><para>*  <term> betaf </term> =    vector of filtered beta at date t with the information available at date t-1 (beta(t|t-1)</para></listitem>
+<listitem><para>*  <term> sigmat </term> =    vector of filtered variances at date t with the information available at date t (sigma(t|t))</para></listitem>
+<listitem><para>*  <term> sigmat </term> =    vector of filtered variances at date t with the information available at date t-1 (sigma(t|t-1))</para></listitem>
+<listitem><para>*  <term> begsmooth </term> =    first observation where to calculate smoothed values</para></listitem>
+ 
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> betas </term> =    vector of smoothed beta at date t with the information available at date T (beta(t|T)</para></listitem>
+<listitem><para>*  <term> sigmat </term> =    vector of smoothed variances at date t with the information available at date T (sigma(t|T))</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Provides smoothed values from a Kalman filtering.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+// smoothing is a used by the function kalman:
+[betas,sigmats]=smooth(grocer_F,betat,betaf,sigmatt,sigmatf)
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

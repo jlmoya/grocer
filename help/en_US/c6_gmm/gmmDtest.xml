@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="gmmDtest" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>gmmDtest </refname>
+               <refpurpose>performs D test of model comparaison for GMM </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rd = gmmDtest(ugmm,rgmm,nr,np)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> ugmm </term> =  tlist result for unrestricted estimation</para></listitem>
+<listitem><para>*  <term> rgmm </term> =  tlist result for restricted estimation</para></listitem>
+<listitem><para>*  <term> nr </term> =  number of parameter restriction</para></listitem>
+<listitem><para>*  <term> np </term> =  'noprint' if the user does not want to print the results</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* <term> rd </term> = a tlist with:</para></listitem>
+<listitem><para>&#160;  -rd('chistat') = test statisitc</para></listitem>
+<listitem><para>&#160;  -rd('pvalue') = pvalue of the test</para></listitem>
+<listitem><para>&#160;  -rd('df') = number of restrictions</para></listitem>
+ 
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs D test of model comparison for efficient GMM as proposed by Newey and West (1987).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+X = [ones(1000,1) grand(1000,1,'nor',0,1) grand(1000,1,'nor',0,1)];
+b = [0;1;-1];
+e = grand(1000,1,'nor',0,1);
+y = X*b + e;
+ 
+gmmopt = tlist(['gmm';'momt';'jake';'prt';'gmmit';'S']);
+gmmopt('prt')=1;
+gmmopt('gmmit') = 1;
+gmmopt('S')='W';
+gmmopt('momt')='gmmLinM';
+gmmopt('jake')='gmmLinJ';
+ 
+b0=zeros(3,1);
+uout=gmm('y',gmmopt,'exo=''X''','ivar=''X''','parm0=b0');
+W0 = uout('W');
+rout=gmm('y',gmmopt,'exo=''X(:,2:3)''','ivar=''X''','parm0=[0;0]','Win=W0','noprint');
+rd = gmmDtest(uout,rout,1);
+ 
+// Examples taken from gmmLin_d() : the first parameter is set to 0
+// and the model is reestimated with the prior weighting matrix,
+// then the test is performed.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2007
+        </refsection>
+</refentry>

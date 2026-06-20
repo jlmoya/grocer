@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="balance_identity" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>balance_identity </refname>
+               <refpurpose>Balances an identity numerically approximatively true </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[argout1,...,argoutm]=balance_identity(namey,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =   a ts, a vector, or a string representing the name of a ts or a vector, equal to the lefthand side of the identity</para></listitem>
+<listitem><para>* <term> arg1,...,argn</term> = arguments that can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;ts</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;representing&#160;the&#160;name&#160;of&#160;a&#160;ts&#160;or&#160;a&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;list&#160;of&#160;such&#160;objects</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'prefix=xxxx'&#160;where&#160;xxxx&#160;is&#160;the&#160;prefix&#160;added&#160;to&#160;the&#160;name&#160;of&#160;the&#160;variables&#160;to&#160;produce&#160;the&#160;new&#160;variables</para></listitem>
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* <term>argout1,...,argoutm</term> = a variable number if arguments that are:</para></listitem>
+<listitem><para>&#160;  - either the new rhs terms of the identity</para></listitem>
+<listitem><para>&#160;  - or the string 'results of macro balance_identity have been saved as variables: ' + the names of the variables the new rhs terms are then put in the calling environment under the original name (exogenousi if the name was not entered between quotes) prefixed by the prefix given by the user </para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Balances an identity that does not numerically adjust; the residual is disributed to each term according to its absolute weight.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+z=grand(20,4,'nor',0,1);x1=z(:,1);x2=z(:,2);x3=z(:,3);y=x1+x2+x3+0.1*z(:,4);[newx1,newx2,newx3]=balance_identity(y,x1,x2,x3)
+z=grand(20,4,'nor',0,1);x1=z(:,1);x2=z(:,2);x3=z(:,3);y=x1+x2+x3+0.1*z(:,4);balance_identity(y,x1,x2,x3,'prefix=new')
+z=grand(20,4,'nor',0,1);x1=z(:,1);x2=z(:,2);x3=z(:,3);y=x1+x2+x3+0.1*z(:,4);balance_identity(y,'x1','x2','x3','prefix=new')
+ 
+// In all examples, the relation to balance is y=x1+x2+x3.
+// In example 1, the new variables are called newx1, newx2 and newx3 and the identity y=newx1+newx2+newx3 holds exactly.
+// In example 2, the new variables are called new_exogenous1,new_exogenous2,new_exogenous3 and the identity
+// y=new_exogenous1+new_exogenous2+new_exogenous3holds exactly.
+// In example 3, the new variables are called new_x1, new_x2 and new_x3 and the identity y=new_x1+new_x2+new_x3 holds exactly.
+ 
+// Note the difference between examples 2 and 3: in order to keep the names of the original exogenous variables, these names
+// are, classically, entered between quotes.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2004
+        </refsection>
+</refentry>

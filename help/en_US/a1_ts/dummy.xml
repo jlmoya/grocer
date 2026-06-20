@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="dummy" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>dummy </refname>
+               <refpurpose>create a dummy variable </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>dum=dummy(boun,subperiod)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> boun </term> =     a (2x1) string vector of dates</para></listitem>
+<listitem><para>*  <term> subperiod </term> =    </para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;either&#160;a&#160;string&#160;scalar&#160;if&#160;the&#160;dummy&#160;is&#160;relative&#160;to&#160;the&#160;lone&#160;date&#160;subperiod</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;or&#160;a&#160;(2&#160;x1)&#160;string&#160;vector&#160;if&#160;the&#160;dummy&#160;is&#160;relative&#160;to&#160;the&#160;period&#160;subperiod(1)&#160;to&#160;subperiod(2)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> dum </term> =     a ts equal to 1 for the period subperiod, O otherwise</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Creates a dummy variable equal to 1 over a sub-period, 0 over the rest of the period.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+d79m4=dummy(['1970m1';'2007m12'],'1979m4')
+// creates a dummy variable on the period going from the 1st month of 1970 until the the last month of 2007, equal to 1 in the 4th month of 1979 and 0 elsewhere.
+d=dummy(['1970q1';'2007q4'],['1980q1';'1989q2'])
+//creates a dummy variable on the period going from the 1st quarter of 1970 until the the last quarter of 2007, equal to 1 from the first quarter of 1980 until the second quarter of 1989.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2007
+        </refsection>
+</refentry>

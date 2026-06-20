@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="vargranger" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:09-Mar-2014$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>vargranger</refname>
+               <refpurpose>Granger (non-)causality tests from a VAR </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=vargranger(rvar,causing,caused,noprint)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> rvar </term> =    a 'var' results tlist</para></listitem>
+<listitem><para>*  <term> causing </term> =    a (j x 1) vector, the indexes of the causing variables</para></listitem>
+<listitem><para>*  <term> caused </term> =    a (k x 1) vector, the indexes of the caused variables</para></listitem>
+<listitem><para>*  <term> noprint </term> =    'noprint' if the user does not to print the results</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  res </term> =    a results tlist with:</para></listitem>
+<listitem><para>&#160;&#160;- res('meth') = 'var Granger causality'</para></listitem>
+<listitem><para>&#160;&#160;-res('rvar res') = the input 'var' results tlist</para></listitem>
+<listitem><para>&#160;&#160;- res('causing') = the index vector of the supposed causing variables</para></listitem>
+<listitem><para>&#160;&#160;- res('caused') = the index vector of the supposed caused variables</para></listitem>
+<listitem><para>&#160;&#160;- res('chistat') = the vector of Wald statistics for non-causlity</para></listitem>
+<listitem><para>&#160;&#160;- res('chi_pvalue') = their p-values</para></listitem>
+<listitem><para>&#160;&#160;- res('chi_df') = the degrees of freedom of the chi2</para></listitem>
+<listitem><para>&#160;&#160;- res('f') = the Fisher statistics for non-causlity</para></listitem>
+<listitem><para>&#160;&#160;- res('dfnum') = the numerator degrees of freedom</para></listitem>
+<listitem><para>&#160;&#160;- res('dfden') = the denominator degrees of freedom</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs Ganger (non-)causality tests for a VAR.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+global GROCERDIR;
+load(GROCERDIR+'/data/lutk1.dat')
+bounds('1960q4','1978q4')
+results=VAR(2,'endo=delts(log(rfa_inv));delts(log(rfa_inc));delts(log(rfa_cons))')
+r=vargranger(results,[1 2],3)
+// provides Ganger (non-)causality test from variables delts(log(rfa_inv)) and delts(log(rfa_inc)) to variable delts(log(rfa_cons))
+r=vargranger(results,'delts(log(rfa_inv))',['delts(log(rfa_inc))' 'delts(log(rfa_cons))'])
+// same test but with the name of the variables instead of their order in the VAR
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2014
+        </refsection>
+</refentry>

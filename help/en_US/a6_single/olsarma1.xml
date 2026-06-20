@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="olsarma1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:15-Aug-2011$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>olsarma1</refname>
+               <refpurpose>ordinary least squares with ARMA errors </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=olsarma1(y,x,AR,MA,initown,namexos,bhat,optfunc,opt_optim)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term>y</term> =   dependent variable vector (nobs x 1)</para></listitem>
+<listitem><para>*  <term>x</term> =   independent variables matrix (nobs x nvar)</para></listitem>
+<listitem><para>*  <term>AR</term> =   a (nar x 1) or (1 x nar) string or real vector of parameters corresponding to the AR part of the error process</para></listitem>
+<listitem><para>&#160;&#160;-&#160;if&#160;AR&#160;is&#160;a&#160;real&#160;then&#160;all&#160;parameters&#160;are&#160;estimated</para></listitem>
+<listitem><para>&#160;&#160;-&#160;if&#160;AR&#160;is&#160;a&#160;string&#160;then&#160;all&#160;parameters&#160;in&#160;AR&#160;with&#160;an&#160;equality&#160;(such&#160;as&#160;'=0.5')&#160;are&#160;constrained&#160;to&#160;&#160;the&#160;given&#160;value&#160;(0.5&#160;in&#160;the&#160;example)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;if&#160;AR&#160;is&#160;a&#160;string&#160;then&#160;it&#160;can&#160;contain&#160;inequality&#160;constraints;&#160;for&#160;instance&#160;'&lt;0.5'&#160;indicates&#160;that&#160;coeff&#160;must&#160;be&#160;lower&#160;than&#160;0.5</para></listitem>
+<listitem><para>&#160;&#160;-&#160;if&#160;initown&#160;is&#160;set&#160;to&#160;%F,&#160;then&#160;the&#160;user&#160;can&#160;give&#160;any&#160;value&#160;to&#160;AR;&#160;only&#160;it&#160;size&#160;matters&#160;for&#160;the&#160;estimation&#160;process</para></listitem>
+<listitem><para>&#160;&#160;-&#160;if&#160;initown&#160;is&#160;set&#160;to&#160;%F,</para></listitem>
+<listitem><para>*  <term>MA</term> =   a (nmaf x 1) or (1 x nmaf) string or real vector of corresponding to the AR part of the error, with the same working as for AR</para></listitem>
+<listitem><para>*  <term>initown</term> =   a boolean indicating whether the program must use the entered values for AR, MA as starting values (%t if this is the case)</para></listitem>
+<listitem><para>*  <term>namexos</term> =   a boolean indicating whether the program must use the entered values for AR, MA as starting values (%t if this is the case)</para></listitem>
+<listitem><para>*  <term>bhat</term> =   the starting values of teh relation between y and x (if initown is set to %t; in the other case, it can be omitted; if given, it will be ignored)</para></listitem>
+<listitem><para>*   <term>optfunc</term> = 'optimg' if the user wants to use the optim optimisation function (default: optim)</para></listitem>
+<listitem><para>*  <term>opt_optim</term> = a tlist, collecting the options to the optimisation function</para></listitem>
+  
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term>res</term> =   a results tlist with</para></listitem>
+<listitem><para>&#160;  - res('meth')  = 'ols with arma errors'</para></listitem>
+<listitem><para>&#160;  - res('y')     = y data vector</para></listitem>
+<listitem><para>&#160;  - res('x')     = x data matrix</para></listitem>
+<listitem><para>&#160;  - res('nobs')  = # observations</para></listitem>
+<listitem><para>&#160;  - res('nvar')  = # variables</para></listitem>
+<listitem><para>&#160;  - res('beta')  = bhat</para></listitem>
+<listitem><para>&#160;  - res('yhat')  = yhat</para></listitem>
+<listitem><para>&#160;  - res('resid') = residuals</para></listitem>
+<listitem><para>&#160;  - res('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;  - res('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - res('sigu')  = sum of squared residuals</para></listitem>
+<listitem><para>&#160;  - res('ser')  = standard error of the regression</para></listitem>
+<listitem><para>&#160;  - res('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;  - res('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;  - res('dw')    = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;  - res('condindex') = multicolinearity cond index</para></listitem>
+<listitem><para>&#160;  - res('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;  - res('llike') = the log-likelihood</para></listitem>
+<listitem><para>&#160;  - res('AR') = the estimated AR part of the residuals</para></listitem>
+<listitem><para>&#160;  - res('MA') = the estimated MA part of the residuals</para></listitem>
+<listitem><para>&#160;  - res('tAR') = the t-statistics of the AR part of the residuals</para></listitem>
+<listitem><para>&#160;  - res('tMA') = the t-statistics of the MA part of the residuals</para></listitem>
+<listitem><para>&#160;  - res('pvalues AR') = the p-values of the AR part of the residuals</para></listitem>
+<listitem><para>&#160;  - res('pvalues MA') = the p-values of the MA part of the residuals</para></listitem>
+<listitem><para>&#160;  - res('V') = the estimated variance of the innovations of the residuals</para></listitem>
+<listitem><para>&#160;  - res('AIC') = the value of the Aka&#239;ke Critrium</para></listitem>
+<listitem><para>&#160;  - res('BIC') = the value of the Schwarz Critrium</para></listitem>
+<listitem><para>&#160;  - res('grad') = the gradient at solution</para></listitem>
+<listitem><para>&#160;  - res('type') = the e4 type of the model</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs the estimation of an ols model with arma errors, with entries constrained to be matrices.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+1) res=olsarma1(grocer_AR,grocer_MA,y,x,grocer_initown,grocer_beta)
+2) res=olsarma1(0.4,[0.5 0.1],y,x,%T,[0.2 ; 0.1 ;-0.3])
+// Example 1 is taken from function oslarma. Example 2 estimates and ols model with 3 exogenous variables, ARMA(1,2) errors, starting values given by the user.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2010
+        </refsection>
+</refentry>

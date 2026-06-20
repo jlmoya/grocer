@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="theta2arm2" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>theta2arm2 </refname>
+               <refpurpose>transformation of VARMA estimate into the corresponding matrices </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[AR,ARS,MA,MAS,V,G]=theta2arm2(theta,theta2mat,fromgrad)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> theta </term> =    (npx1) vector of parameters</para></listitem>
+<listitem><para>*  <term> theta2mat </term> =    a string vector of instructions that transforms</para></listitem>
+<listitem><para>*  <term> fromgrad </term> =    if not given, forces the matrix V to be positive definite</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> AR,AS,MA,MAS,V,G </term> =    matrices of the process:</para></listitem>
+<listitem><para>  (I + AR1.B +...+ARp.B^p)(I + AS1.B^s +...+ ASps.B^ps.s) y(t)</para></listitem>
+<listitem><para>  = (G0 + G1.B +...+ Gt.B^l) u(t) +</para></listitem>
+<listitem><para>  (I + MA1.B +...+MAq.B^q)(I + MAS1.B^s +...+ MASqs.B^qs.s) a(t)</para></listitem>
+<listitem><para>  with Var(a(t)) = V</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Recovers the matrices of an ARMA process from the values of the estimated parameters.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/varma_d.dat'); elec_cons = transdif(seriesa,0,1,1,12);
+results=varma(elec_cons,[],[],0,0,0,12); grocer_AR=[];grocer_ARS=[];grocer_MA=[];grocer_MAS=[];grocer_V=[];grocer_G[];
+[AR,ARS,MA,MAS,V,G]=theta2arm2(results('coeff'),results('theta2mat'),1)
+ 
+// Although theta2arm2 is mainly useful for the estimation of a VARMA model, this example shows how it can be used to recover
+// the estimated matrices from the tlist results produced by the function VARMA. Note however that it imposes to
+// define the matrices grocer_AR,..., grocer_G; so this capability should be used with care...
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Jaime Terceiro, 1997/ Eric Dubois 2004
+        </refsection>
+</refentry>

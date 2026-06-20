@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="expbd2xls" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:16-Août-2021$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>expbd2xls</refname>
+               <refpurpose>exportation of a database to Excel </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[]=expbd2xls(bd,output,sheetname,transpose,names)</synopsis>
+        </refsynopsisdiv>
+ 
+         <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  bd = the name of a database or of a list of variables loaded in the environment</para></listitem>
+<listitem><para>*  output = the excel file where to save the data</para></listitem>
+<listitem><para>*  sheetname =the name of the sheet where the data are exported</para></listitem>
+<listitem><para>*  transpose = a boolean indicating whether the data should be transposed, i.e. presented in row (optional)</para></listitem>
+<listitem><para>*  names = the names to give to the data, if different from the name they have in Scilab (optional)</para></listitem>
+
+           </varlistentry>
+          <varlistentry>
+
+           <term>Output</term>
+
+<listitem><para>* nothing</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Exports the content of a data base or a list of variables bd to a xls or xlxs Excel file.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+global GROCERDIR;
+load(GROCERDIR+'\data\bdheneric.dat')
+expbd2xls(list('lm1','ly','lp','rnet'),'C:\Users\Dubois\Documents\grocer\documentation\test_newversion\essai.xlsx','db_he')
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2021
+        </refsection>
+</refentry>

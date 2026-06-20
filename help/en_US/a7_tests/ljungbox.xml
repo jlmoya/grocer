@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ljungbox" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ljungbox  </refname>
+               <refpurpose>Ljung-Box autocorrelation test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res = ljungbox(namey,p,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =   a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> p  </term> =   a scalar, the # of autocorrelations considered </para></listitem>
+<listitem><para>*  <term> argi </term> =   arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'noplt'&#160;if&#160;the&#160;user&#160;does&#160;not&#160;want&#160;to&#160;plot&#160;the&#160;autocorrelations</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'noprint'&#160;if&#160;the&#160;user&#160;does&#160;not&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;test</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'meth=Box-Pierce'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;use&#160;the&#160;Box-Pierce&#160;formula&#160;instead&#160;of&#160;the&#160;Ljung-Box&#160;one</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'size=x'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;choose&#160;the&#160;size&#160;of&#160;the&#160;autocorrelation&#160;confidence&#160;band&#160;(defaut&#160;=&#160;0.05)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'styleg=x'&#160;with&#160;x&#160;between&#160;1&#160;and&#160;7&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;choose&#160;the&#160;location&#160;of&#160;the&#160;legend&#160;for&#160;the&#160;graph&#160;of&#160;autocorrelations&#160;(default&#160;=&#160;7,&#160;that&#160;is&#160;to&#160;the&#160;right&#160;of&#160;the&#160;graph)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'corrdf=x'&#160;whther&#160;x&#160;is&#160;the&#160;number&#160;to&#160;subtract&#160;from&#160;the&#160;entered&#160;#&#160;of&#160;autocorrelations&#160;to&#160;obtain&#160;the&#160;correct&#160;#&#160;of&#160;degrees&#160;of&#160;fredom&#160;for&#160;the&#160;test&#160;&#160;statistic&#160;(default&#160;=&#160;"&#160;of&#160;AR&#160;and&#160;MA&#160;parameters&#160;for&#160;an&#160;arma&#160;model,&#160;0&#160;in&#160;other&#160;cases)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data&#160;</para></listitem>
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> res </term> =   a results tlist with:</para></listitem>
+<listitem><para>&#160;   - res('meth')   = 'Ljung-Box' or 'Box-Pierce'</para></listitem>
+<listitem><para>&#160;   - res('y')      = values of the input variable (residuals in the case of a tlist)</para></listitem>
+<listitem><para>&#160;   - res('acf')   = autocorrelation coefficients</para></listitem>
+<listitem><para>&#160;   - res('acf_l') = low bound of the confidence interval</para></listitem>
+<listitem><para>&#160;   - res('acf_u') = upper bound of the confidence interval</para></listitem>
+<listitem><para>&#160;   - res('size') = size of the confidence band</para></listitem>
+<listitem><para>&#160;   - res('chistat') = Ljung-Box (or Box-Pierce) chi-squared</para></listitem>
+<listitem><para>&#160;   - res('chi_pvalue') = the p-value of the test</para></listitem>
+<listitem><para>&#160;   - res('chi_df') = the # of degrees of freedom</para></listitem>
+<listitem><para>&#160;   - res('namey') = name of the variable tested</para></listitem>
+<listitem><para>&#160;   - res('prests') = a boolean indicating whether the tested variable is a ts</para></listitem>
+<listitem><para>&#160;   - res('bounds') =  the estimation period (if the variable was a ts)</para></listitem>
+<listitem><para>&#160;   - res('dropna') = boolean indicating if NAs have been droped</para></listitem>
+<listitem><para>&#160;   - res('nonna') = vector indicating position of non-NAs (if the option 'dropna' was active)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes the Ljung-Box Q test of autocorrelation for a vector or the residuals of a results tlist.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/macros/grocer/db/bdhenderic.dat');
+bounds()
+res1=ljungbox('delts(lm1)',6)
+// Example taken from function ljungbox_d. Provides the Ljung-Box test for the variation of the logrithm of M1
+// in the UK and 1 to 6 autocorrelations.
+r=varma_d4();res2=ljungbox(r,10)
+// Also taken from function ljungbox_d. Example 2 provides the Ljung-Box test for the residuals of the arma estimation
+// provided in demo varma_d4() and 1 to 10 autocorrelations.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2007
+        </refsection>
+</refentry>

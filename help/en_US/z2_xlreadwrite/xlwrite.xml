@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Scilab ( http://www.scilab.org/ ) - This file is part of Scilab
+ * Copyright (C) 2018 - Stéphane MOTTELET
+ *
+ * This file is hereby licensed under the terms of the GNU GPL v2.0,
+ * For more information, see the COPYING file which you should have received
+ * along with this program.
+ *
+ -->
+<refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" xmlns:scilab="http://www.scilab.org" xml:lang="en" xml:id="xlwrite">
+    <refnamediv>
+        <refname>xlwrite</refname>
+        <refpurpose>Write to Microsoft Excel spreadsheet file using Java</refpurpose>
+    </refnamediv>
+    <refsynopsisdiv>
+        <title>Syntax</title>
+        <synopsis>xlwrite(file_path,A)</synopsis>
+        <synopsis>xlwrite(file_path,A,sheet)</synopsis>
+        <synopsis>xlwrite(file_path,A,range)</synopsis>
+        <synopsis>xlwrite(file_path,A,sheet,range)</synopsis>
+        <synopsis>status = xlwrite(...)</synopsis>
+    </refsynopsisdiv>
+    <refsection>
+        <title>Arguments</title>
+        <variablelist>
+          <varlistentry>
+              <term>file_path</term>
+              <listitem>
+                  <para>a character string giving the path of the Excel file. If the file does not
+           exist, xlwrite creates a file, determining the format based on
+           the specified extension, <literal>.xls</literal> or <literal>.xlsx</literal> (the default if no extension is given).
+                  </para>
+              </listitem>
+          </varlistentry>
+          <varlistentry>
+              <term>A</term>
+              <listitem>
+                  <para>Two-dimensional logical, numeric or string matrix or, if each
+           cell contains a single element, a cell array.
+                  </para>
+              </listitem>
+          </varlistentry>
+          <varlistentry>
+              <term>sheet</term>
+              <listitem>
+                  <para>an integer giving the sheet position or a character string giving the sheet name.
+                    If does not exist, xlwrite adds a new sheet at the end of the worksheet collection.
+                  </para>
+              </listitem>
+          </varlistentry>
+          <varlistentry>
+              <term>range</term>
+              <listitem>
+                  <para>a character string giving the rectangular range to be writen in the sheet using Excel syntax.
+                    If range is larger than the size of A, xlwrite fills the
+                    remainder of the region with #N/A. If range is smaller than
+                    the size of A, xlwrite writes only the subset that fits
+                    into range to the file.
+                  </para>
+              </listitem>
+          </varlistentry>
+          <varlistentry>
+              <term>status</term>
+              <listitem>
+                <para>a boolean with value <literal>%t</literal> if write opration was
+                  successfull and <literal>%f</literal> otherwise.
+                  </para>
+              </listitem>
+          </varlistentry>
+        </variablelist>
+    </refsection>
+
+    <refsection>
+        <title>Examples</title>
+        <programlisting role="example"><![CDATA[
+sheetName = 'this_is_sheetname';
+startRange = 'B3';
+
+// Generate some data
+xlsData = {'A Number','Boolean Data','Empty Cells','Strings'
+    1, %f, [], 'String Text'
+    5, %f, [], 'Another very descriptive text'
+    -6.26, %f, 'This should have been an empty cell but I made an error' 'This is text'
+    1e8, %t, [], 'Last cell with text'
+    1e3, %f, %nan, %nan
+    1e2, %t, [], 'test'};
+
+// Generate XLS file
+xlwrite('TMPDIR/test.xls', xlsData, sheetName, startRange);
+// Generate XLSX file
+xlwrite('TMPDIR/test.xlsx', xlsData, sheetName, startRange);
+]]>
+</programlisting>
+    </refsection>
+    <refsection role="see also">
+        <title>See also</title>
+        <simplelist type="inline">
+          <member>
+              <link linkend="xlread">xlread</link>
+          </member>
+          <member>
+              <link linkend="xlinfo">xlinfo</link>
+          </member>
+          <member>
+              <link linkend="xls_open">xls_open</link>
+          </member>
+          <member>
+              <link linkend="xls_open">xls_read</link>
+          </member>
+            <member>
+                <link linkend="readxls">readxls</link>
+            </member>
+        </simplelist>
+    </refsection>
+    <refsection>
+        <title>Bibliography</title>
+        <para>This function is based on POI library (<ulink url="http://poi.apache.org/">http://poi.apache.org/</ulink>).
+        </para>
+    </refsection>
+</refentry>
+

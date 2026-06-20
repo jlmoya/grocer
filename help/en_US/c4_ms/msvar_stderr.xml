@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="msvar_stderr" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:13-Feb-2011$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>MSVAR_stderr</refname>
+               <refpurpose>Markvov Switching 2nd order moments </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=MSVAR_stderr(res,hdelta)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+<listitem><para>*  <term> res </term> =  a results tlist from a Markov switching estimation</para></listitem>
+<listitem><para>*  <term> hdelta </term> =  a scalar, the increment used to calculate the hessian matrix</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term> res </term> =  the initial results tlist with the following fields updated:</para></listitem>
+<listitem><para>&#160;   - res('stderr') = the (np x 1) vector of coefficients standard errors</para></listitem>
+<listitem><para>&#160;   - res('tstat') = the (np x 1) vector of associated t-stats</para></listitem>
+<listitem><para>&#160;   - res('pvalue') = the (np x 1) vector of associated p-values</para></listitem>
+<listitem><para>&#160;   - res('covbeta') = the (np x np) variance-covariance matrix of the parameters</para></listitem>
+<listitem><para>&#160;   - res('corbeta') = the (np x np) correlation matrix of the parameters</para></listitem>
+<listitem><para>&#160;   - res('ptrans_tstat') = the (M x 1) vector of t-stats for the transition probabilities</para></listitem>
+<listitem><para>&#160;   - res('beta_id_tstat') = the (1 x n_x*K*M) vector of t-stats for switching parameters</para></listitem>
+<listitem><para>&#160;   - res('beta_co_tstat') = the (1 x n_z*K) vector of t-stats for non switching parameters</para></listitem>
+<listitem><para>&#160;   - res('sigma_tstat') = the (M*M_V x M) matrix of t-stats for the variance-covariance matrix of the residuals</para></listitem>
+<listitem><para>&#160;   - res('ptrans_pvalue') = the (M x M) matrix of t-stats for transition probabilities</para></listitem>
+<listitem><para>&#160;   - res('beta_id_pvalue') = the (1 x n_x*K*M) vector of t-stats for switching parameters</para></listitem>
+<listitem><para>&#160;   - res('beta_co_pvalue') = the (1 x n_z*K) vector of t-stats for non switching parameters</para></listitem>
+<listitem><para>&#160;   - res('sigma_pvalue') = the (M*M_V x M) matrix of t-stats for the variance-covariance matrix of the residuals</para></listitem>
+ 
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ 
+From a MSVAR estimation, compute hessian, gradians, stdev, tstat, pvalues and print parameters, adapted courtesy of Thierry Roncalli (1995). This is the function used in function ms_estimate to perform these calculations, but it can also be used if the results of a ms estimation does not provide statisfactory results.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'\macros\grocer\db\us_revu.dat')
+bounds('1967m4','2004m2')
+nb_states=2
+switch_var=2
+var_opt=3
+r=ms_vares('cte',3,'100*(log(us_revu)-lagts(2,log(us_revu)))',nb_states,switch_var,var_opt,'prt=initial;final','transf=stud')
+r=MSVAR_stderr(r,1e-3)
+ 
+// In this example, the second order moments are re-estimated using a larger increment than the one used to estimate the ms_var model (1e-5).
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2006
+        </refsection>
+</refentry>

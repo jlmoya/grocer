@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ptrend" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ptrend</refname>
+               <refpurpose>matrix of polynomial trend </refpurpose>
+   </refnamediv>
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[xmat]=ptrend(p,nobs)</synopsis>
+        </refsynopsisdiv>
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+           <term>Input</term>
+<listitem><para>*  <term> p </term> =   order of the time-trend polynomial</para></listitem><listitem><para>&#160;&#160;.&#160;p&#160;&lt;&#160;0,&#160;xmat&#160;  =  &#160;empty&#160;vector</para></listitem><listitem><para>&#160;&#160;.&#160;p&#160;  =  &#160;1,&#160;xmat&#160;  =  &#160;time&#160;trend</para></listitem><listitem><para>&#160;&#160;.&#160;p&#160;&gt;&#160;1,&#160;xmat&#160;  =  &#160;higher&#160;order&#160;polynomial&#160;in&#160;time</para></listitem><listitem><para>*  <term> nobs </term> =   size of the matrix</para></listitem>
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+          <varlistentry>
+          <term>Output</term>
+<listitem><para>*  <term> xmat </term> =   matrix containing polynomial trend model data set </para></listitem>
+          </varlistentry>
+          </variablelist>
+        </refsection>
+         <refsection>
+               <title>DESCRIPTION</title>
+Produces an explanatory variables matrix containing a polynomial time-trend.
+        </refsection>
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ext=ptrend(2,10)// retruns
+//
+// ext =
+//!   1.    1.     1.   !
+//!   1.    2.     4.   !
+//!   1.    3.     9.   !
+//!   1.    4.     16.  !
+//!   1.    5.     25.  !
+//!   1.    6.     36.  !
+//!   1.    7.     49.  !
+//!   1.    8.     64.  !
+//!   1.    9.     81.  !
+//!   1.    10.    100. !
+ 
+load(GROCERDIR+'/data/bdhenderic.dat')
+r=ols1('lm1','const','ptrend(1,length(series(lm1)))')// regress lm1 on a constant an a trend
+
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

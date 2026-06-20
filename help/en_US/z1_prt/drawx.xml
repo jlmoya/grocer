@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="drawx" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>drawx </refname>
+               <refpurpose>draw a readable x axis </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>drawx(xscale0,dilat,ref_nbinter,font_axis,y0,x0)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> xscale0 </term> =  a (1 x nobs) string vector, representing the scale</para></listitem>
+<listitem><para>*  <term> ref_nbinter </term> =  a number indicating the maximum numbers of chars that can be displayed</para></listitem>
+<listitem><para>*  <term> dilat </term> =  the dilatation factor (the width of a single value of the axis)</para></listitem>
+<listitem><para>*  <term> font_axis </term> =  size of characters on the axis</para></listitem>
+<listitem><para>*  <term> y0</term> = value of the y axis where to draw the x axis</para></listitem>
+<listitem><para>*  <term> x0</term> = value of the first x value used (default: 1)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing (printed on a graphic window)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Draws an x axis which remains readable whatever number of values it contains. The parameter ref_nbinter must be adapted to the size of the screen (function param_graph). Must be used after a 2D graphic instruction (such as plot2d).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+drawx(string([1:100]),20,3,0)
+// Example draws an x axis with range going from 1 to 100,
+// a maximum number of chars on the axis equal to 20,
+// a font size of 3 and at the axis is located at y=0.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

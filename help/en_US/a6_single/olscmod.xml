@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="olscmod" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:25-Mars-2019$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>olscmod</refname>
+               <refpurpose>Estimate by Cochrane-Orcutt ols Regression for AR1 errors equations of a model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[model2,olsc1,...,olscn]=olscmod(model,tsmat,indeq,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>model</term> = a model tlist</para></listitem>
+<listitem><para>*  <term>tsmat</term> = a tsmat containing all data needed for estimating the equation (should be the tsmat associated to the model, created by function create_dbmod)</para></listitem>
+<listitem><para>*  <term>indeq</term> =</para></listitem>
+<listitem><para>&#160;&#160;&#160;- a string, the name of the equation to estimate or the keyword 'all' (to estimate all equations)</para></listitem>
+<listitem><para>&#160;&#160;&#160;- or an integer, the # of the equation in the model</para></listitem>
+<listitem><para>*  <term>arg1,...,argn</term> = optional arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  the string 'noprint' if the user doesn't want the to print the results of the regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  the string 'maxit=n' where n is the maximum number of iterations that can be performed (default = 100)</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  the string 'crit=n' where crit is the convergence criterion, used to assess if the difference between successive values of the autocorrelation coefficient is significant (default=sqrt(%eps))</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  the string 'dropna' if the user wants to use in the regression all dates with no NA value in any variable (the main use of this option should be when dealing with daily ts)</para></listitem>
+<listitem><para>&#160;&#160;&#160;- the string 'save=%t' if the user wants to save the estimated coefficients in the model tlist</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>model2</term> = the model tlist, with the estimated coefficients if the option save has been swtiched to %t</para></listitem>
+<listitem><para>*  <term>olsc1,...,olscn</term> = a variable number of olsc results tlists, each one corresponding to the results of the corresponding estimated equation</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes Cochrane-Orcutt ols Regression for AR1 errors for equations of a model.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+global GROCERDIR
+// load the model small:
+load(GROCERDIR+'data\small.dat')
+// load the database small_db:
+load(GROCERDIR+'data\small_db.dat')
+// set the bounds:
+bounds('1980q1','2005q4');
+// In the small model, estimate by ols the equation td_p3m_d1, with T-statistics corrected for heteroskedasticity by White's method.
+// Estimated coefficients are stored in the small model tlist:
+ [small,rp3m_d1]=olscmod(small,small_db,'td_p3m_d1','save=%t');
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2019
+        </refsection>
+</refentry>

@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="gmmWald" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>gmmWald </refname>
+               <refpurpose>Wald test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rwd = gmmWald(rgmm,R,r,np)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> rgmm </term> =    tlist result for unrestricted estimation</para></listitem>
+<listitem><para>*  <term> R </term> =    is the (s x #parameters) R matrix of linear constraints in Rb  =    r</para></listitem>
+<listitem><para>*  <term> r </term> =    (s x 1) r vector in Rb  =    r</para></listitem>
+<listitem><para>*  <term> np </term> =    'noprint' if the user does not want to print the results</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* <term>rwd</term> = a tlist which arguments can be:</para></listitem>
+<listitem><para>&#160;  -rwd('chistat') = test statisitic</para></listitem>
+<listitem><para>&#160;  -rwd('pvalue') = pvalue of the test</para></listitem>
+<listitem><para>&#160;  -rwd('df') = number of restrictions</para></listitem>
+ 
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs linear Wald test for GMM.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+X = [ones(1000,1) grand(1000,1,'nor',0,1) grand(1000,1,'nor',0,1)];
+b = [0;1;-1];
+e = grand(1000,1,'nor',0,1);
+y = X*b + e;
+ 
+gmmopt = tlist(['gmm';'momt';'jake';'prt';'gmmit';'S']);
+gmmopt('prt')=1;
+gmmopt('gmmit') = 1;
+gmmopt('S')='W';
+gmmopt('momt')='gmmLinM';
+gmmopt('jake')='gmmLinJ';
+ 
+b0=zeros(3,1);
+ 
+ uout=gmm('y',gmmopt,'exo=''X''','ivar=''X''','parm0=b0');
+R = [1 0 0];r = 0;
+ rw=gmmWald(uout,R,r);
+// Example taken from gmmLin_d(): test if the first parameter is null
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2007
+        </refsection>
+</refentry>

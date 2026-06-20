@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ologit" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ologit </refname>
+               <refpurpose>multivariate ordered logit regression </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[res]=ologit(namey,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term>namey</term> =  a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes which should be coded from 0 to ncat</para></listitem>
+<listitem><para>*  <term>argi</term> =  an argument that can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx1)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nxk)&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'init=v'&#160;where&#160;v&#160;is&#160;the&#160;optional&#160;vector&#160;of&#160;starting&#160;values</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;use&#160;in&#160;the&#160;regression&#160;all&#160;dates&#160;with&#160;no&#160;NA&#160;value&#160;in&#160;any&#160;variable&#160;(the&#160;main&#160;use&#160;of&#160;this&#160;option&#160;should&#160;be&#160;when&#160;dealing&#160;with&#160;daily&#160;ts)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'optfunc=optim' if the user wants to use the optim optimisation function (default: optimg)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'opt_nelmead=crit,nitermax' with crit the value of the convergence criterion in the Nelder-Meade optimisation function and nitermax the maximum number of iterations (default = 'opt_nelmead=2*%eps,1000')</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'opt_optim=opts' where opts are options for optim that can be entered after the starting value of the parameters (default = 'opt_optim=,''ar'',1e6,1e6'')</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'opt_convg=val' where val is the threshold on gradient norm (default = 'opt_convg=1e-5')</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term>res</term> =  a results tlist with</para></listitem>
+<listitem><para>&#160;  - res('meth')  = 'ordered logit'</para></listitem>
+<listitem><para>&#160;  - res('y') = (nobs x ncat) matrix of data</para></listitem>
+<listitem><para>&#160;  - res('x') = (nobs x nx) matrix of data</para></listitem>
+<listitem><para>&#160;  - res('nobs') = number of observations</para></listitem>
+<listitem><para>&#160;  - res('nvar') = number of variables</para></listitem>
+<listitem><para>&#160;  - res('ncat') = number of categories of dependent variable (including the reference category j = 0)</para></listitem>
+<listitem><para>&#160;  - res('beta') = (nvar*ncat x 1) vector of beta coefficients: [beta_1 ; beta_2 ; ... ; beta_ncat] under normalization beta_0 = 0</para></listitem>
+<listitem><para>&#160;  - res('yhat') = (nobs x ncat) matrix of fitted values probabilities: [P_0 P_1 ... P_(ncat-1)] where P_j = [P_1j ; P_2j ; ... ; P_nobsj]</para></listitem>
+<listitem><para>&#160;  - res('r2mf') = McFadden pseudo-R^2</para></listitem>
+<listitem><para>&#160;  - res('rsqr') = Estrella pseudo-R^2</para></listitem>
+<listitem><para>&#160;  - res('llike') = unrestricted log likelihood</para></listitem>
+<listitem><para>&#160;  - res('lratio') = LR test statistic against intercept-only model (all bets=0), distributed chi-squared with (nvar     -1)*ncat degrees of freedom</para></listitem>
+<listitem><para>&#160;  - res('covb') = (nvar*ncat x nvar*ncat) covariance matrix of coefficients</para></listitem>
+<listitem><para>&#160;  - res('tstat') = (nvar*ncat x 1) vector of t-statistics</para></listitem>
+<listitem><para>&#160;  - res('pvalue') = (nvar*ncat x 1) vector of corresponding p-values</para></listitem>
+<listitem><para>&#160;  - res('namey') = name of the y variable</para></listitem>
+<listitem><para>&#160;  - res('namex') = name of the x variables</para></listitem>
+<listitem><para>&#160;  - res('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;  - res('dropna') = boolean indicating if NAs have been dropped</para></listitem>
+<listitem><para>&#160;  - res('bounds') = if there is a timeseries in the regression, the bounds of the regression</para></listitem>
+<listitem><para>&#160;  - res('nonna') = vector indicating position of non-NAs</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes multivariate ordered logit regression.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'\data\gunther.dat')
+res=ologit('rrating',['asset' 'equ' 'growth' 'loa' 'metro' 'prl'])
+/ Example taken from ologit_d, provides the ordered multivariate logit regression
+// of variable 'rrating' (ratings of credit institutions)
+// on variables 'ass' (logarithm of assets), 'equ' (equity to assets ratio),
+// growth (GDP growth rate of the state where the bank is operating),
+// 'loa' (loans to assets ratio), 'metro' (1 if metropolitan statistic area)
+// and 'prl' (no performing loans to total loans ratio),
+// all variables taken from a database provided by J. Gunther (Gunther J. (1999):
+// "Between a rock and a hard place: the CRA-safety and soundness pinch",
+// Federal Reserve Bank of Dallas, Economic and Financial Review, Second Quarter 1999).
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2007
+        </refsection>
+</refentry>

@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="da2m" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>da2m </refname>
+               <refpurpose>transformation of daily data into monthly ones </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>ts=da2m(ts,ind,dropna)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> ts </term> =     a daily timeseries</para></listitem>
+<listitem><para>*  <term> ind </term> =    </para></listitem>
+<listitem><para>&#160;&#160;.&#160; -1&#160;if&#160;the&#160;monthly&#160;data&#160;is&#160;to&#160;be&#160;the&#160;sum&#160;of&#160;the&#160;corresponding&#160;days</para></listitem>
+<listitem><para>&#160;&#160;.&#160; 0&#160;if&#160;the&#160;&#160;monthly&#160;data&#160;is&#160;to&#160;be&#160;the&#160;mean&#160;of&#160;the&#160;corresponding&#160;days</para></listitem>
+<listitem><para>&#160;&#160;.&#160; n&#160;between&#160;1&#160;and&#160;28&#160;if&#160;the&#160;monthly&#160;data&#160;is&#160;to&#160;be&#160;the&#160;value&#160;of&#160;the&#160;n-th&#160;day&#160;of&#160;the&#160;month</para></listitem>
+<listitem><para>&#160;&#160;.&#160; n&#160;&gt;&#160;29&#160;if&#160;the&#160;monthly&#160;data&#160;is&#160;to&#160;be&#160;the&#160;value&#160;of&#160;the&#160;last&#160;day&#160;of&#160;the&#160;month</para></listitem>
+<listitem><para>*  <term> dropna </term> =     'dropna' if the user wants to withdraw all NA values from the calculations (case ind  =    0 or -1) or to take the last non NA value of the quarter (case ind &gt; 90)</para></listitem>
+<listitem><para>&#160; (if not entered then all NA values are considered)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> ts </term> =     the corresponding monthly time series</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Transforms daily data into monthly ones.
+ 
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data\tsd.dat')
+// tsd is a daily ts from 95/01/02 to 96/02/16 with all week-end values lacking
+tsm=da2m(tsd,0)
+//you obtain a monthly series from 2002m3 to 2007m7 with only NA values
+ 
+tsm=da2m(tsd,0,'dropna')
+//you obtain a monthly series from 2002m3 to 2007m7 with values equal for each month to the mean of all non NA daily values in the month
+ 
+tsm=da2m(tsd,1)
+//you obtain a monthly series from 2002m3 to 2007m8 with values equal to the values of each first day in the month, which can be eventually NA
+ 
+sm=da2m(tsd,1,'dropna')
+//you obtain a monthly series from 2002m3 to 2007m8 with values equal to the values of each first day in the month ('dropna' does not change anything on this case)
+ 
+tsm=da2m(tsd,31)
+//you obtain a monthly series from 2002m2 to 2007m7 with values equal to the values of each last day in the month
+ 
+tsm=da2m(tsd,31,'dropna')
+//you obtain a monthly series from 2002m2 to 2007m7 with values equal to last non NA value in the month
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois (2007)
+        </refsection>
+</refentry>

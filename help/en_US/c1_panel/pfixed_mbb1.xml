@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="pfixed_mbb1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:01-Sept.-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>pfixed_mbb1</refname>
+               <refpurpose>Panel equation regressions </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>﻿ res=pfixed_mbb1(y,index,x,B,alpha)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> y </term> =   a (nobs*nindiv x 1) matrix of all of the individual's observations vertically concatenated. This matrix must include in the first column the dependent variable, the independent variables must follow accordingly.</para></listitem>
+<listitem><para>*  <term> index </term> =   index vector that identifies each observation with an individual e.g. 1 (first 2 observations for individual # 1) 1 2 (next 1 observation for individual # 2) 3 (next 3 observations for individual # 3) 3 3</para></listitem>
+<listitem><para>*  <term> x </term> =   a (nobs*nindiv x k) matrix of exogenous variables</para></listitem>
+<listitem><para>*  <term> mol </term> =   moving blocks length</para></listitem>
+<listitem><para>*  <term> B </term> =   number of bootstrap replications</para></listitem>
+<listitem><para>*  <term> alpha </term> =   confidence level</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term> res </term> =   a tlist with</para></listitem>
+<listitem><para>&#160;&#160;-res('meth') =  'panel with fixed effects'</para></listitem>
+<listitem><para>&#160;&#160;-res('y') =   y data vector</para></listitem>
+<listitem><para>&#160;&#160;-res('x') =   x data matrix</para></listitem>
+<listitem><para>&#160;&#160;-res('nobs') =   nobs</para></listitem>
+<listitem><para>&#160;&#160;-res('nvar') =   nvars</para></listitem>
+<listitem><para>&#160;&#160;-res('beta') =   bhat</para></listitem>
+<listitem><para>&#160;&#160;-res('yhat') =   yhat</para></listitem>
+<listitem><para>&#160;&#160;-res('resid') =   residuals</para></listitem>
+<listitem><para>&#160;&#160;-res('vcovar') =   estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;&#160;-res('sige') =   estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;&#160;-res('sigu') =   sum of squared residuals</para></listitem>
+<listitem><para>&#160;&#160;-res('ser') =   standard error of the regression</para></listitem>
+<listitem><para>&#160;&#160;-res('tstat') =   t-stats</para></listitem>
+<listitem><para>&#160;&#160;-res('pvalue') =   pvalue of the betas</para></listitem>
+<listitem><para>&#160;&#160;-res('condindex') =   multicolinearity cond index</para></listitem>
+<listitem><para>&#160;&#160;-res('prescte') =   boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;&#160;-res('lliked') =   log-likelihood</para></listitem>
+<listitem><para>&#160;&#160;-res('rsqr') =   rsquared</para></listitem>
+<listitem><para>&#160;&#160;-res('rbar') =   rbar-squared</para></listitem>
+<listitem><para>&#160;&#160;-res('f') =   F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;&#160;-res('pvaluef') =   its significance level</para></listitem>
+<listitem><para>&#160;&#160;-res('hac') =   type of robust variance matrix in case of HAC estimation</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Fixed effects estimation for panel data with HAC and cross-sectional dependence robust moving-block bootstrap percentile-t confidence intervals for the coefficients. Low level function that works only with matrices.
+        </refsection>
+ 
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2012
+        </refsection>
+</refentry>

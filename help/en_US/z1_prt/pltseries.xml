@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="pltseries" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>pltseries </refname>
+               <refpurpose>2d plot </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>pltseries(arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> argi </term> =    </para></listitem>
+<listitem><para>&#160; - the series to graph, which can take any of these types:</para></listitem>
+<listitem><para>&#160;&#160;&#160; . a time series</para></listitem>
+<listitem><para>&#160;&#160;&#160; . a real (n x p) vector </para></listitem>
+<listitem><para>&#160;&#160;&#160; . a string equal to the name of a time series or a (n x p) real vector between quotes </para></listitem>
+<listitem><para>&#160;&#160;&#160; . a matrix or a list of such elements </para></listitem>
+<listitem><para>optional arguments:</para></listitem>
+<listitem><para>&#160; - 'title=x' if the user wants to give its own title (default: the name of the ts if it has been given between quotes, the string 'ts' if not)</para></listitem>
+<listitem><para>&#160; - 'bounds=[''b1'' ; ''b2'' ;...; ''bn'']' if the user wants to give its own grocer_bounds (default: the whole series)</para></listitem>
+<listitem><para>&#160; - 'yaxex=xx' if the user wants to put the x axis at value xx (default: y minimum value)</para></listitem>
+<listitem><para>&#160; - 'yaxis=xx' where xx is a (1 x p) matrix of 1 and 2, if the user wants 2 axes, respectively at the left and the right of the graph; the j the series is represented on the left axis if xx(j)==1 and on the right one if xx(j)==2 (default: only a left axis)</para></listitem>
+<listitem><para>&#160; - 'bars = xx' with xx integer row vector of size p representing the nature of the representation of the series (1=bars; anything else = curves)</para></listitem>
+<listitem><para>&#160; - 'x0(1)=xx' with xx integer representing the x location of the first y axis (default: put at x=1)</para></listitem>
+<listitem><para>&#160; - 'x0(2)=xx' with xx integer representing the x location of the second y axis (default: put at x=nobs)</para></listitem>
+<listitem><para>&#160;  - 'x=xx' where xx is the (1 x nobs) string vector to put on the x axis</para></listitem>
+<listitem><para>&#160; - 'styleg = xx' with xx integer representing the location of the legend (default: 5, that is the legend is placed interactively with the mouse, see legends in the help menu)</para></listitem>
+<listitem><para>&#160; - 'color = xx' with xxinteger row vector of size p representing the line color of each series</para></listitem>
+<listitem><para>&#160; - 'mycolor=[r1,g1,b1;...;rp,gp,bp]' for user defined colors with ri,gi,bi the RGB integer values of a color</para></listitem>
+<listitem><para>&#160; - 'shade=xx' a (n x 1) vector composed of 0 and 1 where the ones delimit areas to be shaded</para></listitem>
+<listitem><para>&#160; - 'style = xx' with xx' integer row vector of size p representing the line style of each series</para></listitem>
+<listitem><para>&#160; - 'thickn = xx' with xx integer vector of size p representing the thickness of the line drawn for each series (default all equal to 1)</para></listitem>
+<listitem><para>&#160; - 'legend = xx' with xx title of the legend</para></listitem>
+<listitem><para>&#160; - 'yaxis = xx' with xx integer row vector of size p representing the axis for each series (1=left; 2=right)</para></listitem>
+<listitem><para>&#160; - 'bars = xx' with xx integer row vector of size p representing the nature of the representation of the series (1=bars; anything else = curves)</para></listitem>
+<listitem><para>&#160; - 'ntics=xx' with xx an integer representing number of of tics between 2 occurences of the axis values</para></listitem>
+<listitem><para>&#160; - 'font_title=xx' with xx the size of the title font</para></listitem>
+<listitem><para>&#160; - 'font_axis=xx' with xx the size of the axis font</para></listitem>
+<listitem><para>&#160; - 'font_legend=xx' with xx the size of the legend font</para></listitem>
+<listitem><para>&#160; - 'style_title=xx' with xx the font style of the title</para></listitem>
+<listitem><para>&#160; - 'window=x' if the user wants to specify the # x where the graph is plotted (default: the window 1)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'yscale=xx'&#160;with&#160;xx&#160;a&#160;vector&#160;representing&#160; the values to be shown on the y axis</para></listitem>
+<listitem><para>&#160; - 'just_scale=bool' with bool a boolean which is:</para></listitem>
+<listitem><para>&#160;&#160;&#160; . %T if you want the y scale to be exactly the length [min(y),max(y)]</para></listitem>
+<listitem><para>&#160;&#160;&#160; . %F if you want the y scale to begin and end with rounded numbers (default)</para></listitem>
+ 
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing (printed on a graphic window)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Plots series... This function allows the user to make some complex graphs by gathering in one function some capabilities emboddied in scilab graphic functions drawaxis, legend and xset. The user can graph vectors and martrices, as with plot2d, but also timeseries. She can choose to use 2 y axes instead of one by setting the option 'yaxis=...'. She can choose the position of the x axis with the option 'yaxex=...'. She can control the color and style of the lines and the location of the legend.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/bdhenderic.dat');
+pltseries('delts(lm1)','delts(lp)')
+// the simplest use of pltseries: only the series (here ts) are entered.
+ 
+pltseries('ly+lp-lm1','rnet','title=money velocity and interest rate',...
+'yaxis=[1 2 ]','legend=[money velocity (lhs);interest rate (rhs)','color=[2 6]','styleg=3',...
+'window=3','bounds=[''1968q1'';''1985q4'']')
+// a complex use: the user chooses her legend, title, colors, style and ts bounds. The legend is drawn
+// in the lower left-hand corner. The first series is represented along the lhs x scale and the second one along the rhs
+// y axis.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2006
+        </refsection>
+</refentry>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="delsym" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:23-Juin-2018$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>delsym</refname>
+               <refpurpose>remove variables from a model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>model2=delsym(model,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>model</term> = a model typed list created by the function create_model</para></listitem>
+<listitem><para>*  <term>arg1,...,argn</term> =</para></listitem>
+<listitem><para>&#160;&#160;&#160;- a number of paired arguments with the following sequence: 'type of variable', vector_of_variables_names with 'type of variable' = 'endogenous', 'exogenous' or 'residuals'</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'notransf' if the user does not want to transform for estimation and simulation</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>model2</term> = the new model, with the new endogenous, exogenous and residuals and coresponding fields adjusted</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Remove variables in one of the possible lists (endogenous, exogenous or residuals).
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+
+global GROCERDIR;
+// load the model small:
+load(GROCERDIR+'\data\small.dat')
+// in model small, change to exoegnous the statute of variable tc_d5_s14e3:
+small2=changesym(small,'exogenous','tc_d5_s14e3')
+  
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2018
+        </refsection>
+</refentry>

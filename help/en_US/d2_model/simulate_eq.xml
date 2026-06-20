@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="simulate_eq" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:17-Avr.-2019$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>simulate_eq</refname>
+               <refpurpose>simulate an equation of a model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[sim_eq,model_eq]=simulate_eq(model,model_db,name_eq,name_endo,startdate,enddate,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>model</term> = a model typed list created by the function create_model</para></listitem>
+<listitem><para>*  <term>model_db</term> = a tsmat, containing values for endogenous, exogenous and residuals variables (perferably created by the function create_dbmod)</para></listitem>
+<listitem><para>*  <term>name_eq</term> = the name of the equation</para></listitem>
+<listitem><para>*  <term>name_endo</term> = the name of the variable in the equation that will be considered as endogenous</para></listitem>
+<listitem><para>*  <term>startdate</term> = a string, the starting date of the simulation</para></listitem>
+<listitem><para>*  <term>enddate</term> = a string, the end date of the simulation</para></listitem>
+<listitem><para>*  <term>arg1,...,argn</term> = optional arguments that should start with:</para></listitem>
+<listitem><para>&#160;&#160;&#160;- an interger, the lag used for the starting values of the simulation (0: current values in the database,1: the results of the simulation at the previous period)</para></listitem>
+<listitem><para>&#160;&#160;&#160;- a string, the starting date for the preservation of the data in the tsmat output</para></listitem>
+<listitem><para>&#160;&#160;&#160;- a string, the final date for the preservation of the data in the tsmat output</para></listitem>
+<listitem><para> and thereafter optional arguments, among which:</para></listitem>
+<listitem><para>&#160;&#160;&#160;-'meth=xx' where xx is either 'Newton' for the Newton method or 'Gauss-Seidel' for the Gauss-Seidel method</para></listitem>
+<listitem><para>&#160;&#160;&#160;-'ftol=xx' where xx is the value of the convergence criterion for the function absolute value (default: 1e-8)</para></listitem>
+<listitem><para>&#160;&#160;&#160;-'deltol=xx' where xx is the value of the convergence criterion for the absolute value of the variation of the endogenous variables (default: 1e-8)</para></listitem>
+<listitem><para>&#160;&#160;&#160;-'exp=xx' where xx is the value of the exponent applied to the number of endogenous variables in the heart to </para></listitem>
+<listitem><para>obtain the number of Gauss-Seidel simulations performed before switching back to the Newton method, when the Newton method hs not converged intially (default: 0.5)</para></listitem>
+
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term>sim_eq</term> = a tsmat, containing the results of the simulation, with:</para></listitem>
+<listitem><para>&#160;&#160;&#160;- result('meth') = 'model simulation'</para></listitem>
+<listitem><para>&#160;&#160;&#160;- result('model name') = a string, the name of the simulated model</para></listitem>
+<listitem><para>&#160;&#160;&#160;- result('model') = a model tlist, used for the simulation</para></listitem>
+<listitem><para>&#160;&#160;&#160;- result('simulation results') = a tsmat, the results of the simulation</para></listitem>
+<listitem><para>&#160;&#160;&#160;- result('function values') = a (N X 1) vector, collecting the errors terms of the equations</para></listitem>
+<listitem><para>* <term>model_eq</term> = the model created from the selected equation</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Simulates an equation of a model.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+global GROCERDIR;
+// load the model small:
+load(GROCERDIR+'\data\small.dat')
+// load the database small_db:
+load(GROCERDIR+'\data\small_db.dat')
+// simulate the 'td_p3m_d1' equation of model small on the period '1981q1' to
+// '2006q4', with variable td_p3m_d1 as an endogenous variable
+s=simulate_eq(small,small_db,'td_p3m_d1','td_p3m_d1','1981q1','2006q4')
+s_db=s('simulation results');
+// display the percentage error of the simulated and original database for variable
+// td_p3m_d1
+prt_tsmat('pcer',['1981q1';'2006q4'],list('small_db','s_db'),'td_p3m_d1')
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2019
+        </refsection>
+</refentry>

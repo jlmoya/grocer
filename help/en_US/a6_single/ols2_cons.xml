@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ols2_cons" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ols2_cons </refname>
+               <refpurpose>constrained ordinary least squares </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rols=ols2_cons(y,x,R,r)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> y </term> =   dependent variable vector (nobs x 1)</para></listitem>
+<listitem><para>*  <term> x </term> =   independent variables matrix (nobs x nvar)</para></listitem>
+<listitem><para>*  <term> R </term> =   a (nc x k) matrix</para></listitem>
+<listitem><para>*  <term> r </term> =   a (nc x 1) vector</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rols </term> =   a results tlist with</para></listitem>
+<listitem><para>&#160;  - rols('meth')  = 'constrained ols'</para></listitem>
+<listitem><para>&#160;  - rols('y')     = y data vector</para></listitem>
+<listitem><para>&#160;  - rols('x')     = x data matrix</para></listitem>
+<listitem><para>&#160;  - rols('nobs')  = # observations</para></listitem>
+<listitem><para>&#160;  - rols('nvar')  = # variables</para></listitem>
+<listitem><para>&#160;  - rols('beta')  = bhat</para></listitem>
+<listitem><para>&#160;  - rols('yhat')  = yhat</para></listitem>
+<listitem><para>&#160;  - rols('resid') = residuals</para></listitem>
+<listitem><para>&#160;  - rols('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;  - rols('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - rols('sigu')  = sum of squared residuals</para></listitem>
+<listitem><para>&#160;  - rols('ser')  = standard error of the regression</para></listitem>
+<listitem><para>&#160;  - rols('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;  - rols('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;  - rols('dw')    = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;  - rols('condindex') = multicolinearity cond index</para></listitem>
+<listitem><para>&#160;  - rols('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;  - rols('llike') = the log-likelihood</para></listitem>
+<listitem><para>&#160;  - rols('R') = the R matrix in Rb=r</para></listitem>
+<listitem><para>&#160;  - rols('r') = the r matrix in Rb=r</para></listitem>
+<listitem><para>&#160;  - rols('rsqr')  = rsquared</para></listitem>
+<listitem><para>&#160;  - rols('rbar')  = rbar-squared</para></listitem>
+<listitem><para>&#160;  - rols('f')    = F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;  - rols('pvaluef') = its significance level</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+The low-level function that provides the constrained ordinary least squares, when the constraint takes the form Rb=r. Endogenous variable y and r in 'Rb=r' must be given in a vector form and x and R in 'Rb=r' in a matrix form. The programm does not display the results, but they can be found in the output results tlist.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/macros/grocer/db/bdhenderic.dat') ; bounds('1964q3','1989q2') ;[y,junk,x]=explouniv('delts(lm1-lp)',['delts(lp)','delts(lagts(1,lm1))',...
+'delts(lagts(1,lp))','delts(lagts(1,ly))','rnet','lagts(1,lm1-lp-ly)','cte']);r=ols2_cons(y,x,[0 1 1 0 0 0 0 ; 0 1 0 1 0 0 0],[0;0])
+// The example shows the estimation of Hendry and Ericsson (1991) model by imposing the constraints on
+// delts(lagts(1,lm1)), 'delts(lagts(1,lp))' and 'delts(lagts(1,ly))' in order to obtain delts(lagts(1,lm1-ly-lp))
+// (see help for ols_cons). Estimation results are stored in tlist r.
+ 
+              ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2006
+        </refsection>
+</refentry>

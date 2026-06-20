@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="defaultcoef" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>defaultcoef</refname>
+               <refpurpose>finds default coefficients in equations </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>coef=defaultcoef(defaultname,speccarb,speccara,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> defaultname </term> =   a string (default prefix of the coefficients)</para></listitem>
+<listitem><para>*  <term> speccarb </term> =   the characters that must be before a coefficient to be sure that defaultname is not part of the name of another object</para></listitem>
+<listitem><para>*  <term> speccara </term> =   the characters that must be after a coefficient to be sure that defaultname is not part of the name of another object</para></listitem>
+<listitem><para>*  <term> argi </term> =   a string representing the text of an equation</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term> coef</term>  =  a (nx1) vector of coefficients names </para></listitem>
+           </varlistentry>
+          </variablelist>
+        </refsection>
+        <refsection>
+               <title>DESCRIPTION</title>
+Determines the list of default coefs names in a set of equations 
+        </refsection>
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+defaultcoef('co',['=' ; '+' ; '(' ; '-' ; '*'],['+' ; '-' ; '*' ; '/' ; ')'],'y=co1+co2*x1+(co3-co2)*x2')  //The coefficients are supposed prefixed by co, to be preceded by '=', '+', '(', '-' or '*' and followed by '+', '-', '*', '/', or ')';
+// the equation is 'y=co1+co2*x1+(co3-co2)*x2'.
+// and the result is:
+ 
+//!co1   !
+//!         !
+//!co2   !
+//!         !
+//!co3   !
+ 
+grocer_namecoef=defaultcoef('a',grocer_speccarb,grocer_speccara,varargin(:))// Example taken from function sur. 
+               ]]></programlisting>
+        </refsection>
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

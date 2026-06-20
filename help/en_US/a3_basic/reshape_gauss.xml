@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="reshape_gauss" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>reshape_gauss</refname>
+               <refpurpose>mimics gauss function reshape </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[B]=reshape_gauss(A,m,n)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> matin </term> =    a (pxq) matrix</para></listitem>
+<listitem><para>*  <term> n </term> =    # of rows of the destination matrix</para></listitem>
+<listitem><para>*  <term> m </term> =    # of cols of the destination matrix</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> matout </term> =    the (nxm) destinaion matrix</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Function that mimics gauss function reshape_gauss, that replicates and tiles an array.
+Note that:
+1) function reshape exists in grocer, but it mimics troll, and not gauss, function reshape, that is performs the transformation of a vector into a ts
+2) is equivalent to scilab function matrix only when the destination matrix has the same number of elements that the original one 
+
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+A = 1:4;B=reshape_gauss(A,3,5)// returns:
+//B  =//!   1.    2.    3.    4.    1. !//!   2.    3.    4.    1.    2. !//!   3.    4.    1.    2.    3. !  
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2004
+        </refsection>
+</refentry>

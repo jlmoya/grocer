@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="iv1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>iv1 </refname>
+               <refpurpose>instrumental variables </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rtsls]=iv1(y,y1,x1,xall)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> y </term> =    dependent variable vector (nobs x 1)</para></listitem>
+<listitem><para>*  <term> y1 </term> =    endogenous variables matrix (nobs x g) for this equation</para></listitem>
+<listitem><para>*  <term> xexog  </term> =    exogenous variables matrix for this equation</para></listitem>
+<listitem><para>*  <term> xall   </term> =    instruments for variables y1</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rtsls </term> =    a structure tlist with</para></listitem>
+<listitem><para>&#160;  - rtsls ('meth')  = 'tsls'</para></listitem>
+<listitem><para>&#160;  - rtsls ('nobs')  = nobs</para></listitem>
+<listitem><para>&#160;  - rtsls ('nendog') = # of endogenous</para></listitem>
+<listitem><para>&#160;  - rtsls ('nexog')  = # of exogenous</para></listitem>
+<listitem><para>&#160;  - rtsls ('nvar')   = # of endogenous + # of exogenous</para></listitem>
+<listitem><para>&#160;  - rtsls ('y')      = y data vector</para></listitem>
+<listitem><para>&#160;  - rtsls ('beta')  = bhat estimates</para></listitem>
+<listitem><para>&#160;  - rtsls ('tstat') = t-statistics</para></listitem>
+<listitem><para>&#160;  - rtsls ('yhat')  = yhat predicted values</para></listitem>
+<listitem><para>&#160;  - rtsls ('resid') = residuals</para></listitem>
+<listitem><para>&#160;  - rtsls ('residtsls') = residuals calculated with the endogenous variables replaced by their regression from first stage estimation</para></listitem>
+<listitem><para>&#160;  - rtsls ('sigu')  = e'*e</para></listitem>
+<listitem><para>&#160;  - rtsls ('sige')  = e'*e/(n-k)</para></listitem>
+<listitem><para>&#160;  - rtsls ('dw')    = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;  - rtsls ('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;  - rtsls ('rsqr')  = rsquared</para></listitem>
+<listitem><para>&#160;  - rtsls ('rbar')  = rbar-squared</para></listitem>
+<listitem><para>&#160;  - rtsls ('f')    = F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;  - rtsls ('pvaluef') = its significance level</para></listitem>
+<listitem><para>&#160;  - rtsls ('grsqr')  = generalized rsquared (that is which takes into account the endogeneity of some explicative variables)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Produces instrumental variables estimation when all variables are in vector or matrix form.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+x1 = rand(200,1,'n');
+x2 = rand(200,1,'n');
+ 
+y1 = zeros(200,1);
+y2 = zeros(200,1);
+evec = rand(200,1,'n');
+//
+// create simultaneously determined variables y1,y2
+y1 = 1+x1+evec;
+y2 = 1+y1+x2+evec;
+ 
+riv=iv1(y2,y1,[ones(200,1) x2],[ones(200,1) x1 x2])
+// provides and stores into a tlist the results of the estimation of the regression of y2 onto y1, x2 and a constant, using x1, x2 and the constant as intruments
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

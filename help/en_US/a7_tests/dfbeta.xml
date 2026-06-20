@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="dfbeta" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>dfbeta </refname>
+               <refpurpose>BKW influential observation diagnostics </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[results]=dfbeta(y, arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> y </term> =   either an ols results tlist or a a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> argi </term> =   an argument which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para> or, and only if y is not an ols results tlist:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx1)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nx1)&#160;real&#160;vector&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> results </term> =   a results tlist with</para></listitem>
+<listitem><para>&#160;  - results('meth')   = 'dfbeta'</para></listitem>
+<listitem><para>&#160;  - results('nobs')   = # of observations</para></listitem>
+<listitem><para>&#160;  - results('nvar')   = # of variables in x-matrix</para></listitem>
+<listitem><para>&#160;  - results('dfbeta') = df betas</para></listitem>
+<listitem><para>&#160;  - results('dffits') = df fits</para></listitem>
+<listitem><para>&#160;  - results('hatdi')  = hat-matrix diagonals</para></listitem>
+<listitem><para>&#160;  - results('stud')   = studentized residuals</para></listitem>
+<listitem><para>&#160;  - result('namex') = name of the x variables</para></listitem>
+<listitem><para>&#160;  - result('namey') = name of the y variable</para></listitem>
+<listitem><para>&#160;  - result('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;  - result('dropna') = boolean indicating if NAs have been droped</para></listitem>
+<listitem><para>&#160;  - result('nonna') = vector indicating position of non-NAs (if the option 'dropna' was active)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ Computes BKW (influential observation diagnostics) dfbetas, dffits, hat-matrix, studentized residuals. Plots the corresponding results.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+exo = grand(100,6,'nor',0,1);
+exo(:,1) = ones(100,1);
+exo(:,3) = exo(:,2) + grand(100,1,'nor',0,1)*0.05;
+ 
+bet = ones(6,1);
+ 
+endo = exo*bet + grand(100,1,'nor',0,1);
+ 
+// now add a few outliers
+endo(50,1) = 10.0;
+endo(70,1) = -10.0;
+ 
+result = dfbeta('endo','exo');
+// This example is taken from function dfbeta_d. The example provides dfbetas, dffits,
+// hat-matrix, studentized residuals for a regression whose endogenous variable is y
+// and exogenous variables is a matrix (as in dfbeta_d), a vector or a ts x.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

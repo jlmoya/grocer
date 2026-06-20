@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="johansen_eigen" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>johansen_eigen </refname>
+               <refpurpose>calculate eigen values of a johansen procdure </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[flag,lambda,dt,lr1,lr2,pi,s00]=johansen_eigen(dx,exo_st,exo_lt)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> dx </term> =   a a (nobs x ny) vector of differentiated endogenous variables</para></listitem>
+<listitem><para>*  <term> exo_st </term> =   a (nobs x (ny*k+nexo_st) vector of exogenous variables in the short term dynamic (  =   the lagged differentiated endogenous variables + the exogenous variables outside the cointegration vectors) </para></listitem>
+<listitem><para>*  <term> exo_lt </term> =   a (nobs x (ny+nexo_lt) vector of lagged endogenous variables (in level) and exogenous variables incorporated to the cointegration vectors</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> flag </term> =   a flag ('Ok'/'not OK') indicating whether the problem is well specified</para></listitem>
+<listitem><para>*  <term> lambda </term> =   a (ny x 1) vector of eigenvalues of the reduced rank regression</para></listitem>
+<listitem><para>*  <term> dt </term> =   a (nobs x ny) matrix, each column being a cointegration vector</para></listitem>
+<listitem><para>*  <term> lr1 </term> =   a (ny x 1) vector of trace tests statistics</para></listitem>
+<listitem><para>*  <term> lr2 </term> =   a (ny x 1) vector of lambda max</para></listitem>
+<listitem><para>*  <term> pi </term> =   a ((ny+nexo_lt) x ny) matrix of combined effects of the variables in the cointegration relations on the differentiated endogenous variables</para></listitem>
+<listitem><para>*  <term> s00 </term> =   a (ny x ny) matrix, equal to the variance of the residuals of the regression of dx on exo_st</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Calculate eigenvalues of a johansen procedure.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+dy = tdiff(y,1);
+exo=trimr([mlag(dy,grocer_k) exo_st],grocer_k+1,0)
+lagy = trimr([lag(y,1) exo_lt],grocer_k+1,0)
+dy=trimr(dy,grocer_k+1,0)
+[flag,a,evec,lr1,lr2,pi]=johansen_eigen(dy,exo,lagy)
+// Example taken from function johansen. Starting from a matrix y of variables in level,
+// a matrix of short run exogenous variables exo_st and a matrix of long run exogenous variables exo_lt,
+// builds the lagged matrix dy, the matrix of the short run dynamic exo_st and the matrix of
+// the long run cointegration space exo_lt and calculates the corresponding cointegration eigenvalues and eigenvectors.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2009
+        </refsection>
+</refentry>

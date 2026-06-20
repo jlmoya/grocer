@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="lad1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:25-Mars-2019$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>lad1</refname>
+               <refpurpose>Least absolute deviation method </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rlad]=lad1(y,x,crit,maxit)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>y</term> = a (n x 1) vector</para></listitem>
+<listitem><para>*  <term>x</term> = a (n x k) vector</para></listitem>
+<listitem><para>*  <term>crit</term> = a scalar, the convergence criterion (for example 1e-5' ; default = 1e-15)</para></listitem>
+<listitem><para>*  <term>maxit</term> = a scalar, the maximum # of iterations (for example 'itmax=10'; default=500)</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>rlad</term> = a tlist with</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rlad('meth') = 'lad'</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('y') = y data vector</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('x') = x data matrix</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('nobs') = nobs</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('nvar') = nvars</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('b_new') = bhat</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('yhat') = yhat</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('resid') = residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('vcovar') = estimated variance-covariance matrix of b_new</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('sige') = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('sigu') = estimated sum of squared residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('ser') = standard error of the regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('pvalue') = pvalue of the b_news</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('dw') = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('condindex') = multicolinearity cond index</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('prescte') = boolean indicating if the R&#170; can be calculated</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('iter') = # of iterations</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('conv') = convergence max(abs(bnew-bold))</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rlad('weight') = weight used to do the last ols regression</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs least absolute deviations regression.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+b = ones(5,1);
+xmat = grand(100,4,'nor',0,1);
+exo = [ones(100,1),xmat];
+// create leptokurtic errors:
+evec = rand(100,1,'n').^4;
+endo = exo*b+evec;
+result = lad1(endo,exo,sqrt(%eps),100);
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2019
+        </refsection>
+</refentry>

@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="rolreg" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>rolreg </refname>
+               <refpurpose>Compute rolling or recursive out-of-sample prevision </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rreg = rolreg(namey0,,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey0 </term> =    a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> argi </term> =    arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx1)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nxk)&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nxk)&#160;real&#160;vector&#160;or&#160;matrix&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;list&#160;of&#160;such&#160;elemnts</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'simu&#160;=''roll'''&#160;or&#160;''recu'''&#160;:&#160;if&#160;the&#160;user&#160;want&#160;to&#160;use&#160;a&#160;rolling&#160;or&#160;recursice&#160;window&#160;(default=recursive)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'hstep&#160;=&#160;xx':&#160;number&#160;of&#160;out-of-sample&#160;forecast&#160;which&#160;determine&#160;frequence&#160;of&#160;restimation&#160;of&#160;the&#160;model)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'mul&#160;=&#160;1'&#160;:&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;keep&#160;forecast&#160;from&#160;1&#160;to&#160;hstep&#160;(otherwise&#160;the&#160;hstep&#160;forecast&#160;is&#160;conserved)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'dates&#160;=&#160;[''xx'',''yy'']':&#160;&#160;end&#160;of&#160;first&#160;estimation&#160;and&#160;end&#160;of&#160;sample</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'cte'&#160;if&#160;the&#160;user&#160;want&#160;a&#160;constant&#160;in&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'meth=nwest'&#160;/&#160;'ols'&#160;estimation</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'win&#160;=&#160;xx"&#160;truncation&#160;window&#160;for&#160;newey-west&#160;estimation</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'xsmpl=1'&#160;allow&#160;program&#160;to&#160;extand&#160;the&#160;last&#160;hstep-ahead&#160;forecasts&#160;beyond&#160;the&#160;last&#160;date&#160;of&#160;endogenous&#160;variable&#160;(provided&#160;exogenous&#160;data&#160;are&#160;available,&#160;the&#160;program&#160;tests&#160;it)</para></listitem>
+<listitem><para>*  <term> prt </term> =    %f if the user does not want to print the results (optional)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rreg </term> =    a results tlist with</para></listitem>
+<listitem><para>&#160;  - rreg('meth')  = 'rolling' / 'recursive'</para></listitem>
+<listitem><para>&#160;  - rreg('beta')  =  rolling/recursive betas</para></listitem>
+<listitem><para>&#160;  - rreg('tstat')  = rolling/recursive tstats</para></listitem>
+<listitem><para>&#160;  - rreg('pvalue') = rolling/recursive pvalue of the betas</para></listitem>
+<listitem><para>&#160;  - rreg('rsqr')  =  rolling/recursive rsquared</para></listitem>
+<listitem><para>&#160;  - rreg('rbar')  =  rolling/recursiverbar-squared</para></listitem>
+<listitem><para>&#160;  - rreg('yhat')  =  out-of-sample forecasts</para></listitem>
+<listitem><para>&#160;  - rreg('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;  - rreg('bounds')  = begin-end of first estimation and end of sample</para></listitem>
+<listitem><para>&#160;  - rreg('nfor') = vector of number of realized forecast and number of desired forecast</para></listitem>
+ 
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes rolling or recursive estimation and makes out-of-sample forecasts
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+//Examples taken from rolreg_d() :
+global GROCERDIR ;
+load(GROCERDIR+'\data\industrial.dat')
+bounds()
+ri = rolreg('delts(log(y))','ypast','delts(yfut)','cte','dates=[''1992q1'' ''2003q4'']','hstep=4','mul=1','simu=''recu''')
+ //      Out-of-sample forecasts 4 quarters ahead, forecasts from 1 to 4 quater are stored, with recursive estimation
+ 
+ ri = rolreg('delts(log(y))','ypast','delts(yfut)','cte','dates=[''1992q1'' ''2003q4'']','hstep=1','simu=''roll''')
+//     Out-of-sample forecasts 1 quarter ahead with rolling estimation
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2006
+        </refsection>
+</refentry>

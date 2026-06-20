@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="bma_g" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>bma_g </refname>
+               <refpurpose>Bayesian model averaging </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rbma_g = bma_g(namey,ndraws,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =    a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> ndraws </term> =    # of draws</para></listitem>
+<listitem><para>*  <term> argi </term> =    arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx1)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nxk)&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nxk)&#160;real&#160;vector&#160;or&#160;matrix&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;list&#160;of&#160;such&#160;elements</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'nvmax=xx'&#160;maximum&#160;number&#160;of&#160;variable&#160;allowed&#160;in&#160;each&#160;model</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'burnin=xx'&#160;number&#160;of&#160;burn-in&#160;MCMC&#160;simulation</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'g&#160;=XX'&#160;value&#160;of&#160;g-prior&#160;(default&#160;=&#160;1/max(n,k^2))</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'mcmc&#160;=&#160;''mc3''&#160;or&#160;''jump'''&#160;type&#160;of&#160;MCMC&#160;algorithm&#160;(MC3&#160;or&#160;reversible&#160;jump)&#160;must&#160;be&#160;in&#160;quote</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'nvmax=xx'&#160;maximum&#160;number&#160;of&#160;variable&#160;allowed&#160;in&#160;each&#160;model</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rbma_g </term> =    a results tlist with</para></listitem>
+<listitem><para>&#160;  -rbma_g('meth')  = 'bma g-prior'</para></listitem>
+<listitem><para>&#160;  -rbma_g('nmod')  = # of models visited during sampling</para></listitem>
+<listitem><para>&#160;  -rbma_g('beta')  = bhat averaged over all models</para></listitem>
+<listitem><para>&#160;  -rbma_g('mprob') = posterior prob of each model</para></listitem>
+<listitem><para>&#160;  -rbma_g('vprob') = posterior prob of each variable</para></listitem>
+<listitem><para>&#160;  -rbma_g('model') = indicator variables for each model (nmod x k)</para></listitem>
+<listitem><para>&#160;  -rbma_g('yhat')  = yhat averaged over all models</para></listitem>
+<listitem><para>&#160;  -rbma_g('resid') = residuals based on yhat averaged over models</para></listitem>
+<listitem><para>&#160;  -rbma_g('sige')  = averaged over all models</para></listitem>
+<listitem><para>&#160;  -rbma_g('nobs')  = nobs</para></listitem>
+<listitem><para>&#160;  -rbma_g('nvar')  = # of exogenous</para></listitem>
+<listitem><para>&#160;  -rbma_g('y')     = y data vector</para></listitem>
+<listitem><para>&#160;  -rbma_g('x')     = y data vector</para></listitem>
+<listitem><para>&#160;  -rbma_g('visit') = visits to each model during sampling (nmod x 1)</para></listitem>
+<listitem><para>&#160;  -rbma_g('time')  = time taken for MCMC sampling</para></listitem>
+<listitem><para>&#160;  -rbma_g('ndraw') = # of MCMC sampling draws</para></listitem>
+<listitem><para>&#160;  -rbma_g('burnin')= # of burn-in MCMC simulation</para></listitem>
+<listitem><para>&#160;  -rbma_g('gprior')= value of g-prior</para></listitem>
+<listitem><para>&#160;  -rbma_g('namey') = name of the y variable</para></listitem>
+<listitem><para>&#160;  -rbma_g('namex') = name of the x variables</para></listitem>
+<listitem><para>&#160;  -rbma_g('bounds')= if there is a timeseries in the regression, the bounds of the regression</para></listitem>
+<listitem><para>&#160;  -rbma_g('mcmc')  = type of MCMC algorithm</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes bayesian model averaging under g-prior with selection of g-prior as proposed by Fernadez et alii (2001) g = 1/max(n,k^2)
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/crime.dat')
+ 
+// take log of data
+listn = ['crime';'m';'ed';'po1';'po2';'lf';'mf';'pop';'nw';'u1';'u2';'gdp';'ineq';'prob';'time'] ;
+for i =1:size(listn,1)
+	execstr('l'+listn(i)+' = log('+listn(i)+')')
+end
+ 
+// BMA estimation
+rbma = bma_g('lcrime',30000,'lm','so','led','lpo1','lpo2','llf','lmf','lpop','lnw','lu1','lu2',...
+'lgdp','lineq','lprob','ltime','burnin=10000','mcmc=''mc3''');
+ 
+// Example taken from bma_d()
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2006
+        </refsection>
+</refentry>

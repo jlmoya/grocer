@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="qreg" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:15-Aug-2011$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>qreg</refname>
+               <refpurpose>quantile regression estimation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res = qreg(namey,tau,varargin);</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =   a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> tau </term> =   a (q x 1) vector, the values of the quantiles</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =   arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nxp)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nxp)&#160;real&#160;vector&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'algo=xxx'&#160;where&#160;xxx&#160;is&#160;the&#160;alogrithm&#160;used&#160;to&#160;find&#160;the&#160;solution&#160;('linpro'&#160;or&#160;'qreg_solvelp1')</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'weight=xxx'&#160;where&#160;xxx&#160;is&#160;a&#160;vector&#160;of&#160;the&#160;same&#160;size&#160;as&#160;the&#160;endoegnous&#160;variable,&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;weight&#160;differently&#160;the&#160;observations&#160;(default:&#160;equal&#160;weights)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'maxit=xxx'&#160;where&#160;xxx&#160;is&#160;the&#160;maximum&#160;number&#160;of&#160;iterations&#160;allowed&#160;(default:&#160;none)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'sigma=xxx'&#160;where&#160;xxx&#160;is&#160;a&#160;scalar,&#160;&lt;&#160;1,&#160;the&#160;scaling&#160;factor&#160;determines&#160;how&#160;close&#160;the&#160;corrector&#160;step&#160;is&#160;allowed&#160;to&#160;come&#160;to&#160;the&#160;boundary&#160;of&#160;the&#160;constraint&#160;set&#160;in&#160;the&#160;interior&#160;point&#160;method</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'eps=xxx'&#160;where&#160;xxx&#160;is&#160;the&#160;tolerance&#160;value&#160;for&#160;convergence&#160;(default:&#160;sqrt(%eps))</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'big=xxx'&#160;where&#160;xxx&#160;is&#160;the&#160;number&#160;used&#160;to&#160;remove&#160;the&#160;residuals&#160;of&#160;the&#160;wrong&#160;sign&#160;(default:&#160;1E20)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> res </term> =   a results tlist with</para></listitem>
+<listitem><para>&#160;  - res('meth')  = 'quantile'</para></listitem>
+<listitem><para>&#160;  - res('y')     = y data vector</para></listitem>
+<listitem><para>&#160;  - res('x')     = x data matrix</para></listitem>
+<listitem><para>&#160;  - res('tau') = vectores of quantiles to be estimated</para></listitem>
+<listitem><para>&#160;  - res('weights') =   0 or a (nobs x 1) vector of observations weights</para></listitem>
+<listitem><para>&#160;  - res('nobs')  = # observations</para></listitem>
+<listitem><para>&#160;  - res('nvar')  = # variables</para></listitem>
+<listitem><para>&#160;  - res('beta')  = (nvar x q) matrix of quantile estimations</para></listitem>
+<listitem><para>&#160;  - res('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;  - res('namey') = name of the y variable</para></listitem>
+<listitem><para>&#160;  - res('namex') = name of the x variables</para></listitem>
+<listitem><para>&#160;  - res('dropna') = boolean indicating if NAs have been dropped</para></listitem>
+<listitem><para>&#160;  - res('bounds') = if there is a timeseries in the regression, the bounds of the regression</para></listitem>
+<listitem><para>&#160;  - res('nonna') = vector indicating position of non-NAs</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs quantile regression.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data\qreg_d.dat')
+ 
+france_clim_t=m2q((france_clim_c+lagts(france_clim_c)+lagts(2,france_clim_c))/3,2)
+france_clim_nl=delts(france_clim_t)*abs(delts(france_clim_t))
+ 
+rqreg=qreg('growthr(FRA_GDP)',[0.05;0.95],'const','france_clim_t','france_clim_nl','algo=linpro')
+// Performs quantile regression on a "bridge" model relating French GDP growth to the French business climate taken from business surveys.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2011
+        </refsection>
+</refentry>

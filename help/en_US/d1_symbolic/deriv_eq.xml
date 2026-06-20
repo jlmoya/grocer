@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="deriv_eq" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:31-Août-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>deriv_eq</refname>
+               <refpurpose>derivate an equation decomposed in a tlist </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[eqsimpl,reseq_ds]=deriv_eq(reseq,vari)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>reseq</term> =    an 'equation' tlist, the result of the breaking down of an equation into elementary bricks</para></listitem>
+<listitem><para>*  <term>vari</term> =    a string, the name of a variable</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>eqsimpl</term>  =    the resulting symbolic derivative</para></listitem>
+<listitem><para>*  <term>reseq_ds</term>  =    the corresponding tlist collecting the structure of the derivative</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Provides the derivative of a function with respect to a variable x.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+eq='a*x^2+b*sin(0.5*x)';
+an_eq=analyse_eq(eq);
+[eqd,reseq_d]=deriv_eq(an_eq,'x');
+eqd
+eqd2=deriv_eq(reseq_d,'x')
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2012
+        </refsection>
+</refentry>

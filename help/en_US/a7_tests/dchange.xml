@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="dchange" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>dchange </refname>
+               <refpurpose>Test for directional accuracy </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rdb = dchange(y,yb,prt)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> y </term> =   vector or ts of observable or benchmark serie</para></listitem>
+<listitem><para>*  <term> yb </term> =   vector or ts of competiting or forecast serie </para></listitem>
+<listitem><para>*  <term> prt </term> =   %f if the user does not want to print the results (optional)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rdb </term> =   a results tlist with</para></listitem>
+<listitem><para>&#160;  - rchange('meth')   = 'direct. change'</para></listitem>
+<listitem><para>&#160;  - rchange('y')      = benchmark or observable serie s</para></listitem>
+<listitem><para>&#160;  - rchange('yc')     = competiting serie or forecasted series</para></listitem>
+<listitem><para>&#160;  - rchange('namey')  = name of benchmark or observable series</para></listitem>
+<listitem><para>&#160;  - rchange('nameyc') = name of competiting series or forecasted series</para></listitem>
+<listitem><para>&#160;  - rchange('P')      = proportion of time the sign of the observable value is correctly forecasted</para></listitem>
+<listitem><para>&#160;  - rchange('Pstar') = concordance index</para></listitem>
+<listitem><para>&#160;  - rchange('pvalue')= pvalue of the statistic</para></listitem>
+ 
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+A function that computes Pesaran and Timmerman nonparametric test for directional accuracy.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'\data\BusinessSurvey.dat');
+ 
+// performs first differences
+dpp = delts(pp);
+dpf =delts(fp);
+bounds()
+rd = dchange('dpp','lagts(3,dpf)');
+// Example taken from function dchange(): tests in french business survey if changes in
+// "level of future own production" are a good predictor of that of "level of past own production".
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2005
+        </refsection>
+</refentry>

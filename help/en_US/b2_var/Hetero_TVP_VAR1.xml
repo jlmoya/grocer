@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="Hetero_TVP_VAR1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:05-Sept.-2015$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>Hetero_TVP_VAR1</refname>
+               <refpurpose>Time varying structural VAR </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rvar]=Hetero_TVP_VAR1(nlag,Y,Z,nrep,nburn,prior,libsave,nrep_max)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> nlag </term> =    a scalar, the # of lags of the VAR</para></listitem>
+<listitem><para>*  <term> Y </term> =    a (T x M) matrix of endogenous variables</para></listitem>
+<listitem><para>*  <term> Z </term> =    a ((T-lnag)*M x nZ) matrix of exogenous variables</para></listitem>
+<listitem><para>*  <term> nrep </term> =    # of replications taken into account</para></listitem>
+<listitem><para>*  <term> nburn </term> =    # of replications not taken into account ("burned": the total # of draws is therefore nrep+ nburn)</para></listitem>
+<listitem><para>*  <term> prior </term> =    a prior tlist</para></listitem>
+<listitem><para>*  <term> libsave </term> =    name of the library where the resultys will be stored</para></listitem>
+<listitem><para>*  <term> nrep_max </term> =    maximum number of iterations for a storing file</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =    optional arguments that can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'exo=list(exo1,...,&#160;exon)&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;add&#160;exogenous&#160;variables&#160;to&#160;the&#160;VAR,&#160;exoi&#160;then&#160;collects&#160;the&#160;exogenous&#160;variables&#160;of&#160;equation&#160;i</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'nocte'&#160;if&#160;the&#160;user&#160;does&#160;not&#160;want&#160;constants&#160;in&#160;the&#160;VAR</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;drop&#160;NA&#160;values&#160;from&#160;the&#160;data&#160;instead&#160;of&#160;generating&#160;an&#160;error</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  rvar</term>  =    a results tlist with:</para></listitem>
+<listitem><para>&#160;   - rvar('meth') = 'heteroskedastic tvp var'</para></listitem>
+<listitem><para>&#160;   - rvar('y') = matrix, the endogenous variables</para></listitem>
+<listitem><para>&#160;   - rvar('x') = matrix, the exogenous variables</para></listitem>
+<listitem><para>&#160;   - rvar('nobs') = # of observations used for estimation</para></listitem>
+<listitem><para>&#160;   - rvar('nendo') = # of endogenous variables</para></listitem>
+<listitem><para>&#160;   - rvar('nrep') = # of replications taken into account for the calculation of psoterior densities</para></listitem>
+<listitem><para>&#160;   - rvar('nburn') = # of replications not taken into account for the calculation of psoterior densities</para></listitem>
+<listitem><para>&#160;   - rvar('nlag') = # of lags in the VAR</para></listitem>
+<listitem><para>&#160;   - rvar('A_0_prmean') = mean of the prior for the A(0) coefficients</para></listitem>
+<listitem><para>&#160;   - rvar('A_0_prvar') = variance of the prior for the A(0) coefficients</para></listitem>
+<listitem><para>&#160;   - rvar('B_0_prmean') = mean of the prior for the B(0) coefficients</para></listitem>
+<listitem><para>&#160;   - rvar('B_0_prvar') = variance of the prior for the B(0) coefficients</para></listitem>
+<listitem><para>&#160;   - rvar('logsigma_prmean') = mean of the prior for the log of the Sigma(t) variances</para></listitem>
+<listitem><para>&#160;   - rvar('logsigma_prvar') = variance of the tvp prior for the log of the Sigma(t) variances</para></listitem>
+<listitem><para>&#160;   - rvar('Q_prmean') = mean of the prior for the Q variance matrix</para></listitem>
+<listitem><para>&#160;   - rvar('Q_prvar') = variance of the prior for the Q variance matrix</para></listitem>
+<listitem><para>&#160;   - rvar('W_prmean') = mean of the prior for the W variance matrix</para></listitem>
+<listitem><para>&#160;   - rvar('W_prvar') = variance of the prior for the W variance matrix</para></listitem>
+<listitem><para>&#160;   - rvar('S_prmean') = mean of the prior for the S variance matrix</para></listitem>
+<listitem><para>&#160;   - rvar('S_prvar') = variance of tvp prior for the S variance matrix</para></listitem>
+<listitem><para>&#160;   - rvar('Bt_postmean') = estimated matrix of the B(t) coefficients (averaged over the replications)</para></listitem>
+<listitem><para>&#160;   - rvar('At_postmean') = estimated matrix of the A(t) coefficients (averaged over the replications)</para></listitem>
+<listitem><para>&#160;   - rvar('Sigt_postmean') = estimated matrix of the Sigma(t) coefficients (averaged over the replications)</para></listitem>
+<listitem><para>&#160;   - rvar('Qmean') = estimated value of the Q variance matrix (averaged over the replications)</para></listitem>
+<listitem><para>&#160;   - rvar('Smean') = estimated value of the S variance matrix (averaged over the replications)</para></listitem>
+<listitem><para>&#160;   - rvar('Wmean') = estimated value of the W variance matrix (averaged over the replications)</para></listitem>
+<listitem><para>&#160;   - rvar('Sigmamean') = estimated value of the Sigma(t) variance matrices (averaged over the replications)</para></listitem>
+<listitem><para>&#160;   - rvar('.dat Bt') = a string vector, the names of the databases where all B(t) draws are stored</para></listitem>
+<listitem><para>&#160;   - rvar('.dat At') = a string vector, the names of the databases where all A(t) draws are stored</para></listitem>
+<listitem><para>&#160;   - rvar('.dat Sigmat') = a string vector, the names of the databases where all draws of Sigmat are stored</para></listitem>
+<listitem><para>&#160;   - rvar('.dat Htstd') = a string vector, the names of the databases where the estimated variance of the shocks are stored</para></listitem>
+<listitem><para>&#160;   - rvar('.dat Q') = a string vector, the names of the databases where all Q draws are stored</para></listitem>
+<listitem><para>&#160;   - rvar('.dat S') = a string vector, the names of the databases where all S draws are stored</para></listitem>
+<listitem><para>&#160;   - rvar('.dat W') = a string vector, the names of the databases where all W draws are stored</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+TVP-VAR Time varying structural VAR with heteroskedastic covariance matrix. This a low-level function that works only with matrices.
+The user should prefer the high-level function Hetero_TVP_VAR.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+stacksize('max')
+load(GROCERDIR+'\data\primiceri.dat')
+mkdir(GROCERDIR+'\temp')
+nlag=2
+bounds('1953q3','1963q2')
+prior=tvpvar_prior0(nlag,4,4,0.01,0.01,0.1,['Inflation';'Unemployment';'rate_3m'])
+bounds('1963q1','2001q3')// caution: bounds are lagged by 2 periods wr the estimation period because of the lags in the VAR
+y=explone(['Inflation';'Unemployment';'rate_3m'])
+z=ones(153,1) .*. eye(3,3)
+res=Hetero_TVP_VAR1(nlag,y,z,10000,2000,prior,path,2000)
+ 
+// This example reproduces the results of the paper by Primeceri (2005), slightly modified
+// by the corridendum by Del Negro and Primiceri (2014): the varaibles are United states inflation
+// inflation, unemployment and 3 months interest rates, collected in GROCERDIR+'\data\primiceri.dat')
+// database. The number of lags is set to 2, number of useful draws to 10000, number of discarded
+// drawss to 2000 and number of draws per database to 2000. Databases are stored into folder
+// GROCERDIR+'\temp'. Priors have been set in function tvpvar_prior0, with dilatation factors
+// applied to the ols estimates of A0 and B0 over the training sample '1953q3' to '1963q2' set to
+// 4, the the dilatation factors applied, squared, to (n+1) for the inverse Wishart prior of W, Q and
+// S set 0.01, 0.01 and 0.1 respectively
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2015
+        </refsection>
+</refentry>

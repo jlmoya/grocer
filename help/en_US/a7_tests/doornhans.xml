@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="doornhans" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>doornhans </refname>
+               <refpurpose>Doornik and Hansen normality test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rdoornhans]=doornhans(res,np)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> res </term> =    a result tlist</para></listitem>
+<listitem><para>*  <term> np</term>  =    the string 'noprint' if the user doesn't want to print the results of the test</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rdoornhans</term>  =    a typed list with :</para></listitem>
+<listitem><para>&#160;  - rdoornhans('meth') = 'doornhans'</para></listitem>
+<listitem><para>&#160;  - rdoornhans('r1st') = results of the first step regression (allows the "tracability" of the results)</para></listitem>
+<listitem><para>&#160;  - rdoornhans('chistat') = the value of the chi2 statistics</para></listitem>
+<listitem><para>&#160;  - rdoornhans('chi_pvalue') = the corresponding p-value</para></listitem>
+<listitem><para>&#160;  - rdoornhans('chi_df') = the corresponding degrees of freedom</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes "omnibus" normality test (see J. Doornik and H. Hansen (1994) : "A practical test for univariate and multivariate normality", Discussion Paper, Nuffield College). Results are stored in a tlist and displayed on screen if the user has not given as second argument 'noprint'.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+bounds('1964q3','1989q2');
+rols=ols('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet', 'lagts(1,lm1-lp-ly)', 'const');
+//performs ols for Hendry and Ericsson (1991) equation 6
+doornhans(rols)
+// Example is taken from hendryericsson.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

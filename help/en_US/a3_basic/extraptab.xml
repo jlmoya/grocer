@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="extraptab" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>extraptab</refname>
+               <refpurpose>extrapolation of statistical tables </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[critical]=extraptab(tab,n)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> tab </term> =    a (p x q) table where:</para></listitem>
+<listitem><para>&#160;&#160;. the first row is not used (it is supposed to be filled with the size levels)</para></listitem>
+<listitem><para>&#160;&#160;. each row has the form [n v1 ... vn] where n is a # of observations (filled from the lowest to the highest in col 1, starting from row 2, since row 1 is not used)</para></listitem>
+<listitem><para>*  <term> n </term> =    a scalar (the # of observations for which critical are calculated by extrapolation)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term> critical </term> =    a (1 x q) vector of critical values for all sizes present in the table tab </para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+From a table (implicitly of stats...) filled for some values for the # of observations, calculates the corresponding values for n observations.
+
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+critical1=extraptab(tab1,T)
+//(see schmiphi_tab)
+
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

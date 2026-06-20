@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="prtauto" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>prtauto </refname>
+               <refpurpose>prints automatic() results </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>prtauto(results,lnp,out)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> results </term> =    a tlist provided by function automatic</para></listitem>
+<listitem><para>*  <term> lnp </term> =    'prt  =   option_1,..., option_b' where option_i is one among the following options:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'all':&#160;all&#160;results&#160;are&#160;printed</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'initial':&#160;initial&#160;model</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'st0_mod':&#160;stage&#160;0&#160;model&#160;printed</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'st1_mod':&#160;stage&#160;1&#160;models&#160;printed</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'st1_union':&#160;stage&#160;1&#160;union&#160;model&#160;printed</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'st2_mod':&#160;stage&#160;2&#160;models&#160;printed</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'st2_union':&#160;stage&#160;2&#160;union&#160;models&#160;printed</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'final':&#160;final&#160;model&#160;printed</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'st1_path':&#160;paths&#160;of&#160;stage&#160;1&#160;models&#160;printed</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'st2_path':&#160;paths&#160;of&#160;stage&#160;2&#160;model&#160;printed</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'path':&#160;stages&#160;1&#160;and&#160;2&#160;paths&#160;printed</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'test_final':&#160;specification&#160;tests&#160;for&#160;final&#160;model&#160;printed</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'test_inter':&#160;specification&#160;tests&#160;for&#160;all&#160;intermediate&#160;models&#160;printed</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'test'&#160;:&#160;specification&#160;tests&#160;for&#160;all&#160;models&#160;printed</para></listitem>
+ 
+<listitem><para>*  <term> out </term> =    the file where to print the results</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing, just print the results</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Prints the results of an automatic regression.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/bdhenderic.dat') ;
+ 
+bounds('1964q3','1989q2')
+// column HE in table 9 of Hendry and Krozlig paper
+//r=ols('delts(lm1-lp)','lagts(lm1-lp-ly)','delts(lp)','rnet','delts(lagts(lm1-lp-ly))','cte')
+ 
+// this example allows the user to recover
+// the results of columns Final model A and Final model B
+// in table 9 of Hendry and Krozlig paper
+ 
+[r1]=automatic('delts(lm1-lp)','lagts(lm1-lp-ly)',...
+'delts(lp)',...
+'rnet',...
+'delts(lagts(lm1-lp))','delts(lagts(2,lm1-lp))','delts(lagts(3,lm1-lp))','delts(lagts(4,lm1-lp))',...
+'delts(ly)','delts(lagts(1,ly))','delts(lagts(2,ly))','delts(lagts(3,ly))','delts(lagts(4,ly))',...
+'delts(delts(lp))','delts(delts(lagts(1,lp)))','delts(delts(lagts(2,lp)))','delts(delts(lagts(3,lp)))','delts(delts(lagts(4,lp)))',...
+'delts(rnet)','delts(lagts(1,rnet))','delts(lagts(2,rnet))','delts(lagts(3,rnet))','delts(lagts(4,rnet))',...
+'const','prt=nothing')
+ 
+prtauto(r1,'prt=initial,final,test_final',%io(2))
+ 
+// Prints on screen selected results of rauto: inital and final models, with specification tests for the
+// final model.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

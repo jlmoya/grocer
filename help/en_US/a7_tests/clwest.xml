@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="clwest" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>clwest </refname>
+               <refpurpose>Approximately normal test proposed by Clark and West (include test of martingal difference hypothesis) </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rdb = clwest(namey,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =    observed vector or ts</para></listitem>
+<listitem><para>      WARNING: in case of of martingal difference test combined with overlapping regression (for computional purpose):</para></listitem>
+<listitem><para>&#160;&#160;-(1)&#160;this&#160;series&#160;should&#160;be&#160;in&#160;first&#160;difference:&#160;overlaping&#160;terms&#160;are&#160;be&#160;construct&#160;by&#160;sumation</para></listitem>
+<listitem><para>          Ex: If y(t)-y(t-4) = d(y(t))+d(y(t-1))+d(y(t-2))+d(y(t-3)) is the serie to be forecasted it's d(y) that must be entered          </para></listitem>
+<listitem><para>&#160;&#160;-(2)&#160;the&#160;serie&#160;of&#160;forecasts&#160;should&#160;be&#160;in&#160;the&#160;overlapping&#160;form&#160;(y(t)-y(t-4)&#160;in&#160;the&#160;example)&#160;&#160;</para></listitem>
+<listitem><para>*  <term> argi </term> =    arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;1&#160;or&#160;2&#160;time&#160;series&#160;according&#160;to&#160;the&#160;test&#160;specified&#160;(first&#160;series&#160;should&#160;be&#160;the&#160;benchmark&#160;in&#160;case&#160;of&#160;nested&#160;models)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx1)&#160;or&#160;(nx2)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nx1)/(nx2)&#160;real&#160;vector&#160;or&#160;matrix&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;list&#160;of&#160;such&#160;elements</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'bench&#160;=&#160;''mdh'''&#160;if&#160;the&#160;user&#160;want&#160;to&#160;test&#160;martingal&#160;difference&#160;hypothesis&#160;otherwise&#160;2&#160;nested&#160;model&#160;are&#160;tested&#160;(default,&#160;'nm')</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'overlap=xx'&#160;the&#160;number&#160;of&#160;overlapping&#160;terms&#160;if&#160;the&#160;user&#160;performs&#160;the&#160;martingal&#160;difference&#160;test&#160;for&#160;an&#160;overlapping&#160;regression&#160;or&#160;the&#160;size&#160;of&#160;the&#160;lag&#160;truncation&#160;window&#160;if&#160;the&#160;user&#160;wants&#160;an&#160;HAC&#160;correction&#160;when&#160;testing&#160;for&#160;predictive&#160;accuracy&#160;bewteen&#160;nested&#160;models</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;display&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rcw </term> =    a results tlist with</para></listitem>
+<listitem><para>&#160;  - rcw('y') = input forecasted series</para></listitem>
+<listitem><para>&#160;  - rcw('x') = forecasts</para></listitem>
+<listitem><para>&#160;  - rcw('namey') = name of forecasted serie</para></listitem>
+<listitem><para>&#160;  - rcw('namex') = names of forecasts</para></listitem>
+<listitem><para>&#160;  - rcw('stat') = value of the Clark-West statistics</para></listitem>
+<listitem><para>&#160;  - rcw('pvalue') = p-value of the Clark-West statistics</para></listitem>
+<listitem><para>&#160;  - rcw('overlap') = number of overalapping terme if any (0 otherwise)</para></listitem>
+<listitem><para>&#160;  - rcw('prests') = flag for the presence of time series</para></listitem>
+<listitem><para>&#160;  - rcw('bounds') = if there is a timeseries in the forecast, the bounds of the regression</para></listitem>
+<listitem><para>&#160;  - rcw('dropna') = boolean indicating if NAs have been droped</para></listitem>
+<listitem><para>&#160;  - rcw('nonna') = vector indicating position of non-NA values (if the option 'dropna' was active)</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+A function that computes Clark &amp; West (2006) approximately normal test for equal predictive accuracy in nested model and it's special
+case to test martingal difference hypothesis (Clark &amp; West, 2005).
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'\data\industrial.dat')
+bounds('1979q1','2003q4');
+// out-of-sample foreacasts
+rs = rolreg('delts(log(y))','lagts(ypast)','delts(lagts(yfut))','cte',...
+      'dates=[''1991q4'' ''2003q4'']','hstep=1');
+ 
+y_short = rs('yfor') ;
+ 
+bounds('1992q1','2003q4') 	// select an appropriate sample period
+rscl=clwest('delts(log(y))','y_short','bench=''mdh''') ;
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2006-2007
+        </refsection>
+</refentry>

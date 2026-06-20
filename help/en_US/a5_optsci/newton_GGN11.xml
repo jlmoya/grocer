@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="newton_GGN11" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:28-Fév.-2019$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>newton_GGN11</refname>
+               <refpurpose>find the 0 of a function by Grau-Sanchez, Grau and Noguera (2011) method </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[xs,fs,maxfs]=newton_GGN11(x0,func,Jac,ftol,itermax,alphamin)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>x0</term> = a (n x 1) vector of starting values</para></listitem>
+<listitem><para>*  <term>func</term> = a function, whose 0 is searched</para></listitem>
+<listitem><para>*  <term>Jac</term> = a function, performing the Jacobian of the function</para></listitem>
+<listitem><para>*  <term>ftol</term> = the convergence criterion for the function value</para></listitem>
+<listitem><para>*  <term>itermax</term> = the maxmimum number for the function calls</para></listitem>
+<listitem><para>*  <term>alphamin</term> = the minimum value used to dampen the step when convergence is not acheived</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term>xs</term> = the value of the parameter at solution</para></listitem>
+<listitem><para>*  <term>fs</term> = the value of the function at solution</para></listitem>
+<listitem><para>*  <term>maxfs</term> = the maximum value of the absolute function at solution</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Finds the 0 of an equation using the variant of the Newton method provided by Grau-Sanchez, Grau and Noguera "On the computational efficiency index and some iterative methods for solving systems of nonlinear equations", Journal of Computational and Applied Mathematics 236 (6), 1259-1266.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+// Search the zero of function test_func in the optsci folder. The function codes the example 3 provided by
+// Liu, Zheng and Huang (2016), Third- and fifth-order Newton–Gauss methods for solving nonlinear equations with n variables,
+// Applied Mathematics and Computation, n. 290, p. 250-257.
+// The function to minimize is:
+// 4*(x(1)-x(2)^2)+x(2)-x(3)^2 = 0
+// x(2)*(x(2)^2-x(1))-2*(1-x(2))+4*(x(2)-x(3)^2)+x(3)-x(4)^2=0
+// (3)*(x(3)^2-x(2))-2*(1-x(3))+4*(x(3)-x(4)^2)+x(2)^2-x(1)+x(4)-x(5)^2=0
+// x(4)*(x(4)^2-x(3))-2*(1-x(4))+4*(x(4)-x(5)^2)+x(3)^2-x(2)=0
+// x(5)*(x(5)^2-x(4))-2*(1-x(5))+x(4)^2-x(3)=0
+// The corresponding Jacobian function is coded in function test_Jac
+// Starting values are the ones provided in the paper: [1.2 ; 1.2 ; 1.2 ; 1.2 ; 1.2]
+// Convergence criterion is set to 1e-10, maximum # of iterations is set to 1000, 
+// minimum value used to dampen, if needed, the step is set to 0.05
+ 
+[x0,f0,maxf0]=newton_GGN11(1.2*ones(5,1),newton_testfunc,newton_testJac,1e-10,1000,0.05)
+ 
+// Provides the expected result x0 =[1;1;1;1;1] and f0=0
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2019
+        </refsection>
+</refentry>

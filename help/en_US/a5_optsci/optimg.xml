@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="optimg" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:25-Août-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>optimg</refname>
+               <refpurpose>Grocer optimization function </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[valf,b1,valg]=optimg(f,fg,b0,optim_opt,nelmead_opt,gradconv)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> f</term> =   the function to minimize</para></listitem>
+<listitem><para>*  <term> g</term>  =   the function to minimize, with gradient vector calculated as second output argument</para></listitem>
+<listitem><para>*  <term> b0</term>  =   a (k x 1) vector, the vector of starting values</para></listitem>
+<listitem><para>*  <term> optim_opt</term> =   a string, any options to optim entered but entered between quotes</para></listitem>
+<listitem><para>*  <term> nelmead_opt</term> =   a string, the values of the convergence criterion, followed by the maximum number of iterations, the figure being separated by a comma</para></listitem>
+<listitem><para>*  <term> gradconv</term>  =   a positive number, the convergence criterion of the absolute mean of the gradient components</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>valf</term>  =   the value of the function at the solution</para></listitem>
+<listitem><para>*  <term>b1</term>  =   the value of the solution vector of parameters</para></listitem>
+<listitem><para>*  <term>valg</term>  =   the value of the gradient at the solution</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Grocer optimization function.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+function valf=f(b,y,x)
+    valf=sum((y-b(1)*(1-exp(-b(2)*x)))^2)
+endfunction
+ 
+function [valf,valg,ind]=fg(b,ind)
+    valf=sum((y-b(1)*(1-exp(-b(2)*x)))^2)
+    valg=2*[-(1-exp(-b(2)*x)) -b(1).*x.*exp(-b(2)*x)]'*(y-b(1)*(1-exp(-b(2)*x)));
+endfunction
+ 
+1) [valf,b1,valg]=optimg(f,fg,[500.;0.0001 ])
+2) [valf,b1,valg]=optimg(f,fg,[500.;0.0001 ],',''br'',1e6,1e6','%eps,1e6','%eps')
+ 
+ 
+// Example 1 minimizes function f with optimg default values and [500;0.0001] as starting values.
+// Example 2 minimizes function f and [500;0.0001] as starting values, 1E6 for the maximum allowed
+// number of calls to the function to minimize, 1E6 for the maximum number of iterations allowed in optim,
+// %eps for the convergence criterion and 1E6 for the maximum number of iterations and %eps for the global
+// convergence criterion of the absolute mean of the gradient.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2013
+        </refsection>
+</refentry>

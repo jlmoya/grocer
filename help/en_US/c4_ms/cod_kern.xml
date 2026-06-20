@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="cod_kern" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:09-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>cod_kern</refname>
+               <refpurpose>divides data into quantiles with a kernel method </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=cod_kern(data,nbqua)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> data </term> =  a (N X k) data matrix</para></listitem>
+<listitem><para>*  <term> nbqua </term> =  a (2 x 1 ) vector with nbqua(1)  =  # of quantiles used to divide the data (nbqua(2) can have any value)</para></listitem>
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term>  res_code </term> =  a (N x (k*nbqua(1)) matrix of 0 and 1, with:</para></listitem>
+<listitem><para>&#160;    - res_code(i,1:nbqua(1)) = e  with e(j)= 1 if obs i for the first variable is in the j-th quantile and 0 for all other j</para></listitem>
+<listitem><para>&#160;    - res_code(i,nbqua(1)+1:2*nbqua(1)) = e  with e(j)= 1 if obs i for the second variable is in the j-th quantile and 0 for all other j</para></listitem>
+<listitem><para>&#160;    - etc.</para></listitem>
+ 
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ 
+Divides data into quantiles with a kernel method.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/macros/grocer/db/BusinessSurvey.dat')
+list_enq=dblist(GROCERDIR+'/macros/grocer/db/BusinessSurvey.dat')
+mat_enq=explone(list_enq(1:$-1))
+res=cod_kern(mat_enq,[3 0])
+// This example takes the variables contained in the database BusinessSurvey
+// (except for the last one, which is a summary of all others)
+// and codes them into 3 quantiles.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2009
+        </refsection>
+</refentry>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="changeq" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:23-Juin-2018$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>changeq</refname>
+               <refpurpose>change an equation in a model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>model2=changeq(model,indeq,neweq)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+
+<listitem><para>*  <term>model</term>&#160;=&#160;a&#160;model&#160;typed&#160;list</para></listitem>
+<listitem><para>*  <term>indeq</term>&#160;=</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;a&#160;string&#160;vector,&#160;the&#160;names&#160;of&#160;the&#160;equations&#160;to&#160;replace</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;or&#160;a&#160;vector&#160;of&#160;integers,&#160;the&#160;indexes&#160;of&#160;the&#160;equations&#160;to&#160;replace</para></listitem>
+<listitem><para>*  <term>neweq</term>&#160;=&#160;a&#160;string&#160;vector,&#160;the&#160;text&#160;of&#160;the&#160;new&#160;equations</para></listitem>
+
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>* <term>model2</term> = the new model, with the new equations</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Changes equations in a model.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+global GROCERDIR;
+// load the model small:
+load(GROCERDIR+'\data\small.dat')
+// remove the error correction term from equation 'td_p3m_d1':
+small2=changeq(small,'td_p3m_d1','delts(log(td_p3m_d1)) = '+...
+'+c1p3md1''c*delts(log(td_b6_s143/td_p3m_d5))'+...
+'+c2p3md1''c*delts(log(lagts(1,td_b6_s143)/lagts(1,td_p3m_d5)))'+...
+'+c3p3md1''c*delts(log(lagts(2,td_b6_s143)/lagts(2,td_p3m_d5)))'+...
+'+c4p3md1''c*delts(log(lagts(3,td_b6_s143)/lagts(3,td_p3m_d5)))'+...
+'+c5p3md1''c*delts(lagts(2,r3m)-(lagts(2,td_p3m_d5)/lagts(6,td_p3m_d5)-1)*100)'+...
+'+c6p3md1''c*delts(tcho)'+...
+'+c0p3md1''c+p3m_d1_cale') ;
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2018
+        </refsection>
+</refentry>

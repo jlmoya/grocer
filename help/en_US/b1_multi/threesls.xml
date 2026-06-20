@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="threesls" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>threesls </refname>
+               <refpurpose>Three-Stage Least-squares Regression </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[results]=threesls(arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>* <term>argi</term>= arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;an&#160;equation&#160;of&#160;the&#160;following&#160;form:</para></listitem>
+<listitem><para>&#160;&#160;'vary  =   coef1*varx1+...+coefi*varxi' where:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;coefi&#160;=&#160;the&#160;name&#160;of&#160;a&#160;coefficient</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;varxi&#160;=&#160;the&#160;name&#160;of&#160;a&#160;variable</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'coef=coef1;coef2;...coefn'&#160;where&#160;coef1,...,coefn&#160;are&#160;the&#160;names&#160;of&#160;the&#160;coefficients&#160;in&#160;the&#160;system&#160;(optional;&#160;default:&#160;'coef=a1;...,an')</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'endo&#160;=[endo1;...;endon]'&#160;where&#160;endo1,...,endon&#160;are&#160;the&#160;names&#160;of&#160;the&#160;endogenous&#160;variables&#160;(optional;&#160;necessary&#160;if&#160;the&#160;names&#160;of&#160;the&#160;endogenous&#160;variables&#160;in&#160;the&#160;rhs&#160;of&#160;the&#160;equations&#160;are&#160;not&#160;the&#160;same&#160;as&#160;those&#160;of&#160;the&#160;lhs;&#160;default:&#160;the&#160;names&#160;of&#160;all&#160;the&#160;lhs&#160;sides&#160;of&#160;the&#160;equations)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;you&#160;do&#160;not&#160;want&#160;to&#160;print&#160;the&#160;results</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+ 
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> results </term> =   a results tlist with:</para></listitem>
+<listitem><para>&#160;  - results('meth')  = 'threesls'</para></listitem>
+<listitem><para>&#160;  - results('namecoef')  = the matrix of the names of the coefficients</para></listitem>
+<listitem><para>&#160;  - results('riv1'),...,results('rivn) = the results of the iv estimation for each equation (see iv for more details).</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes Three-Stage Least-squares Regression.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+x1 =  rand(100,1,'n')
+x2 =  rand(100,1,'n')
+x3 =  rand(100,1,'n')
+ 
+evec =  rand(100    ,3,'n')
+evec(:,2) = evec(:,3) +  evec(:,2)
+// create cross-eqs corr
+ 
+// create simultaneously determined variables y1,y2
+y1=10+x1+evec(:,1)
+y2=10+y1*0.5+x2*2+evec(:,2)
+y3=10+y2*1.5+x2*3+x3*4+evec(:,3)
+ 
+ 
+r=threesls('y1=a1+b1*x1','y2=a2+b2*x2+c2*y1','y3=a3+b3*x3+c3*y2+d3*x2',...
+'coef=a1;a2;a3;b1;b2;b3;c1;c2;c3;d3')
+ 
+// Example taken from function threesls_d. The equations are 'y1=a1+b1*x1','y2=a2+b2*x2+c2*y1' and 'y3=a3+b3*x3+c3*y2+d3*x2'.
+// Coefficients are a1, a2, a3, b1, b2, b3, c1, c2, c3, d3. Their name is given to the function through the input 'coef=a1;a2;a3;b1;b2;b3;c1;c2;c3;d3'.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2007
+        </refsection>
+</refentry>

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="auto_test" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>auto_test </refname>
+               <refpurpose>build specification tests function and vector of names </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[test_func,name_test]=auto_test(auto_ names,auto_ltest,nobs)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> auto_names </term> =   the tlist that associates a name to each specification test function</para></listitem>
+<listitem><para>*  <term> auto_ltest </term> =   the list of options provided by the user (default: an empty list)</para></listitem>
+<listitem><para>*  <term> nobs </term> =   # of observations</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> test_func </term> =   the function which gathers the specification tests used by automatic()</para></listitem>
+<listitem><para>*  <term> name_test </term> =   the name of the specification tests which will be used for the printings</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+From the specifications list given by the user, build the function test_func which performs these specification tests and the vector name_test of corresponding names.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+[func,names] = auto_test('test=arlm(6),jbnorm,chowtest(0.8),myautocor(5)')
+// creates a function that performs the Breusch and Pagan test with 1 to 6 lags,
+// the Jarque and Bera normality test, the Chow stability test with a break at 80%
+// of the sample and the matrix of corresponding names.
+ 
+[test_func,m2prt_test]=auto_test(grocer_ltest)
+// This example is an application of auto_test in function automatic.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

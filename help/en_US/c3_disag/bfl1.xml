@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="bfl1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>bfl1 </refname>
+               <refpurpose>Temporal disaggregation using the Boot-Feibes-Lisman method </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[y,res]=bfl1(nameY,ta,d,s)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> Y </term> =  Nx1 vector of low frequency data</para></listitem>
+<listitem><para>*  <term> ta </term> =  type of disaggregation</para></listitem>
+<listitem><para>&#160;&#160;-&#160;ta=-1&#160;---&gt;&#160;sum&#160;(flow)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;ta=0&#160;---&gt;&#160;average&#160;(index)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;ta=i&#160;---&gt;&#160;i&#160;th&#160;element&#160;(stock)&#160;---&gt;&#160;interpolation</para></listitem>
+ 
+<listitem><para>*  <term> d </term> =  objective function to be minimized: volatility of - - d = 0 ---&gt; levels</para></listitem>
+<listitem><para>&#160;&#160;-&#160;d=1&#160;---&gt;&#160;first&#160;differences</para></listitem>
+<listitem><para>&#160;&#160;-&#160;d=2&#160;---&gt;&#160;second&#160;differences</para></listitem>
+ 
+<listitem><para>*  <term> s </term> =  number of high frequency data points for each low frequency data point</para></listitem>
+<listitem><para>&#160;&#160;-&#160;s=&#160;4&#160;---&gt;&#160;annual&#160;to&#160;quarterly</para></listitem>
+<listitem><para>&#160;&#160;-&#160;s=12&#160;---&gt;&#160;annual&#160;to&#160;monthly</para></listitem>
+<listitem><para>&#160;&#160;-&#160;s=&#160;3&#160;---&gt;&#160;quarterly&#160;to&#160;monthly</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> y </term> =  High frequency estimate</para></listitem>
+<listitem><para>*  <term> res </term> =  a results tlist with:</para></listitem>
+<listitem><para>&#160;  - res('meth')         = 'Boot-Feibes-Lisman'</para></listitem>
+<listitem><para>&#160;  - res('nobs_lf')      = Number of low frequency data</para></listitem>
+<listitem><para>&#160;  - res('aggreg_mode')  = Type of disaggregation</para></listitem>
+<listitem><para>&#160;  - res('s')            = Frequency conversion</para></listitem>
+<listitem><para>&#160;  - res('diff')         = Degree of differencing</para></listitem>
+<listitem><para>&#160;  - res('y_lf')         = Low frequency data</para></listitem>
+<listitem><para>&#160;  - res('y')            = High frequency estimate</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Provides temporal disaggregation of low frequency data using the Boot-Feibes-Lisman method.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'\data\xesp.dat')
+[y,res] = bfl1(Y,-1,1,12);
+ 
+// Provides monthly disaggregation of series Y which can be a vector only using first differences
+// and with the annual data equal of the sum of corresponding monthly data.
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2005
+        </refsection>
+</refentry>

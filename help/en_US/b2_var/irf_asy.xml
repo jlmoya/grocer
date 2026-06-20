@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="irf_asy" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:28-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>irf_asy</refname>
+               <refpurpose>asymptotic Impulse Response function for VAR </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[irf_low,irf_upp]=irf_asy(results,mres,P,IRF,PHI,S,siz)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> results </term> =    results tlist returned by VAR</para></listitem>
+<listitem><para>*  <term> mres </term> =    decomposition method</para></listitem>
+<listitem><para>*  <term> P </term> =    matrix such that P*e  =    u where u is the residual from the VAR regression; e is the residual to be shocked</para></listitem>
+<listitem><para>*  <term> IRF </term> =    ((S+1) x T) impulse response functions</para></listitem>
+<listitem><para>*  <term> PHI </term> =    (N*p x T) matrix of coefficients</para></listitem>
+<listitem><para>*  <term> S </term> =    # of periods</para></listitem>
+<listitem><para>*  <term> siz </term> =    size of the confidence band</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> irf_low </term> =    ((S+1)N x N) lower range of impulse response confidence band</para></listitem>
+<listitem><para>*  <term> irf_upp </term> =    ((S+1)N x N) upper range of impulse response confidence band</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Calculates standard error of Impulse Response Function for VAR by means of the asymptotic formula. Note: a much simpler  method is to use irf with option 'meth=asym'.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+[irf_low,irf_upp]=irf_asy(results,mres,P,IRF,PHI,S,siz)
+ 
+// Example taken from function irf(). This is equivalent to the simpler call: irf(results,S,'meth=asym','mres=name of mres','size=siz').
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

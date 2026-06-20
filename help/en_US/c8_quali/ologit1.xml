@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ologit1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ologit1 </refname>
+               <refpurpose>multivariate ordered logit regression </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=ologit1(y,x,param,optim_func,opt_optim)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term>y</term> =    (n x 1) dependent variable vector taking ncat integer values</para></listitem>
+<listitem><para>*  <term>x</term> =    (n x m) explanatory variables matrix</para></listitem>
+<listitem><para>*  <term>param</term> =    (k x 1) parameter vector</para></listitem>
+ <listitem><para>*  <term>optfunc</term> =    a string, the name of the optimisation function ('optim' or 'optimg')</para></listitem>
+<listitem><para>*  <term>opt_optim</term> =    a tlist, collecting the options to the optimisation function</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term>res</term> =    a results tlist with</para></listitem>
+<listitem><para>&#160;  - res('meth')  = 'ordered logit'</para></listitem>
+<listitem><para>&#160;  - res('y') = (nobs x ncat) matrix of data</para></listitem>
+<listitem><para>&#160;  - res('x') = (nobs x nx) matrix of data</para></listitem>
+<listitem><para>&#160;  - res('nobs') = number of observations</para></listitem>
+<listitem><para>&#160;  - res('nvar') = number of variables</para></listitem>
+<listitem><para>&#160;  - res('ncat') = number of categories of dependent variable (including the reference category j = 0)</para></listitem>
+<listitem><para>&#160;  - res('beta') = (nvar*ncat x 1) vector of beta coefficients: [beta_1 ; beta_2 ; ... ; beta_ncat] under normalization beta_0 = 0</para></listitem>
+<listitem><para>&#160;  - res('yhat') = (nobs x ncat) matrix of fitted values probabilities: [P_0 P_1 ... P_(ncat-1)] where P_j = [P_1j ; P_2j ; ... ; P_nobsj]</para></listitem>
+<listitem><para>&#160;  - res('r2mf') = McFadden pseudo-R^2</para></listitem>
+<listitem><para>&#160;  - res('rsqr') = Estrella pseudo-R^2</para></listitem>
+<listitem><para>&#160;  - res('llike') = unrestricted log likelihood</para></listitem>
+<listitem><para>&#160;  - res('lratio') = LR test statistic against intercept-only model (all bets=0), distributed chi-squared with (nvar     -1)*ncat degrees of freedom</para></listitem>
+<listitem><para>&#160;  - res('covb') = (nvar*ncat x nvar*ncat) covariance matrix of coefficients</para></listitem>
+<listitem><para>&#160;  - res('tstat') = (nvar*ncat x 1) vector of t-statistics</para></listitem>
+<listitem><para>&#160;  - res('pvalue') = (nvar*ncat x 1) vector of corresponding p-values</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes multivariate ordered logit regression.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'\data\gunther.dat')
+[y,namey,x]=explouniv('rrating',['asset' 'equ' 'growth' 'loa' 'metro' 'prl'])
+res=ologit1(y,x,[zeros(6,1);-1;0;1])
+ 
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2007
+        </refsection>
+</refentry>

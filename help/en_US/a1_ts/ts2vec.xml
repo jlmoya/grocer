@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ts2vec" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ts2vec </refname>
+               <refpurpose>transforms a ts into a vector </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>vecout=ts2vec(ts,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> ts </term> =     a time series (between quotes or not)</para></listitem>
+<listitem><para>*  <term> argi </term> =    </para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;date&#160;strings&#160;(in&#160;even&#160;number)&#160;corresponding&#160;to&#160;the&#160;bounds&#160;over&#160;which&#160;the&#160;values&#160;are&#160;taken</para></listitem>
+<listitem><para>&#160;&#160;-&#160;or&#160;a&#160;(1&#160;x&#160;2*n)&#160;vector&#160;of&#160;date&#160;strings&#160;corresponding&#160;to&#160;the&#160;bounds&#160;over&#160;which&#160;the&#160;values&#160;are&#160;taken&#160;&#160;(optional&#160;:&#160;if&#160;not&#160;provided,&#160;the&#160;function&#160;operates&#160;over&#160;the&#160;whole&#160;time&#160;range&#160;of&#160;the&#160;series)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> vecout </term> =     (N x 1) vector</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Transforms the values of a timeseries into the vector of its value.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/bdhenderic.dat') // load Hendry and Ericsson database
+s = ts2vec(ly,'1970q1','1979q4') // returns the value of ly over the 70's
+s = ts2vec(ly,['1970q1','1979q4']) // returns again the value of ly over the 70's
+s = ts2vec(lp,'1970q1','1970q4','1971q3','1979q4') // returns the value of lp over the 70's except for the first 2 quarters of 1971
+s = ts2vec(lp,['1970q1','1970q4','1971q3','1979q4']) // returns again the value of lp over the 70's except for the first 2 quarters of 1971
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

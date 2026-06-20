@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="exploeqs" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>exploeqs </refname>
+               <refpurpose>Transformation of 2sls or 3sls equations </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[xall,lx1,ly1,endoeq,nameinst,lindx1,lindy1]=exploeqs(neqs,lexo,endo,z,namez)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> neqs </term> =    # of equations</para></listitem>
+<listitem><para>*  <term> lexo </term> =    list of independent variables in each equation</para></listitem>
+<listitem><para>*  <term> endo </term> =    list of dependent variables in each equation</para></listitem>
+<listitem><para>*  <term> z </term> =    matrix of values of the dependent variables</para></listitem>
+<listitem><para>*  <term> namez </term> =    matrix of names of the dependent variables</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> xall </term> =    matrix of the values of the instruments</para></listitem>
+<listitem><para>*  <term> lx1 </term> =    list of the exogenous variables for each equation</para></listitem>
+<listitem><para>*  <term> ly1 </term> =    list of the endogenous variables for each equation</para></listitem>
+<listitem><para>*  <term> endoeq </term> =    list of he names of the endogenous variables for each equation</para></listitem>
+<listitem><para>*  <term> nameinst </term> =    matrix of the names of the instruments</para></listitem>
+<listitem><para>*  <term> lindx1 </term> =    list of the indexes of exogenous variables for each equation</para></listitem>
+<listitem><para>*  <term> lindy1 </term> =    list of the indexes of endogenous variables for each equation</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Retrieves from the equations the list of endogenous, exogenous and instruments for a Two-Stage or Three-Stage Least-squares Regression.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+[xall,lx1,ly1,endoeq,nameinst,lindx1,lindy1]=exploeqs(grocer_neqs,grocer_lexo,grocer_endo,grocer_z,grocer_namez)
+ 
+// This example is taken from twosls.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

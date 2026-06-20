@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="fusvect" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>fusvect</refname>
+               <refpurpose>sorted fusion of vectors </refpurpose>
+   </refnamediv>
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[ind]=fusvect(arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+           <term>Input</term>
+<listitem><para>*  <term> arg1,...,argn </term> =   (n x 1) vectors </para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> ind </term> =   a (n x 1) vector</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Makes the fusion of (n x1) vectors and sort them in increasing order.
+
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+fusvect([1 ;4 ; 5],[3 ; 2 ;4])
+// Returns: 
+//!   1. !//!   2. !//!   3. !//!   4. !//!   4. !//!   5. !  
+
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="prandom1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>prandom1 </refname>
+               <refpurpose>Random Effects Estimation for Panel Data </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=prandom1(meth,y,index,x,z)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> meth </term> =    the gls estimation method used ('wallace', 'swamy', 'amemiya' or 'nerlove')</para></listitem>
+<listitem><para>*  <term> y  </term> =    a (nobs x 1) vector of endogenous variable</para></listitem>
+<listitem><para>*  <term> index </term> =    a (nobs x 1) index vector that identifies each observation with an individual</para></listitem>
+<listitem><para>&#160; e.g. 1  (first 2 observations  for individual # 1)</para></listitem>
+<listitem><para>&#160; &#160; 1</para></listitem>
+<listitem><para>&#160; &#160;  2  (next  1 observation   for individual # 2)</para></listitem>
+<listitem><para>&#160; &#160;  3  (next  3 observations  for individual # 3)</para></listitem>
+<listitem><para>&#160; &#160;  3</para></listitem>
+<listitem><para>&#160; &#160;  3</para></listitem>
+<listitem><para>*  <term> x </term> =    matrix of exogenous variables</para></listitem>
+<listitem><para>*  <term> z </term> =    optional matrix of exogenous variables, dummy variables.</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> res </term> =    a results tlist with:</para></listitem>
+<listitem><para>&#160;   - res('meth')='panel with random effects'</para></listitem>
+<listitem><para>&#160;   - res('y')     = y data vector</para></listitem>
+<listitem><para>&#160;   - res('x')     = x data matrix</para></listitem>
+<listitem><para>&#160;   - res('nobs')  = nobs</para></listitem>
+<listitem><para>&#160;   - res('nvar')  = nvars</para></listitem>
+<listitem><para>&#160;   - res('beta')  = bhat</para></listitem>
+<listitem><para>&#160;   - res('yhat')  = yhat</para></listitem>
+<listitem><para>&#160;   - res('resid') = residuals</para></listitem>
+<listitem><para>&#160;   - res('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;   - res('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;   - res('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;   - res('ser')  = standard error of the regression</para></listitem>
+<listitem><para>&#160;   - res('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;   - res('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;   - res('condindex') = multicolinearity cond index</para></listitem>
+<listitem><para>&#160;   - res('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;   - res('rsqr')  = rsquared</para></listitem>
+<listitem><para>&#160;   - res('rbar')  = rbar-squared</para></listitem>
+<listitem><para>&#160;   - res('f')    = F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;   - res('pvaluef') = its significance level</para></listitem>
+<listitem><para>&#160;   - res('gls estimation method') = the gls method used</para></listitem>
+<listitem><para>&#160;   - res('random effects') = the estimation of the individual effects</para></listitem>
+<listitem><para>&#160;   - res('res0') = residuals from the original model</para></listitem>
+<listitem><para>&#160;   - res('alfa') = the gls parameters</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs Random Effects Estimation for Panel Data (for balanced or unbalanced data). Low level function that works only with matrices.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data\judgepanel.dat') ;
+res=prandom1('wallace',judgepanel('x')(:,1),judgepanel('id'),judgepanel('x')(:,2) )
+// provides the random estimation on Judge panel data, taking directly the matrices in the panel tlist
+ 
+In this example, y and index should be (nobsx1) vectors, x a (nobsxk) matrix.
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2005
+        </refsection>
+</refentry>

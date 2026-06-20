@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="varwithfac" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:26-Août-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>varwithfac</refname>
+               <refpurpose>estimation of a VAR models with exogenous factors </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=varwithfac(p,listy,ARF,MAF,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> p </term> =    a scalar, the number of lags in the VAR</para></listitem>
+<listitem><para>*  <term> listy </term> =    a string (ny x 1) vector of names or a list of ny names, ts or vectors</para></listitem>
+<listitem><para>*  <term> ARF </term> =   </para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;(narf&#160;x&#160;1)&#160;or&#160;(1&#160;x&#160;narf)&#160;string&#160;vector&#160;of&#160;parameters&#160;corresponding&#160;to&#160;the&#160;AR&#160;part&#160;of&#160;the&#160;factor&#160;process</para></listitem>
+<listitem><para>&#160;&#160;*&#160;if&#160;the&#160;user&#160;does&#160;not&#160;give&#160;in&#160;the&#160;list&#160;of&#160;variable&#160;arguments&#160;the&#160;option&#160;'init=own',&#160;then&#160;the&#160;user&#160;can&#160;give&#160;any&#160;value&#160;to&#160;ARF;&#160;only&#160;it&#160;size&#160;matters&#160;for&#160;the&#160;estimation&#160;process</para></listitem>
+<listitem><para>&#160;&#160;*&#160;if&#160;the&#160;user&#160;gives&#160;in&#160;the&#160;list&#160;of&#160;variable&#160;arguments&#160;the&#160;option&#160;'init=own',&#160;then&#160;the&#160;values&#160;given&#160;by&#160;the&#160;user&#160;are&#160;used&#160;as&#160;starting&#160;values&#160;for&#160;the&#160;optimisation&#160;process</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;user&#160;must&#160;enter&#160;the&#160;empty&#160;matrix&#160;[]&#160;if&#160;she&#160;wants&#160;to&#160;impose&#160;that&#160;the&#160;AR&#160;part&#160;is&#160;empty</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;list&#160;of&#160;p&#160;elements,&#160;each&#160;element&#160;of&#160;the&#160;preceding&#160;type,&#160;and&#160;p&#160;is&#160;the&#160;#&#160;of&#160;factors&#160;to&#160;estimate</para></listitem>
+<listitem><para>*  <term> MAF </term> =    a (nmaf x 1) or (1 x nmaf) string vector of parameters corresponding to the MA part of the factor process or a list or p elements of this type (with the same conventions as with ARF and the same number of elements as for the AR part)</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =    optional arguments that can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'init=own'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;enter&#160;her&#160;own&#160;starting&#160;values</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'Q=x'&#160;where&#160;x&#160;is&#160;a&#160;(ny+1&#160;x&#160;ny+1)&#160;matrix&#160;of&#160;starting&#160;values&#160;for&#160;the&#160;var-cov&#160;matrix&#160;of&#160;residuals&#160;(first&#160;the&#160;residual&#160;of&#160;the&#160;factor&#160;ARMA&#160;process;&#160;note&#160;that&#160;for&#160;identification&#160;sake&#160;(see&#160;manual&#160;for&#160;details)&#160;the&#160;variance&#160;of&#160;residual&#160;of&#160;the&#160;factor&#160;ARMA&#160;process&#160;is&#160;fixed&#160;to&#160;the&#160;value&#160;given&#160;by&#160;the&#160;user&#160;in&#160;Q&#160;or&#160;to&#160;0.25&#160;if&#160;the&#160;user&#160;does&#160;not&#160;give&#160;starting&#160;values&#160;to&#160;Q</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'loadings=x'&#160;where&#160;x&#160;is&#160;a&#160;(ny&#160;x&#160;1)&#160;vector&#160;of&#160;starting&#160;values&#160;for&#160;the&#160;loadings&#160;of&#160;the&#160;factor</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'noprint'&#160;if&#160;the&#160;user&#160;does&#160;not&#160;want&#160;to&#160;print&#160;the&#160;estimation&#160;results</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'nap=x'&#160;with&#160;x&#160;=&#160;maximum&#160;#&#160;of&#160;calls&#160;to&#160;the&#160;function&#160;to&#160;optimize&#160;(Scilab&#160;optim&#160;option;&#160;default=1000)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'niter=x'&#160;with&#160;x&#160;=&#160;maximum&#160;#&#160;of&#160;iterations&#160;(Scilab&#160;optim&#160;option;&#160;default=1000)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  res </term> =    the results typed list of the dynamic factor estimation provided by the Kalman filter with:</para></listitem>
+<listitem><para>&#160;   - res('meth') = 'var with factor'</para></listitem>
+<listitem><para>&#160;   - res('y') = a (nobs x ny) matrix of observations</para></listitem>
+<listitem><para>&#160;   - res('nobs') = the # of observations</para></listitem>
+<listitem><para>&#160;   - res('ny') = the # of endogenous variables</para></listitem>
+<listitem><para>&#160;   - res('namey') = the (ny x 1) vector of names of the endogenous</para></listitem>
+<listitem><para>&#160;   - res('fac') = the estimated common factor</para></listitem>
+<listitem><para>&#160;   - res('stud fac') = the studentized estimated common factor</para></listitem>
+<listitem><para>&#160;   - res('coeff') = the (nparam x 1) vector of estimated</para></listitem>
+<listitem><para>&#160;   - res('std') = the (nparam x 1) vector of standard errors of the estimated parameters</para></listitem>
+<listitem><para>&#160;   - res('tstat') = the (nparam x 1) vector of t-stat</para></listitem>
+<listitem><para>&#160;   - res('ARF') = the (1 x narf) vector corresponding to the AR part of the factor process</para></listitem>
+<listitem><para>&#160;   - res('MAF') = the (1 x nmaf) vector corresponding to the</para></listitem>
+<listitem><para>&#160;   - res('Phi') = the estimated Phi matrix of corresponding state-measure Kalman problem</para></listitem>
+<listitem><para>&#160;   - res('H') = the estimated H matrix of corresponding</para></listitem>
+<listitem><para>&#160;   - res('Q') = the estimated Q matrix of corresponding state-measure Kalman problem</para></listitem>
+<listitem><para>&#160;   - res('R') = the estimated R matrix of corresponding</para></listitem>
+<listitem><para>&#160;   - res('C') = the (constrained) C matrix of corresponding state-measure Kalman problem</para></listitem>
+<listitem><para>&#160;   - res('D') = the estimated R matrix of corresponding</para></listitem>
+<listitem><para>*  <term> &lt; - res('llike') </term> =    log-likelihood of the model</para></listitem>
+<listitem><para>&#160;   - res('grad') = gradient of the log-likelihood of the</para></listitem>
+<listitem><para>&#160;   - res('AIC') = the Akaike information criterium</para></listitem>
+<listitem><para>&#160;   - res('BIC') = the Schwarz information criterium</para></listitem>
+<listitem><para>&#160;   - res('E4OPTION') = the tlist of options needed to feed the "e4" Kalman estimation</para></listitem>
+<listitem><para>&#160;   - res('prests') = a boolean indicating whether there are</para></listitem>
+<listitem><para>&#160;   - res('bounds') = bounds of the estimation (if there are ts in the regression)</para></listitem>
+<listitem><para>&#160;   - res('stdARF') = the (1 x narf) vector corresponding to the</para></listitem>
+<listitem><para>&#160;   - res('stdMAF') = the (1 x nmaf) vector corresponding to the MA part of the factor process</para></listitem>
+<listitem><para>&#160;   - res('stdPhi') = the estimated Phi matrix of corresponding</para></listitem>
+<listitem><para>&#160;   - res('stdH') = the estimated H matrix of corresponding state-measure Kalman problem</para></listitem>
+<listitem><para>&#160;   - res('stdQ') = the estimated Q matrix of corresponding</para></listitem>
+<listitem><para>&#160;   - res('stdR') = the estimated R matrix of corresponding state-measure Kalman problem</para></listitem>
+<listitem><para>&#160;   - res('stdD') = the estimated R matrix of corresponding</para></listitem>
+<listitem><para>*  <term> &lt; - res('theta2mat') </term> =    a string vector, collecting the commands that transform the vector of parameters into the matrices of the Kalman filter</para></listitem>
+<listitem><para>&#160;   - res('neqs') = a scalar, the number of endogenous</para></listitem>
+<listitem><para>&#160;   - res('nlag') = a scalar, the number of lags in the VAR</para></listitem>
+<listitem><para>&#160;   - res('VAR nvar') = a scalar, the number of exogenous</para></listitem>
+<listitem><para>&#160;   - res('VAR sigma') = a (neqs x neqs) matrix, the variance the residuals of the VAR</para></listitem>
+<listitem><para>&#160;   - res('VAR ser') = a (neqs x 1) vector, the standard errors</para></listitem>
+<listitem><para>&#160;   - res('VAR beta') = a (nvar x neqs) matrix, the estimated coefficients of the VAR</para></listitem>
+<listitem><para>&#160;   - res('VAR tstat') = a (nvar x neqs) matrix, the Student</para></listitem>
+<listitem><para>&#160;   - res('VAR pvalue') = a (nvar x neqs) matrix, the corresponding p-values</para></listitem>
+<listitem><para>&#160;   - res('VAR rsqr') = a (neqs x 1) vector, the R-squared</para></listitem>
+<listitem><para>&#160;   - res('VAR rbar') = a (neqs x 1) vector, the adjusted R-squared of the equations of the VAR</para></listitem>
+<listitem><para>&#160;   - res('VAR overallf') = a (neqs x 1) vector, the F statictics of nullity for all non-constant variables in the equations of the VAR</para></listitem>
+<listitem><para>&#160;   - res('VAR pvaluef') = a (neqs x 1) vector, the corresponding p-values</para></listitem>
+<listitem><para>&#160;   - res('VAR nx') = a (neqs x 1) vector, the number of exogenous variables in the VAr (constant + factors)</para></listitem>
+<listitem><para>&#160;   - res('VAR namex') = a (nexo x 1) vector, the names of exogenous variables in the VAr (constant + factors)</para></listitem>
+<listitem><para>&#160;   - res('VAR prescte') = %t (indicating the presence of the constant in the VAR)</para></listitem>
+<listitem><para>&#160;   - res('VAR dw') = a (neqs x 1) vector, the Durbin-Watson of the VAR equations</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs the estimation of a VAR models with factors as exogenous variables.
+ The model is: Y_t = sum{i=1:p}{A_i*Y_{t-i}}+sum{j=1:k}{lambda_j*F_t}+ui_t ARF(L)*F_t = MAF(L)*e_t.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ u=grand(250,1,'nor',0,1);
+v=grand(250,3,'nor',0,1);
+f=zeros(251,1);
+y1=zeros(251,1);
+y2=zeros(251,1);
+y3=zeros(251,1);
+ 
+ 
+for i=2:250
+   f(i+1)=0.9*f(i)+u(i);
+   y1(i+1)=-0.2*y1(i-1)+0.7*y1(i)+0.1*y2(i)+0.1*y3(i)+0.02*f(i+1)+0.01*v(i,1);
+   y2(i+1)=-0.3*y2(i-1)+0.4*y1(i)+0.4*y2(i)+0.015*f(i+1)+0.01*v(i,2);
+   y3(i+1)=-0.2*y3(i-1)+0.4*y1(i)+0.4*y3(i)+0.025*f(i+1)+0.01*v(i,3);
+end
+ 
+ 
+y1=reshape(y1(52:251),'2500q1');
+y2=reshape(y2(52:251),'2500q1');
+y3=reshape(y3(52:251),'2500q1');
+ 
+ 
+res=varwithfac(2,['y1';'y2';'y3'],'0.9',[])
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2013
+        </refsection>
+</refentry>

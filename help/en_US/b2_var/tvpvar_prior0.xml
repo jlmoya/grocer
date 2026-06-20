@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="tvpvar_prior0" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:05-Sept.-2015$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>tvpvar_prior0</refname>
+               <refpurpose>returns prior tlist needed by Hetero_TVP_VAR function </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>prior=tvpvar_prior0(nlag,k_B0,k_A0,k_W,k_Q,k_S,endo,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> nlag </term> =    a scalar, the # of lags in the VAR</para></listitem>
+<listitem><para>*  <term> k_B0 </term> =    a scalar, the dilatation factor applied to the variance of the VAR coefficients over the training period to determine the variance of the prior of the VAR coefficients</para></listitem>
+<listitem><para>*  <term> k_A0 </term> =    a scalar, the dilatation factor applied to the variance of the coefficients of the contemporaneous endogenous vraiables over the training period to determine the variance of the prior of the contemporaneous endogenous vraiables</para></listitem>
+<listitem><para>*  <term> k_W </term> =    a scalar, the dilatation factor applied, squared, to (n+1) for the inverse Wishart prior of W</para></listitem>
+<listitem><para>*  <term> k_Q </term> =    a scalar, the dilatation factor applied, squared, to (n+1) for the inverse Wishart prior of Q</para></listitem>
+<listitem><para>*  <term> k_S </term> =    a scalar, the dilatation factor applied, squared, for the inverse Wishart prior of S</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =    an optional argument, that can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'exo=list(exo1,...,&#160;exon)&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;add&#160;exogenous&#160;variables&#160;to&#160;the&#160;VAR,&#160;exoi&#160;then&#160;collects&#160;the&#160;exogenous&#160;variables&#160;of&#160;equation&#160;i</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'nocte'&#160;if&#160;the&#160;user&#160;does&#160;not&#160;want&#160;constants&#160;in&#160;the&#160;VAR</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;drop&#160;NA&#160;values&#160;from&#160;the&#160;data&#160;instead&#160;of&#160;generating&#160;an&#160;error</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  r</term>  =    a prior tlist with:</para></listitem>
+<listitem><para>&#160;&#160;-r('B_0_prmean') =    the prior mean of the B_0 parameters (time varying coefficients of the VAR)</para></listitem>
+<listitem><para>&#160;&#160;-r('B_0_prvar') =    the prior variance of the B_0 parameters</para></listitem>
+<listitem><para>&#160;&#160;-r('A_0_prmean') =    the prior mean of the A_0 parameters (time varying coefficients of the contemporaneous endogenous variables of the VAR equations)</para></listitem>
+<listitem><para>&#160;&#160;-r('A_0_prvar') =    the prior variance of the A_0 parameters</para></listitem>
+<listitem><para>&#160;&#160;-r('Q_prmean') =    the prior mean of the Q parameters</para></listitem>
+<listitem><para>&#160;&#160;-r('Q_prvar') =    the prior variance of the Q parameters</para></listitem>
+<listitem><para>&#160;&#160;-r('W_prmean') =    the prior mean of the W parameters</para></listitem>
+<listitem><para>&#160;&#160;-r('W_prvar') =    the prior variance of the W parameters</para></listitem>
+<listitem><para>&#160;&#160;-r('S_prmean') =    the prior mean of the W parameters</para></listitem>
+<listitem><para>&#160;&#160;-r('S_prvar') =    the prior variance of the W parameters</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+from broad parameters entered by the user, provide the prior tlist needed by fucntion Hetero_TVP_VAR function.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+  stacksize('max')
+load(GROCERDIR+'\data\primiceri.dat')
+mkdir(GROCERDIR+'\temp')
+nlag=2
+bounds('1953q3','1963q2')
+prior=tvpvar_prior0(nlag,4,4,0.01,0.01,0.1,['Inflation';'Unemployment';'rate_3m'])
+// returns the prior as defined by Primiceri (2005): dilatation factors applied to the ols estimates
+// of A0 and B0 over the training sample '1953q3' to '1963q2' set to 4, the the dilatation factors
+// applied, squared, to (n+1) for the inverse Wishart prior of W, Q and S set 0.01, 0.01 and 0.1
+// respectively
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2015
+        </refsection>
+</refentry>

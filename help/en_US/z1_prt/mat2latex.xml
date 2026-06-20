@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="mat2latex" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:30-Jan-2010$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>mat2latex</refname>
+               <refpurpose>LaTex matrix or LaTex table representation of a scilab matrix </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>mtex = mat2latex(mat,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> mat </term> =    a (n x k) matrix</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =    arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'rowtit=xx'&#160;a&#160;n-dimension&#160;string&#160;vector&#160;of&#160;row&#160;titles</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'coltit=xx'&#160;a&#160;k-dimension&#160;string&#160;vector&#160;of&#160;columns&#160;titles</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'caption=xx'&#160;the&#160;table&#160;caption&#160;or&#160;title</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'digits=xx'&#160;with&#160;xx</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;.&#160;a&#160;scalar&#160;indicating&#160;the&#160;number&#160;of&#160;digits&#160;to&#160;display&#160;in&#160;each&#160;column</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;.&#160;a&#160;(k&#160;x&#160;1)&#160;vector&#160;indicating&#160;the&#160;number&#160;of&#160;digits&#160;to&#160;display&#160;in&#160;each&#160;column</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;.&#160;a&#160;(1&#160;x&#160;k)&#160;vector&#160;indicating&#160;the&#160;number&#160;of&#160;digits&#160;to&#160;display&#160;in&#160;each&#160;row</para></listitem>
+ 
+<listitem><para>&#160;&#160;-&#160;'align=xx'&#160;a&#160;scalar&#160;or&#160;a&#160;k-dimensional&#160;vector&#160;indicating&#160;the&#160;alignment&#160;of&#160;the&#160;corresponding&#160;columns&#160;(default&#160;=&#160;center&#160;for&#160;all)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;.'c':&#160;center</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;.'l':&#160;left</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;.'r':&#160;right</para></listitem>
+ 
+<listitem><para>&#160;&#160;-&#160;'float=xx'&#160;a&#160;string&#160;indicating&#160;the&#160;position&#160;of&#160;table&#160;(default='!ht')</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;.&#160;'b':&#160;bottom&#160;of&#160;the&#160;page</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;.&#160;'t':&#160;top&#160;of&#160;the&#160;page</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;.&#160;'h':&#160;at&#160;the&#160;very&#160;place&#160;in&#160;the&#160;text&#160;where&#160;it&#160;occurs</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;.&#160;'p':&#160;on&#160;a&#160;special&#160;page&#160;containing&#160;only&#160;floats</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;.&#160;'!':&#160;without&#160;considering&#160;most&#160;of&#160;the&#160;internal&#160;parameters&#160;which&#160;could&#160;stop&#160;this&#160;float&#160;from&#160;being&#160;placed</para></listitem>
+ 
+<listitem><para>&#160;&#160;-&#160;'label=xx'&#160;the&#160;LaTex&#160;anchor</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'path=xx'&#160;a&#160;path&#160;where&#160;the&#160;file&#160;has&#160;to&#160;be&#160;saved&#160;and&#160;the&#160;name&#160;of&#160;the&#160;file&#160;ex:&#160;c:\mypath\mybable.tex'</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> mtex </term> =    a string formed of LaTex represenation of the matrix</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Convert a matrix into matrix or a table in LaTex code.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ caption='My beautiful LaTex table (\%)'
+ digits=[1,2,3];
+ rowtit='r'+string(1:n)
+ coltit='c'+string(1:k)
+ align=["l","c","c","r"];
+ float='!ht'
+ path='SCI\macros\grocer\db\mlatex.tex'
+ mlatex=mat2latex(mat,'caption=caption','rowtit=rowtit','coltit=coltit','align=align','digits=2','path=path');
+ 
+// Example taken from function mat2latex()
+// Note that the alignment vector contains more elements than the matrix to convert as the first element is
+// used to specify the alignment of the row title columns. When no row titles, column titles, caption are
+// specified then a simple matrix is created. If the label option is used then the converted matrix is
+// be numbered by LaTex.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2009
+        </refsection>
+</refentry>

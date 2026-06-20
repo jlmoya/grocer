@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="hpofilter" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>hpofilter </refname>
+               <refpurpose>Hodrick Prescott one-sided filter </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>hpy = hpofilter(y,q)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> y </term> =   either</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;time&#160;series,&#160;or</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx1)&#160;vector,&#160;or</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nx1)&#160;real&#160;vector&#160;between&#160;quotes</para></listitem>
+<listitem><para>*  <term> q </term> =   relative variance of I(2) component (default values are 0.675*10^(-3) or 0.75*10^(-6) for quarterly or monthly data respectively)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> hpy</term>  =   the smoothed filtered series of the same type than y (if y is not a string) or evstr(y) (if y is a string) </para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Applies to a series the one-sided Hodrick-Prescott filter, assuming the series is a white-noise + I(2) model (see A. C. Harvey and A. Jaeger (1993), "Detrending, Stylized Fact, and the Business Cycle", Journal of Applied Econometrics, 8, pp. 231-247).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data\Fra_GDP.dat')
+Xf=hpofilter(Fra_GDP,1/1600)
+ 
+// Provides the one-sided equivalent of the traditional Hodrick -Prescott filtering of a quarterly data x
+// with parameter lambda=1600, whether x is a ts, a vector, or the name of such a variable between quotes.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2007
+        </refsection>
+</refentry>

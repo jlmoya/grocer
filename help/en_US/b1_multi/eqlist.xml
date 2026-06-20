@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="eqlist" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>eqlist </refname>
+               <refpurpose>recovers objects names in an equation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[namey,ncoefeqi,lexo]=eqlist(eq,coef)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> eq </term> =    a string of the form :   'varendo  =   coefi*varex1+...+coefj*varexk' with varexi possibly lacking</para></listitem>
+<listitem><para>*  <term> coef </term> =    a string vector of the form coef  =   ['coef1';...;'coefn']</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> namey </term> =    the name of the rhs variable</para></listitem>
+<listitem><para>*  <term> ncoefeqi </term> =    a (nx1) vector of the indexes of coefi,...,coefj in coef</para></listitem>
+<listitem><para>*  <term> lexo </term> =    a (nx1) vector of names of the exogenous variables</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Recovers from an equation the name of the endogenous variable, the indexes of the coefficients (in a vector) and the names of the exogenous variables (also in a vector).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+[nyi,ncoefi,lexoi]=eqlist('y1=c1*x1+c2*x2',['c1';'c2'])
+ 
+//Extracts in nyi y1, in ncoefi [1;2] and in lexoi ['x1';'x2'].
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

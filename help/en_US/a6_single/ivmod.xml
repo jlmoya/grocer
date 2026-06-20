@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ivmod" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:31-Mars-2019$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ivmod</refname>
+               <refpurpose>instrumental variables method for a model equation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[model2,rivmod]=ivmod(model,tsmat,indeq,endo,ivar,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>model</term> = a model tlist</para></listitem>
+<listitem><para>*  <term>tsmat</term> = a tsmat containing all data needed for estimating the equation (should be the tsmat associated to the model, created by function create_dbmod)</para></listitem>
+<listitem><para>*  <term>indeq</term> =</para></listitem>
+<listitem><para>&#160;&#160;&#160;- a string, the name of the equation to estimate</para></listitem>
+<listitem><para>&#160;&#160;&#160;- or an integer, the # of the equation in the model</para></listitem>
+<listitem><para>*  <term>endo</term> =</para></listitem>
+<listitem><para>&#160;&#160;&#160;- a string vector, the names of the variables that will be instrumented</para></listitem>
+<listitem><para>&#160;&#160;&#160;- or a list of variables, each entered between quotes</para></listitem>
+<listitem><para>*  <term>ivar</term> =</para></listitem>
+<listitem><para>&#160;&#160;&#160;- a string vector, the names of the instruments</para></listitem>
+<listitem><para>&#160;&#160;&#160;- a list, each element in the list conating the list of instruments for the variable at the same rank in the list of endogenous variables given in the previous input</para></listitem>
+<listitem><para>*  <term>arg1,...,argn</term> = optional arguments</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'noprint' if the user does not want to print the result (default: results are displayed on screen)</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'save=%t' if the user wants to save the estimated coefficients in the model tlist</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>model2</term> = the model tlist, with the estimated coefficients if the option save has been swtiched to %t</para></listitem>
+<listitem><para>*  <term>rivmod</term> = a results tlist, with:</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('meth')  = 'ivmod'</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('y')     = y data vector</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('x')     = x data matrix</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('nobs')  = # observations</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('nvar')  = # variables</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('beta')  = bhat</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('yhat')  = yhat</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('resid') = residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('vcovar') = estimated variance-covariance matrix of</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('sigu')  = sum of squared residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('ser')  = standard error of the regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('dw')    = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('condindex') = multicolinearity cond index</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('prescte') = boolean indicating the presence or</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('llike') = the log-likelihood</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('aic')= the Akaike information criterion</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('bic')= the Schwarz information criterion</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('hq')= the Hannan-Quinn information criterion</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('rsqr')  = rsquared</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('rbar')  = rbar-squared</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('f')    = F-stat for the nullity of coefficients</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('pvaluef') = its significance level</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('grsqr')  = generalized R-squared (the one where</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('grbar') = rbar-squared</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('fg') = F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('pvaluefg') = its significance level</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('like') = log-likelihood of the regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('prests') = boolean indicating the presence or</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('namey') = name of the y variable</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('namey') = name of the y variable</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('namex') = name of the coefficients</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('dropna') = boolean indicating if NAs have           been dropped</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('bounds') = if there is a timeseries in the regression, the bounds of the regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('nonna') = vector indicating position of non-NAs</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('saturation significance level') = significance level used to keep the dummies</para></listitem>
+<listitem><para>&#160;&#160;&#160;- rivmod('significant dummies') = the remaining dummies after testing</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Estimates with instrumental variables an equation of a model-
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+global GROCERDIR
+// load the model small:
+ load(GROCERDIR+'data\small.dat')
+ // load the database small_db:
+ load(GROCERDIR+'data\small_db.dat')
+ // set the bounds:
+ bounds('1981q1','2005q4');
+ // estimate the equation '
+ [small,riv]=ivmod(small,small_db,'td_p523_d1','delts(1,td_dint_dhs1)',['delts(demmon)','const'],'save=%t')
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2019
+        </refsection>
+</refentry>

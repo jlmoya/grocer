@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="bounds" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>bounds</refname>
+               <refpurpose>setting estimation bounds </refpurpose>
+   </refnamediv>
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[]=bounds(b1,b2,..., b2n-1,b2n)</synopsis>
+        </refsynopsisdiv>
+         <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry> 
+           <term>Input</term>
+ 
+<listitem><para>* <term>b1,...b2n</term>= a series of dates strings</para></listitem>
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+          <varlistentry>
+          <term>Output</term>
+<listitem><para>* Nothing: the bounds are transferred to the upper level in a (p x 1) vector by the argument resume</para></listitem>
+          </varlistentry>
+          </variablelist>
+        </refsection>
+        <refsection>
+               <title>DESCRIPTION</title>
+Sets the bounds for a regression. The bounds remain valid until the user leaves the environment (a working space or a function). This choice can be discussed: it is not without danger, since bounds used by a program can be different from the ones the user intended to use; it mimics the Portable Troll choice and is very convenient.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+bounds('1964q3','1989q2')//example taken from demo hendryericsson: bounds range from the first quarter of 1963 to the third quarter of 1989.
+ 
+bounds('1990f52p1','1999f52d26')// bounds range from the first week ('f52' indicates that the frequency is set to 52) of 1990 until the 26th week of 1999.
+ 
+bounds('1901a','1913a', '1919a','1939a', '1946a','2000a')// bounds cover all the 20th century years, the period of the first (years 1914 to 1918) and second (years 1940 to 1945) world wars being excluded.
+ 
+               ]]></programlisting>
+        </refsection>
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

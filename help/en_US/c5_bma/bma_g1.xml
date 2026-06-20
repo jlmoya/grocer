@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="bma_g1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>bma_g1 </refname>
+               <refpurpose>Bayesian model averaging </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rbma_g = bma_g1(y,x,ndraw,burnin,mcmc,g,nvmax)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> y </term> =  dependent variable vector</para></listitem>
+<listitem><para>*  <term> x </term> =  explanatory variables</para></listitem>
+<listitem><para>*  <term> ndraw </term> =  # of draws to carry out</para></listitem>
+<listitem><para>*  <term> burnin </term> =  # of burn-in MCMC simulation</para></listitem>
+<listitem><para>*  <term> mcmc </term> =  name of the MCMC algorithm (jump_g or mc3_g)</para></listitem>
+<listitem><para>*  <term> g </term> =  value of g-prior (default  =  1/max(nobs,k^2))</para></listitem>
+<listitem><para>*  <term> nvmax </term> =  max number of variable allowed in each model</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rbma_g </term> =  a results tlist with</para></listitem>
+<listitem><para>&#160;  -rbma_g('meth')  = 'bma g-prior'</para></listitem>
+<listitem><para>&#160;  -rbma_g('nmod')  = # of models visited during sampling</para></listitem>
+<listitem><para>&#160;  -rbma_g('beta')  = bhat averaged over all models</para></listitem>
+<listitem><para>&#160;  -rbma_g('mprob') = posterior prob of each model</para></listitem>
+<listitem><para>&#160;  -rbma_g('vprob') = posterior prob of each variable</para></listitem>
+<listitem><para>&#160;  -rbma_g('model') = indicator variables for each model (nmod x k)</para></listitem>
+<listitem><para>&#160;  -rbma_g('yhat')  = yhat averaged over all models</para></listitem>
+<listitem><para>&#160;  -rbma_g('resid') = residuals based on yhat averaged over models</para></listitem>
+<listitem><para>&#160;  -rbma_g('sige')  = averaged over all models</para></listitem>
+<listitem><para>&#160;  -rbma_g('nobs')  = nobs</para></listitem>
+<listitem><para>&#160;  -rbma_g('nvar')  = # of exogenous</para></listitem>
+<listitem><para>&#160;  -rbma_g('y')     = y data vector</para></listitem>
+<listitem><para>&#160;  -rbma_g('x')     = y data vector</para></listitem>
+<listitem><para>&#160;  -rbma_g('visit') = visits to each model during sampling (nmod x 1)</para></listitem>
+<listitem><para>&#160;  -rbma_g('time')  = time taken for MCMC sampling</para></listitem>
+<listitem><para>&#160;  -rbma_g('ndraw') = # of MCMC sampling draws</para></listitem>
+<listitem><para>&#160;  -rbma_g('burnin')= # of burn-in MCMC simulation</para></listitem>
+<listitem><para>&#160;  -rbma_g('gprior')= value of g-prior</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes bayesian model averaging under g-prior with selection of g-prior as proposed by Fernadez et alii (2001) g = 1/max(n,k^2).
+This function assumes that x and y are already a matrix and a vector.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/crime.dat')
+ 
+// take log of data
+listn = ['crime';'m';'ed';'po1';'po2';'lf';'mf';'pop';'nw';'u1';'u2';'gdp';'ineq';'prob';'time'] ;
+for i =1:size(listn,1)
+	execstr('l'+listn(i)+' = log('+listn(i)+')')
+end
+[y,namey,x]=explouniv('lcrime',['lm','so','led','lpo1','lpo2','llf','lmf','lpop','lnw','lu1','lu2',...
+'lgdp','lineq','lprob','ltime'])
+ rbma_g = bma_g1(y,x,30000,10000,mc3_g)
+// bma_g1 on y (log of crime) and x (explanatory variables), with 30000 draws, 10000 draws discarded,
+// mc3 algorithm, default g-prior and maximum # of variables authorized in the models
+ 
+ rbma_g = bma_g1(y,x,30000,10000,mc3_g,0.1,10)
+// the same but with a greater g_priori (0.1 instead of 1/15) and a maximum # of variables limited to 10
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2006
+        </refsection>
+</refentry>

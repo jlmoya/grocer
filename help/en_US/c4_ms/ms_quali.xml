@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ms_quali" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:13-Feb-2011$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ms_quali</refname>
+               <refpurpose>Estimates a ms turning point model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=ms_quali(coding,nbqua,nblatent,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term>coding</term> =  the way variables will be coded:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;-&#160;'KERN'&#160;=&#160;by&#160;quantiles&#160;estimated&#160;by&#160;the&#160;Epanechnikov&#160;kernel&#160;method</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;-&#160;'no'&#160;(or&#160;anything&#160;different&#160;from&#160;'KERN')&#160;=&#160;data&#160;already&#160;coded</para></listitem>
+<listitem><para>*  <term>nbqua</term>  =  a (2 x 1 ) vector with nbqua(1)  =  # of quantiles used to divide the data (nbqua(2) can take any value)</para></listitem>
+<listitem><para>*  <term>nblatent</term> =  # of latent variables (1 or 2)</para></listitem>
+<listitem><para>*  <term>arg1,...,argn</term> arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;-a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;-a&#160;real&#160;(nxp)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;-a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nxp)&#160;real&#160;vector&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;-the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;-'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;-'testna=%f'&#160;if&#160;the&#160;user&#160;does&#160;not&#160;want&#160;to&#160;test&#160;if&#160;there&#160;are&#160;NA&#160;values&#160;in&#160;the&#160;series</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;-'initparam=x'&#160;where&#160;x&#160;is&#160;a&#160;(nparam&#160;x&#160;1)&#160;vector&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;feed&#160;the&#160;estimation&#160;with&#160;her&#160;own&#160;starting&#160;values</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;-'nbstates=x'&#160;where&#160;x&#160;is&#160;the&#160;#&#160;of&#160;states&#160;(compulsory&#160;if&#160;there&#160;is&#160;only&#160;1&#160;latent&#160;variable)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;-'nojump'&#160;to&#160;impose&#160;that&#160;the&#160;latent&#160;variables&#160;jump&#160;only&#160;to&#160;contiguous&#160;states</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'optfunc=optim' if the user wants to use the optim optimisation function (default: optimg)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'opt_nelmead=crit,nitermax' with crit the value of the convergence criterion in the Nelder-Meade optimisation function and nitermax the maximum number of iterations (default = 'opt_nelmead=2*%eps,1000')</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'opt_optim=opts' where opts are options for optim that can be entered after the starting value of the parameters (default = 'opt_optim=,''ar'',1e6,1e6'')</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'opt_convg=val' where val is the threshold on gradient norm (default = 'opt_convg=1e-5')</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term>res</term>  =  a results tlist with:</para></listitem>
+<listitem><para>&#160;   - res('meth') = 'ms turning point'</para></listitem>
+<listitem><para>&#160;   - res('y') = original data</para></listitem>
+<listitem><para>&#160;   - res('nobs') = # of observations</para></listitem>
+<listitem><para>&#160;   - res('nvar') = # of variables</para></listitem>
+<listitem><para>&#160;   - res('coded y') = data transformed by the coding</para></listitem>
+<listitem><para>&#160;   - res('nb_quantiles') = # of quantiles used by the coding (if the kernel method has been used)</para></listitem>
+<listitem><para>&#160;   - res('nb_latent') = # of latent state variable</para></listitem>
+<listitem><para>&#160;   - res('nb_states') = # of states</para></listitem>
+<listitem><para>&#160;   - res('nojump') = a boolean indicating whether the latent state is allowed to jump from a state to another non contiguous one</para></listitem>
+<listitem><para>&#160;   - res('param') = vector of estimated parameters</para></listitem>
+<listitem><para>&#160;   - res('std') = vector of associated standard errors</para></listitem>
+<listitem><para>&#160;   - res('tstat') = vector of associated Steudent stats</para></listitem>
+<listitem><para>&#160;   - res('llike') = log-likelihood</para></listitem>
+<listitem><para>&#160;   - res('grad') = gradient at the solution</para></listitem>
+<listitem><para>&#160;   - res('transition probabilities') = matrix of transition probabilities (if there is only 1 state latent variable)</para></listitem>
+<listitem><para>&#160;   - res('transition probabilities') = matrix of transition probabilities (if there is only 1 state latent variable)</para></listitem>
+<listitem><para>&#160;   - res('first transition probabilities') = matrix of transition probabilities for the first latent variable (if there are 2 state latent variables)</para></listitem>
+<listitem><para>&#160;   - res('first transition probabilities') = matrix of transition probabilities for the second latent variable (if there are 2 state latent variables)</para></listitem>
+<listitem><para>&#160;   - res('conditional probabilities') = matrix of conditional probabilities (if there is only 1 state latent variable)</para></listitem>
+<listitem><para>&#160;   - res('filtered probabilities') = matrix of filtered state probabilities</para></listitem>
+<listitem><para>&#160;   - res('smoothed probabilities') = matrix of smoothed state probabilities</para></listitem>
+<listitem><para>&#160;   - res('PZ_std') = matrix of standard errors for the transition probabilities for the first latent variable</para></listitem>
+<listitem><para>&#160;   - res('PW_std') = matrix of standard errors for the transition probabilities for the second latent variable</para></listitem>
+<listitem><para>&#160;   - res('PX_cond_std') = matrix of standard errors for the latent variable</para></listitem>
+<listitem><para>&#160;   - res('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;   - res('namey') = name of the y variable</para></listitem>
+<listitem><para>&#160;   - res('namex') = name of the x variables</para></listitem>
+<listitem><para>&#160;   - res('dropna') = boolean indicating if NAs have been dropped</para></listitem>
+<listitem><para>&#160;   - res('bounds') = if there is a timeseries in the regression, the bounds of the regression</para></listitem>
+<listitem><para>&#160;   - res('nonna') = vector indicating position of non-NAs</para></listitem>
+ 
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ 
+Estimates a ms turning point model.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/macros/grocer/db/enq5.dat')
+bounds()
+ 
+ 
+//Example 1:
+nbquantiles=[3,0];// 3 quantiles
+nblatent=1;// 1 latent state
+ 
+//with the option testna=%f because of lacking data
+res1=ms_quali('KERN',nbquantiles,nblatent,'delts(3,B_ACTPA)','delts(3,C_VENPA)',...
+'delts(3,I_PROPA)','delts(3,I_GOULOT)','delts(3,S_CAPA)','nbstates=3','testna=%f')
+ 
+// Example 2:
+//as indicated by the previous estimation, impose that a high state cannot jump to a low one with the option 'nojump'
+res2=ms_quali('KERN',[3,0],1,'delts(3,B_ACTPA)','delts(3,C_VENPA)',...
+'delts(3,I_PROPA)','delts(3,I_GOULOT)','delts(3,S_CAPA)','nbstates=3','testna=%f','nojump')
+ 
+// Example 3:
+// now estimate with Gregoir and Lenglart 2 states formulation
+nbquantiles=[2,0];// 2 quantiles
+nblatent=2;// 2 latent states
+res3=ms_quali('KERN',nbquantiles,nblatent,'delts(3,B_ACTPA)',...
+'delts(3,C_VENPA)','delts(3,I_PROPA)','delts(3,I_GOULOT)','delts(3,S_CAPA)','testna=%f')
+ 
+// compare the indicators
+ind2=res2ts(res2,'filtered indicator')
+ind3=res2ts(res3,'filtered indicator')
+pltseries('ind2','ind3','title=standard and Gregoir Lenglart turning point indicator','leg=standard;Gregoir-Lenglart')
+ 
+// Examples taken from function ms_quali_d().
+// These examples show how one can estimate the 3 main models
+// (one with one latent state variable and possible jumps between not contiguous states,
+// one with one latent state and no jump between not contiguous states
+// and one with 2 latent variable) with data that contain some NA values.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2009
+        </refsection>
+</refentry>

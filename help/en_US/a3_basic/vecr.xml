@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<refentry version="5.0-subset Scilab" xml:id="vecr" xml:lang="en"
+ 
+          xmlns="http://docbook.org/ns/docbook"
+ 
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+ 
+          xmlns:svg="http://www.w3.org/2000/svg"
+ 
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+ 
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+ 
+          xmlns:db="http://docbook.org/ns/docbook">
+ 
+  <info>
+ 
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+ 
+   </info>
+ 
+   <refnamediv>
+ 
+       <refname>vecr</refname>
+ 
+               <refpurpose>stacks rowwise </refpurpose>
+ 
+   </refnamediv>
+ 
+ 
+ 
+        <refsynopsisdiv>
+ 
+               <title>CALLING SEQUENCE</title>
+ 
+               <synopsis>[v]=vecr(x)</synopsis>
+ 
+        </refsynopsisdiv>
+ 
+ 
+ 
+        <refsection>
+ 
+           <title>PARAMETERS</title>
+ 
+           <variablelist>
+ 
+           <varlistentry>
+ 
+ 
+ 
+           <term>Input</term>
+ 
+ 
+ 
+<listitem><para>*  <term> x </term> =    an input matrix x</para></listitem>
+ 
+ 
+ 
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+ 
+ 
+          <varlistentry>
+ 
+ 
+ 
+          <term>Output</term>
+ 
+ 
+ 
+<listitem><para>*  <term> v </term> =    output vector containing stacked rows of x</para></listitem>
+ 
+ 
+ 
+ 
+ 
+          </varlistentry>
+ 
+          </variablelist>
+ 
+        </refsection>
+ 
+ 
+ 
+        <refsection>
+ 
+               <title>DESCRIPTION</title>
+ 
+Creates a column vector by stacking rows of x.
+ 
+ 
+ 
+        </refsection>
+ 
+ 
+ 
+        <refsection>
+ 
+               <title>AUTHOR</title>
+ 
+Eric Dubois 2002
+ 
+        </refsection>
+ 
+</refentry>
+ 

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="prtgmm" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>prtgmm </refname>
+               <refpurpose>prints gmm estimation results </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>prtgmm(res,out)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> res </term> =    a tlist provided by a gmm function</para></listitem>
+<listitem><para>*  <term> out </term> =    the file where the results are printed (optional; default: %io(2), i.e the screen)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing, just print the results</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Prints Generalized Moments Method regression results.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+X = [ones(1000,1) grand(1000,1,'nor',0,1) grand(1000,1,'nor',0,1)];
+b = [0;1;-1];
+e = grand(1000,1,'nor',0,1);
+y = X*b + e;
+ 
+gmmopt = tlist(['gmm';'momt';'jake';'prt';'gmmit';'S']);
+gmmopt('prt')=1;
+gmmopt('gmmit') = 1;
+gmmopt('S')='W';
+gmmopt('momt')='gmmLinM';
+gmmopt('jake')='gmmLinJ';
+ 
+b0=zeros(3,1);
+ 
+uout=gmm('y',gmmopt,'exo=''X''','ivar=''X''','parm0=b0','noprint');
+ 
+prtgmm(uout,%io(2))
+ 
+// Prints on screen the tlist result coming from a gmm regression.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2007
+        </refsection>
+</refentry>

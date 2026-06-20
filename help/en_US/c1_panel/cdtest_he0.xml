@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="cdtest_he0" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:04-Sept.-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>cdtest_he0</refname>
+               <refpurpose>Panel cross-sectional dependence test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[cdt,pval]=cdtest_he0(y,index,x)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> y </term> =    a (nobs x neqs) matrix of all of the individual's observations vertically concatenated. This matrix must include in the first column the dependent variable, the independent variables must follow accordingly.</para></listitem>
+<listitem><para>*  <term> index </term> =    index vector that identifies each observation with an individual e.g. 1 (first 2 observations for individual # 1) 1 2 (next 1 observation for individual # 2) 3 (next 3 observations for individual # 3) 3 3</para></listitem>
+<listitem><para>*  <term> x </term> =    matrix of exogenous variables</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  cdt </term> =    test statistic</para></listitem>
+<listitem><para>*  <term>  pval </term> =    statistic p-value</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Pesaran (2004) test of cross-sectional dependence in heterogeneous panel data models.
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2012
+        </refsection>
+</refentry>

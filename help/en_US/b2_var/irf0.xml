@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="irf0" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:28-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>irf0</refname>
+               <refpurpose>Low-level Impulse Response function </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[IRF,PHI]=irf0(beta,S,N,p,P)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> beta </term> =    estimated parameters from a VAR</para></listitem>
+<listitem><para>*  <term> S </term> =    # of periods</para></listitem>
+<listitem><para>*  <term> N </term> =    dimension of the VAR</para></listitem>
+<listitem><para>*  <term> p </term> =    # of lags</para></listitem>
+<listitem><para>*  <term> P </term> =    matrix such that P*e  =    u where u is the residual from the VAR regression; e is the residual to be shocked</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> IRF </term> =    ((S+1) x T) impulse response functions</para></listitem>
+<listitem><para>*  <term> PHI </term> =    (N*p x T) matrix of coefficients</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Calculates Impulse Response Function for VAR (low level function).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+m=irf0(sbeta,S,N,p,P)
+ 
+// Example taken from function irf_mc1().
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="difonzo1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>difonzo1 </refname>
+               <refpurpose>Multivariate temporal disaggregation with transversal constraint </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[y,res]=difonzo1(Y,x,z,ta,s,typemod)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>* <term>Y</term> = a (N x M) real vector</para></listitem>
+<listitem><para>&#160;&#160;---&gt; M series of low frequency data with N observations</para></listitem>
+<listitem><para>*  <term> x </term> = a (n x M) real vector</para></listitem>
+<listitem><para>&#160;&#160;---&gt; M series of high frequency data with n observations</para></listitem>
+<listitem><para>*  <term> z </term> =  (n x 1) ---&gt; high frequency transversal constraint with nz obs.</para></listitem>
+<listitem><para>*  <term> ta </term> =  type of disaggregation</para></listitem>
+<listitem><para>&#160;&#160;-ta = 1 ---&gt; sum (flow)</para></listitem>
+<listitem><para>&#160;&#160;-ta = 0 ---&gt; average (index)</para></listitem>
+<listitem><para>&#160;&#160;-ta = i ---&gt; i th element (stock) ---&gt; interpolation</para></listitem>
+<listitem><para>*  <term> s </term> =  number of high frequency data points for each low frequency data points</para></listitem>
+<listitem><para>&#160;&#160;-s =  4 ---&gt; annual to quarterly</para></listitem>
+<listitem><para>&#160;&#160;-s = 12 ---&gt; annual to monthly</para></listitem>
+<listitem><para>&#160;&#160;-s =  3 ---&gt; quarterly to monthly</para></listitem>
+<listitem><para>*  <term> typemod </term> =  model for the high frequency innovations</para></listitem>
+<listitem><para>&#160;&#160;-ypemod = 'wn' ---&gt; multivariate white noise</para></listitem>
+<listitem><para>&#160;&#160;-typemod = 'rw' ---&gt; multivariate random walk</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> y </term> =  High frequency estimate</para></listitem>
+<listitem><para>*  <term> res </term> =  a results tlist with:</para></listitem>
+<listitem><para>&#160;   - res('meth')      = 'Multivariate difonzo'</para></listitem>
+<listitem><para>&#160;   - res('typemod')   = type of the model for the high frequency innovations</para></listitem>
+<listitem><para>&#160;   - res('ta')        = type of disaggregation</para></listitem>
+<listitem><para>&#160;   - res('nobs_lf')   = nobs. of low frequency data</para></listitem>
+<listitem><para>&#160;   - res('nobs_hf')   = nobs. of high-frequency data</para></listitem>
+<listitem><para>&#160;   - res('pred')      = number of extrapolations</para></listitem>
+<listitem><para>&#160;   - res('s')         = frequency conversion between low and high freq.</para></listitem>
+<listitem><para>&#160;   - res('diff')         = Degree of differencing</para></listitem>
+<listitem><para>&#160;   - res('y')         = high frequency estimate</para></listitem>
+<listitem><para>&#160;   - res('y_lf')         = low frequency data</para></listitem>
+<listitem><para>&#160;   - res('indicator')    = high frequency indicators</para></listitem>
+<listitem><para>&#160;   - res('transversal')   = data for the transversal constraint</para></listitem>
+<listitem><para>&#160;   - res('y_dt')      = high frequency estimate: standard deviation</para></listitem>
+<listitem><para>&#160;   - res('resid')     = high frequency residuals</para></listitem>
+<listitem><para>&#160;   - res('resid_U')   = low frequency residuals</para></listitem>
+<listitem><para>&#160;   - res('beta')      = estimated model parameters</para></listitem>
+<listitem><para>&#160;   - res('sd')        = standard deviation of the estimated model parameters</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Temporal disaggregation using the difonzo method of multivariate temporal disaggregation with transversal constraint (low level function that works only with matrices and where all options must be given a value).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+[y,res] = difonzo1(Y,x,z,0,4,'rw')
+// Provides quarterly disaggregation of (23x2) matrix Y (representing 2 annual data) with (92 x 2) matrix x (representing 2 quarterly series)
+// and transversality constraint represented by the (92x1) matrix z.
+// Annual series are built by averaging quarterly series (4th argument is 0); the order of aggregation is 4 (fifth argument);
+// residuals are assumed to follow a multivariate random walk (sixth argument is 'rw').
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2005
+        </refsection>
+</refentry>

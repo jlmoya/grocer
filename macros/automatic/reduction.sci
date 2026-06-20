@@ -1,0 +1,6 @@
+function reduction(stage,ind_0,estim,estimfull,estimpart,estimupd,multitest,test_func,...
+    y,x,z,namey,namexos,namecomp,prests,boundsvar,dropna,strategy,alpha,f0_tdo,...
+    t0_tdo,groups_pval,f0_bup,gam,eta,crit,m2prt_test,wreliab,depth,descent,ncomp,varargin)
+    
+
+endfunction

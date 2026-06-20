@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="autovar2var" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Août-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>autovar2var</refname>
+               <refpurpose>transforms VAR taken from Automatic estimation into a standard VAR </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rvar=autovar2var(rauto,type_mod,rank_mod)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>rauto</term> =    a results tlist from automatic applied to a VAR model (therefore typeof(rauto) is 'results' and rauto('meth') is 'automatic' and rauto('estim') is 'var'</para></listitem>
+<listitem><para>*  <term>rauto</term> =    the type of results that must be transformed ('final', 'stage 1 models', etc.)</para></listitem>
+<listitem><para>*  <term>rank_mod</term> =    the rank of the model in the list of results when the result is made of potentially several models ('stage 1 models', 'stage 2 models', etc.)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>rvar</term>  =    a tlist with</para></listitem>
+<listitem><para>&#160;&#160;- rvar('meth')  =    'restricted var'</para></listitem>
+<listitem><para>&#160;&#160;- rvar('y')  =    y data vector</para></listitem>
+<listitem><para>&#160;&#160;- rvar('x')  =    x data matrix</para></listitem>
+<listitem><para>&#160;&#160;- rvar('nobs')  =    # observations</para></listitem>
+<listitem><para>&#160;&#160;- rvar('nvar')  =    # exogenous variables</para></listitem>
+<listitem><para>&#160;&#160;- rvar('neqs')  =    # endogenous variables</para></listitem>
+<listitem><para>&#160;&#160;- rvar('resid')  =    residuals, with - rvar('resid')(:,i): residuals for equation # i</para></listitem>
+<listitem><para>&#160;&#160;- rvar('beta')  =    bhat, with - rvar('beta')(:,i): coefficients for equation # i</para></listitem>
+<listitem><para>&#160;&#160;- rvar('rsqr')  =    rsquared, with - rvar('rsqr')(i) : rsquared for equation # i</para></listitem>
+<listitem><para>&#160;&#160;- rvar('overallf')  =    F-stat for the nullity of coefficients other than the constant with: - rvar('f')(i): F-stat for equation # i</para></listitem>
+<listitem><para>&#160;&#160;- rvar('pvaluef')  =    their significance level with: - rvar('pvaluef')(i): significance level for equation # i</para></listitem>
+<listitem><para>&#160;&#160;- rvar('rbar')  =    rbar-squared</para></listitem>
+<listitem><para>&#160;&#160;- rvar('sigu')  =    sums of squared residuals with - rvar('sigu')(:,i): sum of squared residuals for equation # i</para></listitem>
+<listitem><para>&#160;&#160;- rvar('ser')  =    standard errors of the regression with - rvar('ser')(i): standard error for equation # i</para></listitem>
+<listitem><para>&#160;&#160;- rvar('tstat')  =    t-stats, with - rvar('tstat')(:,i): t-stat for equation # i</para></listitem>
+<listitem><para>&#160;&#160;- rvar('pvalue')  =    pvalue of the betas, with - rvar('pvalue')(:,i): p-value for equation # i</para></listitem>
+<listitem><para>&#160;&#160;- rvar('dw')  =    Durbin-Watson Statistic, with: - rvar('dw')(i): DW for equation # i</para></listitem>
+<listitem><para>&#160;&#160;- rvar('condindex')  =    multicolinearity cond index, with - rvar('condindex')(i): cond index for equation # i</para></listitem>
+<listitem><para>&#160;&#160;- rvar('boxq')  =    Box Q-stat, with - rvar('boxq')(i): Box Q-stat for equation # i</para></listitem>
+<listitem><para>&#160;&#160;- rvar('sigma')  =    (neqs x neqs) var-covar matrix of the regression</para></listitem>
+<listitem><para>&#160;&#160;- rvar('aic')  =    Akaike information criterion</para></listitem>
+<listitem><para>&#160;&#160;- rvar('bic')  =    Schwartz information criterion</para></listitem>
+<listitem><para>&#160;&#160;- rvar('hq')  =    Hannan-Quinn information criterion</para></listitem>
+<listitem><para>&#160;&#160;- rvar('xpxi')  =    inv(X'X)</para></listitem>
+<listitem><para>&#160;&#160;- rvar('vcovar')  =    variance amtrix of the vector of all coefficents</para></listitem>
+<listitem><para>&#160;&#160;- rvar('prests')  =    boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;&#160;- rvar('nx')  =    # of x variables</para></listitem>
+<listitem><para>&#160;&#160;- rvar('namey')  =    name of the y variable</para></listitem>
+<listitem><para>&#160;&#160;- rvar('namex')  =    name of the x variables (if any)</para></listitem>
+<listitem><para>&#160;&#160;- rvar('dropna')  =    boolean indicating if NAs had been dropped</para></listitem>
+<listitem><para>&#160;&#160;- rvar('bounds')  =    if there is a timeseries in the regression, the bounds of the regression</para></listitem>
+<listitem><para>&#160;&#160;- rvar('nonna')  =    vector indicating position of non-NA values (if the option 'dropna' was active)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Transforms a tlist result from the automatic VAR estimation into a proper VAR tlist, for axample for the sake of IRF calculations. Rsqr, Rbar and derived statistics are absent even in the presence of constants in the eqaution because they are meaningless in this case.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+global GROCERDIR;
+load(GROCERDIR+'/data/lutk1.dat')
+bounds('1960q4','1978q4')
+results=automatic(2,'estim=var','endo=delts(log(rfa_inv));delts(log(rfa_inc));delts(log(rfa_cons))')
+rvar=autovar2var(results,'final model') // recover the final model in a VAR results tlist
+varf(rvar,10) // make a 10 quarters forecast
+rvar2=autovar2var(results,'stage 2 models',2) // recover the second model from the 2nd stage regression
+varf(rvar2,10) // make a 10 quarters forecast with this alternative model
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2013
+        </refsection>
+</refentry>

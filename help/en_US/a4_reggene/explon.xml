@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="explon" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>explon</refname>
+               <refpurpose>explosion of several sequences of variables </refpurpose>
+   </refnamediv>
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[mats,names,prests,b,nonna]=explon(vars,named,b,testna,dropna,mindat,lags)</synopsis>
+        </refsynopsisdiv>
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+           <term>Input</term>
+<listitem><para>*  <term> vars </term> =   list of n:</para></listitem><listitem><para>&#160;&#160;-&#160;lists&#160;of&#160;variables</para></listitem><listitem><para>&#160;&#160;-&#160;matrix&#160;of&#160;names&#160;of&#160;variables&#160;the&#160;variables&#160;being&#160;in&#160;the&#160;form&#160;of</para></listitem><listitem><para>&#160;&#160;&#160;&#160;->&#160;a&#160;timeseries</para></listitem><listitem><para>&#160;&#160;&#160;&#160;->&#160;a&#160;real&#160;vector,</para></listitem><listitem><para>&#160;&#160;&#160;&#160;->&#160;a&#160;real&#160;matrix&#160;or&#160;a&#160;string&#160;(the&#160;name&#160;of&#160;a&#160;variable&#160;with&#160;one&#160;of&#160;the&#160;types&#160;cited&#160;above,&#160;between&#160;quotes)</para></listitem><listitem><para>&#160;&#160;&#160;&#160;->&#160;a&#160;matrix&#160;of&#160;strings,&#160;each&#160;one&#160;being&#160;the&#160;name&#160;of&#160;a&#160;variable</para></listitem><listitem><para>&#160;&#160;&#160;&#160;->&#160;the&#160;string&#160;'cte'&#160;or&#160;'const'&#160;if&#160;the&#160;user&#160;wants&#160;a&#160;constant&#160;to&#160;be&#160;included&#160;automatically</para></listitem><listitem><para>*  <term> named </term> =   a (n x 1) or (1 x n) vector of strings representing the name that will be given to variables not entered between quotes</para></listitem><listitem><para>*  <term> b </term> =   a (2*p x 1) string vector (of dates) (optional: if not given the function either takes the existing bounds or determines the bounds suitable to the given series)</para></listitem><listitem><para>*  <term> testna </term> =   a boolean indicating whether the program will test the existence of na's values in the matrices of values y and x</para></listitem><listitem><para>*  <term> dropna </term> =   a boolean indicating whether the program should keep only lines of matrices y and x with non na values in both matrices (suppose that testna has been set to %f)</para></listitem><listitem><para>*  <term> mindat </term> =  </para></listitem><listitem><para>&#160;&#160;-&#160;%t&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;take&#160;the&#160;min&#160;and&#160;max&#160;dates&#160;over&#160;which&#160;any&#160;series&#160;exists</para></listitem><listitem><para>&#160;&#160;-&#160;%f&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;take&#160;the&#160;time&#160;period&#160;over&#160;which&#160;all&#160;series&#160;exist</para></listitem><listitem><para>*  <term> lags </term> =   a scalar, a (n x 1) vector, each coordinate indicating the lag needed for the corresponding elements in the list vars (usefule for functiosn that are of VAR type)</para></listitem>
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> mats </term> =   a list of n (T x ki) matrices</para></listitem><listitem><para>*  <term> names </term> =   a list of n (ki x 1) matrices of names</para></listitem><listitem><para>*  <term> prests </term> =   a boolean indicating whether there is a ts in x</para></listitem><listitem><para>*  <term> boundsvarb </term> =   a (2*p x 1) string matrix (of dates)</para></listitem><listitem><para>*  <term> nonna </term> =   a (T x 1) vector indicating the indexes of non NA observations</para></listitem>          </varlistentry>
+          </variablelist>
+        </refsection>
+        <refsection>
+               <title>DESCRIPTION</title>
+From any number of lists of variables (for instance: endogenous, exogenous, rhs endogenous and intruments in an iv estimation or endogenous, switching exogenous, non switching exogenous and a priori datation in a Markov switching estimation), which can be in various formats (matrices, vectors, ts,... strings representing such objects, lists of such objects), defines the corresponding matrices that will be used in an estimation process, the names that will be used for the display of results, and, if necessary, the bounds over which the estimation will be performed: this is a function useful mainly to develop new econometric functions. This is the more general fucntion of this sort: there is a function explone and explouniv that explodes respectively 1 and 2 lists of object. Over 3, you must use explon. 
+        </refsection>
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+[grocer_mats,grocer_names,grocer_prests,grocer_b]=explon(list(grocer_endo,grocer_exo_com,grocer_exo_idio,grocer_MS_datation),['endogenous' 'swithing exog.' 'non swithing exog.' 'apriori_datation'])grocer_y=grocer_mats(1)grocer_z=grocer_mats(2)grocer_x=grocer_mats(3)grocer_MS_refdate=grocer_mats(4)
+ 
+grocer_namey=grocer_names(1)grocer_namez=grocer_names(2)grocer_namex=grocer_names(3)// example taken from function ms_reg. See how the matrices and names are recovered after the call to explon:// grocer_y, grocer_z, grocer_x and grocer_MS_refdate are respectively the vector representing the a priori datation,// the endogenous variables, the switching exogenous variables and non swithing exogenous variables. 
+[grocer_mats,grocer_names,grocer_prests,grocer_b]=explon(list(grocer_namey0,grocer_endo,grocer_exo,grocer_ivar),...['endogenous' 'rhs endogenous' 'exogenous' 'instruments'])// example taken from functions iv. 
+               ]]></programlisting>
+        </refsection>
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2006-2009
+        </refsection>
+</refentry>

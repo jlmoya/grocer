@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="banerji" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>banerji </refname>
+               <refpurpose>performs banerji test to evaluate the leading profile of a series against another one </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rba]=banerji(Pr,Tr,Pt,Tt, arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> Pr </term> =   a vector of through dates for the reference series</para></listitem>
+<listitem><para>*  <term> Tr </term> =   a vector of through dates for the reference series</para></listitem>
+<listitem><para>*  <term> Pt </term> =   a vector of through dates for the competeting series</para></listitem>
+<listitem><para>*  <term> Tt </term> =   a vector of through dates for the competeting series</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =   arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'lead&#160;=&#160;xx':&#160;the&#160;number&#160;of&#160;leads&#160;to&#160;test&#160;(default&#160;is&#160;4)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;&#160;&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;display&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rdfa </term> =   a results tlist with</para></listitem>
+<listitem><para>&#160;  -   rba('signi') = confidence for rejection of the null hypothesis of lead not significant                 </para></listitem>
+<listitem><para>&#160;  - rba('sum_ini') = initial sum of time difference                 </para></listitem>
+<listitem><para>&#160;  - rba('dates_extra')= dates of extra-cycle in the reference serie                </para></listitem>
+<listitem><para>&#160;  - rba('PT_extra') = type of each dates (P or T) in the extra-cycles</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+This function provides randomization test to evaluate the leading profile of a serie against another one. It tests the null H0: leads not significant.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/BusinessClimate.dat');
+ 
+// performs Bry-Boschan turning points dating procedure
+bounds('1990m1','2005m5')
+rbe = brybos('clim_be','proc=''bb''');	
+rfr =brybos('clim_fr','proc=''bb''');	
+bounds()
+ 
+// French business climate is the reference series
+Pr = rfr('P') ;
+Tr = rfr('T') ;
+Pt = rbe('P') ;
+Tt = rbe('T') ;
+ 
+// banerji with 4 month lead
+rba =banerji(Pr,Tr,Pt,Tt,'lead=4');
+// This Example is taken from banerji_d(): after having performed the bry-boschan turing points dating procedure,
+// the function tests the leading profile of belgium business climate over french one since the 90's.
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2005
+        </refsection>
+</refentry>

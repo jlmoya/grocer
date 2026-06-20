@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="tvpvar_diagnos_all" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:05-Sept.-2015$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>tvp_var_diagnos_all</refname>
+               <refpurpose>computes MCMC convergence diagnostics for all TVP VAR parmaeters </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[resA,resB,resQ,resW,resQ,resSigma]=tvp_var_diagnos_all(res,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> res </term> =    a tvp var results tlist</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =    optional arguemnts that can be</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'nautcorr=x'&#160;where&#160;x&#160;is&#160;the&#160;order&#160;of&#160;the&#160;aurocorrelation&#160;tested&#160;for&#160;the&#160;draws</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'npct_taper=x'&#160;where&#160;x&#160;is&#160;the&#160;%&#160;used&#160;to&#160;taper&#160;the&#160;window&#160;in&#160;t&#160;for&#160;Geweke's&#160;test</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'n_groups=x'&#160;where&#160;x&#160;is&#160;the&#160;the&#160;number&#160;of&#160;draws&#160;that&#160;are&#160;aggregated&#160;before&#160;performing&#160;the&#160;correlations</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'noprint'&#160;if&#160;the&#160;user&#160;does&#160;not&#160;want&#160;t&#160;print&#160;the&#160;results</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* <term>resA</term>, <term>resB</term>, <term>resQ</term>, <term>resW</term>, <term>resQ</term>, <term>resH</term>= diagnostics results tlist for coefficents At, Bt, Q, W, Q and Hstd</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes MCMC convergence diagnostics for some type of results (At, Bt, S, Q, W or Htstd) from a tvp-var results.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ stacksize('max')
+load(GROCERDIR+'\data\primiceri.dat')
+mkdir(GROCERDIR+'\temp')
+nlag=2
+bounds('1953q3','1963q2')
+prior=tvpvar_prior0(nlag,4,4,0.01,0.01,0.1,['Inflation';'Unemployment';'rate_3m'])
+ 
+ 
+bounds('1963q3','2001q3')
+res=Hetero_TVP_VAR(nlag,['Inflation';'Unemployment';'rate_3m'],10000,2000,prior,path,2000)
+tvp_var_diagnos_hyperp(res,20)
+// Provides MCMC convergence diagnoses on Primeceri (2005) TVP VAR for all parameters
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2015
+        </refsection>
+</refentry>

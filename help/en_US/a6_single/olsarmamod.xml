@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="olsarmamod" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:25-Mars-2019$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>olsarmamod</refname>
+               <refpurpose>Estimate by ols with arma errors equations of a model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[model2,rolsarma]=olsarmamod(model,tsmat,indeq,AR,MA,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>model</term> = a model tlist</para></listitem>
+<listitem><para>*  <term>tsmat</term> = a tsmat containing all data needed for estimating the equation (should be the tsmat associated to the model, created by function create_dbmod)</para></listitem>
+<listitem><para>*  <term>indeq</term> =</para></listitem>
+<listitem><para>&#160;&#160;&#160;- a string, the name of the equation to estimate or the keyword 'all' (to estimate all equations)</para></listitem>
+<listitem><para>&#160;&#160;&#160;- or an integer, the # of the equation in the model</para></listitem>
+<listitem><para>*  <term>AR</term> = a (nar x 1) or (1 x nar) string or real vector of parameters corresponding to the AR part of the error process</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  if AR is a real then all parameters are estimated</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  if AR is a string then all parameters with in AR with an equality (such as '=0.5') are constrained to the given value (0.5 in the example)</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  if AR is a string then it can contain inequality constraints; for instance '&lt;0.5' indicates that coeff must be lower than 0.5</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  if initown is set to %F, then the user can give any value to AR; only it size matters for the estimation process</para></listitem>
+<listitem><para>*  <term>MA</term> = a (nmaf x 1) or (1 x nmaf) string or real vector of corresponding to the AR part of the error, with the same working as for AR</para></listitem>
+<listitem><para>*  <term>arg1,...,argn</term> = arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;&#160;- the string 'noprint' if the user doesn't want to print the results of the regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'dropna' if the user wants to remove the NA values from the data</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'init=own' if the user wants the function to impose starting values for the parameters</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'beta=xxx' to fix the starting values of the coefficients of the regression if the user has given the option 'init=own'</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'optfunc=optim' if the user wants to use the optim optimisation function (default: optimg)</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'opt_nelmead=crit,nitermax' with crit the value of the convergence criterion in the Nelder-Meade optimisation function and nitermax the maximum number of iterations (default = 'opt_nelmead=2*%eps,1000')</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'opt_optim=opts' where opts are options for optim that can be entered after the starting value of the parameters (default = 'opt_optim=,''ar'',1e6,1e6'')</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'opt_convg=val' where val is the threshold on gradient norm (default = 'opt_convg=1e-5')</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term>model2</term> = the model tlist, with the estimated coefficients if the option save has been swtiched to %t</para></listitem>
+<listitem><para>* <term>rolsarma</term> = a olsarma results tlist, collecting the results of the corresponding estimated equation</para></listitem>
+
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs the estimation of an ols model with arma errors for an equation in a model.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+global GROCERDIR
+// load the model small:
+load(GROCERDIR+'data\small.dat')
+// load the database small_db:
+load(GROCERDIR+'data\small_db.dat')
+// set the bounds:
+bounds('1990q1','2005q4');
+// In the small model, estimate by ols with ARMA(2,1) residuals the equation td_p3m_d1,
+// save the estimated coefficients into the small model tlist
+// and store into tlist rp3m_d1 the whole estimation results:
+[small,rp3m_d1]=olsarmamod(small,small_db,'td_p3m_d1',[0 0 ],0,'save=%t');
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2019
+        </refsection>
+</refentry>

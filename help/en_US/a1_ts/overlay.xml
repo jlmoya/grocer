@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="overlay" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>overlay </refname>
+               <refpurpose>overlay several ts </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>tsout=overlay(argi)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+<listitem><para>*  <term> argi </term> =     a timeseries</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term> tsout </term> =     a timeseries whose periodicity is the periodicity of the first argument (other series with another periodicity are ignored) and whose date range runs from the earliest startdate of any of the input series to the latest enddate of any of the series. For each date in the output series, OVERLAY searches the argument list from left to right looking for a non-NA value in the corresponding position of an input series, or an input argument which is a non-NA constant. The first such value found is placed in the output series in that position. If none is found, then an NA is placed in the output series.</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+The same as the portable troll function overlay. Creates a timeseries by overlaying several timeseries.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+x=reshape(1:11,'10a'); y=reshape([9:2:27],'19a') ; z=reshape([0:1.1:37.4],'1a')
+u1 = overlay(x,y) // u1 is defined over the time span '10a'-'28a', equal to x over the time span '10a'-'20a', equal to y over the time span '21a-28a'
+u2 = overlay(x,z) // u2 is defined over the time span '1a'-'35a', equal to z over the time span '1a-9a', equal to x over the time span '10a'-'20a', equal to z over the time span '21a-35a'.
+u3 = overlay(x,z,y) // u3 is u2
+u4 = overlay(z,y)  // u4 is z
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

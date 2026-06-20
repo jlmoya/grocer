@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="multilogit" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>multilogit </refname>
+               <refpurpose>multivariate logit regression </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[res]=multilogit(namey,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =  a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> argi </term> =  an argument which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx1)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nxk)&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nxk)&#160;real&#160;vector&#160;or&#160;matrix&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;list&#160;of&#160;such&#160;elements</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'maxit=xx'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;set&#160;the&#160;maximum&#160;#&#160;of&#160;iterations&#160;to&#160;xx&#160;(default=100)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'tol=xx'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;set&#160;the&#160;convergence&#160;criterion&#160;to&#160;xx&#160;(default=1e-6)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;display&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;use&#160;in&#160;the&#160;regression&#160;all&#160;dates&#160;with&#160;no&#160;NA&#160;value&#160;in&#160;any&#160;variable&#160;(the&#160;main&#160;use&#160;of&#160;this&#160;option&#160;should&#160;be&#160;when&#160;dealing&#160;with&#160;daily&#160;ts)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> res </term> =  a results tlist with</para></listitem>
+<listitem><para>&#160;  - res('meth') = 'multilogit'</para></listitem>
+<listitem><para>&#160;  - res('beta') = (nvar x ncat) matrix of bet coefficients:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; [bet_1 bet_2 ... bet_ncat] under the normalization bet_0 =  0</para></listitem>
+<listitem><para>&#160;  - res('coeff') = (nvar*ncat x 1) vector of beta coefficients:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; [beta_1 ; beta_2 ; ... ; beta_ncat] under</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; normalization beta_0 =  0</para></listitem>
+<listitem><para>&#160;  - res('covb') = (nvar*ncat x nvar*ncat) covariance matrix of coefficients</para></listitem>
+<listitem><para>&#160;  - res('tstat') = (nvar*ncat x 1) vector of t-statistics</para></listitem>
+<listitem><para>&#160;  - res('pvalue') = (nvar*ncat x 1) vector of corresponding p-values</para></listitem>
+<listitem><para>&#160;  - res('y') = (nobs x ncat+1) matrix of data</para></listitem>
+<listitem><para>&#160;  - res('yhat') = (nobs x ncat+1) matrix of fitted probabilities: </para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; [P_0 P_1 ... P_ncat]</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; where P_j =  [P_1j ; P_2j ; ... ; P_nobsj]</para></listitem>
+<listitem><para>&#160;  - res('llike') = unrestricted log likelihood</para></listitem>
+<listitem><para>&#160;  - res('lratio') = LR test statistic against intercept-only model (all bets=0), distributed chi-squared with (nvar-1)*ncat degrees of freedom</para></listitem>
+<listitem><para>&#160;  - res('nobs') = number of observations</para></listitem>
+<listitem><para>&#160;  - res('nvar') = number of variables</para></listitem>
+<listitem><para>&#160;  - res('ncat') = number of categories of dependent variable (including the reference category j = 0)</para></listitem>
+<listitem><para>&#160;  - res('count') = vector of counts of each value taken by y, i.e., couunt = [#y=0 #y=1 ... #y=ncat]</para></listitem>
+<listitem><para>&#160;  - res('r2mf') = McFadden pseudo-R^2</para></listitem>
+<listitem><para>&#160;  - res('rsqr') = Estrella pseudo-R^2</para></listitem>
+<listitem><para>&#160;  - res('namey') = name of the y variable</para></listitem>
+<listitem><para>&#160;  - res('namex') = name of the x variables</para></listitem>
+<listitem><para>&#160;  - res('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;  - res('prescte') = %f (for printings)</para></listitem>
+<listitem><para>&#160;  - res('bounds') = if there is a timeseries in the regression, the bounds of the regression</para></listitem>
+<listitem><para>&#160;  - res('dropna') = boolean indicating if NAs have been dropped</para></listitem>
+<listitem><para>&#160;  - res('nonna') = vector indicating position of non-NAs</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes multivariate logit Regression.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+results = multilogit('y','x');
+ 
+// Example taken from multilogit_d, provides the multilogit regression of variable y on variable x.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2007
+        </refsection>
+</refentry>

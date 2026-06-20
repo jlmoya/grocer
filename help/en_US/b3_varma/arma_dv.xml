@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="arma_dv" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:13-Feb-2011$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>arma_dv</refname>
+               <refpurpose>Computes the partial derivatives in a VARMA model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[F,dF,A,dA,V,dV,G,dG]=arma_dv(theta,theta2mat,di)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> theta </term> =    (npx1) vector of starting values for the parameters</para></listitem>
+<listitem><para>*  <term> theta2mat </term> =    a string vector of instructions that transforms theta into the matrices FR, FS, AR, AS, V and G</para></listitem>
+<listitem><para>*  <term> di </term> =    a scalar</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> F </term> =    the whole AR part of the model</para></listitem>
+<listitem><para>*  <term> A </term> =    the whole MA part of the model</para></listitem>
+<listitem><para>*  <term> V </term> =    the variance of the residuals</para></listitem>
+<listitem><para>*  <term> G </term> =    the coefficients of the exogenous variables</para></listitem>
+<listitem><para>*  <term> dF, dA, dV, dG </term> =    the derivatives of these matrices with respect to the i-th parameter in theta </para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes the partial derivatives of the matrices in reduced form of a VARMAX model with respect to i-th parameter of the theta vector.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+[F,dF,A,dA,V,dV,G,dG] = arma_dv(theta,theta2mat,di);
+ 
+// Examples taken from function fr_dv(); this is an intermedaite in the calculation of the derivative of
+// the information matrix with respect to the parameters (see function imod())
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Jaime Terceiro, 1997/ Eric Dubois 2003
+        </refsection>
+</refentry>

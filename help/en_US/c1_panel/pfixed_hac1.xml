@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="pfixed_hac1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:01-Sept.-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>pfixed_hac1</refname>
+               <refpurpose>Panel equation regressions </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>﻿ rpanel=pfixed_hac1(y,index,x,typvcv,win)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> y </term> =    a (nobs*nindiv x 1) matrix of all of the individual's observations vertically concatenated. This matrix must include in the first column the dependent variable, the independent variables must follow accordingly.</para></listitem>
+<listitem><para>*  <term> index </term> =    index vector that identifies each observation with an individual e.g. 1 (first 2 observations for individual # 1) 1 2 (next 1 observation for individual # 2) 3 (next 3 observations for individual # 3) 3 3</para></listitem>
+<listitem><para>*  <term> x </term> =    a (nobs*nindiv x k) matrix of exogenous variables</para></listitem>
+<listitem><para>*  <term> typvcv </term> =    1 or 2 with</para></listitem>
+<listitem><para>&#160;&#160;-&#160;1&#160;"clustered"&#160;covariance&#160;matrix&#160;of&#160;Arellano&#160;(1987)&#160;recommended&#160;when&#160;T&#160;is&#160;fixed&#160;and&#160;N&#160;large&#160;but&#160;also&#160;"works"&#160;when&#160;T&#160;is&#160;large&#160;and&#160;N&#160;fixed&#160;see&#160;Hansen&#160;C.&#160;B.&#160;(2007)&#160;(reference&#160;below)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;2&#160;a&#160;Newey-west&#160;type&#160;(Driscoll-Kray)&#160;estimator&#160;recommended&#160;when&#160;T&#160;is&#160;large&#160;and&#160;N&#160;fixed</para></listitem>
+<listitem><para>*  <term> win </term> =    the length of the Barlett window kernel estimator (default  =    automatic selection by Andrews (1991) using an AR(1) model)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  res </term> =    a tlist with</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('meth') =   'panel with fixed effects'</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('y') =    y data vector</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('x') =    x data matrix</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('nobs') =    nobs</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('nvar') =    nvars</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('beta') =    bhat</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('yhat') =    yhat</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('resid') =    residuals</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('vcovar') =    estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('sige') =    estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('sigu') =    sum of squared residuals</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('ser') =    standard error of the regression</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('tstat') =    t-stats</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('pvalue') =    pvalue of the betas</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('condindex') =    multicolinearity cond index</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('prescte') =    boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('lliked') =    log-likelihood</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('rsqr') =    rsquared</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('rbar') =    rbar-squared</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('f') =    F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;&#160;-rpanel('pvaluef') =    its significance level</para></listitem>
+<listitem><para>&#160;&#160;-res('hac') =    type of robust variance matrix in case of HAC estimation</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs HAC variance correction for fixed effects panel model. Low level function that works only with matrices.
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2012
+        </refsection>
+</refentry>

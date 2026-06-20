@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="paneldb" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>paneldb </refname>
+               <refpurpose>Construct a tlist in grocer panel format </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>pdb = paneldb(ind,var,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> ind </term> =   vector of name for individual</para></listitem>
+<listitem><para>*  <term> var </term> =   vector of generic name for variable</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =   arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'conc&#160;=&#160;1'&#160;if&#160;concatenation&#160;must&#160;begins&#160;by&#160;individual&#160;names&#160;(2&#160;instead,&#160;default&#160;=1)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'bounds&#160;=[''bounds1''&#160;''bounds2'']'&#160;bounds&#160;for&#160;data</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rpdb </term> =   a results tlist with</para></listitem>
+<listitem><para>&#160;  - rpdb('panel data') = type of the list</para></listitem>
+<listitem><para>&#160;  - rpdb('dates')      = bounds of data</para></listitem>
+<listitem><para>&#160;  - rpdb('id')         = individual indentifiant</para></listitem>
+<listitem><para>&#160;  - rpdb('x')          = stacked data in matrix format</para></listitem>
+<listitem><para>&#160;  - rpdb('nameid')     = names of individual indentifiant</para></listitem>
+<listitem><para>&#160;  - rpdb('namex')      = generic names of data</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Transforms ts data into a panel data base admissible for a panel estimation.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+pdb = paneldb(['ze';'jp';'ca';'uk';'sw';'nw';'sd';'dk';'us'],['lxrate';'money_s';'rmmkt_s';'pic_s'],'bounds=[''1994m1'' ''2002m12'']');
+// Example taken from function paneldb_d(): construct a panel tlist for 4 macroeconomic data observed on 9 countries.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2006
+        </refsection>
+</refentry>

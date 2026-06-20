@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="tobit" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>tobit </refname>
+               <refpurpose>Tobit estimation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rtobit]=tobit(namey,arg1,...,argn)  </synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =    a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =    arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx1)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nx1)&#160;real&#160;vector&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;option&#160;which&#160;can&#160;be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'trunc=left'&#160;or&#160;'trunc=right'&#160;for&#160;censoring&#160;(default=left)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'vtrunc=x'&#160;where&#160;x&#160;is&#160;the&#160;value&#160;for&#160;censoring&#160;(default=0)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'b0=x'&#160;where&#160;x&#160;is&#160;the&#160;starting&#160;values&#160;for&#160;parameters&#160;(default&#160;=&#160;ols)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'hess=x'&#160;where&#160;x&#160;=&#160;Hessian:&#160;'dfp',&#160;'bfgs',&#160;'gn',&#160;'marq',&#160;'sd'&#160;(default&#160;=&#160;'bfgs')</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'btol=x'&#160;where&#160;x&#160;is&#160;the&#160;tolerance&#160;for&#160;b&#160;convergence&#160;(default&#160;=&#160;1e-8)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'ftol=x'&#160;tolerance&#160;for&#160;FUN&#160;convergence&#160;(default&#160;=&#160;1e-8)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'maxit=x'&#160;is&#160;the&#160;maximum&#160;#&#160;of&#160;iterations&#160;(default&#160;=&#160;500)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rtobit </term> =    a results tlist with</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('meth')&#160;&#160;=&#160;'tobit'</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('y')&#160;&#160;&#160;&#160;&#160;=&#160;y&#160;data&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('x')&#160;&#160;&#160;&#160;&#160;=&#160;x&#160;data&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('nobs')&#160;&#160;=&#160;#&#160;observations</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('nobsc')&#160;&#160;=&#160;#&#160;censored&#160;observations</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('nvar')&#160;&#160;=&#160;#&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('beta')&#160;&#160;=&#160;bhat</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('yhat')&#160;&#160;=&#160;yhat</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('resid')&#160;=&#160;residuals</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('vcovar')&#160;=&#160;estimated&#160;variance-covariance&#160;matrix&#160;of&#160;beta</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('sige')&#160;&#160;=&#160;estimated&#160;variance&#160;of&#160;the&#160;residuals</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('sigu')&#160;&#160;=&#160;sum&#160;of&#160;squared&#160;residuals</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('ser')&#160;&#160;=&#160;standard&#160;error&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('tstat')&#160;=&#160;t-stats</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('pvalue')&#160;=&#160;pvalue&#160;of&#160;the&#160;betas</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('dw')&#160;&#160;&#160;&#160;=&#160;Durbin-Watson&#160;Statistic</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('condindex')&#160;=&#160;multicolinearity&#160;cond&#160;index</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('prescte')&#160;=&#160;%f&#160;=&#160;boolean&#160;indicating&#160;the&#160;absence&#160;of&#160;a&#160;constant&#160;in&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('iter')&#160;=&#160;#&#160;iterations&#160;performed</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('llike')&#160;=&#160;log&#160;likelihood</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('opthess')&#160;=&#160;option&#160;used&#160;to&#160;update&#160;hessian</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('grad')&#160;=&#160;gradient&#160;at&#160;the&#160;optimum</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('ts')&#160;=&#160;boolean&#160;indicating&#160;the&#160;presence&#160;or&#160;absence&#160;of&#160;a&#160;time&#160;series&#160;in&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('namey')&#160;=&#160;name&#160;of&#160;the&#160;y&#160;variable</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('namex')&#160;=&#160;name&#160;of&#160;the&#160;x&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;-&#160;rtobit('bounds')&#160;=&#160;if&#160;there&#160;is&#160;a&#160;timeseries&#160;in&#160;the&#160;regression,&#160;the&#160;bounds&#160;of&#160;the&#160;regression</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes Tobit Regression. If the user has not given the argument 'noprint', the results of the regression and various diagnostics.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+xr = grand(200,5,'nor',0,1);
+bet = ones(5,1);
+yr = xr*bet+rand(200,1,'n');
+// now censor the data
+for i = 1:200
+  if yr(i,1)<0 then
+    yr(i,1) = 0;
+  end
+end
+ 
+// an example which provide only the results without
+// printing them
+r = tobit('yr','xr');
+ 
+// Example taken from tobit_d. The endogenous varaible is y, x is a matrix of exogenous variables. Hessian calcualtion method is dfp and maximum
+// # of iterations is set to 1000.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

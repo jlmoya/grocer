@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="fernandez1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>fernandez1 </refname>
+               <refpurpose>Temporal disaggregation using the Fernandez method </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[y,res]=fernandez1(Y,x,ta,s)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> Y </term> =  a (N x 1) vector of low frequency data</para></listitem>
+<listitem><para>*  <term> x </term> =  a (n x p) matrix of high frequency indicators (without intercept)</para></listitem>
+<listitem><para>*  <term> ta </term> =  type of disaggregation:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;&#160;n=-1&#160;(default)&#160;---&gt;&#160;sum&#160;(flow)</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;n=0&#160;---&gt;&#160;average&#160;(index)</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;n=i&#160;---&gt;&#160;i&#160;th&#160;element&#160;(stock)&#160;---&gt;&#160;interpolation</para></listitem>
+ 
+<listitem><para>*  <term> s </term> =  number of high frequency data points for each low frequency data points: </para></listitem>
+<listitem><para>&#160;&#160;-&#160;s=&#160;4&#160;---&gt;&#160;annual&#160;to&#160;quarterly</para></listitem>
+<listitem><para>&#160;&#160;-&#160;s=12&#160;---&gt;&#160;annual&#160;to&#160;monthly</para></listitem>
+<listitem><para>&#160;&#160;-&#160;s=&#160;3&#160;---&gt;&#160;quarterly&#160;to&#160;monthly</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> y </term> =  High frequency estimate</para></listitem>
+<listitem><para>*  <term> res </term> =  a results tlist with:</para></listitem>
+<listitem><para>&#160;   - res('meth')      = 'Fernandez'</para></listitem>
+<listitem><para>&#160;   - res('typemod')   = type of the model for the high frequency innovations</para></listitem>
+<listitem><para>&#160;   - res('ta')        = type of disaggregation</para></listitem>
+<listitem><para>&#160;   - res('nobs_lf')   = nobs. of low frequency data</para></listitem>
+<listitem><para>&#160;   - res('nobs_hf')   = nobs. of high-frequency data</para></listitem>
+<listitem><para>&#160;   - res('pred')      = number of extrapolations</para></listitem>
+<listitem><para>&#160;   - res('s')         = frequency conversion between low and high freq.</para></listitem>
+<listitem><para>&#160;   - res('p')         = number of regressors (including intercept)</para></listitem>
+<listitem><para>&#160;   - res('y')         = high frequency estimate</para></listitem>
+<listitem><para>&#160;   - res('y_lf')         = low frequency data</para></listitem>
+<listitem><para>&#160;   - res('indicator')    = high frequency indicators</para></listitem>
+<listitem><para>&#160;   - res('y_dt')      = high frequency estimate: standard deviation</para></listitem>
+<listitem><para>&#160;   - res('y_up')      = high frequency estimate: sd + sigma</para></listitem>
+<listitem><para>&#160;   - res('y_lo')      = high frequency estimate: sd - sigma</para></listitem>
+<listitem><para>&#160;   - res('resid')     = high frequency residuals</para></listitem>
+<listitem><para>&#160;   - res('resid_lf')   = low frequency residuals</para></listitem>
+<listitem><para>&#160;   - res('beta')      = estimated model parameters</para></listitem>
+<listitem><para>&#160;   - res('sd')        = standard deviation of the estimated model parameters</para></listitem>
+<listitem><para>&#160;   - res('tstat')     = estimated model parameters: t ratios</para></listitem>
+<listitem><para>&#160;   - res('aic')       = Information criterion: AIC</para></listitem>
+<listitem><para>&#160;   - res('bic')       = Information criterion: BIC</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Temporal disaggregation using the Fernandez method of multivariate temporal disaggregation (low level function with matrices only all parameters given).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'\data\xesp.dat')
+[y,res] = fernandez1(Y,x,-1,4);
+// If Y and X are taken from the database GROCERDIR+'\macros\grocer\db\xesp.dat',
+// provides quarterly disaggregation of the (22x1) matrix Y
+// (representing annual Spanih exportations) with the (88x1) matrix x.
+// Annual series are built by summing quarterly series (3rd arg set to -1);
+// the order of aggregation is 4.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2005
+        </refsection>
+</refentry>

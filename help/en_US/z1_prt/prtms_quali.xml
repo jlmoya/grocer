@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="prtms_quali" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>prtms_quali </refname>
+               <refpurpose>prints the results of a HMM estimation based upon qualitative data </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>prtms_quali(res,out)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> res </term> =    the results typed list of a qualtitaive turning point estimation </para></listitem>
+<listitem><para>*  <term> out </term> =    the symobolic name of the file where the results are printed (default: %io(2))</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* all results are printed on the specified file</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Prints the results of a HMM estimation based upon qualitative data.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/enq5.dat')
+bounds()
+ 
+nbquantiles=[3,0];// 3 quantiles
+nblatent=1;// 1 latent state
+ 
+// first estimate a model with 3 states
+// with the option testna=%f because of lacking data
+res1=ms_quali('KERN',nbquantiles,nblatent,'delts(3,B_ACTPA)','delts(3,C_VENPA)',...
+'delts(3,I_PROPA)','delts(3,I_GOULOT)','delts(3,S_CAPA)','nbstates=3','testna=%f','noprint')
+ 
+prtms_quali(res1)
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2009
+        </refsection>
+</refentry>

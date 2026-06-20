@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="Chowlin" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>chowlin </refname>
+               <refpurpose>Temporal disaggregation using the Chow-Lin method </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[y,res]=chowlin(namey,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term>nameY</term> =  a ts or a Nx1 vector of low frequency data or a string representing the name of a vector or a ts</para></listitem>
+<listitem><para>*  <term>argi</term> = an argument which can be</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx1)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nx1)&#160;real&#160;vector&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;list&#160;of&#160;such&#160;objects</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'divfq=n'&#160;where&#160;n&#160;is&#160;the&#160;number&#160;of&#160;high&#160;frequency&#160;data&#160;points&#160;for&#160;each&#160;low&#160;frequency&#160;data&#160;points</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'typemin=xxx'&#160;where&#160;xxx&#160;is&#160;the&#160;maximisation&#160;method&#160;(llike&#160;-default-&#160;or&#160;wls)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'ta=n'&#160;where&#160;n&#160;is&#160;the&#160;aggregation&#160;type:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;n=-1&#160;(default)&#160;---&gt;&#160;sum&#160;(flow)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;n=0&#160;---&gt;&#160;average&#160;(index)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;n=i&#160;---&gt;&#160;i&#160;th&#160;element&#160;(stock)&#160;---&gt;&#160;interpolation</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'delta=x'&#160;where&#160;x&#160;is&#160;the&#160;increment&#160;used&#160;for&#160;numerical&#160;derivation</para></listitem>
+<listitem><para>&#160;&#160;- 'optfunc=optim' if the user wants to use the optim optimisation function (default: optimg)</para></listitem>
+<listitem><para>&#160;&#160;- 'opt_nelmead=crit,nitermax' with crit the value of the convergence criterion in the Nelder-Meade optimisation function and nitermax the maximum number of iterations (default = 'opt_nelmead=2*%eps,1000')</para></listitem>
+<listitem><para>&#160;&#160;- 'opt_optim=opts' where opts are options for optim that can be entered after the starting value of the parameters (default = 'opt_optim=,''ar'',1e6,1e6'')</para></listitem>
+<listitem><para>&#160;&#160;- 'opt_convg=val' where val is the threshold on gradient norm (default = 'opt_convg=1e-5')</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term>y</term> =  High frequency estimate</para></listitem>
+<listitem><para>*  <term>res</term> =  a results tlist with:</para></listitem>
+<listitem><para>&#160;&#160;   - res('meth')      = 'Chow-Lin'</para></listitem>
+<listitem><para>&#160;&#160;   - res('ta')        = type of disaggregation</para></listitem>
+<listitem><para>&#160;&#160;   - res('nobs_lf')   = nobs. of low frequency data</para></listitem>
+<listitem><para>&#160;&#160;   - res('nobs_hf')   = nobs. of high-frequency data</para></listitem>
+<listitem><para>&#160;&#160;   - res('pred')      = number of extrapolations</para></listitem>
+<listitem><para>&#160;&#160;   - res('s')         = frequency conversion between low and high freq.</para></listitem>
+<listitem><para>&#160;&#160;   - res('p')         = number of regressors (including intercept)</para></listitem>
+<listitem><para>&#160;&#160;   - res('y_lf')      = low frequency data</para></listitem>
+<listitem><para>&#160;&#160;   - res('indicator') = high frequency indicators</para></listitem>
+<listitem><para>&#160;&#160;   - res('y')         = high frequency estimate</para></listitem>
+<listitem><para>&#160;&#160;   - res('y_dt')      = high frequency estimate: standard deviation</para></listitem>
+<listitem><para>&#160;&#160;   - res('y_up')      = high frequency estimate: sd + sigma</para></listitem>
+<listitem><para>&#160;&#160;   - res('y_lo')      = high frequency estimate: sd - sigma</para></listitem>
+<listitem><para>&#160;&#160;   - res('resid_hf')  = high frequency residuals</para></listitem>
+<listitem><para>&#160;&#160;   - res('resid_lf)   = low frequency residuals</para></listitem>
+<listitem><para>&#160;&#160;   - res('beta')      = estimated model parameters</para></listitem>
+<listitem><para>&#160;&#160;   - res('sd')        = estimated model parameters: standard deviation</para></listitem>
+<listitem><para>&#160;&#160;   - res('tstat')     = estimated model parameters: t ratios</para></listitem>
+<listitem><para>&#160;&#160;   - res('rho')       = innovational parameter</para></listitem>
+<listitem><para>&#160;&#160;   - res('aic')       = Information criterion: AIC</para></listitem>
+<listitem><para>&#160;&#160;   - res('bic')       = Information criterion: BIC</para></listitem>
+<listitem><para>&#160;&#160;   - res('typemin')   = method of estimation</para></listitem>
+<listitem><para>&#160;&#160;   - res('llike')     = Log-likelihood at the estimated parameters</para></listitem>
+<listitem><para>&#160;&#160;   - res('sigma')     = Variance at the estimated parameters</para></listitem>
+<listitem><para>&#160;&#160;   - res('namey')     = Name of the high frequency aggregate</para></listitem>
+<listitem><para>&#160;&#160;   - res('namex')     = Name of the low frequency indicators</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Temporal disaggregation using the Chow-Lin method (high level function with vectors, matrices or ts and the possibility of default parmaters)
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'\data\xesp.dat')
+[y,res] = chowlin('Y','x','ta=-1','typemin=wls')
+ 
+// Example taken from function chowlin_d. Provides monthly disaggregation of series Y
+// (in chowlin_d a vector, but it should also work if y were a ts)
+// through weighted least squares maximisation and with the annual data equal to the sum of corresponding monthly data.
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2005
+        </refsection>
+</refentry>

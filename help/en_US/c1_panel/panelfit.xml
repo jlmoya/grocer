@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="panelfit" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>panelfit </refname>
+               <refpurpose>Compute fitted value implied by panel estimation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>panhat = panelfit(res,paneldb)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> res </term> =    tlist result of estimation (poolded, fixed effect or random effect estimation)</para></listitem>
+<listitem><para>*  <term> paneldb </term> =    tlist containing data in panel format (use of tlist as imput it allow the user to make out-of-sample forecasts by mean of a database with different time span, cf. paneldb.sci for construction of panel tlist)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> panhat </term> =    a results tlist with</para></listitem>
+<listitem><para>&#160;  - panhat('meth')   ='panel fit'</para></listitem>
+<listitem><para>&#160;  - panhat('yhat')   = matrix of fited data</para></listitem>
+<listitem><para>&#160;  - panhat('bounds') = bounds of the asjustment</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes fitted values implied by panel estimation.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'\macros\grocer\db\judgepanel.dat')     // Judge Example with Balanced Panel
+ 
+//  Fixed Effects Estimation
+r1 = pfixed('y',judgepanel);
+ 
+// Compute adjustement
+rfit = panelfit(r1,judgepanel);
+ 
+// Example taken from function panelfit_d(): compute panel fitted value on Judge et alii data.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2006
+        </refsection>
+</refentry>

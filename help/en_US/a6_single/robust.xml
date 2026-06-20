@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="robust" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>robust </refname>
+               <refpurpose>robust regression </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rrobust]=robust(wfunc,wparm,namey, arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> wfunc </term> =   'huber' for Huber's t function</para></listitem>
+<listitem><para>&#160;&#160;-'ramsay' for Ramsay's E function</para></listitem>
+<listitem><para>&#160;&#160;-'andrew' for Andrew's wave function</para></listitem>
+<listitem><para>&#160;&#160;-'tukey' for Tukey's biweight</para></listitem>
+<listitem><para>*  <term> wparm </term> =   weighting function parameter</para></listitem>
+<listitem><para>*  <term> namey </term> =   a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> argi </term> =   an argument that can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx1)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nxk)&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nxk)&#160;real&#160;vector&#160;or&#160;matrix&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;list&#160;of&#160;such&#160;elements</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;display&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rrobust </term> =   a tlist with</para></listitem>
+<listitem><para>&#160;  - rrobust('meth')  = 'robust'+ 'huber', 'ramsay', 'andrew' or 'tukey'</para></listitem>
+<listitem><para>&#160;  - rrobust('y')     = y data vector</para></listitem>
+<listitem><para>&#160;  - rrobust('x')     = x data matrix</para></listitem>
+<listitem><para>&#160;  - rrobust('nobs')  = nobs</para></listitem>
+<listitem><para>&#160;  - rrobust('nvar')  = nvars</para></listitem>
+<listitem><para>&#160;  - rrobust('beta')  = bhat</para></listitem>
+<listitem><para>&#160;  - rrobust('yhat')  = yhat</para></listitem>
+<listitem><para>&#160;  - rrobust('resid') = residuals</para></listitem>
+<listitem><para>&#160;  - rrobust('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;  - rrobust('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - rrobust('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - rrobust('ser')  = standard error of the regression</para></listitem>
+<listitem><para>&#160;  - rrobust('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;  - rrobust('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;  - rrobust('dw')    = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;  - rrobust('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;  - rrobust('rsqr')  = rsquared</para></listitem>
+<listitem><para>&#160;  - rrobust('rbar')  = rbar-squared</para></listitem>
+<listitem><para>&#160;  - rrobust('f')    = F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;  - rrobust('pvaluef') = its significance level</para></listitem>
+<listitem><para>&#160;  - rrobust('prescte') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;  - rrobust('namey') = name of the y variable</para></listitem>
+<listitem><para>&#160;  - rrobust('namex') = name of the x variables</para></listitem>
+<listitem><para>&#160;  - rrobust('bounds') = if there is a timeseries in the regression, the bounds of the regression</para></listitem>
+<listitem><para>&#160;  - rrobust('wparm') = wparm</para></listitem>
+<listitem><para>&#160;  - rrobust('iter')  = # of iterations</para></listitem>
+<listitem><para>&#160;  - rrobust('weight') = nobs - vector of weights</para></listitem>
+<listitem><para>&#160;  - rrobust('convg') = convg criterion</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ Computes robust regression using iteratively reweighted least-squares. The first argument control the weighting scheme. The second argument controls the weighting parameter. Endogenous variable must be given third, as a vector, a ts, between quotes (if the user wants to keep the name of the variable in the tlist result and for the printings) or not. Exogenous variables are given after, in one of the formats authorized for the endogenous one, or in matrix format. The program displays on screen various results (coefficients, tstat, R², Durbin and Watson, first order autocorrelation of residuals,...) except if the user has entered the argument 'noprint' anywhere after the first argument.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'\data\bdhenderic.dat') ; bounds('1964q3','1989q2') ;
+r = robust('huber', 0.000338','delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet', 'lagts(1,lm1-lp-ly)','cte')
+r = robust('andrew', 0.000338','delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet', 'lagts(1,lm1-lp-ly)','cte', 'noprint')
+// These examples shows the results of a robust regression on Hendry and Ericsson's preferred regression, using huber's weighting scheme in example 1 and andrew's one in example 2. Results are not displayed in example 2.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

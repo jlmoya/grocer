@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="contrib" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>contrib </refname>
+               <refpurpose>contribution of an exogenous variable </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[contrib_x]=contrib(vari,mainf_proxy)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> vari </term> =   the exogenous variable, either a ts, a vector or such an object</para></listitem>
+<listitem><para>*  <term> mainf_proxy </term> =   the nbterms first terms of the Infinite Moving average</para></listitem>
+<listitem><para>*  <term> dropna </term> =   'dropna' if the user wants to remove the NA values from the data (optional)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> contrib_x </term> =   the vector of contributions</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Calculates contribution of variable vari to the evolution of an endogenous variable, with response function mainf_proxy.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/macros/grocer/db/bdhenderic.dat');
+rnet_mainf=mainf([1-0.1746071-0.0928556 ; 0.1746071],-0.6296264);
+rnet_contrib=contrib(delts(rnet),rnet_mainf)
+ 
+load(GROCERDIR+'/macros/grocer/db/bdhenderic.dat');
+rnet_mainf=mainf([1-0.1746071-0.0928556 ; 0.1746071],-0.6296264,107);rnet_contrib=contrib(delts(rnet),rnet_mainf)
+ 
+// The two examples calculate the contribution of the interest rate to the delta of logarithm of m1 according to Hendry and Ericsson
+// model (estimated by grocer function hendryericsson(). In the first one, the moving average approximation has been calculated
+// only for the 100 first terms (default of mainf); Therefore contrib has given the message "WARNING:# of terms in the response
+// function are lower than the # of observations". In the second example, this number of terms has been adjusted to the length
+// of the ts and the warning message no longer occurs.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2004
+        </refsection>
+</refentry>

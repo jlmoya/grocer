@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="nlsmod" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:25-Mars-2019$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>nlsmod</refname>
+               <refpurpose>Estimate non-linear least squares for equations of a model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[model2,rnls]=nlsmod(model,tsmat,indeq,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>model</term> = a model tlist</para></listitem>
+<listitem><para>*  <term>tsmat</term> = a tsmat containing all data needed for estimating the equation (should be the tsmat associated to the model, created by function create_dbmod)</para></listitem>
+<listitem><para>*  <term>indeq</term> =</para></listitem>
+<listitem><para>&#160;&#160;&#160;- a string, the name of the equation to estimate or the keyword 'all' (to estimate all equations)</para></listitem>
+<listitem><para>&#160;&#160;&#160;- or an interger, the # of the equation in the model</para></listitem>
+<listitem><para>*  <term>arg1,...,argn</term> = optional arguments</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'noprint' if the user does not want to print the result (defautlt: results are displayed on screen)</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'save=%t' if the user wants to save the estimated coefficients in the model tlist</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'optfunc=optim' if the user wants to use the optim optimisation function (default: optimg)</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'opt_nelmead=crit,nitermax' with crit the value of the convergence criterion in the Nelder-Meade optimisation function and nitermax the maximum number of iterations (default = 'opt_nelmead=2*%eps,1000')</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'opt_optim=opts' where opts are options for optim that can be entered after the starting value of the parameters (default = 'opt_optim=,''ar'',1e6,1e6'')</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'opt_convg=val' where val is the threshold on gradient norm (default = 'opt_convg=1e-5')</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>model2</term> = the model tlist, with the estimated coefficients if the option save has been swtiched to %t</para></listitem>
+<listitem><para>*  <term>rnls</term> = a nls results tlist, collecting the results of the corresponding estimated equation</para></listitem>
+ 
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Estimates by non-linear least squares an equation of a model.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+global GROCERDIR
+// load the model small:
+load(GROCERDIR+'data\small.dat')
+// load the database small_db:
+load(GROCERDIR+'data\small_db.dat')
+// set the bounds:
+bounds('1981q1','2005q4');
+// In the small model, estimate by non-linear least squares the equation td_p6_d1
+// Estimated coefficients are stored into the small model tlist and
+// the whole estimation results are stored into tlist rp6_d1:
+[small,rp6_d1]=nlsmod(small,small_db,'td_p6_d1','save=%t')
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2019
+        </refsection>
+</refentry>

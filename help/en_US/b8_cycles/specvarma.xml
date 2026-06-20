@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="specvarma" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>specvarma </refname>
+               <refpurpose>compute parametric spectral analysis of time series </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rspec]=specvarma(result,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> result </term> =   tlist estimation result from OLS,VAR or VARMA methods (warning: no constant is allowed !)</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =   arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;display&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;optional&#160;arguments&#160;that&#160;can&#160;be&#160;the&#160;following:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.'trunc=xx'&#160;:&#160;lag&#160;window&#160;size&#160;(the&#160;default&#160;value&#160;is&#160;k=round(sqrt(T)))</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.'weight=xx'&#160;:&#160;(N&#160;x&#160;1)&#160;vector&#160;of&#160;weights&#160;(equal&#160;weights&#160;by&#160;default)&#160;for&#160;cohesion</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.spec=1'&#160;:&#160;plot&#160;spectrum</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.'cospe=1'&#160;&#160;&#160;&#160;&#160;:&#160;plot&#160;cospectrum</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.'dcorr=1'&#160;:&#160;plot&#160;dynamic&#160;correlation</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.'phase=1'&#160;:&#160;plot&#160;phase&#160;spectrum</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.'coher=1'&#160;:&#160;plot&#160;coherency</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.'cohes=1'&#160;:&#160;plot&#160;cohesion</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.'ic&#160;=1'&#160;:&#160;performs&#160;delta-method&#160;estimation&#160;of&#160;confidence&#160;band</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rspec </term> =   a results tlist with</para></listitem>
+<listitem><para>&#160;  - rspec('cospe') = matrix of cospectra</para></listitem>
+<listitem><para>&#160;  - rspec('cohes') = matrix of cohesion (if more than one TS)</para></listitem>
+<listitem><para>&#160;  - rspec('coher') = matrix of coherence (if more than one TS)</para></listitem>
+<listitem><para>&#160;  - rspec('dcorr') = matrix of dynamic correlations (if more than one TS)</para></listitem>
+<listitem><para>&#160;  - rspec('phase') = matrix of standardized phase spectrum (if more than one TS)</para></listitem>
+<listitem><para>&#160;  - rspec('order') = order of arrival of variable in cross-products</para></listitem>
+<listitem><para>&#160;  - rspec('ucohes') = matrix of upper bound for cohesion (compute by block-bootstrap)</para></listitem>
+<listitem><para>&#160;  - rspec('lcohes') = matrix of lower bound for cohesion (compute by block-bootstrap)</para></listitem>
+<listitem><para>&#160;  - rspec('ucoher') = matrix of upper bound for coherency (compute by block-bootstrap)</para></listitem>
+<listitem><para>&#160;  - rspec('lcoher') = matrix of lower bound for coherency (compute by block-bootstrap)</para></listitem>
+<listitem><para>&#160;  - rspec('ucospe') = matrix of upper bound for cospectra (compute by block-bootstrap)</para></listitem>
+<listitem><para>&#160;  - rspec('lcospe') = matrix of upper bound for cospectra (compute by block-bootstrap)</para></listitem>
+<listitem><para>&#160;  - rspec('udcorr') = matrix of upper bound for dynamic correlations (compute by block-bootstrap)</para></listitem>
+<listitem><para>&#160;  - rspec('ldcorr') = matrix of lower bound for dynamic correlations (compute by block-bootstrap)</para></listitem>
+<listitem><para>&#160;  - rspec('uphase') = matrix of upper bound for phase spectrum (compute by block-bootstrap)</para></listitem>
+<listitem><para>&#160;  - rspec('lphase') = matrix of lower bound for phase spectrum (compute by block-bootstrap)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+This function provides standard spectral related tools to analyse stationary time series. It performs: spectrum, cospectrum, phase spectrum, coherence, dynamic correlation and cohesion. The method is parametric: the function is based upon the priori estimation of a var or varma model, whose results are taken as an entry of function specvarma.
+ 
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'\data\specgdp.dat');
+ 
+// get the names of the variables available in the database
+lvar =dblist(GROCERDIR+'\data\specgdp.dat');
+ 
+// transforms by log and first difference
+// & center data
+for i = 1:size(lvar,1)
+   execstr('dl'+lvar(i)+' = delts(log('+lvar(i)+'))')
+   execstr('dl'+lvar(i)+'_m = dl'+lvar(i)+' - mean(dl'+lvar(i)+')')
+end
+ 
+// estimate var(4) model with no constant
+rvar = VAR(4,'endo=dlfr_m;dlger_m;dlit_m;dlsp_m','nocte','noprint')
+ 
+// estimates and prints cohesion of var model
+// and compute 95% interval confidence band
+rspec = specvarma(rvar,'cohes=1','ic=1');
+// Example taken from function specvarma_d. A var model is estimated on
+// the variations of logarithm of the French, German, Italian and Spanish GDP.
+// The cohesion of these 4 series is plotted ('cohes=1') with the confidence band calculated by the mean of the delta method.
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2005
+        </refsection>
+</refentry>

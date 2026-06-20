@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="Choi1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:24-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>Choi1 </refname>
+               <refpurpose>Choi Panel Unit Root Test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res = Choi1(Y,t_order,LagOrders,pmax,signif)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> Y </term> =   matrix (T,N) of observations</para></listitem>
+<listitem><para>&#160;&#160;The data matrix may be unbalanced.</para></listitem>
+<listitem><para>&#160;&#160;Missing Values must be specified as %nan      </para></listitem>
+<listitem><para>*  <term> t_order </term> =   -1 : no individual effect</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;0 : individual effects (Default)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1 : individual effects and time trends</para></listitem>
+<listitem><para>*  <term> LagOrders </term> =  </para></listitem>
+<listitem><para>&#160;&#160;-&#160;%nan&#160;if&#160;the&#160;user&#160;wants&#160;the&#160;program&#160;to&#160;determine&#160;the&#160;optimal&#160;lag&#160;order&#160;for&#160;each&#160;country&#160;(pmax=12&#160;or&#160;T/4)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;vector&#160;(N&#160;x&#160;1)&#160;or&#160;(1&#160;x&#160;N)&#160;of&#160;optimal&#160;lags&#160;for&#160;all&#160;the&#160;individuals&#160;of&#160;the&#160;panel</para></listitem>
+<listitem><para>*  <term> pmax </term> =   Maximum of the lag order authorized</para></listitem>
+<listitem><para>*  <term> pmax </term> =   Maximum of the lag order authorized</para></listitem>
+<listitem><para>*  <term> signif </term> =   significance level for the individual ADF tests (0.05, 0.01 or 0.1)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* <term>res</term> = a results tlist with:</para></listitem>
+<listitem><para>&#160;  - res('meth') = 'Choi'</para></listitem>
+<listitem><para>&#160;   - res('y') = (T x k) matrix of data</para></listitem>
+<listitem><para>&#160;   -  res('t_order') = the trend order (0 or 1)</para></listitem>
+<listitem><para>&#160;   -  res('t_orderlit') = the trend order in plain english</para></listitem>
+<listitem><para>&#160;   -  res('Pm') = Fisher''s modified Statistic (for large N) : converge toward N(0,1) under H0</para></listitem>
+<listitem><para>&#160;   -  res('Z') = Inverse Normal Test : converge toward N(0,1) under H0 when N tends to infinity</para></listitem>
+<listitem><para>&#160;   -  res('Lstar') = Modified Logit Test (George 1977): converge toward N(0,1) under H0</para></listitem>
+<listitem><para>&#160;   -  res('Pm_critical') = Critical Values of the Fisher's modified Statistic (Choi, 2001) at 1%, 5% and 10%: if Pm&gt;Ca Reject H0</para></listitem>
+<listitem><para>&#160;   -  res('Z_critical') = Critical Values of the Inverse Normal Test: at 1%, 5% and 10% : if Z&lt;Ca Reject H0</para></listitem>
+<listitem><para>&#160;   -  res('Lstar_critical') = Critical Values of the Modified Logit Test at 1%, 5% and 10%: if Lstar&lt;Ca Reject H0</para></listitem>
+<listitem><para>&#160;   -  res('Pm_pvalue') = Pvalue associated to the Fisher's modified Statistic</para></listitem>
+<listitem><para>&#160;   -  res('Z_pvalue') = Pvalue associated to the Inverse Normal Test</para></listitem>
+<listitem><para>&#160;   -  res('Lstar_pvalue') = Pvalue associated to the Modified Logit Test</para></listitem>
+<listitem><para>&#160;   -  res('pvalue_ADF') = Individual pvalues of individual ERS statitics based on standard DF pvalues (only for t_order=0)</para></listitem>
+<listitem><para>&#160;   -  res('tstat') = Individual statistiques of ERS tests</para></listitem>
+<listitem><para>&#160;   -  res('pi') = Individual lag order in individual ADF models</para></listitem>
+<listitem><para>&#160;   -  res('Ti') = Adjusted Individual Size</para></listitem>
+<listitem><para>&#160;   -  res('pmax') = Maximum Lag Order for individual ADF regressions</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Choi (2006) test of Unit Root ("Unit Root Tests for Cross-Sectionally Correlated Panels" in Frontiers of Analysis and Applied Research, Cambridge University Press).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/gdpan_oecd.dat');
+Y=explone(dblist(GROCERDIR+'/data/gdpan_oecd.dat'));
+// extract matrix of data present in database
+res=Choi1(log(Y),0,%nan,5,0.05)
+// Example provides the Choi test for all Y columns, with a constant but not trend (arg # 2 = 0),
+// the Lag order to be determined by the program (arg # 3 = %nan),
+// the maximum number of lags set to 5 (arg # 4 = 5) and a 5% significance level (arg # 5 = 0.05.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Christophe Hurlin 2004 / Eric Dubois 2008
+        </refsection>
+</refentry>

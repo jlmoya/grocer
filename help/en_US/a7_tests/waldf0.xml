@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="waldf0" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>waldf0  </refname>
+               <refpurpose>Wald F-test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[fstat,fprb,dfnum,dfden]=waldf0(resultr,resultu)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> resultr </term> =    results tlist from ols() restricted regression</para></listitem>
+<listitem><para>*  <term> resultu </term> =    results tlist from ols() unrestrcted regression</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> fstat </term> =    {(essr - essu)/#restrict}/{essu/(nobs-nvar)}</para></listitem>
+<listitem><para>*  <term> fprb  </term> =    marginal probability for fstat</para></listitem>
+<listitem><para>*  <term> dfnum </term>= degrees of freedom associated with the numerator</para></listitem>
+<listitem><para>*  <term> fprb </term>= degrees of freedom associated with the denominator</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ Computes Wald F-test for two regressions. Results are stored as numbers and are not displayed on screen.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+bounds('1964q3','1989q2');
+r1=ols('delts(lm1-lp)','delts(lagts(1,lm1-lp-ly))', 'lagts(1,lm1-lp-ly)', 'const');
+r2=ols('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet', 'lagts(1,lm1-lp-ly)', 'const');
+[fstat,f_pvalue,dfnum,dfden]=waldf0(r1,r2)
+ 
+// Useful mainly for programming purpose (since jbnorm does much more).
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

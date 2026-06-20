@@ -1,0 +1,45 @@
+Toolbox: grocer
+
+Title: GROCER
+
+Summary: Comprehensive econometric toolbox
+
+Version: 1.87
+
+Author: Eric Dubois and Emmanuel Michaux
+
+Maintainer: Eric Dubois <grocer.toolbox@free.fr>
+
+Category: Data Analysis - Statistics
+
+Entity: private individuals
+
+WebSite: // http://grocer.toolbox.free.fr/grocer.html
+
+License: CeCILL
+
+ScilabVersion: >= 5.5
+
+Depends: 
+
+Date: 2026-05-23
+
+Description: GROCER provides many standard econometric methods: ols, instrumental variables,
+ VAR, specification and unit root tests, limited dependent variables methods,
+ Johansen cointegration tests and VECM, GMM, statistical filters, basic methods
+ on panel data, ARMA and VARMA estimations, GARCH ...
+ 
+ GROCER provides also less standard ones: a pc-gets like function implementing in
+ an automatic manner the "general-to-specific" methodology, various
+ Markov-switching estimations, Bayesian Model Averaging estimation, dynamic
+ contributions...
+
+ GROCER allows to build, estimate and simulate backward macroeconomic models
+ 
+ GROCER comes with 2 new types of data useful to an econometrician: time series
+ and matrices of time series.
+  
+ You will find at http://grocer.toolbox.free.fr/grocer.html
+ a user manual and information on recent modifications made to Grocer.
+ 
+

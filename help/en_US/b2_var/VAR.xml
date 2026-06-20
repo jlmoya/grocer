@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="VAR" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:28-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>VAR</refname>
+               <refpurpose>estimates a VAR model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rvar=VAR(p,arg1,...argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>p</term> =   the lag length of the VAR</para></listitem>
+<listitem><para>*  <term>argi</term> =   an argument which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'endo=[var1;var2;&#160;...&#160;;varn]'&#160;or&#160;'endo=var1;var2;&#160;...&#160;;varn'&#160;with&#160;vari&#160;the&#160;name&#160;of&#160;an&#160;admissible&#160;variable&#160;for&#160;explox&#160;(a&#160;real&#160;vector,&#160;a&#160;ts,&#160;a&#160;real&#160;matrix&#160;or&#160;a&#160;list&#160;of&#160;such&#160;variables)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'exo=[var1;var2;&#160;...&#160;;varn]'&#160;or&#160;'exo=var1;var2;&#160;...&#160;;varn'&#160;with&#160;vari&#160;the&#160;name&#160;of&#160;an&#160;admissible&#160;variable&#160;for&#160;explox&#160;(a&#160;real&#160;vector,&#160;a&#160;ts,&#160;a&#160;real&#160;matrix&#160;or&#160;a&#160;list&#160;of&#160;such&#160;variables)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'nocte'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;a&#160;constant&#160;in&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term>rvar</term> =   a results tlist with:</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('meth')&#160;&#160;=&#160;'var'</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('yall')&#160;&#160;&#160;&#160;&#160;=&#160;y&#160;data&#160;vector&#160;agged&#160;data&#160;included</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('y')&#160;&#160;&#160;&#160;&#160;=&#160;y&#160;data&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('x')&#160;&#160;&#160;&#160;&#160;=&#160;x&#160;data&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('nobs')&#160;&#160;=&#160;#&#160;observations</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('nvar')&#160;&#160;=&#160;#&#160;exogenous&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('neqs')&#160;&#160;=&#160;#&#160;endogenous&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('resid')&#160;=&#160;residuals,&#160;with&#160;rvar('resid')(:,i):&#160;residuals&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('beta')&#160;&#160;=&#160;bhat,&#160;with&#160;rvar('beta')(:,i):&#160;coefficients&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('rsqr')&#160;&#160;=&#160;rsquared,&#160;with&#160;rvar('rsqr')(i)&#160;:&#160;rsquared&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('overallf')&#160;=&#160;F-stat&#160;for&#160;the&#160;nullity&#160;of&#160;coefficients&#160;other&#160;than&#160;the&#160;constant</para></listitem>
+<listitem><para>&#160;&#160;with: rvar('overallf')(i): F-stat for equation # i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('pvaluef')&#160;=&#160;their&#160;significance&#160;level&#160;with:&#160;rvar('pvaluef')(i):&#160;significance&#160;level&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('rbar')&#160;&#160;=&#160;rbar-squared</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('sigu')&#160;&#160;=&#160;sums&#160;of&#160;squared&#160;residuals&#160;with&#160;rvar('sigu')(:,i):&#160;sum&#160;of&#160;squared&#160;residuals&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('ser')&#160;&#160;&#160;=&#160;standard&#160;errors&#160;of&#160;the&#160;regression&#160;with&#160;rvar('ser')(i):&#160;standard&#160;error&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('tstat')&#160;=&#160;t-stats,&#160;with&#160;rvar('tstat')(:,i):&#160;t-stat&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('pvalue')=&#160;pvalue&#160;of&#160;the&#160;betas,&#160;with&#160;rvar('pvalue')(:,i):&#160;p-value&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('dw')&#160;&#160;&#160;&#160;=&#160;Durbin-Watson&#160;Statistic,&#160;with:&#160;rvar('dw')(i):&#160;DW&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('condindex')&#160;=&#160;multicolinearity&#160;cond&#160;index,&#160;with&#160;rvar('condindex')(i):&#160;cond&#160;index&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('boxq')&#160;=&#160;Box&#160;Q-stat,&#160;with&#160;rvar('boxq')(i):&#160;Box&#160;Q-stat&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('sigma')&#160;=&#160;(neqs&#160;x&#160;neqs)&#160;var-covar&#160;matrix&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('aic')&#160;=&#160;Aka&#239;ke&#160;information&#160;criterion</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('bic')&#160;=&#160;Schwartz&#160;information&#160;criterion</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('hq')&#160;=&#160;Hannan-Quinn&#160;information&#160;criterion</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('prests')&#160;=&#160;boolean&#160;indicating&#160;the&#160;presence&#160;or&#160;absence&#160;of&#160;a&#160;time&#160;series&#160;in&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('namey')&#160;=&#160;name&#160;of&#160;the&#160;y&#160;variable</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('nx')&#160;=&#160;#&#160;of&#160;x&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('namex')&#160;=&#160;name&#160;of&#160;the&#160;x&#160;variables&#160;(if&#160;any)</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('dropna')&#160;=&#160;boolean&#160;indicating&#160;if&#160;NAs&#160;have&#160;been&#160;dropped</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('bounds')&#160;=&#160;if&#160;there&#160;is&#160;a&#160;timeseries&#160;in&#160;the&#160;forecast,&#160;the&#160;bounds&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;.&#160;rvar('nonna')&#160;=&#160;vector&#160;indicating&#160;position&#160;of&#160;non-NAs</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Estimates a VAR of order p on endogenous variables, with the eventual presence of exogenous variables and, by default, displays on screen the estimation results.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/lutk1.dat')
+ 
+bounds('1960q4','1978q4')
+results=VAR(2,'endo=delts(log(rfa_inv));delts(log(rfa_inc));delts(log(rfa_cons))')
+// Example taken from function var_d1() estimate a var model, taken from Lütkepohl's book "Introduction to multiple time series analysis",
+// with three endogenous variables (the differentiated logarithm of investment, GDP and consumption) with 2 lags and no exogenous variables.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2007
+        </refsection>
+</refentry>

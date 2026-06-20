@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="olst1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:25-Mars-2019$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>olst1</refname>
+               <refpurpose>ols with t distributed errors </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rolst]=olst1(y,x,crit,maxit)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>y</term> = a (n x 1) vector</para></listitem>
+<listitem><para>*  <term>x</term> = a (n x k) vector</para></listitem>
+<listitem><para>*  <term>crit</term> = a scalar, the convergence criterion (for example 1e-5' ; default = 1e-15)</para></listitem>
+<listitem><para>*  <term>maxit</term> = a scalar, the maximum # of iterations (for example 'itmax=10'; default=500)</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>rolst</term> = a tlist with</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('meth') = 'olst'</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('y') = y data vector</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('x') = x data matrix</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('nobs') = nobs</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('nvar') = nvars</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('beta') = bhat</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('yhat') = yhat</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('resid') = residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('sige') = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('sigu') = estimated sum of squared residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('ser') = standard error of the regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('dw') = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('condindex') = multicolinearity cond index</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('conv') = convergence max(abs(bnew-bold))</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('iter') = # of iterations</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rolst('prescte') = boolean indicating if the R&#170; can be calculated</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Peforms ols with t-distributed errors. The low-level counrerpart to oslt, working only with matrices.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+b = ones(5,1);
+xmat = rand(100,4,'n');
+exo = [ones(100,1),xmat];
+// generate t-distributed errors
+ 
+evec = tdis_rnd(100,2)*.5;
+endo = exo*b+evec;
+// do robust t-distributed errors regression:
+lresult = olst1(endo,exo,0.0001,1000);
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2019
+        </refsection>
+</refentry>

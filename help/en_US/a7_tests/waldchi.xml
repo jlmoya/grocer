@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="waldchi" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:12-Feb-2012$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>waldchi</refname>
+               <refpurpose>Wald F-test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>resw=waldchi(R,r,resu,np)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> R </term> =    a (q x n-beta) matrix of linear constraints</para></listitem>
+<listitem><para>*  <term> r </term> =    a (q x 1) vector of linear constraints values</para></listitem>
+<listitem><para>*  <term> resu </term> =    a results tlist from an ols(), pfixed() regression</para></listitem>
+<listitem><para>*  <term> np</term>  =    'noprint' if the user does not want to print the results</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> resw </term> =    a results tlist with:</para></listitem>
+<listitem><para>&#160;&#160;- resw('meth')   = 'waldchi'</para></listitem>
+<listitem><para>&#160;&#160;- resw('runcons') = results tlist of the unrestricted regression</para></listitem>
+<listitem><para>&#160;&#160;- resw('chi') = Wald Chi-squared statistic</para></listitem>
+<listitem><para>&#160;&#160;- resw('def') = degrees of freedom of the chi2</para></listitem>
+<listitem><para>&#160;&#160;- resw('chi_pvalue') = p-value of the test</para></listitem>
+<listitem><para>&#160;&#160;- resw('R') = (q x n-beta) matrix of linear constraints</para></listitem>
+<listitem><para>&#160;&#160;- res('r') = q-vector of linear constraints values</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes Wald Chi-squared test for linear constraints on parameters. Results are stored in a tlist and displayed on screen if the user has not given as second argument 'noprint'.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/bdhenderic.dat');
+bounds('1964q3','1989q2');
+rols=ols('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1))',...
+'delts(lagts(1,lp))','delts(lagts(1,ly))','rnet','lagts(1,lm1-lp-ly)','cte');
+ 
+ 
+// calling b the vector of coefficents, the constraints are:
+// b2=-b3 and b2=-b4
+// hence:
+// * R= [0 1 1 0 0 0 0 ]
+//      [ 0 1 0 1 0 0 0]
+// and r = [0]
+//         [0]
+R=[0 1 1 0 0 0 0 ; 0 1 0 1 0 0 0];
+r=[0;0];
+waldchi(R,r,rols);
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2012
+        </refsection>
+</refentry>

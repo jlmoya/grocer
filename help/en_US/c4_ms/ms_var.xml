@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ms_var" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:13-Feb-2011$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ms_var</refname>
+               <refpurpose>Markov Switching VAR model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>r=ms_var(MS_typvar,MS_p,endo,MS_M,MS_M_V,MS_var_opt,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+<listitem><para>*  <term>MS_typvar</term> =   </para></listitem>
+<listitem><para>&#160;&#160;-&#160;'all'&#160;if&#160;the&#160;constant&#160;AND&#160;the&#160;endogenous&#160;variables&#160;are&#160;switching&#160;exogenous&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'cte'&#160;if&#160;only&#160;the&#160;constant&#160;is&#160;a&#160;switching&#160;exogenous&#160;variable</para></listitem>
+<listitem><para>*  <term>MS_p</term> =    the VAR lag order</para></listitem>
+<listitem><para>*  <term> endo</term> =   </para></listitem>
+<listitem><para>&#160;&#160;-&#160;(T&#160;x&#160;K)&#160;string&#160;matrix&#160;of&#160;endogenous&#160;variables</para></listitem>
+<listitem><para>or:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;-&#160;a&#160;list&#160;containing&#160;all&#160;the&#160;endogenous&#160;variables&#160;in&#160;any&#160;of&#160;the&#160;following&#160;form:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. a&#160;real&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. a&#160;string&#160;representing&#160;such&#160;objects</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. the&#160;string&#160;'const'&#160;(for&#160;the&#160;constant&#160;variable)</para></listitem>
+<listitem><para>*  <term>MS_M</term> =    a scalar equal the # of states</para></listitem>
+<listitem><para>*  <term>MS_V</term> =    a scalar:</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;1&#160;if&#160;the&#160;variance&#160;of&#160;the&#160;residuals&#160;is&#160;the&#160;same&#160;for&#160;all&#160;states</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;MS_M&#160;if&#160;the&#160;variance&#160;of&#160;the&#160;residuals&#160;differs&#160;among&#160;the&#160;states</para></listitem>
+<listitem><para>*  <term>MS_var_opt</term> =    a scalar:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;1&#160;if&#160;the&#160;variance&#160;of&#160;residuals&#160;is&#160;heteroskedastic</para></listitem>
+<listitem><para>&#160;&#160;-&#160;2&#160;if&#160;the&#160;variance&#160;of&#160;residuals&#160;is&#160;homoskedastic</para></listitem>
+<listitem><para>&#160;&#160;-&#160;3&#160;if&#160;the&#160;variance&#160;of&#160;residuals&#160;is&#160;unconstrained</para></listitem>
+<listitem><para>*  <term>arg1,... argn</term> =    optional arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'datation=xx'&#160;where&#160;xx&#160;is&#160;the&#160;name&#160;of&#160;a&#160;series&#160;used&#160;as&#160;an&#160;a&#160;priori&#160;datation&#160;(default:&#160;no&#160;a&#160;priori&#160;datation)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'transf=xx'&#160;where&#160;xx&#160;is&#160;either&#160;'dem'&#160;if&#160;the&#160;user&#160;wants&#160;all&#160;series&#160;to&#160;be&#160;demeaned&#160;or&#160;'stu'&#160;if&#160;the&#160;user&#160;wants&#160;all&#160;series&#160;to&#160;be&#160;studentized&#160;(default:&#160;no&#160;transformation)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'gdelta=xx'&#160;where&#160;xx&#160;is&#160;a&#160;number&#160;used&#160;to&#160;calculate&#160;the&#160;numerical&#160;derivative&#160;of&#160;the&#160;log-likelihood&#160;(default&#160;1e-4)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'hdelta=xx'&#160;where&#160;xx&#160;is&#160;a&#160;number&#160;used&#160;to&#160;calculate&#160;the&#160;numerical&#160;hessian&#160;(default&#160;1e-5)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'prt=xx'&#160;where&#160;xx='nothing',&#160;'final',&#160;'all'&#160;or&#160;['initial';'final']&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;print&#160;nothing,&#160;only&#160;the&#160;final&#160;results&#160;or&#160;the&#160;final&#160;and&#160;the&#160;initial&#160;results</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'noprint'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;print&#160;nothing&#160;(equivalent&#160;to&#160;'prt=nothing')</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'init_beta_id&#160;=&#160;xxx'&#160;where&#160;xxx&#160;is&#160;a&#160;vector&#160;of&#160;starting&#160;values&#160;for&#160;the&#160;switching&#160;exogenous&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'init_beta_co&#160;=&#160;xxx'&#160;where&#160;xxx&#160;is&#160;a&#160;vector&#160;of&#160;starting&#160;values&#160;for&#160;the&#160;non&#160;switching&#160;exogenous&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'init_prob'&#160;=&#160;xxx'&#160;where&#160;xxx&#160;is&#160;a&#160;matrix&#160;of&#160;starting&#160;values&#160;for&#160;the&#160;transition&#160;probabilities</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'init_var'&#160;=&#160;xxx'&#160;where&#160;xxx&#160;is&#160;a&#160;matrix&#160;of&#160;starting&#160;values&#160;for&#160;the&#160;variances</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'init_var'&#160;=&#160;xxx'&#160;where&#160;xxx&#160;is&#160;a&#160;matrix&#160;of&#160;starting&#160;values&#160;for&#160;the&#160;variances</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'notstat'&#160;if&#160;the&#160;user&#160;does&#160;not&#160;want&#160;to&#160;calculate&#160;the&#160;Student&#160;statistics&#160;of&#160;the&#160;parameters</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'optfunc=optim' if the user wants to use the optim optimisation function (default: optimg)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'opt_nelmead=crit,nitermax' with crit the value of the convergence criterion in the Nelder-Meade optimisation function and nitermax the maximum number of iterations (default = 'opt_nelmead=2*%eps,1000')</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'opt_optim=opts' where opts are options for optim that can be entered after the starting value of the parameters (default = 'opt_optim=,''ar'',1e6,1e6'')</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'opt_convg=val' where val is the threshold on gradient norm (default = 'opt_convg=1e-5')</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term>res</term>  =    a results tlist with:</para></listitem>
+<listitem><para>&#160;   - res('meth') = 'ms var'</para></listitem>
+<listitem><para>&#160;   - res('typmod') = model numbered type</para></listitem>
+<listitem><para>&#160;   - res('y') = a (T x K) matrix of original endogenous variables</para></listitem>
+<listitem><para>&#160;   - res('ymat') = (T*K x 1) matrix of stacked endogenous variables</para></listitem>
+<listitem><para>&#160;   - res('xmat') = (T*K x sum(n_x)) matrix of switching exogenous variables</para></listitem>
+<listitem><para>&#160;   - res('zmat') = the (T x M) matrix of -transformed- non switching regressors</para></listitem>
+<listitem><para>&#160;   - res('switching V') = a scalar:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 1 if the variance does not switch with the states</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. M if the variance switches with the states</para></listitem>
+<listitem><para>&#160;   - res('var_opt') = a scalar:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 1 if the variance of residuals is heteroskedastic</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 2 if the variance of residuals is homoskedastic</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 3 if the variance of residuals is unconstrained</para></listitem>
+<listitem><para>&#160;   - res('nobs') = the # if observations</para></listitem>
+<listitem><para>&#160;   - res('nendo') = the # of endogenous variables</para></listitem>
+<listitem><para>&#160;   - res('nb_states') = the # of states</para></listitem>
+<listitem><para>&#160;   - res('coeff') = the (np x 1) vector of parameters</para></listitem>
+<listitem><para>&#160;   - res('llike') = the log-likekihood</para></listitem>
+<listitem><para>&#160;   - res('grad') = the gradient at the solution</para></listitem>
+<listitem><para>&#160;   - res('yhat') = the adjusted y</para></listitem>
+<listitem><para>&#160;   - res('filtered resid') = the filtered residuals of the regression</para></listitem>
+<listitem><para>&#160;   - res('dll') = the degrees of freedom</para></listitem>
+<listitem><para>&#160;   - res('prob_st') = the (M x 1) vector of egodic state probabilities</para></listitem>
+<listitem><para>&#160;   - res('ptrans') = the (M x M) matrix of transition probabilities</para></listitem>
+<listitem><para>&#160;   - res('sigma') = the (M*M_V x M) variance-covariance matrix of the residuals</para></listitem>
+<listitem><para>&#160;   - res('beta_id') = the (1 x sum(n_x)*M) vector of switching parameters</para></listitem>
+<listitem><para>&#160;   - res('beta_co') = the (1 x sum(n_z)) vector of non switching parameters</para></listitem>
+<listitem><para>&#160;   - res('inv_sigma') = the (K x K) inverse of the variance matrix</para></listitem>
+<listitem><para>&#160;   - res('det_inv_sigma') = the determinant of the inverse of the variance matrix</para></listitem>
+<listitem><para>&#160;   - res('filtered probs') = the (T x M) vector of filtered probabilities</para></listitem>
+<listitem><para>&#160;   - res('smoothed probs') = the (T x M) vector of smoothed probabilities</para></listitem>
+<listitem><para>&#160;   - res('n_x') = the (K x 1) vector of the numbers of switching exogenous variables for each endogenous variable</para></listitem>
+<listitem><para>&#160;   - res('n_z') = the (K x 1) vector of the numbers of non switching exogenous variables for each endogenous variable</para></listitem>
+<listitem><para>&#160;   - res('stderr') = the (np x 1) vector of coefficients standard errors</para></listitem>
+<listitem><para>&#160;   - res('hes. delta') = the numerical increment for the calculation of the hessian matrix</para></listitem>
+<listitem><para>&#160;   - res('tstat') = the (np x 1) vector of associated t-stats</para></listitem>
+<listitem><para>&#160;   - res('pvalue') = the (np x 1) vector of associated p-values</para></listitem>
+<listitem><para>&#160;   - res('covbeta') = the (np x np) variance-covariance matrix of the parameters</para></listitem>
+<listitem><para>&#160;   - res('corbeta') = the (np x np) correlation matrix of the parameters</para></listitem>
+<listitem><para>&#160;   - res('ptrans_tstat') = the (M x 1) vector of t-stats for the transition probabilities</para></listitem>
+<listitem><para>&#160;   - res('beta_id_tstat') = the (1 x n_x*K*M) vector of t-stats for switching parameters</para></listitem>
+<listitem><para>&#160;   - res('beta_co_tstat') = the (1 x n_z*K) vector of t-stats for non switching parameters</para></listitem>
+<listitem><para>&#160;   - res('sigma_tstat') = the (M*M_V x M) matrix of t-stats for the variance-covariance matrix of the residuals</para></listitem>
+<listitem><para>&#160;   - res('ptrans_pvalue') = the (M x M) matrix of t-stats for transition probabilities</para></listitem>
+<listitem><para>&#160;   - res('beta_id_pvalue') = the (1 x n_x*K*M) vector of t-stats for switching parameters</para></listitem>
+<listitem><para>&#160;   - res('beta_co_pvalue') = the (1 x n_z*K) vector of t-stats for non switching parameters</para></listitem>
+<listitem><para>&#160;   - res('sigma_pvalue') = the (M*M_V x M) matrix of t-stats for the variance-covariance matrix of the residuals</para></listitem>
+<listitem><para>&#160;   - res('smoothed resid') = the smoothed residuals of the regression</para></listitem>
+<listitem><para>&#160;   - res('prests') = a boolean indicating whether there are ts in the regression</para></listitem>
+<listitem><para>&#160;   - res('datation') = the a priori datation if any</para></listitem>
+<listitem><para>&#160;   - res('namedat') = the name of the series used for an a priori datation if any</para></listitem>
+<listitem><para>&#160;  - res('namey') = name of the y variable</para></listitem>
+<listitem><para>&#160;  - res('namex') = name of the x variables</para></listitem>
+<listitem><para>&#160;  - res('dropna') = boolean indicating if NAs have been dropped</para></listitem>
+<listitem><para>&#160;  - res('bounds') = if there is a timeseries in the forecast, the bounds of the regression</para></listitem>
+<listitem><para>&#160;  - res('nonna') = vector indicating position of non-NAs</para></listitem>
+ 
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ 
+Estimates a Markvov Switching (MS) VAR model by the maximum likelihood method.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'\macros\grocer\db\us_revu.dat')
+bounds('1967m4','2004m2')
+nb_states=2
+switch_var=2
+var_opt=3
+r=ms_var('cte',3,'100*(log(us_revu)-lagts(2,log(us_revu)))',nb_states,switch_var,var_opt,'prt=initial;final','transf=stud')
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Benoit Bellone/Eric Dubois 2006-2007
+        </refsection>
+</refentry>

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="expbd2csv" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>expbd2csv</refname>
+               <refpurpose>exportation to Excel </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[]=expbd2csv(bd,out,sep,transpose,sepcol,names)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> bd </term> =    the name of a database, a string matrix or a list collecting the names (between quotes) of ts or vectors loaded in the environment</para></listitem>
+<listitem><para>*  <term> out </term> =    the excel file where to save the data</para></listitem>
+<listitem><para>*  <term> sep </term> =    decimal separator (optional: if not given then sep  =    '.')</para></listitem>
+<listitem><para>*  <term> transpose</term>  =   anything, but optional: if given then series are exported in rows instead of columns</para></listitem>
+<listitem><para>*  <term> sepcol</term>  =   the separartor used for colums (optional: if not given, then set to the char ' ')</para></listitem>
+<listitem><para>*  <term> names</term>  =   the names to give to the variables in the destination file if the user wants them to differ from their Scilab names (optional)</para></listitem>
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>* nothing </para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Exports the content of a data base or a list of variables bd to a .csv file.
+
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+expbd2csv(GROCERDIR+'/data/bdhenderic.dat','c:/mydb/mydata.txt')// save on a file 'c:/mydb/mydata.txt' the variables 'rnet','ly', 'lp' and 'lm1' contained in the scilab file GROCERDIR+'data/bdhenderic.dat'
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+expbd2csv(list('rnet','ly', 'lp','lm1'), 'c:/mydb/mydata.txt')// same thing as previous example
+ 
+expbd2csv(GROCERDIR+'/data/bdhenderic.dat','c:/mydb/mydata.txt',',','transp')//same thing as previous example, expect that decimal sperator is ',' instead of '.' and series are exported in columns and not in rows
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

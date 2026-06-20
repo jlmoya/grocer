@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="explots" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>explots</refname>
+               <refpurpose>explosion of a list of ts </refpurpose>
+   </refnamediv>
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[x,boundsvarb]=explots(listts,searchna,mindat)</synopsis>
+        </refsynopsisdiv>
+         <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+            <term>Input</term>
+<listitem><para>*  <term> listts </term> =   a list of ts</para></listitem><listitem><para>*  <term> testna </term> =   a boolean indicating whether the program will test the existence of na's values in the matrices of values y and x</para></listitem><listitem><para>*  <term> mindat </term> =  </para></listitem><listitem><para>&#160;&#160;-&#160;%t&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;take&#160;the&#160;min&#160;and&#160;max&#160;dates&#160;over&#160;which&#160;any&#160;series&#160;exists</para></listitem><listitem><para>&#160;&#160;-&#160;%f&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;take&#160;the&#160;time&#160;period&#160;over&#160;which&#160;all&#160;series&#160;exist</para></listitem>
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+          <varlistentry>
+          <term>Output</term>
+<listitem><para>*  <term> x </term> =   a (T x k) real matrix</para></listitem><listitem><para>*  <term> boundsvarb </term> =   a (2 x 1) string matrix (of dates)</para></listitem>
+          </varlistentry>
+          </variablelist>
+        </refsection>         <refsection>
+               <title>DESCRIPTION</title>
+From a list of ts find the greatest time span over which the series are simultaneously defined and non NA and store in a vector the corresponding values.
+
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/macros/grocer/db/bdhenderic.dat');
+[x,boundsvarb]=explots(list(lm1,ly,lp,rnet))// Determines the admissible bounds for a regression involving the variables m1,ly,lp, rnet of the database bdhenderic.dat: 1963q1 to 1989q2 and stores
+// the values in the series on this period in matix x. 
+
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2005-2009
+        </refsection>
+</refentry>

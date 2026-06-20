@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="cusumf" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>cusumf  </refname>
+               <refpurpose>forward cusum stability tests </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rcusum]=cusumf(y,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> y </term> =    a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> argi </term> =    an argument that can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx1)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nx1)&#160;real&#160;vector&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'size=x'&#160;where&#160;x=0.01,&#160;0.05&#160;or&#160;0.1&#160;is&#160;the&#160;size&#160;chosen&#160;for&#160;the&#160;teste&#160;(default&#160;=0.05)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rcusum </term> =    a results tlist with:</para></listitem>
+<listitem><para>&#160;  - rcusum('meth')='cusum'</para></listitem>
+<listitem><para>&#160;  - rcusum('nobs')= # of observations</para></listitem>
+<listitem><para>&#160;  - rcusum('nvar')= # of variables</para></listitem>
+<listitem><para>&#160;  - rcusum('y')= y data vector</para></listitem>
+<listitem><para>&#160;  - rcusum('x')= x matrix vector</para></listitem>
+<listitem><para>&#160;  - rcusum('rres')= vector of recursive residuals</para></listitem>
+<listitem><para>&#160;  - rcusum('cusum')= cusum test</para></listitem>
+<listitem><para>&#160;  - rcusum('cusum_l90')= the lower value of its 90% confidence interval</para></listitem>
+<listitem><para>&#160;  - rcusum('cusum_u90')= the upper value of its 90% confidence interval</para></listitem>
+<listitem><para>&#160;  - rcusum('cusum_l95')= the lower value of its 95% confidence interval</para></listitem>
+<listitem><para>&#160;  - rcusum('cusum_u95')= the upper value of its 95% confidence interval</para></listitem>
+<listitem><para>&#160;  - rcusum('cusum_l99')= the lower value of the 99% confidence interval</para></listitem>
+<listitem><para>&#160;  - rcusum('cusum_u99')= the upper value of the 99% confidence interval</para></listitem>
+<listitem><para>&#160;  - rcusum('cusums')= squared cusum test</para></listitem>
+<listitem><para>&#160;  - rcusum('cusums_l90')= the lower value of its 90% confidence interval</para></listitem>
+<listitem><para>&#160;  - rcusum('cusums_u90')= the upper value of its 90% confidence interval</para></listitem>
+<listitem><para>&#160;  - rcusum('cusums_l95')= the lower value of its 95% confidence interval</para></listitem>
+<listitem><para>&#160;  - rcusum('cusums_u95')= the upper value of its 95% confidence interval</para></listitem>
+<listitem><para>&#160;  - rcusum('cusums_l99')= the lower value of the 99% confidence interval</para></listitem>
+<listitem><para>&#160;  - rcusum('cusums_u99')= the upper value of the 99% confidence interval</para></listitem>
+<listitem><para>&#160;  - rcusum('prests')=boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;  - rcusum('namey') = name of the y variable</para></listitem>
+<listitem><para>&#160;  - rcusum('namex') = name of the x variables</para></listitem>
+<listitem><para>&#160;  - rcusum('bounds') = if there is a timeseries in the regression, the bounds of the test (which are the bounds of the regression, less the k first dates)</para></listitem>
+<listitem><para>&#160;  - rcusum('dropna') = boolean indicating if NAs have been droped</para></listitem>
+<listitem><para>&#160;  - rcusum('nonna') = vector indicating position of non-NAs (if the option 'dropna' was active)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ Computes forward cusum and cusum-squares test and plots the tests values along with their 5% confidence bands (see Brown R.L, J. Durbin and J.M Evans (1975):"Techniques for Testing the Constancy of Regression Relationship over Time", Journal of the Royal Statistical Society, Series B, 2, 149-192).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/macros/grocer/db/bdhenderic.dat') ;
+bounds('1964q3','1985q2') ;
+r=cusumf('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet','lagts(1,lm1-lp-ly)','cte')
+ 
+// Example taken from function cusum_d. The example provides the cusum forward stability test for the estimation of Hendry and Ericsson equation # 6.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2007
+        </refsection>
+</refentry>

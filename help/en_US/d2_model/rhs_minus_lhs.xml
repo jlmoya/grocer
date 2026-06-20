@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="rhs_minus_lhs" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:17-Avr.-2019$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>rhs_minus_lhs</refname>
+               <refpurpose>displays the absolute maximum value of model equations if it is above a threshold </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rhs_minus_lhs(model,dbmat,boun,tol)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>model</term> = a model tlist</para></listitem>
+<listitem><para>*  <term>dbmat</term>= a tsmat, representing the database associated to the model</para></listitem>
+<listitem><para>*  <term>boun</term> = a [2 x 1] string vector, the bound over which to perform the calcualtions</para></listitem>
+<listitem><para>*  <term>tol</term> = a scalar, the tolerance criterion</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing : results are displayed on screen</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+For a model and an associated database calculates the rhs minus the lhs of each equation and displays the absolute maximum value if it is above a threshold.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+ global GROCERDIR;
+ // load the model small:
+ load(GROCERDIR+'\data\small.dat')
+ // load the database small_cale
+ load(GROCERDIR+'\data\small_cale.dat')
+ small_cale_db=small_cale('simulation results');
+ rhs_minus_lhs(small,small_cale_db,['1981q1';'2006q4'],1e-10)
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2019
+        </refsection>
+</refentry>

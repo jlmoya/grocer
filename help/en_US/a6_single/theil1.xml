@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="theil1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:25-Mars-2019$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>theil1</refname>
+               <refpurpose>Theil-Goldberger mixed estimator </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[results]=theil1(y,x,rvec,rmat,v)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>y</term> = a (N X 1) vector</para></listitem>
+<listitem><para>*  <term>x</term> = a (N X k) vector</para></listitem>
+<listitem><para>*  <term>rvec</term> = a vector of prior mean values, (c above)</para></listitem>
+<listitem><para>*  <term>rmat</term> = a matrix of rank(r) (R above)</para></listitem>
+<listitem><para>*  <term>v</term> = prior variance-covariance (var-cov(U) above)</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>results</term> = a results tlist with</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  results('meth') = 'Theil-Goldberger'</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  results('beta') = bhat</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  results('y') = y data vector</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  results('x') = x data matrix</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  results('nobs') = # observations</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  results('nvar') = # variables</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  results('yhat') = yhat</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  results('resid') = residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  results('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  results('sige') = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  results('sigu') = sum of squared residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  results('ser') = standard error of the regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  results('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  results('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  results('dw') = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  results('condindex') = multicolinearity cond index</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  results('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes Theil-Goldberger mixed estimator y = X B + E, E = N(0,sige*IN) c = R B + U, U = N(0,v).
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+xmat = rand(100,4,'n');
+exo = [ones(100,1),xmat];
+evec = rand(100,1,'n');
+ 
+endo = exo*ones(5,1)+evec;
+r = theil1(endo,exo,ones(5,1),eye(5,5),0.1*eye(5,5))
+// display the estimated parameters
+r('beta')
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2019
+        </refsection>
+</refentry>

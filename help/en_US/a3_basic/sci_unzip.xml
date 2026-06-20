@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="sci_unzip" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:10-Juil-2014$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>sci_unzip</refname>
+               <refpurpose>unzip a zipped file </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rep,stat,err]=sci_unzip(zipfile,dir_out)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> zipfile </term> =   the whole address of the zip file to unzip</para></listitem>
+<listitem><para>*  <term> dir_out </term> =   the directory where to locate the unzipped files</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  rep </term> =   a column vector of character strings (standard output)</para></listitem>
+<listitem><para>*  <term>  stat </term> =   an integer, the error status. stat  =  0 if no error occurred</para></listitem>
+<listitem><para>*  <term>  err </term> =   a column vector of character strings (standard error)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+unzip a file from Scilab.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+sci_unzip(GROCERDIR+'\data\bdhenderic.zip',GROCERDIR+'\tmp')
+// unzip the file bdhenderic.zip in the data folder in Grocer distribution into the folder tmp in Grocer distribution
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2014
+        </refsection>
+</refentry>

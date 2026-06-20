@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="filter_like" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>filter_like </refname>
+               <refpurpose>Kalman filter log-likelihood </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[llik]=filter_like(param,func,y,x,F,z)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> param </term> =    a vector of parameters (sqrt of variances)</para></listitem>
+<listitem><para>*  <term> func </term> =    the function which transforms the parameters into the matrix of variances (Q and R)</para></listitem>
+<listitem><para>*  <term> y </term> =    (nx1) data vector</para></listitem>
+<listitem><para>*  <term> x </term> =    (nxk) data matrix</para></listitem>
+<listitem><para>*  <term> F </term> =    transition matrix</para></listitem>
+<listitem><para>*  <term> z </term> =    (nxl) data matrix</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term> llik </term> =    - 2*log-likehood (+n*log(2*%pi))</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Generates model loglikelihood in a kalman model:
+y(t) = X(t)*B(t) + Z(t)*A  + e(t), e(t) = N(0,R)
+B(t) = F*B(t-1) + v(t),    v(t) = N(0,Q)
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+// Filter_like is used by the function kalman:
+oresult = maxlik(filter_like,grocer_param,grocer_func,grocer_y,grocer_x,grocer_F, varargin(:))
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

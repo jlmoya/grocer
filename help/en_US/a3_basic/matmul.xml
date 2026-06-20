@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="matmul" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>matmul</refname>
+               <refpurpose>matrix elementwise multiplication </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[out]=matmul(x,y)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+<listitem><para>*  <term> x,y </term> =    two matrices (not of the same dimension but are row or column compatible) </para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term> out </term> =    x.*y where x and y are row or column compatible </para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs matrix multiplication even if matrices are not of the same dimension, but are row or column compatible 
+
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+x1=ones(7,1);x2=[1:7]';y = lag([x1 x2],1,4);z=0.5*ones(7,1);matmul(x,z)// returns:
+//!   2.     2.  !
+//!    .5     .5 !
+//!    .5    1.  !
+//!    .5    1.5 !
+//!    .5    2.  !
+//!    .5    2.5 !
+//!    .5    3.  !
+ 
+xstar = matmul(x,sqrt(w));// Example taken from function robust: makes the term by term multiplication of each column of matrix x ((nxk) matrix of exogenous variables) by the (nx1) vector of weights for the ongoing weighted least squares estimation. 
+
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

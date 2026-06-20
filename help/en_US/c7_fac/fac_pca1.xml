@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="fac_pca1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>fac_pca1 </refname>
+               <refpurpose>Static factor analysis </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=fac_pca1(x,snum,pnum,baing,meth)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> x </term> =  a matrix of data</para></listitem>
+<listitem><para>*  <term> snum </term> =  a vector of factors to keep (e.g. [1,...,k]) or the maximum number of factor to test (here k) if the Bai-Ng information criteria is used</para></listitem>
+<listitem><para>*  <term> pnum </term> =  number of factors to keep for the printing of results</para></listitem>
+<listitem><para>*  <term> baing  </term> =  'Icp1', 'ICp2', 'ICp3' or 'no' type of Bai-Ng criteria to use</para></listitem>
+<listitem><para>*  <term> meth  </term> =  'stan' if the user wants to perform the  analysis on standardized variables</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> res </term> =  a results tlist with</para></listitem>
+<listitem><para>&#160;  - res('meth') = 'static factor'</para></listitem>
+<listitem><para>&#160;  - res('namex') = vector of names of the x variables</para></listitem>
+<listitem><para>&#160;  - res('x') = matrix of x data</para></listitem>
+<listitem><para>&#160;  - res('fi') = first factor selected by the user (in TS format when working with TS) it's the factor i i.e the i-th most important contributor to total variance</para></listitem>
+<listitem><para>&#160;  - res('fj') = second factor selected by the user it's the factor j i.e the j-th most important contributor to total variance and so on</para></listitem>
+<listitem><para>&#160;  - res('propor') = proportion of variance explained by each factor</para></listitem>
+<listitem><para>&#160;  - res('corr_x_f') = matrix of correlations between variables and factors default is the first five factors)</para></listitem>
+<listitem><para>&#160;  - res('loadings') = matrix of loadings (variables are in rows) (default is the first five factors)</para></listitem>
+<listitem><para>&#160;  - res('snum') = number of selected factor by the user of Bai-Ng (default is the first factor)</para></listitem>
+<listitem><para>&#160;  - res('pnum') = number of selected factor for printing results (default is the first five factors)</para></listitem>
+<listitem><para>&#160;  - res('bai_ng')= 'no','ICp1','ICp2', 'ICp3'</para></listitem>
+<listitem><para>&#160;  - res('ICpk') = value of information criteria selected for each of the number of factor tested</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs the estimation of a Static factor analysis with the selection of the number of factors according to one of the information criteria proposed by Bai-Ng.
+<para>NOTE: can also be used as an approximate dynamic factor analysis (see Stock, J. H. and M. Watson (1998), "Diffusion Indexes", NBER Working Paper, n. 6702).</para>
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/BusinessSurvey.dat');
+y=explone(['pp','fp','gpp','gob','fob','in'])
+r=fac_pca1(y,1:2,2,'no','stan')
+// With French business survey variables, on standardized variables (option 'stan'),
+// calculates the first 2 factors, stores all results for these 2 factors.
+// The # of factors being imposed by the user, the Bai-Ng option is set to 'no'.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2006
+        </refsection>
+</refentry>

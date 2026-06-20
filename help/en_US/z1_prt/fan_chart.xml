@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="fan_chart" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>fan_chart </refname>
+               <refpurpose>draws a fan-chart </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>fan_chart(mat,dat,win,colour,sep)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> mat</term>  =   a (T x k) probability matrix</para></listitem>
+<listitem><para>*  <term> dat</term>  =   a (T x 1) vector of dates</para></listitem>
+<listitem><para>*  <term> win</term>  =   the window's number</para></listitem>
+<listitem><para>*  <term> colour</term>  =   'blue' or 'grey'</para></listitem>
+<listitem><para>*  <term> sep</term>  =   the decimal separator used for the figures</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* Nothing (printed on a graphic window)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Draws a fan-chart as the ones used by the Bank of England.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+x0=[0.1 0.1 0.3]
+x=[]
+for i=1:19
+   n=cdfnor('X',0,1,0.05*i,1-0.05*i)
+   x=[x ; x0+[0.28 0.33 0.37] * n]
+end
+// the bands have been taken from the normal distribution
+x=[0.64*ones(19,1) x]
+// add the starting point and draw the fan chart
+fan_chart(x,['2007T'+string(1:4) '2008T'+string(1:4)],15,'blue')
+ 
+// Example taken from function fan_chart_d. Draws a fan chart for the dates between 2007T1 to 2008T4 on window 15, with the blue colour.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2008
+        </refsection>
+</refentry>

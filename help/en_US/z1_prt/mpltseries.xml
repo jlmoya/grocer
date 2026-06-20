@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="mpltseries" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:12-Avr.-2014$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>mpltseries</refname>
+               <refpurpose>multiple 2d plot in one page </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>mpltseries(arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+<listitem><para>*  <term> argi</term> = arguments that can be:</para></listitem>
+<listitem><para>&#160;&#160;-the series to graph, which can take any of these types:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;a&#160;real&#160;(nxp)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nxp)&#160;real&#160;vector&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;a&#160;matrix&#160;or&#160;a&#160;list&#160;of&#160;such&#160;elements</para></listitem>
+<listitem><para>optional arguments:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'nseries=x'&#160;the&#160;number&#160;series&#160;to&#160;draw&#160;on&#160;each&#160;graph&#160;(default=1)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'order=x'&#160;to&#160;change&#160;the&#160;order&#160;of&#160;appearance&#160;of&#160;the&#160;series&#160;in&#160;the&#160;graphs.&#160;In&#160;the&#160;default&#160;mode&#160;(x=0)&#160;the&#160;series&#160;are&#160;plotted&#160;according&#160;to&#160;their&#160;order&#160;of&#160;appearance&#160;in&#160;the&#160;function&#160;call:&#160;The&#160;user&#160;can&#160;change&#160;the&#160;order&#160;in&#160;following&#160;2&#160;ways:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;x&#160;=&#160;(1&#160;x&#160;p)&#160;or&#160;(p&#160;x&#160;1)&#160;vector&#160;containing&#160;the&#160;user&#160;defined&#160;order&#160;of&#160;appearance&#160;of&#160;each&#160;series</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;x&#160;=&#160;-1&#160;the&#160;whole&#160;list&#160;of&#160;data&#160;is&#160;decomposed&#160;into&#160;b=p/nseries&#160;consecutive&#160;blocks&#160;(B)&#160;such&#160;that&#160;graph&#160;number&#160;i&#160;contains&#160;series&#160;B_1(i),...B_b(i).</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'ncol=x'&#160;the&#160;number&#160;of&#160;columns&#160;of&#160;the&#160;graph&#160;page&#160;(default=1)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'title=x'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;give&#160;its&#160;own&#160;title&#160;to&#160;each&#160;graph</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'main_title=x'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;give&#160;a&#160;title&#160;to&#160;the&#160;whole&#160;graph&#160;page</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'legend=xx'&#160;with&#160;xx&#160;title&#160;of&#160;the&#160;legend&#160;for&#160;each&#160;graph</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'main_legend==xx'&#160;for&#160;an&#160;identical&#160;legend&#160;for&#160;all&#160;graphs</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'yaxex=xx'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;put&#160;the&#160;x&#160;axis&#160;at&#160;value</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.xx (default: y minimum value)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'yaxis=xx'&#160;where&#160;xx&#160;is&#160;a&#160;(1&#160;x&#160;nseries)&#160;&#160;or&#160;(1&#160;x&#160;p)&#160;matrix&#160;of&#160;1&#160;and&#160;2,&#160;if&#160;the&#160;user&#160;wants&#160;2&#160;axes,&#160;respectively&#160;at&#160;the&#160;left&#160;and&#160;the of the graph; the j the series is represented on the left axis if xx(j) =  = 1 and on the right one if xx(j) =  = 2</para></listitem>
+<listitem><para>&#160;&#160;(default: only a left axis)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'bars=xx'&#160;with&#160;xx&#160;integer&#160;row&#160;vector&#160;of&#160;size&#160;p&#160;representing&#160;the&#160;nature&#160;of&#160;the&#160;representation&#160;of&#160;the&#160;series&#160;(1=bars;&#160;anything&#160;else=curves)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'bounds=[''b1''&#160;;&#160;''b2''&#160;;...;&#160;''bn'']'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;give&#160;its&#160;own&#160;grocer_bounds</para></listitem>
+<listitem><para>&#160;&#160;(default: the whole series)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'x0(1)=xx'&#160;with&#160;xx&#160;integer&#160;representing&#160;the&#160;x&#160;location of the first y axis (default: put at x = 1)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'x0(2)=xx'&#160;with&#160;xx&#160;integer&#160;representing&#160;the&#160;x&#160;location of the second y axis (default: put at x s= nobs)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'x=xx'&#160;where&#160;xx&#160;is&#160;the&#160;(1xnobs)&#160;string&#160;vector&#160;to&#160;put&#160;on&#160;the&#160;x&#160;axis</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'ntics=xx'&#160;with&#160;xx&#160;an&#160;integer&#160;representing&#160;number&#160;of&#160;of&#160;tics&#160;between&#160;2&#160;occurences&#160;of&#160;the&#160;axis&#160;values</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'styleg=xx'&#160;with&#160;xx&#160;integer&#160;representing&#160;the&#160;location&#160;of&#160;the&#160;legend</para></listitem>
+<listitem><para>&#160;&#160;(default: 5, that is the legend is placed interactively with the mouse, see legends in the help menu)</para></listitem>
+<listitem><para>&#160;&#160;- 'color=xx'&#160;with&#160;xx&#160;an&#160;integer&#160;row&#160;vector&#160;of&#160;size&#160;nseries&#160;representing&#160;the&#160;line&#160;color&#160;of&#160;each&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'shade=xx'&#160;a&#160;(nx1)&#160;vector&#160;composed&#160;of&#160;0&#160;and&#160;1&#160;where&#160;the&#160;ones&#160;delimit&#160;areas&#160;to&#160;be&#160;shaded</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'mycolor=[r1,g1,b1;...;rp,gp,bp]'&#160;for&#160;user&#160;defined&#160;colors&#160;with&#160;ri,gi,bi&#160;the&#160;RGB&#160;integer&#160;values&#160;of&#160;a&#160;color</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'style=xx'&#160;with&#160;xx'&#160;an&#160;integer&#160;row&#160;vector&#160;of&#160;size&#160;nseries&#160;representing&#160;the&#160;line&#160;style&#160;of&#160;each&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'thickn=xx'&#160;with&#160;xx&#160;an&#160;integer&#160;vector&#160;of&#160;size&#160;p&#160;representing&#160;the&#160;thickness&#160;of&#160;the&#160;line&#160;drawn&#160;for&#160;each&#160;series&#160;(default&#160;all&#160;equal&#160;to&#160;1)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'styleg=xx'&#160;with&#160;xx&#160;an&#160;integer&#160;representing&#160;the&#160;location&#160;of&#160;the&#160;legend&#160;(default:&#160;5,&#160;that&#160;is&#160;the&#160;legend&#160;is&#160;placed&#160;interactively&#160;with&#160;the&#160;mouse,&#160;see&#160;legends&#160;in&#160;the&#160;help&#160;menu)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'font_title=xx'&#160;with&#160;xx&#160;the&#160;size&#160;of&#160;the&#160;title&#160;font</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'font_main_title=xx'&#160;with&#160;xx&#160;the&#160;size&#160;of&#160;the&#160;main&#160;title</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'font_axis=xx'&#160;with&#160;xx&#160;the&#160;size&#160;of&#160;the&#160;axis&#160;font</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'font_legend=xx'&#160;with&#160;xx&#160;the&#160;size&#160;of&#160;the&#160;legend&#160;font</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'font_main_legend=xx'&#160;with&#160;xx&#160;the&#160;size&#160;of&#160;the&#160;main&#160;legend&#160;font</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'style_title=xx'&#160;with&#160;xx&#160;the&#160;font&#160;style&#160;of&#160;the&#160;title</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'yaxis=xx'&#160;with&#160;xx&#160;integer&#160;row&#160;vector&#160;of&#160;size&#160;p&#160;representing&#160;the&#160;axis&#160;for&#160;each&#160;series&#160;(1=left;&#160;2=right)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'bars=xx'&#160;with&#160;xx&#160;integer&#160;row&#160;vector&#160;of&#160;size&#160;p&#160;representing&#160;the&#160;nature&#160;of&#160;the&#160;representation&#160;of&#160;the</para></listitem>
+<listitem><para>&#160;&#160; series (1 = bars; anything else = curves)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'window=x'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;specify&#160;the&#160;#&#160;x&#160;where&#160;the&#160;graph&#160;is&#160;plotted&#160;(default:&#160;the&#160;window&#160;1)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'just_scale=bool'&#160;with&#160;bool&#160;a&#160;boolean&#160;which&#160;is:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;%T&#160;if&#160;you&#160;want&#160;the&#160;y&#160;scale&#160;to&#160;be&#160;exactly&#160;the&#160;length&#160;[min(y),max(y)]</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;%F&#160;if&#160;you&#160;want&#160;the&#160;y&#160;scale&#160;to&#160;begin&#160;and&#160;end&#160;with&#160;rounded&#160;numbers&#160;(default)</para></listitem>
+ 
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing (printed on a graphic window)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Plots several graphs on one page... This function allows the user to make some complex graphs by gathering in one function some capabilities emboddied in scilab graphic functions drawaxis, legend and xset. The user can graph vectors and martrices, as with plot2d, but also timeseries. She can choose to use 2 y axes instead of one by setting the option 'yaxis=...'. She can choose the position of the x axis with the option 'yaxex=...'. She can control the color and style of the lines and the location of the legend.
+ 
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+mpltseries('lm1','ly','lp','rnet','title=[lm1;ly;lp;rnet]','noleg','main_title=Hendry-Ericsson database',...
+'font_title=2','font_main_title=4') ;
+// Example 1 shows how to plot several time series on the same page with a head title and a title on each graphs
+load(GROCERDIR+'/data/DataFex.dat');
+ tsmat_pi=ts2tsmat('zepic','jppic','ukpic','uspic');
+tsmat_r=ts2tsmat('zermmkt','jprmmkt',ukrmmkt','usrmmkt')
+mpltseries(tsmat_r,tsmat_pi,'nseries=2','ncol=2','yaxis=[1,2]','window=1','main_title=Inflation and monetary policy',...
+'title=[Euro area;Japan;UK;US]','main_legend=[interest rate (3 month, lhs) ;inflation (rhs)]',...
+'font_main_title=4','font_title=3','font_legend=2');
+// This is a more complex use. The user converts the time series into tsmat format
+// and graph for a set of countries the inflation and the short term interest rate (option 'nseries=2')
+// with a dual scale ('yaxis=[1,2]', one could have also used yaxis=[1,1,1,1,2,2,2,2]).
+// The graph page contains 2 columns, a head title, a graph title and a head legend.
+// Fonts are respectively set to 4, 3 and 2.
+// The same graph could also have been generated wuthout any use of tsmat
+// by simply replacing the two tsmat by the name of the corresponding ts.
+ 
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois / Emmanuel Michaux 2008
+        </refsection>
+</refentry>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="internet2sci" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:10-Juil-2014$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>internet2sci</refname>
+               <refpurpose>downlaod a file from Internet </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rep, stat, err]=internet2sci(url_in,file_out,OSNAME)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> url_in </term> =   the url to be downloaded</para></listitem>
+<listitem><para>*  <term> file_out </term> =   the full name (path included) of the destination file</para></listitem>
+<listitem><para>*  <term> OSNAME </term> =   the name of the OS ('linux',''solaris',''sbd', 'macosx' or 'windows')</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  rep </term> =   a column vector of character strings (standard output)</para></listitem>
+<listitem><para>*  <term>  stat </term> =   an integer, the error status. stat  =  0 if no error occurred</para></listitem>
+<listitem><para>*  <term>  err </term> =   a column vector of character strings (standard error)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+download a file from internet.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+mkdir('c:/data') // create the folder c:/data if it does not exist
+[OSNAME] = getconfig()
+internet2sci('http://epp.eurostat.ec.europa.eu/NavTree_prod/everybody/BulkDownloadListing?sort=1&file=data%2Fnamq_gdp_k.tsv.gz','C:\data\namq_gdp_k.tsv.gz',OSNAME)
+// download the file namq_gdp_k.tsv.gz from Eurostat web site into the folder C:\data
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2014
+        </refsection>
+</refentry>

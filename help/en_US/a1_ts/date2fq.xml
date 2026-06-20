@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="date2fq" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>date2fq </refname>
+               <refpurpose>finds the frequency associated to a date </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[fq,namefq]=date2fq(dat,indw)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+<listitem><para>*  <term> dat </term> =     a date string</para></listitem>
+<listitem><para>*  <term> indw </term> =     'w' if the date is given as a day date but corresponds to a week (optional)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term> fq </term> =     an integer (the frequency of the date)</para></listitem>
+<listitem><para>*  <term>  namefq </term> =     a string (the string characteristic of the date)</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Finds the frequency associated to a date.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+[fq,namefq]=date2fq('1985q4')
+// returns the frequencies of the quarterly date '1985q4'
+ 
+[fq,namefq]=date2fq('2002a')
+// returns the frequencies of the yearly date '2002a'.
+ 
+[fq,namefq]=date2fq('97m12')
+// returns the frequencies of the monthly date '97m12'.
+ 
+[fq,namefq]=date2fq('2000/03/15')
+// returns the frequencies of the daily date '2000/03/15'.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2007
+        </refsection>
+</refentry>

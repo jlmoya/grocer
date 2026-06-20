@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="des_stat" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>des_stat </refname>
+               <refpurpose>basic statistics </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rdb = des_stat(namey,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =   a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> argi </term> =   optional arguments that can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'color=x'&#160;where&#160;x&#160;is&#160;numerical&#160;representation&#160;of&#160;the&#160;color</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'nbars=n'&#160;where&#160;n&#160;is&#160;the&#160;#&#160;of&#160;bars&#160;of&#160;the&#160;histogramm</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'bounds=[''b1'';''b2'']'&#160;where&#160;b1&#160;and&#160;b2&#160;are&#160;the&#160;bounds&#160;over&#160;which&#160;the&#160;stats&#160;are&#160;calculated</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'noprint'&#160;if&#160;the&#160;user&#160;does&#160;not&#160;want&#160;to&#160;print&#160;the&#160;results</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term>  r</term>  =   a results tlist with:</para></listitem>
+<listitem><para>&#160;  - r('meth') = 'des_stat'</para></listitem>
+<listitem><para>&#160;  - r('namey') = name of the variable</para></listitem>
+<listitem><para>&#160;  - r('y') = (n x 1) vector of variables</para></listitem>
+<listitem><para>&#160;  - r('mean') = mean of the variable</para></listitem>
+<listitem><para>&#160;  - r('median') = median of the variable</para></listitem>
+<listitem><para>&#160;  - r('miny') = min of the variable</para></listitem>
+<listitem><para>&#160;  - r('maxy') = min of the variable</para></listitem>
+<listitem><para>&#160;  - r('stdevy') = standard deviation of y</para></listitem>
+<listitem><para>&#160;  - r('skew') = skewness of variable y</para></listitem>
+<listitem><para>&#160;  - r('kurt') = kurtosis of variable y</para></listitem>
+<listitem><para>&#160;  - r('jbstat') = Jarque and Bera stat for normality</para></listitem>
+<listitem><para>&#160;  - r('jbprob') = associated p-value</para></listitem>
+<listitem><para>&#160;  - r('prests') = a boolean indicating whether there is a ts in the regression</para></listitem>
+<listitem><para>&#160;  - r('dropna') = boolean indicating if NAs have been droped</para></listitem>
+<listitem><para>&#160;  - r('bounds') = if the variable is a timeseries, the bounds used for the calculations</para></listitem>
+<listitem><para>&#160;  - r('nonna') = vector indicating position of non-NAs (if the option 'dropna' was active)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Presents basic statistics on a variable and graphs the histogram of the probability distribution function.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/macros/grocer/db/bdhenderic.dat') ;
+r=des_stat('delts(lm1)')
+//Example taken from function des_stat_d(). The studied series is delts(log(m1)). Here, default values are used.
+grey=addcolor([0.7 0.7 0.7]) ;
+bounds('1964q1','1988q4');
+r=des_stat('delts(lm1)','nbars=10','color=grey','wind=4')
+// Here, the window is chosen (option 'wind=4'), the color is a grey defined by function addcolor (option 'color=grey'),
+// and the histogram is presented in the form of deciles (option 'nbars=10').
+ 
+              ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2007
+        </refsection>
+</refentry>

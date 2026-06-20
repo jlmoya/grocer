@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="theta2arma" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>theta2arma </refname>
+               <refpurpose>transformation of VARMA model into its reduced form </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[F,A,V,G]=theta2arma(theta,theta2mat)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> theta </term> =   (npx1) vector of parameters</para></listitem>
+<listitem><para>*  <term> theta2mat </term> =   a string vector of instructions that transforms</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> F </term> =   the MA part of the model</para></listitem>
+<listitem><para>*  <term> A </term> =   the MA part of the model</para></listitem>
+<listitem><para>*  <term> V </term> =   the variance of residuals</para></listitem>
+<listitem><para>*  <term> G </term> =   the exogenous part of the model</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ Converts a VARMA model to reduced form VARMAX notation. The input arguments corresponding to the model:
+<para>(I + AR1.B + ... +ARp.B^p)(I + ARS1.B^s + ... + ARSps.B^ps.s) y(t) =</para>
+<para>  (G0 + G1.B + ... + Gt.B^l) u(t) +   (I + MA1.B + ... + MAq.B^q)(I + MAS1.B^s + ... + MASqs.B^qs.s) a(t)</para>
+<para>are transformed to:</para>
+<para>F(B)y(t) = G(B)u(t) + A(B)e(t)</para>
+ 
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+[F,A,V,G]=theta2arma(theta,theta2mat)
+ 
+// Taken from function theta2fr. Since this function is an intermediate calculation in an VARMA estimation, it would be diffcult
+// to use it outside this framework.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Jaime Terceiro, 1997/ Eric Dubois 2004
+        </refsection>
+</refentry>

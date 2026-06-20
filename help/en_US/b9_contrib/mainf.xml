@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="mainf" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>mainf </refname>
+               <refpurpose>Infinite Moving average representation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[mainf_proxy]=mainf(ar,ma,nbterms)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> ar</term>  =    the ar part  =    a (p x 1) or (1 x p) vector</para></listitem>
+<listitem><para>*  <term> ma </term> =    the ma part  =    a (q x 1) or (1 x q) vector</para></listitem>
+<listitem><para>*  <term> nbterms </term> =    # of terms developped (optional, default  =    100)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> mainf_proxy </term> =    the nbterms first terms of the Infinite Moving average representation</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Infinite Moving average representation of an ARMA process, supposed to be written:
+(1-ar(L))xt = ma(L) ut
+ 
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+m=mainf([0.5 .2],[1 -0.3 -0.4],200)
+// Calculates the 200 first terms of the Infinite Moving AverageRepresentation of the ARMA process :
+// (1-0.5*L-0.2*L^2) xt= (1-0.3*L-0.4*L^2) et
+ 
+m=mainf([0.5 .2],[1 -0.3 -0.4])
+ 
+// calculates the 200 first terms of the Infinite Moving Average Representation of the same ARMA process.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2004
+        </refsection>
+</refentry>

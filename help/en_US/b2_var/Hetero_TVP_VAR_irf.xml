@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="Hetero_TVP_VAR_irf" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:05-Sept.-2015$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>Hetero_TVP_VAR_irf</refname>
+               <refpurpose>IRF for a Time varying structural VAR </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[irf_med,irf_mean,irf_low,irf_up]=Hetero_TVP_VAR_irf(r,dates,nhor,pvalue,impulse_mode,plt)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> res </term> =    a tlist results from a Homo_TVOP_VAr estimation</para></listitem>
+<listitem><para>*  <term> dates </term> =    a string vector (standard Grocer dates) or a real vector (corresponding to the indexes of the observations)</para></listitem>
+<listitem><para>*  <term> nhor </term> =    the horizon for the IRF</para></listitem>
+<listitem><para>*  <term> pvalue </term> =    the p-value of the confidence band</para></listitem>
+<listitem><para>*  <term> impulse_mode </term> =    the mode used to calculate the impulse response (optional):</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'unitary'&#160;for&#160;unitary&#160;shocks&#160;(default)&#160;&#160;&#160;&#160;&#160;</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'std_dev'&#160;for&#160;1&#160;standard&#160;deviation&#160;shock&#160;calcualted&#160;at&#160;each&#160;date&#160;t</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'av&#160;std'&#160;for&#160;1&#160;standard&#160;deviation&#160;shock&#160;averaged&#160;over&#160;the&#160;whole&#160;estimation&#160;period</para></listitem>
+<listitem><para>*  <term> plt </term> =    the way irfs will be graphed (optional):</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'noplt'&#160;if&#160;the&#160;user&#160;does&#160;not&#160;want&#160;to&#160;plot&#160;the&#160;IRF</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'isolated'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;graph&#160;the&#160;irfs&#160;separately&#160;at&#160;each&#160;period&#160;(and&#160;with&#160;their&#160;confidence&#160;bands)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'together'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;graph&#160;on&#160;the&#160;same&#160;graph&#160;the&#160;irfs&#160;at&#160;the&#160;different&#160;periods&#160;(without&#160;their&#160;confidence&#160;bands)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'all'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;graph&#160;according&#160;to&#160;both&#160;options&#160;'isolated'&#160;and&#160;'together'&#160;(default)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  irf_med </term> =    a (ndates x nendo x nendo x (nhor+1)) hypermatrix, collecting all median IRF</para></listitem>
+<listitem><para>*  <term>  irf_mean </term> =    a (ndates x nendo x nendo x (nhor+1)) hypermatrix, collecting all average IRF</para></listitem>
+<listitem><para>*  <term>  irf_low </term> =    a (ndates x nendo x nendo x (nhor+1)) hypermatrix, collecting all lower band IRF</para></listitem>
+<listitem><para>*  <term>  irf_up </term> =    a (ndates x nendo x nendo x (nhor+1)) hypermatrix, collecting all upper band IRF</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs the impulse response function for a Time varying structural VAR with heteroskedastic covariance matrix.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ stacksize('max')
+load(GROCERDIR+'\data\primiceri.dat')
+mkdir(GROCERDIR+'\temp')
+nlag=2
+bounds('1953q3','1963q2')
+prior=tvpvar_prior0(nlag,4,4,0.01,0.01,0.1,['Inflation';'Unemployment';'rate_3m'])
+ 
+ 
+bounds('1963q3','2001q3')
+res=Hetero_TVP_VAR(nlag,['Inflation';'Unemployment';'rate_3m'],10000,2000,prior,path,2000)
+ 
+ 
+[irf_med,irf_mean,irf_low,irf_up]=Hetero_TVP_VAR_irf(res,['1975q1';'1981q3';'1996q1'],20,0.32)
+// After having estimated Primiceri (2005) tvp-VAR, the irfs are calculated at dates
+// '1975q1', '1981q3' and '1996q1', with a 20 periods horizon and a 68% confidence band
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2015
+        </refsection>
+</refentry>

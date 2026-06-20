@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="bpagan" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>bpagan  </refname>
+               <refpurpose>Breusch and Pagan heteroskedasticity test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[resulbp]=bpagan(resulols,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> resulols </term> =   results tlist from a first stage estimation</para></listitem>
+<listitem><para>*  <term> argi </term> =   arguments of the second stage regression, which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nxp)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nxp)&#160;real&#160;vector&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> resulbp </term> =   a results tlist with:</para></listitem>
+<listitem><para>&#160;  - resulbp('meth')   = 'bpagan'</para></listitem>
+<listitem><para>&#160;  - resulbp('resul1st') = results tlist of the first stage regression</para></listitem>
+<listitem><para>&#160;  - resulbp('u2') = sum of square residuals from the first stage regression</para></listitem>
+<listitem><para>&#160;  - resulbp('namex2') = names of the exogenous variables in the second stage regression</para></listitem>
+<listitem><para>&#160;  - resulbp('x2') = vector of the exogenous variables in the second stage regression</para></listitem>
+<listitem><para>&#160;  - resulbp('f') = Breush-Pagan LM-statistic (Fisher form)</para></listitem>
+<listitem><para>&#160;  - resulbp('p') = p-value of the test</para></listitem>
+<listitem><para>&#160;  - resulbp('dfnum') = degrees of freedom of the numerator</para></listitem>
+<listitem><para>&#160;  - resulbp('dfden') = degrees of freedom of the denominator</para></listitem>
+<listitem><para>&#160;  - resulbp('f_pvalue) = p-value of the test</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes Breusch and Pagan heteroskedasticity test with the exogenous second stage variables provided by the user (see Breusch, T.S. and A.R. Pagan (1979): "A simple test for heteroscedasticity and random coefficient variation", Econometrica 47, 1287-1294). Results are stored in a tlist and displayed on screen.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+bounds('1964q3','1989q2');
+rols=ols('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet', 'lagts(1,lm1-lp-ly)', 'const');
+// performs ols for Hendry and Ericsson (1991) equation 6
+bpagan(rols,'delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet','lagts(1,lm1-lp-ly)','cte','(delts(lp))^2', '(delts(lagts(1,lm1-lp-ly)))^2','(rnet)^2','(lagts(1,lm1-lp-ly))^2')
+// Example taken from bpagan_d. The first stage result comes from the estimation of Hendry and Ericsson equation # 6.
+// The second stage exogenous variables are the squares of all exogenous variables of the first stage regression.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

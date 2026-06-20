@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="olspec1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:25-Mars-2019$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>olspec1</refname>
+               <refpurpose>ols with specification test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rols]=olspec1(y,x,names,ltest,test_default)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>y</term> = a (n x 1) vector</para></listitem>
+<listitem><para>*  <term>x</term> = a (n x k) vector</para></listitem>
+<listitem><para>*  <term>names</term> = a tlist, typed 'names' with: anmes('name_foo') = a string, the name that will be given in the corresponding test in the results displayed</para></listitem>
+<listitem><para>*  <term>ltest</term> = a string, 'test=xxx' where xxx collects the names of the specification tests performed (for instance 'test=predfailin(0.5),predfailin(0.9), doornhans,arlm(4),hetero_sq')</para></listitem>
+<listitem><para>*  <term>test_default</term> = the testing function that will be used by default</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>rols</term> = a results tlist with</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('meth') = 'ols'</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('y') = y data vector</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('x') = x data matrix</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('nobs') = # observations</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('nvar') = # variables</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('beta') = bhat</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('yhat') = yhat</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('resid') = residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('sige') = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('sigu') = sum of squared residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('ser') = standard error of the regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('dw') = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('condindex') = multicolinearity cond index</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('like') = log-likelihood of the regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('rsqr') = rsquared</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('rbar') = rbar-squared</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('f') = F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('pvaluef') = its significance level</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('name_test') = the names of the specification</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  rols('spec_test') = a matrix with the values of the statistics of the specification tests in column 1 and the corresponding p-values in column 2</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs ordinary least-squares and standard specification test (Chow in-sample stability tests computed at 50% and 90% of the sample; Doornik and Hansen normality test; heteroskedasticity test called xi&#170; by D.F. Hendry; AutoRegressive Lagrange multiplier tests at order 4) or any tests given by the user.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'data\bdhenderic.dat')
+[y,namey,x]=explouniv('delts(lm1-lp)',['delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet','lagts(1,lm1-lp-ly)','cte'],['1964q3';'1989q2'])
+names=tlist(['names';'jbnorm';'doornhans';'hetero_sq';...
+     'chowtest';'predfailin';'arlm';'reset'],'Jarque and Bera',...
+     'Doornik and Hansen','hetero x_squared','Chow',...
+     'Chow pred. fail. ','AR','reset');
+ 
+r=olspec1(y,x,names,list(),test_spec0)
+// diplay the estimated parameters
+r('beta')
+// display the specifiaction tests results and the corresponding p-values
+// note the olspec1 should be used only in other programs or for testing: olspec is the program to use if you want
+// a more user-friendly function
+r('spec_test')
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2019
+        </refsection>
+</refentry>

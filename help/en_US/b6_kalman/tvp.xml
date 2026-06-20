@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="tvp" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>tvp </refname>
+               <refpurpose>Time varying parameters estimation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rtvp]=tvp(namey,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =   a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> argi </term> =  arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;&#160;-&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx1)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nx1)&#160;real&#160;vector&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'priorb0=x'&#160;where&#160;x&#160;is&#160;(k&#160;x&#160;1)&#160;vector&#160;with&#160;prior&#160;b0&#160;values&#160;(default&#160;=&#160;ols(y,x))</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'priorv0=x'&#160;where&#160;x&#160;=&#160;(k&#160;x&#160;k)&#160;matrix&#160;with&#160;prior&#160;variance&#160;for&#160;Q&#160;(default&#160;=&#160;eye(k)*1e+5,&#160;a&#160;diffuse&#160;prior)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'tvpmeth=x'&#160;where:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;x&#160;=&#160;1&#160;(Q&#160;is&#160;diagonal&#160;and&#160;only&#160;Q&#160;and&#160;R&#160;are&#160;estimated)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;or&#160;x=1a&#160;(no&#160;constraint&#160;on&#160;Q&#160;and&#160;only&#160;Q&#160;and&#160;R&#160;are&#160;estimated),</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;or&#160;x=2&#160;(prirov0=0,&#160;Q&#160;is&#160;diagonal&#160;and&#160;priorb0,&#160;Q&#160;and&#160;R&#160;are&#160;estimated)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;&#160;-&#160;or&#160;x=2a&#160;(priorv0=0,&#160;no&#160;constraint&#160;on&#160;Q,&#160;and&#160;priorb0,&#160;Q&#160;and&#160;R&#160;are&#160;estimated)&#160;(default&#160;=&#160;1)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'Q=x'&#160;where&#160;x&#160;is&#160;a&#160;(kxk)&#160;initial&#160;value&#160;for&#160;Q</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'R=x'&#160;where&#160;x&#160;is&#160;an&#160;initial&#160;value&#160;for&#160;R</para></listitem>
+<listitem><para>&#160;&#160;-&#160; 'optfunc=optim' if the user wants to use the optim optimisation function (default: optimg)</para></listitem>
+<listitem><para>&#160;&#160;-&#160; 'opt_nelmead=crit,nitermax' with crit the value of the convergence criterion in the Nelder-Meade optimisation function and nitermax the maximum number of iterations (default = 'opt_nelmead=2*%eps,1000')</para></listitem>
+<listitem><para>&#160;&#160;-&#160; 'opt_optim=opts' where opts are options for optim that can be entered after the starting value of the parameters (default = 'opt_optim=,''ar'',1e6,1e6'')</para></listitem>
+<listitem><para>&#160;&#160;-&#160; 'opt_convg=val' where val is the threshold on gradient norm (default = 'opt_convg=1e-5')</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rtvp </term> =   a results tlist with</para></listitem>
+<listitem><para>&#160;  - rtvp('meth') = 'tvp'</para></listitem>
+<listitem><para>&#160;  - rtvp('Q') = estimated Q</para></listitem>
+<listitem><para>&#160;  - rtvp('R') = estimated R</para></listitem>
+<listitem><para>&#160;  - rtvp('betat') = B(t/t)</para></listitem>
+<listitem><para>&#160;  - rtvp('betaf') = B(t/t-1)</para></listitem>
+<listitem><para>&#160;  - rtvp('betas') = B(t/T)</para></listitem>
+<listitem><para>&#160;  - rtvp('sigmatt') = sigma(t/t)</para></listitem>
+<listitem><para>&#160;  - rtvp('sigmatf') = sigma(t/t-1)</para></listitem>
+<listitem><para>&#160;  - rtvp('sigmats') = sigma(t/T)</para></listitem>
+<listitem><para>&#160;  - rtvp('param') = estimated parameters</para></listitem>
+<listitem><para>&#160;  - rtvp('vcov') = variance-covariance matrix of estimated paramters</para></listitem>
+<listitem><para>&#160;  - rtvp('tstat') = Student's t of estimated parameters</para></listitem>
+<listitem><para>&#160;  - rtvp('y') = y</para></listitem>
+<listitem><para>&#160;  - rtvp('x') = x</para></listitem>
+<listitem><para>&#160;  - rtvp('yhat') = X(t)*B(t)</para></listitem>
+<listitem><para>&#160;  - rtvp('resid') = y-X*B(t)</para></listitem>
+<listitem><para>&#160;  - rtvp('like') = log-likelihood</para></listitem>
+<listitem><para>&#160;  - rtvp('nobs') = # of observations</para></listitem>
+<listitem><para>&#160;  - rtvp('nvar') = # of exogenous variables</para></listitem>
+<listitem><para>&#160;  - rtvp('tR') = t-stat of estimated R variance</para></listitem>
+<listitem><para>&#160;  - rtvp('tQ') = t-stat of estimated Q variance</para></listitem>
+<listitem><para>&#160;  - rtvp('tpriorb0') = t-stat of estimated priorb0 (if method 1a or 2a are used)</para></listitem>
+<listitem><para>&#160;  - rtvp('param') = estimated parameters in a vector form</para></listitem>
+<listitem><para>&#160;  - rtvp('tstat') = their t-stat</para></listitem>
+<listitem><para>&#160;  - rtvp('tvpmeth') = method used in tvp</para></listitem>
+<listitem><para>&#160;  - rtvp('namey') = name of the endogenous variable</para></listitem>
+<listitem><para>&#160;  - rtvp('namex') = name of the exogenous variable</para></listitem>
+<listitem><para>&#160;  - rtvp('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;  - rtvp('bounds') = if there is a timeseries in the regression, the bounds of the regression</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Time-varying parameter maximum likelihood estimation of the linear regression model
+<para>         y(t) = X(t)*B(t) + e(t), e(t) = N(0,R)</para>
+<para>         B(t) = B(t-1) + v(t),    v(t) = N(0,Q)</para>
+<para>: the methods '1a' and '2a' are not very robust; so I recommend to use them with much caution!</para>
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+r1=tvp('con','inc','cte','R=sigu','Q=0.1*eye(2,2)','priorb0=b','priorv0=100000*eye(2,2)','tvpmeth=1')
+// Example taken from function tvp_d1.
+// Here the variance of the innovations of the time varying coefficients is assumed to be diagonal
+// and there is a diffuse prior for starting values (tvpmeth=1);
+// endogenous variable is 'con', the exogenous ones are'inc' and 'cte';
+// starting values are given for R, Q and priorb0; priorv0 is imposed.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

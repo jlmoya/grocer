@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="fac_kalman" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>fac_kalman </refname>
+               <refpurpose>dynamic factor analysis with the Kalman filter </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=fac_kalman(listy,ARF,MAF,listar,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term>listy</term> =  a string  (ny x 1) vector of names or a list of ny names, ts or vectors</para></listitem>
+<listitem><para>*  <term>ARF</term> = either</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;a&#160;(narf&#160;x&#160;1)&#160;or&#160;(1&#160;x&#160;narf)&#160;string&#160;vector&#160;of&#160;parameters&#160;corresponding&#160;to&#160;the&#160;AR&#160;part&#160;of&#160;the&#160;factor&#160;process</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;.&#160;if&#160;the&#160;user&#160;does&#160;not&#160;give&#160;in&#160;the&#160;list&#160;of&#160;variable&#160;arguments&#160;the&#160;option&#160;'init=own',&#160;then&#160;the&#160;user&#160;can&#160;give&#160;any&#160;value&#160;to&#160;grocer_ARF;&#160;only&#160;it&#160;size&#160;matters&#160;for&#160;the&#160;estimation&#160;process</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;.&#160;if&#160;the&#160;user&#160;gives&#160;in&#160;the&#160;list&#160;of&#160;variable&#160;arguments&#160;the&#160;option&#160;'init=own',&#160;then&#160;the&#160;values&#160;given&#160;by&#160;the&#160;user&#160;are&#160;used&#160;as&#160;starting&#160;values&#160;for&#160;the&#160;optimisation&#160;process</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;.&#160;the&#160;user&#160;must&#160;enter&#160;the&#160;empty&#160;matrix&#160;[]&#160;if&#160;she&#160;wants&#160;to&#160;impose&#160;that&#160;the&#160;AR&#160;part&#160;is&#160;empty</para></listitem>
+<listitem><para>&#160;&#160;-&#160;or&#160;a&#160;list&#160;of&#160;p&#160;elements,&#160;each&#160;element&#160;of&#160;the&#160;preceding&#160;type,&#160;and&#160;p&#160;is&#160;the&#160;#&#160;of&#160;factors&#160;to&#160;estimate</para></listitem>
+<listitem><para>*  <term>  MAF</term> =  a (nmaf x 1) or (1 x nmaf) string vector of parameters corresponding to the MA part of the factor process or a list or p elements of this type (with the same conventions as with grocer_ARF and the same number of elements as for the AR part)</para></listitem>
+<listitem><para>*  <term> listar</term> =  a list of n vectors with:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;n:&#160;#&#160;of&#160;y&#160;variables</para></listitem>
+<listitem><para>*  <term> argi</term> =  optional arguments that can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'Q=x'&#160;where&#160;x&#160;is&#160;a&#160;(ny+1&#160;x&#160;ny+1)&#160;matrix&#160;of&#160;starting&#160;values&#160;for&#160;the&#160;var-cov&#160;matrix&#160;of&#160;residuals&#160;(first&#160;the&#160;residual&#160;of&#160;the&#160;factor&#160;ARMA&#160;process,&#160;then&#160;the&#160;ny&#160;residuals&#160;of&#160;the&#160;endogenous&#160;variables);&#160;note&#160;that&#160;for&#160;identification&#160;sake&#160;(see&#160;manual&#160;for&#160;details)&#160;the&#160;variance&#160;of&#160;residual&#160;of&#160;the&#160;factor&#160;ARMA&#160;process&#160;is&#160;fixed&#160;to&#160;the&#160;value&#160;given&#160;by&#160;the&#160;user&#160;in&#160;Q&#160;or&#160;to&#160;0.25&#160;if&#160;the&#160;user&#160;does&#160;not&#160;give&#160;starting&#160;values&#160;to&#160;Q</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'loadings=x'&#160;where&#160;x&#160;is&#160;a&#160;(ny&#160;x&#160;1)vector&#160;of&#160;starting&#160;values&#160;for&#160;the&#160;loadings&#160;of&#160;the&#160;factor</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'nap=x'&#160;with&#160;x&#160;=&#160;maximum&#160;#&#160;of&#160;calls&#160;to&#160;the&#160;function&#160;to&#160;optimize&#160;(Scilab&#160;optim&#160;option;&#160;default=1000)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'niter=x'&#160;with&#160;x&#160;=&#160;maximum&#160;#&#160;of&#160;iterations&#160;(Scilab&#160;optim&#160;option;&#160;default=1000)</para></listitem>
+<listitem><para>&#160;&#160;-&#160; 'optfunc=optim' if the user wants to use the optim optimisation function (default: optimg)</para></listitem>
+<listitem><para>&#160;&#160;-&#160; 'opt_nelmead=crit,nitermax' with crit the value of the convergence criterion in the Nelder-Meade optimisation function and nitermax the maximum number of iterations (default = 'opt_nelmead=2*%eps,1000')</para></listitem>
+<listitem><para>&#160;&#160;-&#160; 'opt_optim=opts' where opts are options for optim that can be entered after the starting value of the parameters (default = 'opt_optim=,''ar'',1e6,1e6'')</para></listitem>
+<listitem><para>&#160;&#160;-&#160; 'opt_convg=val' where val is the threshold on gradient norm (default = 'opt_convg=1e-5')</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> res </term> =  the results typed list of the dynamic factor estimation provided by the Kalman filter with:</para></listitem>
+<listitem><para>&#160;  - res('meth')= 'fac_kalman'</para></listitem>
+<listitem><para>&#160;   - res('y')= a (nobs x ny) matrix of observations</para></listitem>
+<listitem><para>&#160;   - res('nobs')= the # of observations</para></listitem>
+<listitem><para>&#160;   - res('ny')= the # of endogenous variables</para></listitem>
+<listitem><para>&#160;   - res('namey')= the (ny x 1) vector of names of the endogenous variables</para></listitem>
+<listitem><para>&#160;   - res('fac')= the estimated commun factor</para></listitem>
+<listitem><para>&#160;   - res('stud fac')= the studentized estimated commun factor</para></listitem>
+<listitem><para>&#160;   - res('ARF')= the (1 x narf) vector corresponding to the AR part of the factor process</para></listitem>
+<listitem><para>&#160;   - res('MAF')= the (1 x nmaf) vector corresponding to the MA part of the factor process</para></listitem>
+<listitem><para>&#160;   - res('ary')= the list of ny vectors corresponding to the AR processes of the residuals of the endogenous variables</para></listitem>
+<listitem><para>&#160;   - res('Phi')= the estimated Phi matrix of corresponding state-measure Kalman problem</para></listitem>
+<listitem><para>&#160;   - res('H')= the estimated H matrix of corresponding state-measure Kalman problem</para></listitem>
+<listitem><para>&#160;   - res('Q')= the estimated Q matrix of corresponding state-measure Kalman problem</para></listitem>
+<listitem><para>&#160;   - res('coeff')= the (nparam x 1) vector of estimaredparameters (exploded in the Phi, Q and H matrices)</para></listitem>
+<listitem><para>&#160;   - res('std')= the (nparam x 1) vector of standard errors of the estimared parameters</para></listitem>
+<listitem><para>&#160;   - res('tstat')= the (nparam x 1) vector of t-stat of the estimared parameters</para></listitem>
+<listitem><para>&#160;   - res('llike') = log-likelihood of the model</para></listitem>
+<listitem><para>&#160;   - res('grad') = gradient of the log-likelihood of the model at the estimated parameters</para></listitem>
+<listitem><para>&#160;   - res('AIC')= the Akaike information criterium</para></listitem>
+<listitem><para>&#160;   - res('BIC')= the Schwarz information criterium</para></listitem>
+<listitem><para>&#160;   - res('E4OPTION')= the tlist of options needed to feed the "e4" Kalman estimation</para></listitem>
+<listitem><para>&#160;   - res('prests') = a boolean indicating whether there are ts in the regression</para></listitem>
+<listitem><para>&#160;   - res('bounds') = bounds of the estimation (if there are ts in the regression)</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs the estimation of a dynamic factor model provided by the Kalman filter.
+ The model is:
+yi_t = lambda_1(i)*F_1t+...+lambda_k(i)*F_kt+ui_t
+ARF(L)*F_jt = MAF(L)*e_jt
+ARi(L)*ui_t=vi_t
+<para>REFERENCE: Doz C. and Lenglart F. (1999): "Analyse factorielle dynamique : test du nombre de facteurs, estimation et application  l'enquete de conjoncture dans l'industrie", Annales d'Economie et de Statistique, n. 54. </para>
+<para> </para>
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/BusinessSurvey.dat');
+bounds('1976m3','1997m3')
+[r]=fac_kalman(['pp';'fp';'gob';'fob';'in';'gpp'],string([0.9;0]),'0',list('0.1','0.1','0.1','0.1','0.1','0.1'))
+// Example taken from fac_kalman_d(): it provides the estimation of the original Doz and Lenglart estimation.
+ 
+[r]=fac_kalman(['pp';'fp';'gob';'fob';'in';'gpp'],string([-1.83;0.85]),'-0.48',list('0.33','0.81','0.88','0.87',...
+'0.82','0.89'),'init=own','Q=diag([0.5;2.55;3.23;2.55;3.94;2.83;5.95].^2)','loadings=[2.76;1.96;3.17;3.25;-1.61;3.69]',...
+'noprint','nap=100','niter=100')
+// Performs the same estimation, except that the user gives her own starting values,
+// taken here from Doz and Lenglart paper ([-1.83;0.85] for the AR part of the factor process,
+//  -0.48 for its MA part, 0.33,0.81,0.88,0.87,0.82,0.89 for the AR coefficients of the residuals of the endogenous variables,
+// the square of 2.55;3.23;2.55;3.94;2.83;5.95 for their variance
+//(note that Doz and Lenglart' present the standard errors whereas GROCER needs variances);
+// the maximum # of calls to the optimization function as well as the maximum # of iterations is set to 100.
+// The results are not printed (option 'noprint') but saved in the tlist r, so that they can be printed later.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2007
+        </refsection>
+</refentry>

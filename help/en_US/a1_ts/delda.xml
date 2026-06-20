@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="delda" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>delda </refname>
+               <refpurpose>differentiates a ts ignoring NA values </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>tsout=delda(arg1[,arg2])</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> arg1 </term> =     the order of differenciation (optional, set to 1 if not provided, can be &gt; 0,  =    0 or &lt; 0) or a ts</para></listitem>
+<listitem><para>*  <term> arg2 </term> =     a time series if the first argument was set to the order of differentiation</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> tsout </term> =     the differenciated time series</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes x(t)-x(t-n) for a timeseries x where all NA values are ignored (that is x(t-n) is the nth non NA value preceding x(t)). Equivalent, but a little bit quicker than x-lagts(n,x).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load('GROCERDIR\data\Daily_P.dat')
+y = delda(P)
+// simple differentiation of the daily ts P
+y = delda(1,P)
+// simple differentiation of the daily ts P
+y = delda(4,P)
+// y= P-P(-4)
+y = delda(-3,x)
+// y= P-P(+3)
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 20007
+        </refsection>
+</refentry>

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="pltms_prob" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>pltms_prob </refname>
+               <refpurpose>plots smoothed or filtered probabilities of a Markov switching regression </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>pltms_prob(res)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> res </term> =    the results typed list of a Markov switching regression </para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing (printed on a graphic window)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Plots the filtered or smoothed probabilities of a Markov switching regression.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'\data\us_revu.dat')
+ 
+bounds('1967m4','2004m2')
+ 
+nb_states=2
+switch_var=2 // variances are switching
+var_opt=3 // unrestricted var-cov matrix
+ 
+res=ms_reg('100*(log(us_revu)-lagts(2,log(us_revu)))',['100*(lagts(1,log(us_revu))-lagts(3,log(us_revu)))';...
+'100*(lagts(2,log(us_revu))-lagts(4,log(us_revu)))';'100*(lagts(3,log(us_revu))-lagts(5,log(us_revu)))'],'cte',nb_states,switch_var,var_opt,'transf=stud',...
+'noprint')
+ 
+// now plot the filtered probabilities
+pltms_prob(res,'filtered')
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2006
+        </refsection>
+</refentry>

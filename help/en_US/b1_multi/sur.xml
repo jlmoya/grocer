@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="sur" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>sur </refname>
+               <refpurpose>Zellner Seemingly Unrelated Regression </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rsur=sur(arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>* <term>argi</term> =  arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;equations&#160;written&#160;'vary=coef1*varx1+...+coefi*varxi'&#160;where:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;coefi&#160;=&#160;the&#160;name&#160;of&#160;a&#160;coefficient</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;varxi&#160;=&#160;the&#160;name&#160;of&#160;a&#160;variable</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'coef=xx'&#160;where&#160;xx&#160;is&#160;a&#160;vector&#160;of&#160;coefficients&#160;names</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'niter=x'&#160;where&#160;x&#160;is&#160;the&#160;max&#160;#&#160;iterations&#160;authorized&#160;(optional;&#160;default&#160;=100)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'crit=x'&#160;where&#160;x&#160;is&#160;the&#160;convergence&#160;criterion</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'unequal'&#160;if&#160;the&#160;equations&#160;do&#160;not&#160;all&#160;cover&#160;the&#160;entered&#160;the&#160;time&#160;span&#160;given&#160;by&#160;the&#160;bounds&#160;(so,&#160;the&#160;user&#160;must&#160;have&#160;bounds&#160;by&#160;the&#160;use&#160;of&#160;the&#160;function&#160;bounds)&#160;and&#160;the&#160;user&#160;wants&#160;to&#160;estimate&#160;all&#160;equations&#160;over&#160;the&#160;largest&#160;time&#160;span&#160;included&#160;in&#160;the&#160;one&#160;covered&#160;by&#160;the&#160;bounds</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rsur </term> =  a results tlist with:</para></listitem>
+<listitem><para>&#160;  - rsur('meth') = 'sur'</para></listitem>
+<listitem><para>&#160;  - rsur('nobs') = # of observations</para></listitem>
+<listitem><para>&#160;  - rsur('neqs') = # of estimated equations</para></listitem>
+<listitem><para>&#160;  - rsur('ncoef') = # of estimated coefficients</para></listitem>
+<listitem><para>&#160;  - rsur('beta') = bhat</para></listitem>
+<listitem><para>&#160;  - rsur('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;  - rsur('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;  - rsur('sigma') = covariance matrix of the residuals</para></listitem>
+<listitem><para>&#160;  - rsur('sigu') = (1 x neqs) sum of squared residuals</para></listitem>
+<listitem><para>&#160;  - rsur('sigu') = (1 x neqs) sum of squared residuals</para></listitem>
+<listitem><para>&#160;  - rsur('dw') = (1 x neqs) Durbin-Watson</para></listitem>
+<listitem><para>&#160;  - rsur('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;  - rsur('dropna') = boolean indicating if NAs have been dropped</para></listitem>
+<listitem><para>&#160;  - rsur('namecoef') = (ncoef x 1) mame of the coeffcients</para></listitem>
+<listitem><para>&#160;  - rsur('namey') = name of endogenous variables</para></listitem>
+<listitem><para>&#160;  - rsur('eqs') = list of the neqs equations</para></listitem>
+<listitem><para>&#160;  - rsur('coefs') = list of the coefs names in each equation</para></listitem>
+<listitem><para>&#160;  - rsur('bounds') = if any, the bounds of the equations:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;a&#160;string&#160;vector&#160;if&#160;the&#160;bounds&#160;are&#160;common&#160;to&#160;all&#160;equations&#160;(option&#160;'unequal'&#160;not&#160;given)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;a&#160;list&#160;of&#160;string&#160;vectors&#160;if&#160;the&#160;bounds&#160;are&#160;specific&#160;to&#160;each&#160;equation&#160;(option&#160;'unequal'&#160;given)</para></listitem>
+<listitem><para>&#160;  - rsur('nonna') = vector indicating position of non-NAs</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes Zellner Seemingly Unrelated Regression. Some coefficients can be commun to several equations.There can be spaces in the text of the equations. If you want to introduce a constant in your equation, you can omit the '*varxi' in the text of the equation. The exogenous variable can be expressed anyway. The only constraint is that the model must be linear in its coefficients. The standard procedure assumes that the "panel" is balanced (all equations cover the same period) and, if there are time series and the bounds are not given, the function determines the largest time span for which all series exist. The user can however estimate the equations on an unbalanced panel: in that case, she must give bounds with the function bounds and enter the option 'unequal'.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+	
+load(GROCERDIR+'/data/grun.dat')
+// grunfeld investment data
+// see page 650, Green 1997
+ 
+ige  = grun(:,1); // general electric
+fge = grun(:,2);
+cge = grun(:,3);
+ 
+iwest  = grun(:,4); // westinghouse
+fwest = grun(:,5);
+cwest = grun(:,6);
+ 
+igm  = grun(:,7); // general motors
+fgm = grun(:,8);
+cgm = grun(:,9);
+ 
+ich  = grun(:,10); // chrysler
+fch = grun(:,11);
+cch = grun(:,12);
+ 
+iuss  = grun(:,13); // us steel
+fuss = grun(:,14);
+cuss = grun(:,15);
+ 
+ 
+eq1='igm=a1*fgm+a2*cgm+a3'
+eq2='ich=a4*fch+a5*cch+a6'
+eq3='ige=a7*fge+a8*cge+a9'
+eq4='iwest=a10*fwest+a11*cwest+a12'
+eq5='iuss=a13*fuss+a14*cuss+a15'
+ 
+eq1='igm=a1*fgm+a2*cgm+a3';
+eq2='ich=a4*fch+a5*cch+a6';
+eq3='ige=a7*fge+a8*cge+a9';
+eq4='iwest=a10*fwest+a11*cwest+a12';
+eq5='iuss=a13*fuss+a14*cuss+a15';
+r=sur(eq1,eq2,eq3,eq4,eq5)
+// Example taken from function sur_d. Here coefficients names are a1 to a15 and are not given as input of the function.
+// # of iterations is set to default. Results are printed.
+sur('igm=c1*fgm+c2*cgm+c3','ich=c1*fch+c4*cch+c5','ige=c6*fge+c7*cge+c8','namecoef='+joinstr('c',string([1:8]),','),'itmax=20','noprint')
+// Example 2 makes use of options on itmax and on the name of the coefficients.
+// Note that the coefficient c1 is imposed to be the same in equations 1 and 2.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2007
+        </refsection>
+</refentry>

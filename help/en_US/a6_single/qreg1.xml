@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="qreg1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:15-Aug-2011$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>qreg1</refname>
+               <refpurpose>quantile regression estimation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[r] = qreg1(y,x,tau,w,algo,maxit,eps,big,sigma)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> y </term> =   a (nobs x 1) real vector of endogenous variable</para></listitem>
+<listitem><para>*  <term> x </term> =   a (nobs x k) real matrix of exogenous variables</para></listitem>
+<listitem><para>*  <term> tau </term> =   a (q x 1) vector, the values of the quantiles</para></listitem>
+<listitem><para>*  <term> w </term> =   a vector of the same size as the endoegnous variable, if the user wants to weight differently the observations (default: equal weights)</para></listitem>
+<listitem><para>*  <term> algo </term> =   a string, the name of the algorithm  ('linpro' or 'qreg_solvelp1')</para></listitem>
+<listitem><para>*  <term> maxit</term>  =  a scalar, the maximum number of iterations allowed (default: none)</para></listitem>
+<listitem><para>*  <term> eps</term>  =  a scalar, the tolerance value for convergence (default: sqrt(%eps))</para></listitem>
+<listitem><para>*  <term> big</term>  =  a scalar, the number used to remove the residuals of the wrong sign (default: 1E20)</para></listitem>
+<listitem><para>*  <term> sigma</term>  =  a scalar, &lt; 1, the scaling factor determines how close the corrector step is allowed to come to the boundary of the constraint set in the interior point method</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> res </term> =   a results tlist with</para></listitem>
+<listitem><para>&#160;  - res('meth')  =  'quantile'</para></listitem>
+<listitem><para>&#160;  - res('y')     = y data vector</para></listitem>
+<listitem><para>&#160;  - res('x')     = x data matrix</para></listitem>
+<listitem><para>&#160;  - res('tau') = vectores of quantiles to be estimated</para></listitem>
+<listitem><para>&#160;  - res('weights') =   0 or a (nobs x 1) vector of observations weights</para></listitem>
+<listitem><para>&#160;  - res('nobs')  = # observations</para></listitem>
+<listitem><para>&#160;  - res('nvar')  = # variables</para></listitem>
+<listitem><para>&#160;  - res('beta')  = (nvar x q) matrix of quantile estimations</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs quantile regression on matrices.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+X = grand(100,3,'nor',0,1);
+X1 = X(:,1)
+X2 = X(:,2)
+Y = 12 + 3*X1 + 5*X2 + .2*X(:,3);
+tau = [0.05;0.50;0.75;0.95];
+r = qreg1(Y,[ones(100,1) X1 X2],tau,0,'linpro',%inf,sqrt(%eps),1E20,0.99995);
+// Performs quantile regression on simulated data, with algorithm 'linpro' (needs to have previously installed the toolbox 'quapro') and default qreg values.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2011
+        </refsection>
+</refentry>

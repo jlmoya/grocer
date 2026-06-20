@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="longrun_variance" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>longrun_variance</refname>
+               <refpurpose>long run variance of a stationary series </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>LR = longrun_variance(X,kern,bandwitch)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> X </term> =    vector of observations      </para></listitem>
+<listitem><para>*  <term> kern </term> =   </para></listitem>
+<listitem><para>&#160;&#160;-&#160;'qs'&#160;for&#160;Quadratic&#160;Spectral&#160;(Defaut)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'b'&#160;for&#160;Bartlett</para></listitem>
+<listitem><para>*  <term> bandwitch </term> =    </para></listitem>
+<listitem><para>&#160;&#160;&#160;-'n'&#160;(Default)&#160;for&#160;the&#160;Newey&#160;West&#160;(1994)'s&#160;non&#160;parametric&#160;bandwitch&#160;parameter</para></listitem>
+<listitem><para>&#160;&#160;&#160;-'a'&#160;for&#160;the&#160;Andrews&#160;(1991)&#160;automatic&#160;bandwitch&#160;parameter&#160;selection&#160;with&#160;AR(1)&#160;structure</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* <term>LR</term> a results tlist with:</para></listitem>
+<listitem><para>&#160;  - LR('meth') = 'lr variance'</para></listitem>
+<listitem><para>&#160;   - LR('omega') = Long run variance of X</para></listitem>
+<listitem><para>&#160;   - LR('kernel') = kernel function</para></listitem>
+<listitem><para>&#160;   - LR('bandwitch') = Method to fix the bandwitch parameter</para></listitem>
+<listitem><para>&#160;   - LR('h') = Value of bandwitch parameter</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Estimates the long run variance of a stationary series.
+
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/bdhenderic.dat')
+l=longrun_variance(series(delts(lm1)),'qs','n')h=l('h')
+// provides the Standard Newey-West estimate of the long-run variance with a floor (4*(T/100)^(2/25)) window width (equivalent to newey_west(x,(4*(T/100)^(2/25))))
+ 
+LRV_func = longrun_variance(residual(:,i),kern,bandwitch)//example taken from function Moon_Perron
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Christophe Hurlin 2004 / Eric Dubois 2008
+        </refsection>
+</refentry>

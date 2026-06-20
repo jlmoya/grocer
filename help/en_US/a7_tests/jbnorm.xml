@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="jbnorm" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>jbnorm </refname>
+               <refpurpose>Jarque and Bera normality test on the residuals of a regression </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rjbnorm]=jbnorm(res,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> res </term> =   a result tlistor a variable which can be a vector or a ts between quotes or not</para></listitem>
+<listitem><para>*  <term> argi </term> =   optional arguments that can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'noprint'&#160;if&#160;the&#160;user&#160;does&#160;not&#160;want&#160;to&#160;print&#160;the&#160;results</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rjbnorm</term>  =   a typed list with :</para></listitem>
+<listitem><para>&#160;  - rjbnorm('meth') = 'jbnorm'</para></listitem>
+<listitem><para>&#160;  - rjbnorm('r1st') = results of the first step regression (if res was a results tlist)</para></listitem>
+<listitem><para>&#160;  - rjbnorm('chistat') = the value of the chi2 statistics</para></listitem>
+<listitem><para>&#160;  - rjbnorm('chi_pvalue') = the corresponding p-value</para></listitem>
+<listitem><para>&#160;  - rjbnorm('chi_df') = the corresponding degrees of freedom</para></listitem>
+<listitem><para>&#160;  - rjbnorm('skewness') = the skewness of the residuals</para></listitem>
+<listitem><para>&#160;  - rjbnorm('kurtosis') = the kurtosis of the residuals</para></listitem>
+<listitem><para>&#160;  - rjbnorm('dropna') = a boolean indicating if NAs have been droped(if the first input was a ts)</para></listitem>
+<listitem><para>&#160;  - rjbnorm('nonna') = vector indicating position of non-NA values (if the option 'dropna' was active)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes Jarque and Bera normality test (see Jarque, C. M., and Bera, A. K. (1980). ' Efficient tests for normality, homoskedasticity and serial independence of regression residuals', Economics Letters, 6, 255-259). Results are stored in a tlist and displayed on screen if the user has not given as second argument 'noprint'.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+bounds('1964q3','1989q2');
+rols=ols('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet', 'lagts(1,lm1-lp-ly)', 'const');
+// performs ols for Hendry and Ericsson (1991) equation 6
+ 
+jbnorm(rols)
+// Example taken from hendryericsson. The example provides the normality test for Hendry and Ericsson equation # 6,
+// whose results have been stored in tlist rols.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2007
+        </refsection>
+</refentry>

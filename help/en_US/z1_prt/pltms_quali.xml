@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="pltms_quali" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>pltms_quali </refname>
+               <refpurpose>plots smoothed or filtered probabilities of a qualtitative turning point estimation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>pltms_quali(res,indic)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> res </term> =    the results typed list of a Markov switching regression </para></listitem>
+<listitem><para>*  <term> indic </term> =    'filtered' or 'smoothed'</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing (printed on a graphic window)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Plots the filtered or smoothed probabilities of a qualtitative turning point estimation.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/enq5.dat')
+bounds()
+ 
+nbquantiles=[3,0];// 3 quantiles
+nblatent=1;// 1 latent state
+ 
+// first estimate a model with 3 states
+// with the option testna=%f because of lacking data
+res=ms_quali('KERN',nbquantiles,nblatent,'delts(3,B_ACTPA)','delts(3,C_VENPA)',...
+'delts(3,I_PROPA)','delts(3,I_GOULOT)','delts(3,S_CAPA)','nbstates=3','testna=%f','noprint')
+// now plot the filtered residuals
+pltms_quali(res,'filtered')
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2009
+        </refsection>
+</refentry>

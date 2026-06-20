@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="extrap" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>extrap </refname>
+               <refpurpose>extrapolate a ts by another ts </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>tsout=extrap(arg1,...argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> argi </term> =     a time series</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> tsout </term> =     a time series</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Extrapolates the first time series by the growth rate of the following ones over the future of each preceding time series. Can probably be made more efficient.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+x=reshape(1:11,'10a');
+y=reshape(exp([0:0.01:0.09]),'19a');
+z=reshape(exp([0:0.01:0.34]),'1a');
+a = extrap(x,y)
+// a is a ts defined over the time span '10a'-'28a', equal to x over the time span '10a'-'20a', y*value(x/y,'20a') over the time span '21a'-'28a'.
+b= extrap(x,y,z)
+// b is a ts defined over the time span '10a'-'35a', equal to x over the time span '10a'-'35a', y*value(x/y,'20a') over the time span '21a'-'28a', z*value(y/z,'25a')* value(x/y,'20a') over the time span '29a'-'35a'.
+c= extrap(x,z)
+// c is a ts defined over the time span '10a'-'35a', equal to x over the time span '10a'-'20a', y*value(x/y,'20a') over the time span '21a'-'35a'.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

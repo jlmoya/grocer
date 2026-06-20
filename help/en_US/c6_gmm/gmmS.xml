@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="gmmS" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>gmmS </refname>
+               <refpurpose>Spectral density matrix in GMM </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[S,eflag,gmmopt] = gmmS(b,gmmopt,Y,X,Z)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> b </term> =    parameter values</para></listitem>
+<listitem><para>*  <term> gmmopt </term> =    options tlist from GMM which revelant arguments are [default]</para></listitem>
+<listitem><para>&#160;&#160;-&#160;gmmopt('W')&#160;=&#160;set&#160;to&#160;'S'&#160;to&#160;use&#160;gmmS&#160;for&#160;inverse&#160;spectral&#160;density&#160;as&#160;GMM&#160;weighting&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;-&#160;gmmopt('W0')&#160;=&#160;&#160;initial&#160;weighting&#160;matrix&#160;['Z']:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . 'Z'&#160;=&#160;&#160;&#160;&#160;&#160;inv(I&#160;kron&#160;Z'Z)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . 'I'&#160;=&#160;&#160;&#160;&#160;&#160;identity</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . 'C'&#160;=&#160;&#160;&#160;&#160;&#160;calculated&#160;from&#160;parms&#160;in&#160;b</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . 'U'&#160;=&#160;user-defined&#160;(pass&#160;to&#160;gmm&#160;as&#160;Win)</para></listitem>
+<listitem><para>&#160;&#160;-gmmopt('S')&#160;&#160;Type&#160;of&#160;spectral&#160;density&#160;matrix:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . &#160;'I'&#160;=&#160;identity</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . &#160;'P'&#160;=&#160;plain&#160;(like&#160;OLS,&#160;&#160;e'e.*.Z'Z)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . &#160;'W'&#160;=&#160;White&#160;(hetero-consistent)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . &#160;'H'&#160;=&#160;&#160;&#160;&#160;&#160;Hansen&#160;(truncated,&#160;wts&#160;=&#160;1&#160;or&#160;0)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . &#160;'NW'&#160;=&#160;Newey-West&#160;(Bartlett&#160;weights)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . &#160;'G'&#160;=&#160;Gallant&#160;(Parzen&#160;weights)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . &#160;'AM'&#160;=&#160;Andews&#160;or&#160;Andrews-Monahan&#160;(see randmon.sci)</para></listitem>
+<listitem><para>&#160;&#160;- gmmopt('lags') = lags in H, NW, or G kernels</para></listitem>
+<listitem><para>&#160;&#160;- gmmopt('wtvec') = user-defined weights for Hansen matrix, allows for seasonals, etc. (eg. wtvec = [1 0 1])</para></listitem>
+<listitem><para>&#160;&#160;- gmmopt('Strim') = Controls demeaning of moments in calculating S [1]</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . &#160;0 =&#160;none</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . &#160;1 = demean&#160;model&#160;errors&#160;e</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . &#160;2 = demean&#160;moments,&#160;Z'e</para></listitem>
+<listitem><para>*  <term> Y </term> =    endogenous data</para></listitem>
+<listitem><para>*  <term> X </term> =    exogenous variable</para></listitem>
+<listitem><para>*  <term> Z </term> =    instruments</para></listitem>
+ 
+ 
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term>  S </term> =    the spectral density matrix of the GMM moments</para></listitem>
+<listitem><para>*  <term>  eflag </term> =    1 if matrix is negative definite</para></listitem>
+<listitem><para>*  <term>  gmmopt </term> =    gmm option tlist</para></listitem>
+ 
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Calculates the spectral density matrix S in GMM
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ S = gmmS(b,gmmopt,Y,X,Z);;
+// Example taken from gmm1:
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2007
+        </refsection>
+</refentry>

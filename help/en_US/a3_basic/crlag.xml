@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="crlag" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>crlag</refname>
+               <refpurpose>circular lag function </refpurpose>
+   </refnamediv>
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[y]=crlag(x,n)</synopsis>
+        </refsynopsisdiv>
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+            <term>Input</term>
+<listitem><para>*  <term> x </term> =   input vector (tx1) or (1xt)</para></listitem>
+<listitem><para>*  <term> n </term> =   # of values to return (optional; default  =  t)</para></listitem>
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+          <varlistentry>
+          <term>Output</term>
+<listitem><para>*  <term> y </term> =   a (nx1) (if x is (1xt)) or a (1xn) (if x is (1xt))vector with:</para></listitem>
+<listitem><para>&#160;&#160;- y(1) = x(n)</para></listitem>
+<listitem><para>&#160;&#160;- y(2) = x(1)</para></listitem>
+<listitem><para>&#160;&#160;...</para></listitem>
+<listitem><para>&#160;&#160;-y(n) = x(n-1)</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+        <refsection>
+               <title>DESCRIPTION</title>
+Circular lag function 
+        </refsection>
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+y=crlag([1:5]) // returns: y=[5 1 2 3 4]
+               ]]></programlisting>
+        </refsection>
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

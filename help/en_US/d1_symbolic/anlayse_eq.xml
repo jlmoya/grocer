@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="analyse_eq" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:31-Août-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>analyse_eq</refname>
+               <refpurpose>breaks down an equation into elementary bricks </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>resout=analyse_eq(equation)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>equation</term> =    a string, the text of an equation</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>resout</term>  =    a tlist, whose type is equation, with as 2nd argument the type of the operation, which can be:</para></listitem>
+<listitem><para>&#160;   - 'operation' (such as '+', '*', '.*' , ...); in that case there are the following fields:</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;'lhs':&#160;an&#160;'equation'&#160;tlist&#160;relative&#160;to&#160;the&#160;left&#160;hand&#160;side&#160;of&#160;the&#160;operation</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;'operator':&#160;the&#160;operator&#160;(!)</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;'rhs':&#160;an&#160;'equation'&#160;tlist&#160;relative&#160;to&#160;the&#160;right&#160;hand&#160;side&#160;of&#160;the&#160;operation</para></listitem>
+<listitem><para>&#160;   - 'unary' (when a unary '-', as opposed to the operator, has been found); in that case there is the following field:</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;'rhs':&#160;the&#160;equation'&#160;tlist&#160;relative&#160;to&#160;the&#160;expression&#160;after&#160;the&#160;'-'</para></listitem>
+<listitem><para>&#160;   - 'parentheses'; in that case there is the following field:</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;'exp':&#160;the&#160;equation'&#160;tlist&#160;relative&#160;to&#160;expression&#160;between&#160;the&#160;parentheses</para></listitem>
+<listitem><para>&#160;   - 'function'; in that case there is the following field:</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;'input':&#160;the&#160;'equation'&#160;tlist&#160;relative&#160;to&#160;the&#160;input&#160;of&#160;the&#160;function</para></listitem>
+<listitem><para>&#160;   - 'scalar'; in that case there is the following field:</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;'val':&#160;a&#160;string,&#160;the&#160;value&#160;of&#160;the&#160;number&#160;that&#160;represents&#160;the&#160;equation</para></listitem>
+<listitem><para>&#160;   - 'variable'; in that case there is the following field:</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;'name&#160;vari':&#160;a&#160;string,&#160;the&#160;name&#160;of&#160;the&#160;found&#160;variable,&#160;assessed&#160;as&#160;such&#160;if&#160;it&#160;is&#160;a&#160;matrix&#160;or&#160;a&#160;ts</para></listitem>
+<listitem><para>&#160;   - 'unknown'; in that case there is the following field:</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;'name&#160;unknown':&#160;a&#160;string,&#160;the&#160;name&#160;of&#160;the&#160;found&#160;unknown&#160;object</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Breaks down an equation into elementary bricks.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+eq='a*x^2+b*sin(0.5*x)';
+an_eq=analyse_eq(eq);
+[eqd,reseq_d]=deriv_eq(an_eq,'x');
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2012
+        </refsection>
+</refentry>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="garch_grad" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>garch_grad </refname>
+               <refpurpose>Generates garch gradient </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[g,dht,gradt]=garch_grad(parm,nar,nma,y,x)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> parm</term>  =    vector of parameters (beta, a0, ar and ma in that order)</para></listitem>
+<listitem><para>*  <term> nar </term> =    # of ar parameters</para></listitem>
+<listitem><para>*  <term> nma </term> =    # of ma parameters</para></listitem>
+<listitem><para>*  <term> y </term> =    (n x 1) vector of the endogenous variable</para></listitem>
+<listitem><para>*  <term> x </term> =    (n x k) vector of the exogenous variables</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> g </term> =    (k+nar+nma+1 x 1) -gradient at param</para></listitem>
+<listitem><para>*  <term> dht </term> =    (nobs x nar+nma+1) derivative of sigt w.r.t a0, ar, ma</para></listitem>
+<listitem><para>*  <term> scores </term> =    (k+nar+nma+1 x 1) sub-gradient at each date</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Generates garch likelihood gradient with respect to the true garch parameters. This in not the function used for maximisation, because maximised parameters are transformed in order to insure the positivity of the variance.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/garchd.dat')
+ 
+bounds('1949q1','1983q4')
+r1 = ols('gnpdef','cte','lagts(gnpdef)','lagts(2,gnpdef)','lagts(3,gnpdef)','lagts(4,gnpdef)');
+bet = r1('beta');
+s = r1('sige');
+[y,namey,x]=explouniv('gnpdef',list('cte','lagts(gnpdef)','lagts(2,gnpdef)','lagts(3,gnpdef)','lagts(4,gnpdef)'));
+parm=[bet ; s ; 0 ; 0 ]
+[g,dht,scores]=garch_grad(parm,1,1,y,x)
+// the gradient, derivate of sigt and scores have been caluclated at ols solution
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

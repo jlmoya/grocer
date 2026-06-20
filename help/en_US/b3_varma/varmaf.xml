@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="varmaf" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>varmaf </refname>
+               <refpurpose>forecasts from a VARMA model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rvarmaf = varmaf(namevarma,hfore,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namevarma </term> =   the tlist results resulting from a VARMA estimation or the same between quotes (to have its name saved)</para></listitem>
+<listitem><para>*  <term> hfore </term> =   the prevision period which can be either</para></listitem>
+<listitem><para>&#160;&#160;-a&#160;[n1&#160;n2]&#160;constant&#160;vector&#160;where&#160;n1&#160;and&#160;n2&#160;are&#160;the&#160;lead&#160;over&#160;the&#160;last&#160;period&#160;of&#160;the&#160;estimation&#160;(n1&lt;=0&#160;means&#160;that&#160;the&#160;forecast&#160;begins&#160;within&#160;the&#160;estimation&#160;period)</para></listitem>
+<listitem><para>&#160;&#160;-a&#160;n&#160;constant&#160;which&#160;is&#160;equivalent&#160;to&#160;[1&#160;n]&#160;(forecast&#160;begins&#160;just&#160;after&#160;the&#160;estimation&#160;period)</para></listitem>
+<listitem><para>&#160;&#160;-a&#160;[n1&#160;n2]&#160;string&#160;vector&#160;where&#160;n1&#160;and&#160;n2&#160;are&#160;the&#160;time&#160;periods&#160;for&#160;forecasting&#160;(a&#160;posibility&#160;open&#160;only&#160;if&#160;the&#160;VAR&#160;has&#160;been&#160;estimated&#160;on&#160;ts)</para></listitem>
+<listitem><para>&#160;&#160;-a&#160;n&#160;string&#160;which&#160;is&#160;equivalent&#160;to&#160;[1&#160;n]&#160;(forecast&#160;begins&#160;just&#160;after&#160;the&#160;estimation&#160;period)</para></listitem>
+<listitem><para>*  <term> argi </term> =   a variables # of arguments that can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'exo=xx'&#160;(necessary&#160;if&#160;the&#160;variables&#160;in&#160;the&#160;VARMA&#160;has&#160;been&#160;given&#160;as&#160;a&#160;matrix)&#160;where&#160;xx&#160;is&#160;either&#160;a&#160;vector&#160;of&#160;strings&#160;betweeen&#160;double&#160;quotes,&#160;a&#160;list&#160;of&#160;ts&#160;or&#160;a&#160;matrix&#160;of&#160;size&#160;[#&#160;of&#160;forecasting&#160;dates&#160;;&#160;#&#160;of&#160;exogenous&#160;variables&#160;in&#160;the&#160;var]&#160;for&#160;the&#160;values&#160;of&#160;exogenous&#160;variables&#160;over&#160;the&#160;forecasting&#160;period</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;forecast</para></listitem>
+ 
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rvarmaf </term> =   a results tlist with:</para></listitem>
+<listitem><para>&#160;  - result('meth') ='varmaf'</para></listitem>
+<listitem><para>&#160;  - rvarmaf('namevarma') = the name of the varma tlist result (if entered between quotes)</para></listitem>
+<listitem><para>&#160;  - rvarmaf('rvarma') = the varma tlist result used for forecasting</para></listitem>
+<listitem><para>&#160;  - rvarmaf('h forecast') = the forecast horizon</para></listitem>
+<listitem><para>&#160;  - rvarmaf('forecast') = the forecast</para></listitem>
+<listitem><para>&#160;  - rvarmaf('forecast var') = the forecast variance</para></listitem>
+<listitem><para>&#160;  - rvarmaf('fore_namei') = vector or ts of forecast called by the name of the forecast variable prefixed by 'fore_'</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs forecasting from a VARMA model estimated by the e4 method.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat') ;
+bounds('1964q3','1988q4');
+rarma=varma('rnet',[0 0],[],[0],[],0,1,'exo=''const''','Gexo=1')
+// estimation of an ARMA(2,1) on the interest data in the database bdhenderic.dat provided with grocer
+rarmf=varmaf(rarma,10,'exo=''const''')
+// makes a forecast on the first 10 out-of-sample observations
+rarmf=varmaf(rarma,'1991q2','exo=''const''')
+// makes a forecast from the first out-of-sample date (here '1989q1') to '1991q2': this is exactly the same as the first example
+rarmf=varmaf(rarma,['1988q3' '1990q4'],'exo=''const''')
+// makes a forecast from an in-sample date ('1988q3') to an out-of-sample date ('1990q4')
+rarmf=varmaf(rarma,['1989q3' '1990q4'],'exo=''const''')
+// makes a forecast from a date three quarters after the end of estimation period to an out-of-sample date;
+// note that it is possible since data on rnet are available until 1989q4,
+// that is after the start of the forecast.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2004
+        </refsection>
+</refentry>

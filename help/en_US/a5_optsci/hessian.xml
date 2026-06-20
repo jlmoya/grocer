@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="hessian" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>hessian </refname>
+               <refpurpose>finite symmetric difference Hessiann </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>H=hessian(func,pin[,arg1,&#133;argn])</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>* <term> func </term>= (minus likelihood) function to minimize </para></listitem>
+<listitem><para>* <term> pin </term>= parameter vector fed to func</para></listitem>
+<listitem><para>* <term> argi </term>=</para></listitem>
+<listitem><para>&#160;-&#160;'maxit=x'&#160;to&#160;set&#160;the&#160;maximum&#160;#&#160;of&#160;iterations&#160;(default&#160;=&#160;500)</para></listitem>
+<listitem><para>&#160;-&#160;arguments&#160;of&#160;function&#160;func&#160;others&#160;that&#160;the&#160;parameters</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* <term> H </term>= value of the hessian of namefunc at point grocer_p</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes finite symmetric difference Hessian. func must take the form func(b,varargin) where:
+<para>b = parameter vector (k x 1)</para>
+<para>varargin = arguments passed to the function</para>
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+chh='hessian(''filter0'',param,'''+func+''',y,x,F)'; vcovt=inv(evstr(chh))
+ 
+This example, taken from kalman provides the calculation of the variance-covariance matrix of the estimated parameters of a kalman filtering.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

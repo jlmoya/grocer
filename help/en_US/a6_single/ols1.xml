@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ols1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ols1 </refname>
+               <refpurpose>ordinary least squares </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rols]=ols1(y,x)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> y </term> =    dependent variable vector (nobs x 1)</para></listitem>
+<listitem><para>*  <term> x </term> =    independent variables matrix (nobs x nvar)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rols </term> =    a tlist with:</para></listitem>
+<listitem><para>&#160;  - rols('meth')  = 'ols'</para></listitem>
+<listitem><para>&#160;  - rols('y')     = y data vector</para></listitem>
+<listitem><para>&#160;  - rols('x')     = x data matrix</para></listitem>
+<listitem><para>&#160;  - rols('nobs')  = nobs</para></listitem>
+<listitem><para>&#160;  - rols('nvar')  = nvars</para></listitem>
+<listitem><para>&#160;  - rols('beta')  = bhat</para></listitem>
+<listitem><para>&#160;  - rols('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;  - rols('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;  - rols('resid') = residuals</para></listitem>
+<listitem><para>&#160;  - rols('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;  - rols('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - rols('sigu')  = sum of squared residuals</para></listitem>
+<listitem><para>&#160;  - rols('ser')  = standard error of the regression</para></listitem>
+<listitem><para>&#160;  - rols('yhat')  = yhat</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ One of the numerous functions performing ordinary least squares: this one assumes that x et y are already a matrix and a vector and does not provide DW, R² statistics. Used in other programs.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+x=grand(15,3,'nor',0,1)
+y=x*ones(3,1)+grand(15,1,'nor',0,1)
+r=ols1(y,x)
+ 
+r=ols1(y,ptrend(t,nobs))
+//example taken from kpss.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

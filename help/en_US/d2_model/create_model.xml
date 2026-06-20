@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="create_model" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:23-Juin-2018$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>create_model</refname>
+               <refpurpose>create a model from a a text file </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>model=create_model(filein)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+
+<listitem><para>*  <term>filein</term>&#160;=&#160;the&#160;text&#160;file&#160;of&#160;the&#160;model</para></listitem>
+
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>model</term> = a model tlist, with:</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('namemod') = a string, the name of the model</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('name endo') = a string vector, the names of the endogenous variables</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('name exo') = a string vector, the names of the exogenous variables</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('name resid') = a string vector, the names of the residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('name coeff') = a string vector, the names of the coefficients</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('name param') = a string vector, the names of the parameters</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('name eq') = a string vector, the names of the equations</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('equations') = a string vector, the texts of the equations</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('coeffs') = a tlist, whose type is 'coeffs' with:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;model('coeffs')(i) = name of the i-th coeff</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('params') = a tlist, the equivalent of model('coeffs') for parameters</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('eq coeffs') = a (ncoeffs x neqs) sparse matrix, with</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; the (i,j) non zero value corresponding to the coefficient i being present in the equation j</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('eq endos') = a (nendo x neqs) sparse matrix, with</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; the (i,j) non zero value corresponding to the endogenous i being present in the equation j</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('eq exos') = a (nexo x neqs) sparse matrix, with</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; the (i,j) non zero value corresponding to the exogenous i being present in the equation j</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('eq resids') = a (nresid x neqs) sparse matrix, with</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; the (i,j) non zero value corresponding to the residual i being present in the equation j</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('eq params') = a (nparam x neqs) sparse matrix, with</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; the (i,j) non zero value corresponding to the parameter i being present in the equation j</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('lags endos') = a list of vectors, each vector collecting the various lags the corresponding</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;endogenous variable appears in the model</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('lags exos') = a list of vectors, each vector collecting the various lags the corresponding</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;exogenous variable appears in the model</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('non empty lagged endos') = a vector of integers, collecting the endogenous that is lagged at least in an equation</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('maxlag') = the lag maximum in the model</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('names for regressions') = a list of (2 x n_i) matrix that for each equation collects on column 1 the names of the coefficients</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in this equation (equivalent to the names of the exogenous variables in an ols estimation)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;and in column 2 the derivative of the equation with respect to each coefficient</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('linearity') =  a (neq x 1) vector of booleans, set to %f if the equation is non linear with respect</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;to its coefficients, %t if it is (or has no coefficients)</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('transf') = a boolean, set to %t if the model has been transformed for simulation, %f if not </para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('prolog string2run') = a (k x 1) string vector, collecting the equations that will be incorporated in the text</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;of the function called by function simulate to run the prologue</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('prolog func txts') = a (k x 1) string vector, collecting the texts of the functions that are to be</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;solved for equations in the prologue that cannot be solved directly as 'endogenous=rhs'</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('prolog Jac txts') = a (k x 1) string vector, collecting the texts of the corresponding Jacobians</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('prolog endo') = a (k x 1) vector of integers, collecting the indexes of the endogenous variables that are calculated by the prologue</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('prolog eq') = a (k x 1) vector of integers, collecting the indexes of the equations that are solved by the prologue</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('prolog string2run') = a (m x 1) string vector, collecting the equations that will be incorporated in the text</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;of the function called by function simulate to run the epilogue</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('prolog func txts') = a (m x 1) string vector, collecting the texts of the functions that are to be</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;solved for equations in the epilogue that cannot be solved directly as 'endogenous=rhs'</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('prolog Jac txts') = a (m x 1) string vector, collecting the texts of the corresponding Jacobians</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('prolog endo') = a (m x 1) vector of integers, collecting the indexes of the endogenous variables that are calculated by the epilogue</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('prolog eq') = a (m x 1) vector of integers, collecting the indexes of the equations that are solved by the epilogue</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('heart func txt') = a (n x 1) string vector,collecting the equations that will be incorporated in</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; the text of the function called by function simulate to run the heart of the model</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('heart Jac txt') = a (p x 1) string vector, collecting the equations of the non zero Jacobian matrix values</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('heart Jac trhs') = a (p x 1) string vector, collecting only the rhs of the equations of the non zero Jacobian matrix values</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('heart Jac indexes') = a (p x 2) matrix of integers, collecting the corresponding coordinates in the Jacabian matrix</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('heart endogenous') = a (n x 1) vector of integers, collecting the indexes of the endogenous variables that are calculated by the heart</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('heart equations') = a (n x 1) vector of integers, collecting the indexes of the equations that are solved by the heart</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('gs string2run') = a (q x 1) string vector, collecting the equations that will be calculated by the Gauss-Seidel method (if option 'GS' has been entered)</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('gs func txts') = a (q x 1) string vector, collecting the texts of the functions that are to be solved at each Gsuss-Seidel step</para></listitem>
+<listitem><para>&#160;&#160;&#160;- model('gs Jac txts') = a (q x 1) string vector, collecting the texts of the corresponding Jacobians</para></listitem>
+  
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Creates a model from a txt file.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+
+global GROCERDIR;
+small=create_model(GROCERDIR+'\data\smallmod.txt') 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2018
+        </refsection>
+</refentry>

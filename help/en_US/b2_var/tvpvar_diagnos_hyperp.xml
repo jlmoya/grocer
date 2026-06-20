@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="tvpvar_diagnos_hyperp" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:05-Sept.-2015$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>tvp_var_diagnos_hyperp</refname>
+               <refpurpose>computes MCMC convergence diagnostics for TVP VAR hyperparameters </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>tvp_var_diagnos_hyperp(res,nautocor)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> res </term> =    the results typed list from a tvp_var diagnos call</para></listitem>
+<listitem><para>*  <term> nautocor </term> =    the order of autocorrelation</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing: all results are printed on screen and graphed</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Prints the results of tvp_var diagnostics for matrices Q, S, W and Sigma(t) and plots the corresponding results.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ stacksize('max')
+load(GROCERDIR+'\data\primiceri.dat')
+mkdir(GROCERDIR+'\temp')
+nlag=2
+bounds('1953q3','1963q2')
+prior=tvpvar_prior0(nlag,4,4,0.01,0.01,0.1,['Inflation';'Unemployment';'rate_3m'])
+ 
+ 
+bounds('1963q3','2001q3')
+res=Hetero_TVP_VAR(nlag,['Inflation';'Unemployment';'rate_3m'],10000,2000,prior,path,2000)
+tvp_var_diagnos_hyperp(res,20)
+// Provides MCMC convergence diagnoses on Primeceri (2005) TVP VAR for the hyperparameters
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2015
+        </refsection>
+</refentry>

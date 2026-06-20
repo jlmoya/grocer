@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="olsar1_1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>olsar1_1 </refname>
+               <refpurpose>maximum likelihood estimation of an autocorrelated model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[result]=olsar1_1(y,x,optfunc,opt_optim)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term>y</term> =    a real (n,1) vector or a</para></listitem>
+<listitem><para>*  <term>x</term> =    a real (n,k) matrix</para></listitem>
+<listitem><para>*  <term>optfunc</term> =    'optimg' if the user wants to use the optim optimisation function (default: optim)</para></listitem>
+<listitem><para>*  <term>opt_optim</term> =    a tlist, collecting the options to the optimisation function</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term>rolsar1</term> =    a results tlist with</para></listitem>
+<listitem><para>&#160;  - rolsar1('meth')  = ' ar(1) maximum likelihood'</para></listitem>
+<listitem><para>&#160;  - rolsar1('y')     = y data vector</para></listitem>
+<listitem><para>&#160;  - rolsar1('x')     = x data matrix</para></listitem>
+<listitem><para>&#160;  - rolsar1('nobs')  = # observations</para></listitem>
+<listitem><para>&#160;  - rolsar1('nvar')  = # variables</para></listitem>
+<listitem><para>&#160;  - rolsar1('beta')  = bhat</para></listitem>
+<listitem><para>&#160;  - rolsar1('yhat')  = yhat</para></listitem>
+<listitem><para>&#160;  - rolsar1('resid') = residuals</para></listitem>
+<listitem><para>&#160;  - rolsar1('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;  - rolsar1('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - rolsar1('sigu')  = sum of squared residuals</para></listitem>
+<listitem><para>&#160;  - rolsar1('ser')  = standard error of the regression</para></listitem>
+<listitem><para>&#160;  - rolsar1('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;  - rolsar1('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;  - rolsar1('dw')    = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;  - rolsar1('condindex') = multicolinearity cond index</para></listitem>
+<listitem><para>&#160;  - rolsar1('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;  - rolsar1('rsqr')  = rsquared</para></listitem>
+<listitem><para>&#160;  - rolsar1('rbar')  = rbar-squared</para></listitem>
+<listitem><para>&#160;  - rolsar1('f')    = F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;  - rolsar1('pvaluef') = its significance level</para></listitem>
+<listitem><para>&#160;  - rolsar1('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;  - rolsar1('rho') = estimated first order autocorrelation of residuals</para></listitem>
+<listitem><para>&#160;  - rolsar1('trho') = its Student t</para></listitem>
+<listitem><para>&#160;  - rolsar1('like') = log-likelihood of the regression</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes maximum likelihood ols regression for AR1 errors.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+x=grand(15,3,'nor',0,1)
+y=x*ones(3,1)+autocum(grand(15,1,'nor',0,1),0.8)
+rolsar1=olsar1_1(y,x)
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2005
+        </refsection>
+</refentry>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="etalcalinsee" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:05-Fév.-2018$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>etalcalinsee</refname>
+               <refpurpose>Disaggregation using Insee's method </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[yhf,retal] = etalcalinsee(namey,arg1,&#133;,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para><term> namey </term>= low frequency series</para></listitem>
+<listitem><para><term> arg1,...,argn </term>= strings that can be</para></listitem>
+<listitem><para>&#160;&#160;&#160;.'alpha&#160;=xx'&#160;where&#160;w&#160;is&#160;significance&#160;level&#160;for&#160;the&#160;constant&#160;default&#160;0.1,&#160;that&#160;is&#160;10%</para></listitem>
+<listitem><para>&#160;&#160;&#160;.'ny_prov&#160;=n'&#160;where&#160;n&#160;is&#160;the&#160;number&#160;of&#160;known&#160;annual&#160;data&#160;that&#160;are&#160;ignored&#160;in&#160;the&#160;diseggregation&#160;process</para></listitem>
+<listitem><para>&#160;&#160;&#160;.'mod=''rw'''&#160;if&#160;the&#160;residuals&#160;are&#160;supposed&#160;to&#160;be&#160;a&#160;RW&#160;or&#160;'mod=''ar'''&#160;if&#160;the&#160;residuals&#160;are&#160;supposed&#160;to&#160;be&#160;an&#160;AR(1)&#160;(default:&#160;model&#160;with&#160;maximum&#160;likelihood&#160;is&#160;chosen)</para></listitem>
+<listitem><para>&#160;&#160;&#160;.'bench=''xxx'''&#160;where&#160;xxx&#160;is&#160;the&#160;name&#160;of&#160;the&#160;series&#160;the&#160;user&#160;wants&#160;to&#160;compare&#160;the&#160;result&#160;with&#160;(for&#160;instance&#160;to&#160;compare&#160;the&#160;method&#160;with&#160;another&#160;one)</para></listitem>
+<listitem><para>&#160;&#160;&#160;.'noprint'&#160;if&#160;the&#160;user&#160;does&#160;not&#160;want&#160;to&#160;print&#160;the&#160;results</para></listitem>
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para><term> yhf </term>= the disaggregated series</para></listitem>
+<listitem><para><term> retal </term>= a results tlist with:</para></listitem>
+<listitem><para>&#160;   - retal('meth') = 'Insee''s disaggregation'</para></listitem>
+<listitem><para>&#160;   - retal('lf y') = annual series</para></listitem>
+<listitem><para>&#160;   - retal('y estim') = annual transformed series (that is differentiated if residuals follow a RW, levle if not)</para></listitem>
+<listitem><para>&#160;   - retal('lf x') = a (N x 1) vector of annual data</para></listitem>
+<listitem><para>&#160;   - retal('x estim') = a (N x 1) vector of transformed annual data</para></listitem>
+<listitem><para>&#160;   - retal('x trim') = a (n x k) matrix of exogenous high frequency indicators</para></listitem>
+<listitem><para>&#160;   - retal('nobs') = # of observations in the regression</para></listitem>
+<listitem><para>&#160;   - retal('resid estim') = a (n x 1) vector of regression residuals</para></listitem>
+<listitem><para>&#160;   - retal('beta') = estimated coefficients of the annual regression</para></listitem>
+<listitem><para>&#160;   - retal('tstat') = t stats</para></listitem>
+<listitem><para>&#160;   - retal('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;   - retal('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;   - retal('llike') = the log-likelihood</para></listitem>
+<listitem><para>&#160;   - retal('rho') = autcorrelation coefficient of residuals:</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;if&#160;rho&#160;=&#160;]-1,1[&#160;then&#160;the&#160;model&#160;is&#160;estimated&#160;in&#160;levels</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;if&#160;rho&#160;=&#160;1&#160;then&#160;the&#160;model&#160;is&#160;estimated&#160;in&#160;differences</para></listitem>
+<listitem><para>&#160;   - retal('trend') = trend</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;retal('trend')&#160;=&#160;1&#160;if&#160;retal('prescte')&#160;=&#160;%t&#160;and&#160;rho&#160;=&#160;1</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;retal('trend')&#160;=&#160;2&#160;if&#160;retal('prescte')&#160;=&#160;%t&#160;and&#160;rho&#160;~=&#160;1</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;retal('trend')&#160;=&#160;0&#160;in&#160;other&#160;cases</para></listitem>
+<listitem><para>  - retal('y last values') = provisional value for y (and therefore not used in estimation)</para></listitem>
+<listitem><para>  - retal('hf x') = a (n x k) matrix of exogenous high frequency indicators</para></listitem>
+<listitem><para>  - retal('high freq') = a scalar, the indicators frequency</para></listitem>
+<listitem><para>  - retal('freq ratio') = a scalar, the ratio of high to low frequency </para></listitem>
+<listitem><para>  - retal('aug lf x') = (N x l) matrix of regressors, including the constant or trend if necessary</para></listitem>
+<listitem><para>  - retal('aug hf x') = (n x l) matrix of regressors, including the constant or trend if necessary</para></listitem>
+<listitem><para>  - retal('lf yhat') = (N x 1) adjusted low frequency y</para></listitem>
+<listitem><para>  - retal('lf resid') = (N x 1) low frequency residual</para></listitem>
+<listitem><para>  - retal('forecasted lf resid') = low frequency residual extended to the incomplete year with the estimated model</para></listitem>
+<listitem><para>  - retal('hf resid') = high frequency residual in TS form</para></listitem>
+<listitem><para>  - retal('hf yhat') = high frequency adjusted y</para></listitem>
+<listitem><para>  - retal('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>  - retal('namey') = name of the y variable</para></listitem>
+<listitem><para>  - retal('namex') = name of the x variables</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Provides Insee's method for desaggegating time series with a high frequency indicator. The regression allows for: (a) AR(1) or RW résiduals (b) inclusion or exclusion of a constant.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ bounds()
+load(GROCERDIR+'\data\EtalCalInsee.dat');
+ 
+[yhf,retal] = etalcalinsee('consameu','cammeu','bench=''consmmeu''','s=12','alpha=0.15') ;
+
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2004-2018
+        </refsection>
+</refentry>

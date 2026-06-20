@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="statfore" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>statfore </refname>
+               <refpurpose>static forecast </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[p]=statfore(res,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> res </term> =    result tlist</para></listitem>
+<listitem><para>*  <term> argi  </term> =   </para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;(optional)&#160;subperiod&#160;over&#160;which&#160;the&#160;forecast&#160;is&#160;done&#160;if&#160;variables&#160;are&#160;ts</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;-&#160;a&#160;(m x k)&#160;matrix&#160;of&#160;exogenous&#160;variables&#160;if&#160;they&#160;are&#160;not&#160;ts&#160;</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> p </term> =    forecast</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ Provides a static forecast from an equation estimated by ols(), hwhite(), olst(), lad(),... It can be used also with results of olsc, but does not take into account the autocorrelation of residuals. If the estimation has been performed with ts, then the function assumes that the variables have been entered between quotes and that their name have therefore been saved in the tlist; in that case, the corresponding data must be present in the environment.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+r = hendryericsson();statfore(r, '1985q1', '1989q3 ')
+// Example shows the static forecast made on period 1985q1 to 1989q3 with Hendry and Ericsson preferred specification.
+r2=ols(r('y'),r('x'));statfore(r2,[0.02 0.01 0.03 0.015 1])
+// Example shows a static forecast made with the same model, but estimated now with the corresponding vectors (r('y') and r('x')), and with exogenous values equal to [0.02 0.01 0.03 0.015 1].
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

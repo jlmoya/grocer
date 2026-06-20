@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="pltacf" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>pltacf </refname>
+               <refpurpose>plots partial autocorrelation fonction </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>pltacf(res,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> res</term>  =    a tlist result from function acf, ljungbox, li_mcloed or pacf </para></listitem>
+<listitem><para>*  <term> argi </term> =    options that can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'stud'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;graph&#160;standardized&#160;residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;-&#160;'onegraph'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;plot&#160;one&#160;residual&#160;per&#160;graphic&#160;window&#160;(if&#160;there&#160;are&#160;several&#160;endogenous&#160;variables)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing (printed on a graphic window)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Plots (partial) autocorrelation fonction.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/varma_d.dat');
+elec_cons = transdif(seriesa,0,1,1,12);
+respacf=pacf(elec_cons,'m=30','noplt');
+pltacf(respacf)
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2004
+        </refsection>
+</refentry>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="prt_tsmat" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:16-Août-2021$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>prt_tsmat(</refname>
+               <refpurpose>prints tsmats or a comparison between3 of them </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>prt_tsmat(type_prt,bounds_prt,db,vari,nseriespertab,out)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  type_prt = 'pcer', 'diff', 'level', 'growth rate'</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'pcer' = calculate the percentage differences between the db with repsect to the first one</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'diff' = calculate the differences between the db with repsect to the first one</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'level' = presents the databases one by one</para></listitem>
+<listitem><para>&#160;&#160;&#160;- 'growth rate' = presents the growth rate of the chosen variables in the databases one by one</para></listitem>
+<listitem><para>*  bounds_prt = a string vetor of even size or of size 1</para></listitem>
+<listitem><para>*  db =</para></listitem>
+<listitem><para>&#160;&#160;&#160;- a list of tsmat</para></listitem>
+<listitem><para>&#160;&#160;&#160;- or a string vector of names of tsmast between quotes</para></listitem>
+<listitem><para>&#160;&#160;&#160;- or a tsmat</para></listitem>
+<listitem><para>*  vari = a matrix of strings containing elements among these:</para></listitem>
+<listitem><para>&#160;&#160;&#160;- names of variables existing in the tsmat(s)</para></listitem>
+<listitem><para>&#160;&#160;&#160;- the keyword 'all' if you want to print all variables (note: if you want to display the values of peculiar types of variables frome a model (say mymodel), such as 'endogenous', 'exoegnous' or 'residuals', then enter mymodel('name endo'), etc.)</para></listitem>
+<listitem><para>*  nseriespertab = a scalar, the maximum #of series you want to be displayed at a time (optional argument: if not given, then all series are displayed in the same tab, whcich may lead to a very large tab)</para></listitem>
+<listitem><para>*  nseriespertab = a scalar, the maximum # of series you want to be displayed at a time (optional argument: if not given, the all series are displayed in the same tab, whcich may lead to a veyr large tab)</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  nothing: all results are sent to the output file</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+prints the data from 1 or more tsmat; this is in paticular suited to results from model simulations.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+
+// load the database associated to the "small" model:
+global GROCERDIR;
+load(GROCERDIR+'\data\small_db.dat')
+// print the values of the variables demon, time, trim and trim2 in this database for the
+// period 1990q1 to 2006q4
+prt_tsmat('level',['1990q1';'2006q4'],list('small_db'),['demmon';'time';'trim1';'trim2'])
+// print the growth rate of the variables demon, td_pib1, td_pib3 and td_pib5 in this database for the
+// period 2006q1 to 2007q4
+prt_tsmat('growth rate',['1990q1';'2006q4'],list('small_db'),['demmon';'td_pib1';'td_pib3';'td_pib5'])
+
+load(GROCERDIR+'\data\small.dat')
+// load the database small_db
+// simulate the small model with database small_db from 1981q1 to 2006q4, keeping
+// the data from 1978q1 and using the lagged endogenous variables as starting values
+sim_histo=simulate(small,small_db,'1981q1','2006q4',1,'1978q1','2006q4') 
+// display the comparison of simulation results with the original database small_db
+// for variables td_pib1 and td_pib3 
+prt_tsmat('pcer',['1990q1';'2006q4'],list('small_db','sim_histo(''simulation results'')'),['td_pib1','td_pib3']) 
+
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2020-2021
+        </refsection>
+</refentry>

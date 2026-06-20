@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="bounds_db4model" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:23-Juin-2018$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>bounds_db4model</refname>
+               <refpurpose>find the admissible bounds for a model and its database </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>simul_bounds=bounds_db4model(model,dbmod)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+
+<listitem><para>*  <term>model</term>&#160;=&#160;a&#160;model&#160;tlist</para></listitem>
+<listitem><para>*  <term>dbmod</term>&#160;=&#160;a&#160;database&#160;tsmat</para></listitem>
+
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>simul_bounds</term> = a (n x 3) string matrix, with:</para></listitem>
+<listitem><para>&#160;&#160;&#160;- the first column gathers the first possible starting date</para></listitem>
+<listitem><para>&#160;&#160;&#160;- the second column gathers the last possible starting date</para></listitem>
+<listitem><para>&#160;&#160;&#160;- the third column gathers the last possible ending date</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Finds the admissible bounds for a model and its database.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+global GROCERDIR;
+// load the model small:
+load(GROCERDIR+'\data\small.dat')
+// load the database small_db:
+load(GROCERDIR+'\data\small_db.dat')
+
+//now, find the admissible for the saall model and the small_db data base
+bounds_db4model(small,small_db)
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2018
+        </refsection>
+</refentry>

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="predfail" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>predfail  </refname>
+               <refpurpose>out of sample predictive failure test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rpredf]=predfail(grocer_res,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> grocer_res </term> =   the tlist results resulting from a regression</para></listitem>
+<listitem><para>* <term> arg1,...,argn</term> = </para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;constant,&#160;which&#160;idicates&#160;the&#160;#&#160;of&#160;periods&#160;over&#160;which&#160;the&#160;forecast&#160;is&#160;done</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;date,&#160;which&#160;indicates&#160;the&#160;date&#160;until&#160;which&#160;the&#160;forecast&#160;is&#160;done&#160;(if&#160;the&#160;estimation&#160;has&#160;been&#160;made&#160;with&#160;ts)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> grocer_rpredf </term> =   a results tlist with:</para></listitem>
+<listitem><para>&#160;  - grocer_rpredf('meth')  = 'rprefail'</para></listitem>
+<listitem><para>&#160;  - grocer_rpredf('res0')  = results tlist of the originating estimation</para></listitem>
+<listitem><para>&#160;  - grocer_rpredf('chistat')  = value of the test statistics</para></listitem>
+<listitem><para>&#160;  - grocer_rpredf('pchi') = its p-level</para></listitem>
+<listitem><para>&#160;  - grocer_rpredf('p') = the # of forecasts</para></listitem>
+<listitem><para>&#160;  - grocer_rpredf('prests')  = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;  - grocer_rpredf('prests')  = the residuals over the forecasting period</para></listitem>
+<listitem><para>&#160;  - grocer_rpredf('bounds')  = the bounds of the forecasting period</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ Computes out-of-sample predictive failure test. Results are stored in a tlist and displayed on screen if the user has not given as second argument 'noprint'.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+bounds('1964q3','1985q2');
+rols=ols('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet', 'lagts(1,lm1-lp-ly)', 'const');
+// performs ols for Hendry and Ericsson (1991) equation 6
+ 
+rpredf=predfail(rols,16)
+// Example taken from predfail_d. The example provides the predictive failure test with 16 periods ahead
+// for Hendry and Ericsson equation # 6, whose results have been stored in tlist rols.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

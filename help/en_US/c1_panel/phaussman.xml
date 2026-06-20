@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="phaussman" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>phaussman </refname>
+               <refpurpose>Haussman test on panel estimations </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=phaussman(result1,result2,prt)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> results1 </term> =   a tlist returned by pfixed()</para></listitem>
+<listitem><para>*  <term> results2 </term> =   a tlist returned by prandom()</para></listitem>
+<listitem><para>*  <term> prt </term> =   'noprint' if the user does not want to print the result on the screen</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> res </term> =   a results tlist with:</para></listitem>
+<listitem><para>&#160;   - res('meth') = 'panel haussman'</para></listitem>
+<listitem><para>&#160;   - res('pfixed res') = the tlist returned by pfixed()</para></listitem>
+<listitem><para>&#160;   - res('prandom res') = the tlist returned by prandom()</para></listitem>
+<listitem><para>&#160;   - res('stat') = the Haussman statistics</para></listitem>
+<listitem><para>&#160;   - res('pvalue') = the corresponding p-value</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs the Haussman test, used for testing the specification of the fixed or random effects model.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'\macros\grocer\db\judgepanel.dat') ;
+r1 = pfixed('y',judgepanel);
+r2 = prandom('y',judgepanel);
+rh=phaussman(r1,r2);
+// Estimate of a fixed effects model and a random panel model on Judge et alii example.
+// Then performs a Haussman test from the results tlist of these estimation. Results are printed on the working space.
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2005
+        </refsection>
+</refentry>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="chowtest" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>chowtest </refname>
+               <refpurpose>Chow usual test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[resulch]=chowtest(resulols,n1,np)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> resulols </term> =   results tlist from a first stage estimation</para></listitem>
+<listitem><para>*  <term> n1 </term> =   # of observations of the first sub-period</para></listitem>
+<listitem><para>*  <term> np </term> =   'noprin' if the user does not want to display the results</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> resulch </term> =   a results tlist with:</para></listitem>
+<listitem><para>&#160;  - resulch('meth') = chow</para></listitem>
+<listitem><para>&#160;  - resulch('rols') = the tlist results from first stage estimation</para></listitem>
+<listitem><para>&#160;  - resulch('fstat') = value of the test statistic</para></listitem>
+<listitem><para>&#160;  - resulch('f_pvalue') = its p-value</para></listitem>
+<listitem><para>&#160;  - resulch('dfnum') = # dof of the numerator</para></listitem>
+<listitem><para>&#160;  - resulch('dfden') = # dof of the denominator</para></listitem>
+<listitem><para>&#160;  - resulch('cut') = date (if there is a ts in the regression) or index of the observation (if there is no ts in the   regression) of the cut</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes Chow usual test with a break at observation n1. Results are saved in a tlist and displayed on screen.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+bounds('1964q3','1989q2');
+rols=ols('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet', 'lagts(1,lm1-lp-ly)', 'const');
+//performs ols for Hendry and Ericsson (1991) equation 6
+ 
+chowtest(rols,50)
+// Example taken from function chowtest_d. The Chow test on Hendry and Ericsson equation 6 is provided for a break at observation # 50.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

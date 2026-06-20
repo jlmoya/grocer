@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="bkwols" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>bkwols </refname>
+               <refpurpose>BKW scaled multicollinearity diagnostic </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[condindex]=bkwols(w,warn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> x </term> = independent variables matrix (nobs x nvar)</para></listitem>
+<listitem><para>*  <term> warn </term> = any input if you do not want a warning to be displayed when the matrix is extremely ill-conditionned</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> condindex </term> =    the condition number </para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes BKW COND index of a x matrix (with variables studentized to achieve invariance with respect to their scale). Contrary to bkw_scale, this function does not provide the variance-decomposition matrix.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+x = grand(200,5,'nor',0,1);
+x(:,1) = ones(200,1);
+x(:,3) = x(:,2) + grand(200,1,'nor',0,1)*0.05;
+// create multioncolinearity between columns 2 and 3
+condindex=bkwols(x)
+// Useful mainly for programming purpose (since bkw does much more).
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002/Emmanuel Michaux 2005
+        </refsection>
+</refentry>

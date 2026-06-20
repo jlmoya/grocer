@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ecm" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:28-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ecm</refname>
+               <refpurpose>performs error correction model estimation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>recm=ecm(p,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> p </term> =    # of lags </para></listitem>
+<listitem><para>*  <term> argi </term> =    an argument which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'endo=var1;var2;...;varn'&#160;or&#160;'endo=[var1;var2;...;varn]'&#160;with&#160;vari&#160;the&#160;name&#160;of&#160;an&#160;admissible&#160;variable&#160;(a&#160;real&#160;vector,&#160;a&#160;ts,&#160;a&#160;real&#160;matrix&#160;or&#160;a&#160;list&#160;of&#160;such&#160;variables)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'jres=xx'&#160;where&#160;xx&#160;is&#160;the&#160;name&#160;of&#160;a&#160;johansen&#160;results&#160;tlist&#160;(optional:&#160;if&#160;not&#160;given,&#160;is&#160;estimated&#160;by&#160;the&#160;function)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'exo_st=exo1;..,exok'&#160;where&#160;exo1,...,exok&#160;are&#160;variables&#160;entering&#160;the&#160;johansen&#160;estimation&#160;equations&#160;in&#160;the&#160;short&#160;run&#160;dynamic&#160;(needed&#160;if&#160;the&#160;user&#160;does&#160;not&#160;use&#160;the&#160;option&#160;'jrex=xx')</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'exo_lt=exo1;..,exok'&#160;where&#160;exo1,...,exok&#160;are&#160;variables&#160;entering&#160;the&#160;johansen&#160;estimation&#160;equations&#160;in&#160;the&#160;cointegration&#160;relationships&#160;(needed&#160;if&#160;the&#160;user&#160;does&#160;not&#160;use&#160;the&#160;option&#160;'jrex=xx')</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'nbr=xx'&#160;where&#160;xx&#160;is&#160;the&#160;#&#160;of&#160;cointegration&#160;vectors&#160;to&#160;keep&#160;from&#160;the&#160;johansen&#160;estimation&#160;(optional:&#160;if&#160;not&#160;given,&#160;is&#160;calculated&#160;by&#160;the&#160;function&#160;with&#160;a&#160;level&#160;equal&#160;to&#160;plevel)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'plevel=xx'&#160;where&#160;xx=0.01,&#160;0.05&#160;or&#160;0.1&#160;is&#160;the&#160;significance&#160;level&#160;for&#160;the&#160;cointegrating&#160;vectors&#160;(optional:&#160;if&#160;not&#160;given,&#160;is&#160;set&#160;to&#160;0.05;&#160;useless&#160;if&#160;the&#160;option&#160;'nbr=xx'&#160;is&#160;used)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;does&#160;not&#160;want&#160;to&#160;print&#160;the&#160;results</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'stat_meth=asym'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;use&#160;asymptotic&#160;tables&#160;to&#160;determine&#160;the&#160;#&#160;of&#160;cointegration&#160;relationships&#160;instead&#160;of&#160;//   . the string 'noprint' if the user doesn't want to
+//     print the results of the regression
+&#160;ones&#160;obtained&#160;by&#160;bootstrap</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'Nboot=xx'&#160;where&#160;xx&#160;is&#160;the&#160;number&#160;of&#160;bootstrap&#160;replications&#160;in&#160;the&#160;johansen&#160;method&#160;(default&#160;=999)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'st2lt'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;add&#160;the&#160;exogenous&#160;variables&#160;in&#160;the&#160;short&#160;run&#160;relation&#160;to&#160;the&#160;long&#160;run&#160;relationship</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> recm </term> =    a results tlist with:</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('meth')&#160;&#160;=&#160;'ecm'</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('y')&#160;&#160;&#160;&#160;&#160;=&#160;y&#160;data&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('x')&#160;&#160;&#160;&#160;&#160;=&#160;x&#160;data&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('nobs')&#160;&#160;=&#160;#&#160;observations</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('nvar')&#160;&#160;=&#160;#&#160;exogenous&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('neqs')&#160;&#160;=&#160;#&#160;endogenous&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('resid')&#160;=&#160;residuals,&#160;with&#160;recm('resid')(:,i):&#160;residuals&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('beta')&#160;&#160;=&#160;bhat,&#160;with&#160;recm('beta')(:,i):&#160;coefficients&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('tstat')&#160;=&#160;t-stats,&#160;with&#160;recm('tstat')(:,i):&#160;t-stat&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('pvalue')=&#160;pvalue&#160;of&#160;the&#160;betas,&#160;with&#160;recm('pvalue')(:,i):&#160;p-value&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('rsqr')&#160;&#160;=&#160;rsquared,&#160;with&#160;recm('rsqr')(i)&#160;:&#160;rsquared&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('overallf')&#160;=&#160;F-stat&#160;for&#160;the&#160;nullity&#160;of&#160;coefficients&#160;other&#160;than&#160;the&#160;constant</para></listitem>
+<listitem><para>   with: recm('overallf')(i): F-stat for equation # i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('pvaluef')&#160;=&#160;their&#160;significance&#160;level&#160;with:&#160;recm('pvaluef')(i):&#160;significance&#160;level&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('rbar')&#160;&#160;=&#160;rbar-squared</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('sigu')&#160;&#160;=&#160;sums&#160;of&#160;squared&#160;residuals&#160;with&#160;recm('sigu')(:,i):&#160;sum&#160;of&#160;squared&#160;residuals&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('ser')&#160;&#160;&#160;=&#160;standard&#160;errors&#160;of&#160;the&#160;regression&#160;with&#160;recm('ser')(i):&#160;standard&#160;error&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('dw')&#160;&#160;&#160;&#160;=&#160;Durbin-Watson&#160;Statistic,&#160;with:&#160;recm('dw')(i):&#160;DW&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('condindex')&#160;=&#160;multicolinearity&#160;cond&#160;index,&#160;with&#160;recm('condindex')(i):&#160;cond&#160;index&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('ftest')&#160;=&#160;matrix&#160;of&#160;F&#160;statistics&#160;for&#160;the&#160;nullity&#160;of&#160;the&#160;coefficient&#160;of&#160;all&#160;lag&#160;of&#160;a&#160;variable&#160;in&#160;each&#160;equation</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('fvalues')&#160;=&#160;the&#160;corresponding&#160;p&#160;values</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('boxq')&#160;=&#160;Box&#160;Q-stat,&#160;with&#160;recm('boxq')(i):&#160;Box&#160;Q-stat&#160;for&#160;equation&#160;#&#160;i</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('sigma')&#160;=&#160;variance-covariance&#160;matrix&#160;of&#160;residuals</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('aic')&#160;=&#160;Aka&#239;ke&#160;information&#160;criterion</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('bic')&#160;=&#160;Schwartz&#160;information&#160;criterion</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('hq')&#160;=&#160;Hannan-Quinn&#160;information&#160;criterion</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('nx')&#160;=&#160;#&#160;of&#160;x&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('xpxi')&#160;=&#160;inv(X'*X)</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('prescte)&#160;=&#160;a&#160;boolean&#160;indicating&#160;if&#160;there&#160;is&#160;a&#160;constant&#160;in&#160;the&#160;regressions</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('namey')&#160;=&#160;name&#160;of&#160;the&#160;y&#160;variable</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('namex')&#160;=&#160;name&#160;of&#160;the&#160;cointegration&#160;relations&#160;(if&#160;any)&#160;and&#160;short&#160;term&#160;exogenous&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('nb_coint_relat')&#160;=&#160;#&#160;of&#160;cointegration&#160;relations</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('jres')&#160;=&#160;results&#160;of&#160;johansen&#160;estimation</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('dropna')&#160;=&#160;boolean&#160;indicating&#160;if&#160;NAs&#160;have&#160;been&#160;dropped</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('bounds')&#160;=&#160;if&#160;there&#160;is&#160;a&#160;timeseries&#160;in&#160;the&#160;forecast,&#160;the&#160;bounds&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('evec')&#160;=&#160;matrix&#160;of&#160;cointegrating&#160;vectors</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('namexo_lt')&#160;=&#160;the&#160;names&#160;of&#160;the&#160;exogenous&#160;variables&#160;in&#160;the&#160;cointegration&#160;relationship</para></listitem>
+<listitem><para>&#160;&#160;.&#160;recm('nonna')&#160;=&#160;vector&#160;indicating&#160;position&#160;of&#160;non-NAs</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs error correction model estimation. The user can specify the names of the tlist resulting from johansen estimation, the number of cointegration relations to take into account or the significance level  to use to select the number of cointegration relations, but if these parameters are not provided, the  function takes default values and, if necessary, performs johansen estimation.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+ 
+load(GROCERDIR+'/data/datajpl.dat') // load Le Sage matlab data
+result = ecm(2,'endo=[illinos;indiana;kentucky;michigan;ohio;pennsyvlania;tennesse;westvirginia]','exo_st=const')
+result = ecm(2,'endo=[illinos;indiana;kentucky;michigan;ohio;pennsyvlania;tennesse;westvirginia]','exo_st=const','plevel=0.05')
+result = ecm(2,'endo=[illinos;indiana;kentucky;michigan;ohio;pennsyvlania;tennesse;westvirginia]','exo_st=const','nbr=1')
+ 
+// First example is taken from function ecm_d(); endogenous variables are 'illinos','indiana','kentucky','michigan',
+// 'ohio','pennsyvlania','tennesse','westvirginia'; example 1 let the function set the number of cointegration
+// relations to the one chosen by a Johansen estimation at a 5% level; since there are 2 cointegration relations at a 5% level, all 3 examples give the same result.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2009
+        </refsection>
+</refentry>

@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="fac_pca" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>fac_pca </refname>
+               <refpurpose>Static factor analysis </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=fac_pca(arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> arg1,...,argn </term> =    arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nxp)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nxp)&#160;real&#160;vector&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'bai_ng&#160;&#160;&#160;&#160;&#160;=xx'&#160;if&#160;the&#160;user&#160;want&#160;to&#160;determine&#160;the&#160;number&#160;of&#160;factors&#160;with&#160;Bai-Ng&#160;information&#160;criteria&#160;(ICp1,ICp2&#160;or&#160;ICp3)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'snum==xx'&#160;a&#160;vector&#160;with&#160;the&#160;factors&#160;to&#160;keep&#160;(e.g&#160;[1,3,...,k])&#160;or&#160;the&#160;maxiumum&#160;number&#160;of&#160;factors&#160;to&#160;test&#160;(here&#160;k)&#160;if&#160;bai_ng&#160;option&#160;is&#160;selected</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'pnum==xx'&#160;number&#160;of&#160;factors&#160;to&#160;keep&#160;for&#160;results&#160;printing</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> res </term> =    a results tlist with</para></listitem>
+<listitem><para>&#160;  - res('namex') = vector of names of the x variables</para></listitem>
+<listitem><para>&#160;  - res('namex') = vector of names of the x variables</para></listitem>
+<listitem><para>&#160;  - res('x') = matrix of x data</para></listitem>
+<listitem><para>&#160;  - res('fi') = first factor selected by the user (in TS format when working with TS) it's the factor i i.e the i-th most important contributor to total variance</para></listitem>
+<listitem><para>&#160;  - res('fj') = second factor selected by the user it's the factor j i.e the j-th most important contributor to total variance and so on</para></listitem>
+<listitem><para>&#160;  - res('propor') = proportion of variance explained by each factor</para></listitem>
+<listitem><para>&#160;  - res('corr_x_f') = matrix of correlations between variables and factors default is the first five factors)</para></listitem>
+<listitem><para>&#160;  - res('loadings') = matrx of loadings (variables are in rows) (default is the first five factors)</para></listitem>
+<listitem><para>&#160;  - res('snum') = number of selected factor by the user of Bai-Ng (default is the first factor)</para></listitem>
+<listitem><para>&#160;  - res('pnum') = number of selected factor for printing results (default is the first five factors)</para></listitem>
+<listitem><para>&#160;  - res('bai_ng')= 'no','ICp1','ICp2', 'ICp3'</para></listitem>
+<listitem><para>&#160;  - res('ICpk') = value of information criteria selected for each of the number of factor tested</para></listitem>
+<listitem><para>&#160;  - res('prests') = boolean indicating the presence or absence of a time series</para></listitem>
+<listitem><para>&#160;  - res('bounds')= if there is a timeseries in the analysis, the bounds of the regression</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs the estimation of a Static factor analysis with the selection of the number of factors according to one of the information criteria proposed by Bai-Ng.
+NOTE: can also be used as an approximate dynamic factor analysis (see Stock, J. H. and M. Watson (1998), "Diffusion Indexes", NBER Working Paper, n. 6702)
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/BusinessSurvey.dat');
+ 
+res = fac_pca('pp','fp','gpp','gob','fob','in','pnum=6','snum=1');
+// Example taken from fac_pca_d():
+ 
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2006
+        </refsection>
+</refentry>

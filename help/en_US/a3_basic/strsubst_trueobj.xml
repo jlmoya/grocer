@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="strsubst_trueobj" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:05-Sept.-2015$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>strsubst_trueobj</refname>
+               <refpurpose>replace a "true' string by another one in a string </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[txt,true_obj]=strsubst_trueobj(txt,obj1,obj2,before,after,suppr_blank,opt_convstr)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> vi </term> =    a string</para></listitem>
+<listitem><para>*  <term> obj1 </term> =    a string to substitue in txt</para></listitem>
+<listitem><para>*  <term> obj2 </term> =    the new string</para></listitem>
+<listitem><para>*  <term> before </term> =    a string vector: what character must be found before vi</para></listitem>
+<listitem><para>*  <term> after </term> =    a string vector: what character must be found after vi</para></listitem>
+<listitem><para>*  <term> suppr_blank </term> =    a booelan indicating whether blanks count or not (optional: default  =   %f)</para></listitem>
+<listitem><para>*  <term> convstr </term> =    a booelan indicating whether the searched object must be converted to lower case or not (optional: default  =   %f)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  txt </term> =    the new txt</para></listitem>
+<listitem><para>*  <term>  true_obj </term> =    a boolean indicating whether the object has been found</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+susbititue obj2 to obj1 in string txt provided it is alone or preceded by one of the characters in vector before and followed by one of the characters in vector after.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+--&gt; [newstr,truevar]=strsubst_trueobj('x+ax1-y','x','z',['+' ;'-';'*';'/';' ';'^';'('],['+' ;'-';'*';'/';' ';'^';')'])
+// leads to truevar = %t and newstr = 'z+ax1-y'
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2015
+        </refsection>
+</refentry>

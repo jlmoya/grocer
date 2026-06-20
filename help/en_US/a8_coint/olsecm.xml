@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="olsecm" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:08-Mar-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>olsecm</refname>
+               <refpurpose>Error correction test for cointegration </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rolsecm = olsecm(p,namey0,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> p </term> =   order of time polynomial in the error correction part</para></listitem>
+<listitem><para>&#160;&#160;-&#160;p=-1,&#160;no&#160;deterministic&#160;part&#160;(default)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;p=0,&#160;for&#160;constant&#160;term</para></listitem>
+<listitem><para>&#160;&#160;-&#160;p=1,&#160;for&#160;constant&#160;plus&#160;time-trend</para></listitem>
+<listitem><para>&#160;&#160;-&#160;p=2,&#160;for&#160;constant&#160;plus&#160;quadratic&#160;time-trend</para></listitem>
+<listitem><para>*  <term> namey </term> =   the exogenous variable wich can be a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =   arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;*&#160;'coint=[var1&#160;var2&#160;...&#160;varn]'&#160;the&#160;cointegrating&#160;variables&#160;with&#160;var1&#160;the&#160;variables&#160;which&#160;t-stat&#160;has&#160;to&#160;be&#160;tested.</para></listitem>
+<listitem><para>&#160;&#160;*&#160;'ncoint=x'&#160;with&#160;x&#160;the&#160;number&#160;of&#160;cointegrating&#160;variables&#160;when&#160;the&#160;user&#160;is&#160;testing&#160;a&#160;constained&#160;cointegrating&#160;vector/&#160;(see&#160;olsecm_d&#160;for&#160;an&#160;example)</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;exogenous&#160;variables&#160;of&#160;the&#160;ECM&#160;which&#160;can&#160;be</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;the&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;*&#160;the&#160;string&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;delete&#160;NAs&#160;(this&#160;option&#160;should&#160;be&#160;used&#160;when&#160;dealing&#160;with&#160;daily&#160;and&#160;weekly&#160;TS)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  rolsecm </term> =   a results tlist with</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('meth')&#160;=&#160;'olsecm'</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('y')&#160;=&#160;y&#160;data&#160;vector&#160;of&#160;the&#160;ECM</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('x')&#160;=&#160;x&#160;data&#160;matrix&#160;of&#160;the&#160;ECM</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('ecm')&#160;=&#160;data&#160;matrix&#160;of&#160;the&#160;error&#160;correction</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('nobs')&#160;=&#160;#&#160;observations&#160;in&#160;the&#160;ECM</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('nvar')&#160;=&#160;#&#160;variables&#160;in&#160;the&#160;ECM</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('beta')&#160;=&#160;estimated&#160;b</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('yhat')&#160;=&#160;fited&#160;y</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('resid')&#160;=&#160;residuals&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('vcovar')&#160;=&#160;estimated&#160;variance-covariance&#160;matrix&#160;of&#160;beta</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('sige')&#160;=&#160;estimated&#160;variance&#160;of&#160;the&#160;residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('sigu')&#160;=&#160;sum&#160;of&#160;squared&#160;residuals</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('ser')&#160;=&#160;standard&#160;error&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('tstat')&#160;=&#160;t-stats</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('pvalue')&#160;=&#160;pvalue&#160;of&#160;the&#160;betas</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('dw')&#160;=&#160;Durbin-Watson&#160;Statistic</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('condindex')&#160;=&#160;multicolinearity&#160;cond&#160;index</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('prescte')&#160;=&#160;boolean&#160;indicating&#160;the&#160;absence&#160;of&#160;a&#160;constant&#160;in&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('test&#160;p-value')&#160;=&#160;the&#160;(approximate)&#160;p-value&#160;of&#160;the&#160;test</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('test&#160;crit.&#160;value')&#160;=&#160;the&#160;Ericsson-MacKinnon&#160;critical&#160;value&#160;of&#160;the&#160;test</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('deterministic')&#160;=&#160;type&#160;of&#160;deterministic&#160;part&#160;in&#160;the&#160;cointegrating&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('prests')&#160;=&#160;boolean&#160;indicating&#160;the&#160;presence&#160;or&#160;absence&#160;of&#160;a&#160;time&#160;series&#160;in&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('namey')&#160;=&#160;name&#160;of&#160;the&#160;y&#160;variable&#160;of&#160;the&#160;ECM</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('namex')&#160;=&#160;name&#160;of&#160;the&#160;x&#160;variables&#160;of&#160;the&#160;ECM</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('ecm')&#160;=&#160;location&#160;of&#160;variables&#160;in&#160;x&#160;and&#160;namex</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('bounds')&#160;=&#160;if&#160;there&#160;is&#160;a&#160;timeseries&#160;in&#160;the&#160;regression,&#160;the&#160;bounds&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('like')&#160;=&#160;log-likelihood&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('dropna')&#160;=&#160;boolean&#160;indicating&#160;if&#160;NAs&#160;had&#160;been&#160;dropped</para></listitem>
+<listitem><para>&#160;&#160;&#160;.&#160;rolsecm('nonna')&#160;=&#160;vector&#160;indicating&#160;position&#160;of&#160;non-NA&#160;values&#160;(if&#160;the&#160;option&#160;'dropna'&#160;was&#160;active)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Estimates an Error correction model and carries out a test of cointegration based critical values and p-values using
+the response surfaces in Ericsson and MacKinnon (2002) as implemented in the program ECMtest.xls (version 1.0). The error correction part can be fully estimated by the programm or constained by the user (see olsecm_d and reference below for an exmaple).
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+r=olsecm(2,'delts(lm1-lp)','delts(lp)','delts(lagts(lm1-lp-ly))','rnet','coint=[lagts(lm1-lp-ly);lagts(ly)]','ncoint=4');
+// Example taken from function olsecm_d. It reproduces equation (30) and part of table 6 from
+// N. R. Ericsson and J. G. MacKinnon (2002), "Distribution of error correction test for cointegration",
+// Econometrics Journal, 5, 285-318.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2007-2013
+        </refsection>
+</refentry>

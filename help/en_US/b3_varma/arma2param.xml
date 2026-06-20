@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="arma2param" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:13-Feb-2011$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>arma2param</refname>
+               <refpurpose>explodes a Varmax model for estimation uses </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[theta,theta2mat,V2theta,thetalab,AR,ARS,MA,MAS,G,V,p,P,q,Q,g,s,k,n,np,%type,vdiag,ineq]=arma2param(m,AR,ARS,MA,MAS,V,s,G,r,namexos)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> m </term> =    # of endogenous variables</para></listitem>
+<listitem><para>*  <term> AR </term> =    a string, representing the name of the AR part of the model</para></listitem>
+<listitem><para>*  <term> ARS </term> =    a string, representing the name of the seasonal AR part of the model</para></listitem>
+<listitem><para>*  <term> MA </term> =    a string, representing the name of the MA part of the model</para></listitem>
+<listitem><para>*  <term> MAS </term> =    a string, representing the name of the seasonal MA part of the model</para></listitem>
+ 
+<listitem><para> the names of FR, FS, AR and AS represent objects that can be either of constant type or list type; in the last case, the first item of the list should represent as in the fist case the starting value of the corresponding matrix, and second one a string matrix, of same size, of constraints ('' for no constraint, '=' for equality constraint,  'value&lt; *', '*&lt; value' or 'value1&lt; *&lt; value2' for inequality constraints)</para></listitem>
+<listitem><para>*  <term> V </term> =    a (mxm) (var-covar) matrix or a (mx1) vector (the diagonal of a var-covar matrix, supposed to have 0 outside the diagonal)</para></listitem>
+<listitem><para>*  <term> s </term> =    order of seasonality</para></listitem>
+<listitem><para>*  <term> G </term> =    the coefficients martrix for the endogenous variables (if any)</para></listitem>
+<listitem><para>*  <term> r </term> =    # of exogenous variables (if any)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> theta </term> =    (npx1) vector of parameters that will be estimated</para></listitem>
+<listitem><para>*  <term> theta2mat </term> =    vector of strings, representing the instructions that transform back theta into the input parameters</para></listitem>
+<listitem><para>*  <term> V2theta </term> =    vector of strings, representing the instructions that transform V into the corresponding parameters in theta  thetalab  =    (npx1) vector of strings, representing theta  names used when printing the results</para></listitem>
+<listitem><para>*  <term> FR </term> =    the AR part of the model</para></listitem>
+<listitem><para>*  <term> FS </term> =    the seasonal AR part of the model</para></listitem>
+<listitem><para>*  <term> AR </term> =    the MA part of the model</para></listitem>
+<listitem><para>*  <term> AS </term> =    the seasonal MA part of the model</para></listitem>
+<listitem><para>*  <term> G </term> =    the coefficients matrix for the endogenous variables</para></listitem>
+<listitem><para>*  <term> V </term> =    the (mxm) (var-covar) matrix</para></listitem>
+<listitem><para>*  <term> p </term> =    degree of the AR part of the model</para></listitem>
+<listitem><para>*  <term> P </term> =    degree of the seasonal AR part of the model</para></listitem>
+<listitem><para>*  <term> q </term> =    degree of the MA part of the model</para></listitem>
+<listitem><para>*  <term> Q </term> =    degree of the seasonal MA part of the model</para></listitem>
+<listitem><para>*  <term> s </term> =    order of seasonality</para></listitem>
+<listitem><para>*  <term> k </term> =    maximum degree of the total AR, MA and G parts</para></listitem>
+<listitem><para>*  <term> n </term> =    k*m</para></listitem>
+<listitem><para>*  <term> np </term> =    # of estimated parameters</para></listitem>
+<listitem><para>*  <term> %type </term> =    type of the e4 model</para></listitem>
+<listitem><para>*  <term> vdiag </term> =    0 if V is diagonal, 1 if not</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Explodes a Varmax model for estimation uses The input arguments corresponding to the model:
+ 
+(I + AR1.B + ... +ARp.B^p)(I + ARS1.B^s + ... + ARSps.B^ps.s) y(t) =
+  (G0 + G1.B + ... + Gt.B^l) u(t) +   (I + MA1.B + ... + MAq.B^q)(I + MAS1.B^s + ... + MASqs.B^qs.s) e(t)
+are:
+AR = [AR1 | ... | ARp]  ARS = [ARS1 | ... | ARSps]
+  G  = [G0 | G1 | ... | Gg]   MA = [MA1 | ... | MAq]  MAS = [MAS1 | ... | MASqs]
+ 
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+[theta,grocer_e4_theta2mat,grocer_e4_V2theta,grocer_e4_lab,grocer_AR,grocer_ARS,grocer_MA,grocer_MAS,G,grocer_V,...
+ grocer_e4_p,grocer_e4_P,grocer_e4_q,grocer_e4_Q,grocer_e4_g,...
+ grocer_e4_s,grocer_e4_k,grocer_e4_n,grocer_e4_np,grocer_e4_type,grocer_e4_vdiag,grocer_e4_ineq] ...
+ = arma2param(grocer_e4_m,grocer_AR,grocer_ARS,grocer_MA,grocer_MAS,...
+ grocer_v,grocer_s,grocer_e4_Gexo,grocer_e4_r,grocer_e4_namexo);
+[theta,grocer_e4_theta2mat,grocer_e4_V2theta,grocer_e4_lab,grocer_AR,grocer_ARS,grocer_MA,grocer_MAS,G,grocer_V,...
+ grocer_e4_p,grocer_e4_P,grocer_e4_q,grocer_e4_Q,grocer_e4_g,...
+ grocer_e4_s,grocer_e4_k,grocer_e4_n,grocer_e4_np,grocer_e4_type,grocer_e4_vdiag,grocer_e4_ineq] ...
+ = arma2param(grocer_e4_m,grocer_AR,grocer_ARS,grocer_MA,grocer_MAS,grocer_v,grocer_s);
+ 
+// Both examples taken from function varma(); the first example deals with the case when there are exogenous variables
+// (for instance a constant), the second one when there are no exogenous variables (in particular no constant).
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2004
+        </refsection>
+</refentry>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="seqa" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>seqa</refname>
+               <refpurpose>production of a sequence of values </refpurpose>
+   </refnamediv>
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[seq]=seqa(a,b,c)</synopsis>
+        </refsynopsisdiv>
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+           <term>Input</term>
+<listitem><para>*  <term> a </term> =   initial value in sequence</para></listitem><listitem><para>*  <term> b </term> =   increment</para></listitem><listitem><para>*  <term> c </term> =   number of values in the sequence</para></listitem>
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+          <varlistentry>
+          <term>Output</term>
+<listitem><para>* <term> seq </term> = a sequence, (a:b:(a+b*(c-1)))' in scilab notation </para></listitem>
+          </varlistentry>
+          </variablelist>
+        </refsection>
+        <refsection>
+               <title>DESCRIPTION</title>
+Produces a sequence of values (a Gauss compatibility function).
+        </refsection>
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+seqa(2,5,3)//returns
+////!   2.  !//!   7.  !//!   12. !
+               ]]></programlisting>
+        </refsection>
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

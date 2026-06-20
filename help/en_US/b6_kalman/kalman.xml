@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="kalman" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>kalman </refname>
+               <refpurpose>Kalman filter estimation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rkalman]=kalman(func,y,x,z,F,param,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term>func</term> =   the function which transforms the parameters into the matrix of variances (Q and R)</para></listitem>
+<listitem><para>*  <term>y</term> =   (nobs x 1) dependent variable vector</para></listitem>
+<listitem><para>*  <term>x</term> =   (nobs x 1) explanatory variable matrix</para></listitem>
+<listitem><para>*  <term>z</term> =   (nxl) data matrix of exogenous variables (or [] if there are no exogenous variables in the model) .TP</para></listitem>
+<listitem><para>*  <term>F</term> =   the transfer matrix</para></listitem>
+<listitem><para>*  <term>param</term> =   a vector of parameters (sqrt of variances)</para></listitem>
+<listitem><para>*  <term>argi</term> =   optional arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'priorb0=x'&#160;where&#160;x&#160;is&#160;(k&#160;x&#160;1)&#160;vector&#160;with&#160;prior&#160;b0&#160;values&#160;(default&#160;=&#160;zeros(k,1),&#160;diffuse)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'priorv0=x'&#160;where&#160;x&#160;=&#160;(k&#160;x&#160;k)&#160;matrix&#160;with&#160;prior&#160;variance&#160;for&#160;Q&#160;(default&#160;=&#160;eye(k)*1e+5,&#160;a&#160;diffuse&#160;prior)</para></listitem>
+<listitem><para>&#160;&#160;-&#160; 'optfunc=optim' if the user wants to use the optim optimisation function (default: optimg)</para></listitem>
+<listitem><para>&#160;&#160;-&#160; 'opt_nelmead=crit,nitermax' with crit the value of the convergence criterion in the Nelder-Meade optimisation function and nitermax the maximum number of iterations (default = 'opt_nelmead=2*%eps,1000')</para></listitem>
+<listitem><para>&#160;&#160;-&#160; 'opt_optim=opts' where opts are options for optim that can be entered after the starting value of the parameters (default = 'opt_optim=,''ar'',1e6,1e6'')</para></listitem>
+<listitem><para>&#160;&#160;-&#160; 'opt_convg=val' where val is the threshold on gradient norm (default = 'opt_convg=1e-5')</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rkalman </term> =   a results tlist with</para></listitem>
+<listitem><para>&#160;  - rkalman('meth') = 'kalman'</para></listitem>
+<listitem><para>&#160;  - rkalman('Q') = estimated Q</para></listitem>
+<listitem><para>&#160;  - rkalman('R') = estimated R</para></listitem>
+<listitem><para>&#160;  - rkalman('priorb0') = B(0/0)</para></listitem>
+<listitem><para>&#160;  - rkalman('priorv0') = sigma(0/0)</para></listitem>
+<listitem><para>&#160;  - rkalman('betat') = B(t/t)</para></listitem>
+<listitem><para>&#160;  - rkalman('betaf') = B(t/t-1)</para></listitem>
+<listitem><para>&#160;  - rkalman('betas') = B(t/T)</para></listitem>
+<listitem><para>&#160;  - rkalman('sigmatt') = sigma(t/t)</para></listitem>
+<listitem><para>&#160;  - rkalman('sigmatf') = sigma(t/t-1)</para></listitem>
+<listitem><para>&#160;  - rkalman('sigmats') = sigma(t/T)</para></listitem>
+<listitem><para>&#160;  - rkalman('param') = estimated parameters</para></listitem>
+<listitem><para>&#160;  - rkalman('vcov') = variance-covariance matrix of estimated parameters</para></listitem>
+<listitem><para>&#160;  - rkalman('tstat') = Student's t of estimated parameters</para></listitem>
+<listitem><para>&#160;  - rkalman('y') = y</para></listitem>
+<listitem><para>&#160;  - rkalman('x') = x</para></listitem>
+<listitem><para>&#160;  - rkalman('yhat') = X(t)*B(t)</para></listitem>
+<listitem><para>&#160;  - rkalman('resid') = y-X*B(t)</para></listitem>
+<listitem><para>&#160;  - rkalman('like') = log-likelihood</para></listitem>
+<listitem><para>&#160;  - rkalman('nobs') = # of observations</para></listitem>
+<listitem><para>&#160;  - rkalman('nvar') = # of exogenous variables</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Maximum likelihood estimation of a kalman model:
+<para>         y(t) = X(t)*B(t) + Z(t)*A + e(t), e(t) = N(0,R)</para>
+<para>         B(t) = Z(t) * B(t-1) + v(t),    v(t) = N(0,Q)</para>
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+rtvp=kalman(grocer_func,grocer_y,grocer_x,grocer_ik,grocer_param,'priorb0=grocer_priorb0','priorv0=grocer_priorv0','meth=grocer_optmeth',varargin(:))
+// This example is taken from tvp. Here grocer_func is one of the 4 following cases:
+// 1) '[Q,R]=tvp_param1(grocer_param)'
+// 2) '[Q,R]=tvp_param1a(grocer_param)'
+// 3) '[Q,R,grocer_priorb0]=tvp_param2(param)'
+// 4) '[Q,R,grocer_priorb0]=tvp_param2a(param)';
+// grocer_y is the vector of endogenous variables, grocer_x the matrix of exogenous variables;
+// grocer_ik is the (k x k) identity matrix; grocer_param is a vector of starting values,
+// either given b the user or calculated as the ols regression of y on x;
+// grocer_priorb0, grocer_priorv0 and grocer_optmeth are either the values given by the user or the default values;
+// lastly, varargin are the option for maxlik, if any, given by he user.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

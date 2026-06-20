@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="prtvarf" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>prtvarf </refname>
+               <refpurpose>prints VAR or VARMA forecast results </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>prtvarf(res,out)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> res </term> =    a tlist provided by a VAR or VARMA forecast</para></listitem>
+<listitem><para>*  <term> out </term> =    the file where the results are printed (optional; default: %io(2), i.e the screen)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing, just print the results</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Prints the results from a var forecast (from varf function) or varma forecast (from varmaf function).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/datajpl.dat')
+illinos=reshape(illinos,'1982m1')
+indiana=reshape(indiana,'1982m1')
+kentucky=reshape(kentucky,'1982m1')
+michigan=reshape(michigan,'1982m1')
+ohio=reshape(ohio,'1982m1')
+pennsyvlania=reshape(pennsyvlania,'1982m1')
+tennesse=reshape(tennesse,'1982m1')
+westvirginia=reshape(westvirginia,'1982m1')
+bounds('1982m7','1994m12')
+varjls=VAR(2,'endo=illinos;indiana;kentucky;michigan;ohio;pennsyvlania;tennesse;westvirginia','noprint')
+save('varjls.dat',varjls)
+rf=varf(varjls,'1995m12','noprint')
+ 
+ 
+prtvarf(rf,%io(2))
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2004
+        </refsection>
+</refentry>

@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="varma" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>varma </refname>
+               <refpurpose>estimation of a (V)ARMA(X) model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>result=varma(endo,AR,ARS,MA,MAS,v,s,arg1,...argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> endo </term> =   either</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;(Txn)&#160;real&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;matrix&#160;of&#160;strings,&#160;each&#160;one&#160;being&#160;the&#160;name&#160;of&#160;a&#160;variable</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;timeseries</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;list&#160;of&#160;variables;&#160;each&#160;element&#160;could&#160;be&#160;a&#160;timeseries,&#160;a&#160;real&#160;vector,&#160;a&#160;real&#160;matrix&#160;or&#160;a&#160;string&#160;(the&#160;name&#160;of&#160;a&#160;variable&#160;with&#160;one&#160;of&#160;the&#160;types&#160;cited&#160;above,&#160;between&#160;quotes)</para></listitem>
+<listitem><para>*  <term> AR </term> =   the matrix [] or a (n x (n*p)) matrix with:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;n&#160;=&#160;#&#160;of&#160;endogenous&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;-&#160;p&#160;=&#160;#&#160;of&#160;lags&#160;in&#160;the&#160;AR&#160;part&#160;of&#160;the&#160;process</para></listitem>
+<listitem><para>*  <term> ARS </term> =   the matrix [] or a (n x (n*ps)) matrix with:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;ps&#160;=&#160;#&#160;of&#160;lags&#160;in&#160;the&#160;seasonal&#160;AR&#160;part&#160;of&#160;the&#160;process</para></listitem>
+<listitem><para>*  <term> MA </term> =   the matrix [] or a (n x (n*q)) matrix</para></listitem>
+<listitem><para>* with:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;q&#160;=&#160;#&#160;of&#160;lags&#160;in&#160;the&#160;AM&#160;part&#160;of&#160;the&#160;process</para></listitem>
+<listitem><para>*  <term> MAS </term> =   the matrix [] or a (n x (n*qs)) matrix x</para></listitem>
+<listitem><para>&#160;&#160; with:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;qs&#160;=&#160;#&#160;of&#160;lags&#160;in&#160;the&#160;seasonal&#160;MA&#160;part&#160;of&#160;the&#160;process</para></listitem>
+<listitem><para>*  <term> v </term> =   a (nx1) vector if the user wants to impose independence between resisduals or a (nxn) matrix in the other case</para></listitem>
+<listitem><para>*  <term> s </term> =   a scalar representing the seasonality</para></listitem>
+<listitem><para>*  <term> argi </term> =   optional arguments that can be:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;-&#160;'init=own'&#160;if&#160;the&#160;users&#160;wants&#160;to&#160;use&#160;as&#160;starting&#160;values&#160;of&#160;the&#160;optimisation&#160;algorithm&#160;those&#160;given&#160;by&#160;her&#160;as&#160;entry&#160;of&#160;varma</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;'exo=xxx'&#160;where&#160;xxx&#160;is&#160;the&#160;names&#160;of&#160;exogenous&#160;variables&#160;which&#160;can&#160;take&#160;the&#160;form&#160;of&#160;a&#160;list&#160;or&#160;a&#160;vector&#160;of&#160;strings</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;'Gexo=xxx'&#160;where&#160;xxx&#160;is&#160;a&#160;vector&#160;of&#160;coefficients&#160;corresponding&#160;to&#160;the&#160;exogenous&#160;variables</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;'delta=xx'&#160;where&#160;xx&#160;is&#160;the&#160;increment&#160;used&#160;to&#160;calculate&#160;the&#160;numerical&#160;derivative&#160;of&#160;the&#160;log-likelihood&#160;(default:&#160;sqrt(%eps))</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;'noprint'&#160;if&#160;the&#160;user&#160;does&#160;not&#160;want&#160;to&#160;print&#160;the&#160;results</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+<listitem><para>&#160;&#160;&#160;-'optfunc=optim' if the user wants to use the optim optimisation function (default: optimg)</para></listitem>
+<listitem><para>&#160;&#160;&#160;-'opt_nelmead=crit,nitermax' with crit the value of the convergence criterion in the Nelder-Meade optimisation function and nitermax the maximum number of iterations (default = 'opt_nelmead=2*%eps,1000')</para></listitem>
+<listitem><para>&#160;&#160;&#160;-'opt_optim=opts' where opts are options for optim that can be entered after the starting value of the parameters (default = 'opt_optim=,''ar'',1e6,1e6'')</para></listitem>
+<listitem><para>&#160;&#160;&#160;-'opt_convg=val' where val is the threshold on gradient norm (default = 'opt_convg=1e-5')</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> result </term> =   a results tlist with:</para></listitem>
+<listitem><para>&#160;  - result('meth') ='varma'</para></listitem>
+<listitem><para>&#160;  - result('y') = (nobsxnendo) matrix of values for the endogenous variables</para></listitem>
+<listitem><para>&#160;  - result('namey') = (nvarx1) vector of names for the endogenous variables</para></listitem>
+<listitem><para>&#160;  - result('z') = (nobsx(nendo+nexo)) matrix of endogenous and exogenous variables</para></listitem>
+<listitem><para>&#160;  - result('nobs') = # of observations</para></listitem>
+<listitem><para>&#160;  - result('nendo') = # of endogenous variables</para></listitem>
+<listitem><para>&#160;  - result('nvar') = # of endogenous and exogenous variables</para></listitem>
+<listitem><para>&#160;  - result('coeff') = (npx1) vector of estimated parameters</para></listitem>
+<listitem><para>&#160;  - result('lab') = (npx1) string vector of names for the estimated parameters</para></listitem>
+<listitem><para>&#160;  - result('llike') = log-likelihood of the model</para></listitem>
+<listitem><para>&#160;  - result('grad') = gradient of the log-likelihood of the model at the estimated parameters</para></listitem>
+<listitem><para>&#160;   - result('tstat') = Student's t of the coefficients</para></listitem>
+<listitem><para>&#160;   - result('std') = (npx1) Student's t of the coefficients</para></listitem>
+<listitem><para>&#160;   - result('corr') = (npxnp) correlation matrix</para></listitem>
+<listitem><para>&#160;   - result('AIC') = Akaike information criterion</para></listitem>
+<listitem><para>&#160;   - result('BIC') = Schwartz information criterion</para></listitem>
+<listitem><para>&#160;   - result('theta2mat') = (npx1) string vector making the transformation of the vector of estimated parameters into the matrices of the problem</para></listitem>
+<listitem><para>&#160;   - result('seas') = order of the seasonality</para></listitem>
+<listitem><para>&#160;   - result('nexo') = # of exogenous variables in the model</para></listitem>
+<listitem><para>&#160;   - result('resid') = (nobsx1) vector of filtered residuals</para></listitem>
+<listitem><para>&#160;   - result('AR') = the estimated AR part of the ARMA</para></listitem>
+<listitem><para>&#160;   - result('MA') = the estimated MA part of the ARMA</para></listitem>
+<listitem><para>&#160;   - result('ARS') = the estimated seasonal AR part of the ARMA</para></listitem>
+<listitem><para>&#160;   - result('MAS') = the estimated seasonal MA part of the ARMA</para></listitem>
+<listitem><para>&#160;   - result('V') = the estimated variance of residuals</para></listitem>
+<listitem><para>&#160;   - result('G') = the estimated variance of residuals</para></listitem>
+<listitem><para>&#160;   - result('k') = maximum degree of the total AR, MA and G parts</para></listitem>
+<listitem><para>&#160;   - result('p') = # of AR parameters</para></listitem>
+<listitem><para>&#160;   - result('P') = # of ARS parameters</para></listitem>
+<listitem><para>&#160;   - result('q') = # of MA parameters</para></listitem>
+<listitem><para>&#160;   - result('Q') = # of MAS parameters</para></listitem>
+<listitem><para>&#160;   - result('lagexo') = # of lags applied to the vector of exogenous variables</para></listitem>
+<listitem><para>&#160;   - result('k') = n*nendo</para></listitem>
+<listitem><para>&#160;   - result('type') = type of the e4 model</para></listitem>
+<listitem><para>&#160;   - result('userflag') = a boolean equal to %f indicating that the likelihood function has not been provided by the user (a e4 parameter)</para></listitem>
+<listitem><para>&#160;   - result('innov') = a flag indicating that this is an innovation model (a e4 parameter)</para></listitem>
+<listitem><para>&#160;   - result('prests') = a boolean signaling the presence or absence of a ts in the model</para></listitem>
+<listitem><para>&#160;   - result('E4OPTION') = the list of options used to perform optimisation (see sete4opt for details)</para></listitem>
+<listitem><para>&#160;   - result('yhat') = adjusted y</para></listitem>
+<listitem><para>&#160;   - result('resid') = residuals of the VARMA</para></listitem>
+<listitem><para>&#160;   - result('std resid') = standardized residuals of the VARMA</para></listitem>
+<listitem><para>&#160;   - result('exo') = value of the exogenous variables (if any)</para></listitem>
+<listitem><para>&#160;   - result('exo') = name of the exogenous variables (if any)</para></listitem>
+<listitem><para>&#160;   - result('bounds') = bounds of the estimation (if there are ts in the regression)</para></listitem>
+<listitem><para>&#160;   - result('dropna') = boolean indicating if NAs have been droped</para></listitem>
+<listitem><para>&#160;   - result('nonna') = vector indicating position of non-NA values (if the option 'dropna' was active)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Estimates a VARMA model using E4 functions the ARMA model has the following form:
+<para></para>
+<para>AR(L)*ARS(L^s) y = MA(L)*MAS(L^s) e [+G(L)X]</para>
+<para>where L is the lag operator, X is an optional vector of exogenous variables</para>
+ 
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/varma_d.dat');
+elec_cons = transdif(seriesa,0,1,1,12);
+results=varma(elec_cons,[],[],0,0,0,12)
+ 
+// Provides the estimation of a VARMA model without AR part and without exogenous variables (in particular without constant)
+// Series are monthly and starting values for the 3 estimated parameters (the first MA parameter, the first
+// seasonal MA and the variance of residuals) are all 0.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2004-2007
+        </refsection>
+</refentry>

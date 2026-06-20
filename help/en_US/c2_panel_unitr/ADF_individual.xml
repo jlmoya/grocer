@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ADF_individual" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:24-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ADF_Individual </refname>
+               <refpurpose>ADF Unit Root Tests on Individual Time Series </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res = ADF_Individual(Y,model,Lag_Orders,pmax,signif)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> Y </term> =   matrix (T,N) of observations</para></listitem>
+<listitem><para>&#160;&#160;The data matrix may be unbalanced.</para></listitem>
+<listitem><para>&#160;&#160;Missing Values must be specified as %nan      </para></listitem>
+<listitem><para>*  <term> Model </term> =   -1 : no individual effect</para></listitem>
+<listitem><para>&#160;&#160;0 : individual effects (Default)</para></listitem>
+<listitem><para>&#160;&#160;1 : individual effects and time trends</para></listitem>
+<listitem><para>*  <term> Lag_Orders </term> =  </para></listitem>
+<listitem><para>&#160;&#160;-&#160;%nan&#160;if&#160;the&#160;user&#160;wants&#160;the&#160;program&#160;to&#160;determine&#160;the&#160;optimal&#160;lag&#160;order&#160;for&#160;each&#160;country&#160;(pmax=12&#160;or&#160;T/4)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;vector&#160;(N&#160;x&#160;1)&#160;or&#160;(1&#160;x&#160;N)&#160;of&#160;optimal&#160;lags&#160;for&#160;all&#160;the&#160;individuals&#160;of&#160;the&#160;panel</para></listitem>
+<listitem><para>*  <term> pmax </term> =   Maximum of the lag order authorized</para></listitem>
+<listitem><para>*  <term> signif </term> =   Level of significance for the test on the kth lag order parameter</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* <term>res</term>= a results tlist with:</para></listitem>
+<listitem><para>&#160;&#160;  - res('meth') = 'adf individual'</para></listitem>
+<listitem><para>&#160;&#160;   - res('model') = model of the ADF test("Model without intercept nor trend", "Model with intercept", Model with intercept and trend")</para></listitem>
+<listitem><para>&#160;&#160;   - res('tstat') = (N x 1) Individal ADF Statistic</para></listitem>
+<listitem><para>&#160;&#160;   - res('critical') = Critical Values of the DF distribution at 1%, 5% and 10% for T and N sample</para></listitem>
+<listitem><para>&#160;&#160;   - res('pvalue') = (N x 1) p-value for each individual ADF Statistic</para></listitem>
+<listitem><para>&#160;&#160;   - res('pi') = (N x 1) Optimal Lag Order in ADF Regression</para></listitem>
+<listitem><para>&#160;&#160;   - res('Ti') = (N x 1) Optimal Adjusted Size</para></listitem>
+<listitem><para>&#160;&#160;   - res('rho') = (N x 1) Estimated autoregressive parameter</para></listitem>
+<listitem><para>&#160;&#160;   - res('ser') = (N x 1) Standard Error of ADF Residuals</para></listitem>
+<listitem><para>&#160;&#160;   - res('resid') = (T x N) ADF Residuals</para></listitem>
+<listitem><para>&#160;&#160;   - res('si') = (N x 1) Ratios of long run standard deviation to the innovation SE</para></listitem>
+<listitem><para>&#160;&#160;   - res('starti') = (N x 1) Starting Date of Adjusted Sample</para></listitem>
+<listitem><para>&#160;&#160;   - res('endi') = (N x 1) Ending Date of Adjusted Sample</para></listitem>
+<listitem><para>&#160;&#160;   - res('pmax') = Maximum of the lag order authorized</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ADF (1981) Unit Root Tests on Individual Times Series Augmented Dickey Fuller Tests for a collection of series entered as matrix. Lag Selection is performed with the k-max Criterium proposed by  Dickey et Fuller (1981), Econometrica.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/gdpan_oecd.dat');
+Y=explone(dblist(GROCERDIR+'/data/gdpan_oecd.dat'));
+// extract matrix of data present in database
+ADF_Individual(Y,0,%nan,5,0.05)
+// provides the ADF test for all Y columns, with a constant but not trend (arg # 2 = 0),
+// the Lag order to be determined by the programm (arg # 3 = %nan),
+// the maximum number of lags set to 5(arg # 4 = 5), a 5% significance level (arg # 5 = 0.05).
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Christophe Hurlin 2004 / Eric Dubois 2008
+        </refsection>
+</refentry>

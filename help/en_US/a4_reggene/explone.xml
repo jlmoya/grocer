@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="explone" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>explone</refname>
+               <refpurpose>explosion of one sequence of variables </refpurpose>
+   </refnamediv>
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[y,namey,prests,b,nonna]=explone(ly,b,named,testna,dropna,mindat)</synopsis>
+        </refsynopsisdiv>
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+           <term>Input</term>
+<listitem><para>*  <term> ly </term> =   a real matrix, a string matrix or a list of variables, which can be:</para></listitem><listitem><para>&#160;&#160;-&#160;a&#160;matrix&#160;of&#160;names&#160;of&#160;variables</para></listitem><listitem><para>&#160;&#160;-&#160;a&#160;timeseries</para></listitem><listitem><para>&#160;&#160;-&#160;a&#160;real&#160;vector,</para></listitem><listitem><para>&#160;&#160;-&#160;a&#160;real&#160;matrix&#160;or&#160;a&#160;string&#160;(the&#160;name&#160;of&#160;a&#160;variable&#160;with&#160;one&#160;of&#160;the&#160;types&#160;cited&#160;above,&#160;between&#160;quotes)</para></listitem><listitem><para>&#160;&#160;-&#160;a&#160;matrix&#160;of&#160;strings,&#160;each&#160;one&#160;being&#160;the&#160;name&#160;of&#160;a&#160;variable</para></listitem><listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'cte'&#160;or&#160;'const'&#160;if&#160;the&#160;user&#160;wants&#160;a&#160;constant&#160;to&#160;be&#160;included&#160;automatically</para></listitem><listitem><para>*  <term> b </term> =   a (2*p x 1) string vector (of dates) (optional: if not given the function either takes the existing bounds or determines the bounds suitable to the given series)</para></listitem><listitem><para>*  <term> named </term> =   a string representing the name that will be given to variables not entered between quotes</para></listitem><listitem><para>*  <term> testna </term> =   a booelan indicating whether the program will test the existence of na's values in the matrices of values y</para></listitem><listitem><para>*  <term> dropna </term> =   a boolean indicating whether the program should keep only lines of matrices y and x with non na values in both matrices (suppose that testna has been set to %f)</para></listitem><listitem><para>*  <term> mindat </term> =  </para></listitem><listitem><para>&#160;&#160;-&#160;%t&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;take&#160;the&#160;min&#160;and&#160;max&#160;dates&#160;over&#160;which&#160;any&#160;series&#160;exists</para></listitem><listitem><para>&#160;&#160;-&#160;%f&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;take&#160;the&#160;time&#160;period&#160;over&#160;which&#160;all&#160;series&#160;exist</para></listitem>
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+           <varlistentry>
+          <term>Output</term>
+ <listitem><para>*  <term> y </term> =   a (T x k) matrix</para></listitem><listitem><para>*  <term> namey </term> =   a (ky x 1) string vector</para></listitem><listitem><para>*  <term> prests </term> =   a boolean indicating whether there is a ts in x</para></listitem><listitem><para>*  <term> b </term> =   a (2*p x 1) string matrix (of dates)</para></listitem><listitem><para>*  <term> nonna </term> =   a (T x 1) vector indicating the indexes of non NA observations</para></listitem>
+          </varlistentry>
+          </variablelist>
+        </refsection>
+        <refsection>
+               <title>DESCRIPTION</title>
+From a list of variables, which can be in various formats (matrices, vectors, ts,... strings representing such objects, lists of such objects), defines the corresponding matrix that will be used in an estimation process, the names that will be used for the display of results, and, if necessary, the bounds over which the estimation will be performed: this is a function useful mainly to develop new econometric functions. This is a particular case of a the more general function explon. 
+        </refsection>
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/macros/grocer/db/bdhenderic.dat');[y,namey,prests,b]=explone(list('lm1','lp',ly),['1964q1' ; '1988q4'],'endogenous')// results in (100 x 3) y matrix (not reported here) and the following results for the other variables://
+// b  =// !1964q1  !// !        !// !1988q4  !
+// prests  =//  T//
+//  namey  =// !lm1         !// !            !// !lp          !// !            !// !endogenous  !
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2006-2009
+        </refsection>
+</refentry>

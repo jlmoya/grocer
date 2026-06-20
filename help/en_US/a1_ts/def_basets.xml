@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="def_basets" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>def_basets </refname>
+               <refpurpose>creation of the frequencies data base </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>def_basets(basefqnum,basefqlit)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> basefqnum </term> =   a (nr x nc) matrix of frequencies</para></listitem>
+<listitem><para>&#160;&#160;--&gt;&#160;if&#160;nc&#160;==&#160;1&#160;then&#160;all&#160;frequencies&#160;are&#160;at&#160;most&#160;annual&#160;(monthly,&#160;quarterly,&#160;...&#160;as&#160;well&#160;as&#160;annual)</para></listitem>
+<listitem><para>&#160;&#160;--&gt;&#160;if&#160;nc&#160;==&#160;2&#160;then&#160;frequencies&#160;can&#160;be&#160;less&#160;than&#160;annual; in that case each row has a 1 in the first or second cell</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;-&#160;a&#160;1&#160;in&#160;the&#160;first&#160;cell&#160;means&#160;that&#160;the&#160;frequency&#160;is&#160;less&#160;than&#160;annual&#160;(decades,&#160;centuries,...)&#160;and&#160;the&#160;second&#160;cell&#160;is&#160;the&#160;frequency&#160;(10&#160;for&#160;decades,&#160;100&#160;for&#160;centuries,...)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;-&#160;a&#160;1&#160;in&#160;the&#160;second&#160;cell&#160;means&#160;that&#160;the&#160;frequency&#160;is&#160;more&#160;than&#160;annual&#160;(monthly,&#160;quarterly,&#160;weekly,&#160;...&#160;as&#160;well&#160;as&#160;annual)&#160;and&#160;the&#160;first&#160;cell&#160;is&#160;the&#160;frequency&#160;(12&#160;for&#160;monthly,&#160;4&#160;for&#160;quarterly,&#160;...&#160;1&#160;for&#160;annual)</para></listitem>
+<listitem><para>*  <term> basefqlit </term> =  a string matrix associating a symbol to the daily and weekly ts, and then to each frequency in basefqnum</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing: data are saved into the file SCI\macros\grocer\db\basets.dat</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Creates the data base of the frequencies and their literal representation.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+def_basets([1 1 ; 2 1 ; 4 1 ; 12 1 ; 1 10 ],['da' ; 'w' ; 'a' ; 'h' ; 'q' ; 'm'  ; 'd'])
+// Taken from function def0_basets. This is how the basic fequencies given with grocer can be built. There are 7 frequencies: , daily ("frequency" imposed : 365 1) weekly ("frequency" imposed: 52 1), annual (frequency 1), half-yearly (frequency 2, entered here as the couple 2 1), quarterly (frequency 4, entered here as the couple 4 1), monthly (frequency 12, entered here as the couple 12 1), decadly (frequency 1/10, entered here as the couple 1 10). The corresponding letters are 'da' 'w' 'a' 'h' 'q' 'm' and 'd' .
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2005-2007
+        </refsection>
+</refentry>

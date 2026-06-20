@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<refentry version="5.0-subset Scilab" xml:id="mvblockboot" xml:lang="en"
+ 
+          xmlns="http://docbook.org/ns/docbook"
+ 
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+ 
+          xmlns:svg="http://www.w3.org/2000/svg"
+ 
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+ 
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+ 
+          xmlns:db="http://docbook.org/ns/docbook">
+ 
+  <info>
+ 
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+ 
+   </info>
+ 
+   <refnamediv>
+ 
+       <refname>mvblockboot</refname>
+ 
+               <refpurpose>Multivariate block-bootstrap </refpurpose>
+ 
+   </refnamediv>
+ 
+ 
+ 
+        <refsynopsisdiv>
+ 
+               <title>CALLING SEQUENCE</title>
+ 
+               <synopsis>[bsdata,a]=mvblockbott(data,sb,B)</synopsis>
+ 
+        </refsynopsisdiv>
+ 
+ 
+ 
+        <refsection>
+ 
+           <title>PARAMETERS</title>
+ 
+           <variablelist>
+ 
+           <varlistentry>
+ 
+ 
+ 
+           <term>Input</term>
+ 
+ 
+ 
+<listitem><para>*  <term> data </term> =    matrix of data</para></listitem>
+ 
+<listitem><para>*  <term> sb </term> =    size ob blocks</para></listitem>
+ 
+<listitem><para>*  <term> B </term> =    number of draws     </para></listitem>
+ 
+ 
+ 
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+ 
+ 
+          <varlistentry>
+ 
+ 
+ 
+          <term>Output</term>
+ 
+ 
+ 
+<listitem><para>*  <term>  bsdata </term> =    resampled data</para></listitem>
+ 
+<listitem><para>*  <term>  a     </term> =    corresponding columns</para></listitem>
+ 
+ 
+ 
+ 
+ 
+          </varlistentry>
+ 
+          </variablelist>
+ 
+        </refsection>
+ 
+ 
+ 
+        <refsection>
+ 
+               <title>DESCRIPTION</title>
+ 
+Computes block bootsrap resempling
+ 
+ 
+ 
+ 
+ 
+<para> </para>
+ 
+        </refsection>
+ 
+ 
+ 
+        <refsection>
+ 
+               <title>AUTHOR</title>
+ 
+Emmanuel Michaux 2004
+ 
+        </refsection>
+ 
+</refentry>
+ 

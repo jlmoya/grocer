@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="bpagan0" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>bpagan0 </refname>
+               <refpurpose>Breusch and Pagan heteroskedasticity test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[nvar2,f,f_pvalue,r2]=bpagan0(u2,x2,nvar)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> u2 </term> =    the first stage regression squared residuals</para></listitem>
+<listitem><para>*  <term> x2 </term> =    the exogenous variables of the Breusch and Pagan second stage regression</para></listitem>
+<listitem><para>*  <term> nvar </term> =    number of exogenous variables in the first satge regression</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> nvar2 </term> =    # of exogenous variables of the Breusch and Pagan second stage regression</para></listitem>
+<listitem><para>*  <term> f </term> =    value of the Goldfeld-Quandt F test</para></listitem>
+<listitem><para>*  <term> f_pvalue </term> =    its p-value</para></listitem>
+<listitem><para>*  <term> r2 </term> =    R² of the auxilliary regression</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ Computes Breusch and Pagan heteroskedasticity test with the exogenous second stage variables provided by the user (see Breusch, T.S. and A.R. Pagan (1979): "A simple test for heteroscedasticity and random coefficient variation", Econometrica 47, 1287-1294). Results are given only in constant form and not printed.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+[nvar2,f,f_pvalue]=bpagan0(u2,x2,nvar)
+// Example taken from function bpagan. Useful mainly for programming purpose (since bkw does much more).
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

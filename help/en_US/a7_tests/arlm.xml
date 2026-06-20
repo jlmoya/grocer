@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="arlm" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>arlm </refname>
+               <refpurpose>Lagrange multiplier autocorrelation test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[resulbp]=arlm(resul1,p,np)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> resul1 </term> =   results tlist from a first stage estimation</para></listitem>
+<listitem><para>*  <term> p </term> =   # of lag of residuals in the second stage estimation</para></listitem>
+<listitem><para>*  <term> np </term> =   'noprint' if the user does not want to print the results</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> resulbp </term> =   results tlist with:</para></listitem>
+<listitem><para>&#160;  - resulbp('meth') = 'archtest'</para></listitem>
+<listitem><para>&#160;  - resulbp('resul1st') = resul1</para></listitem>
+<listitem><para>&#160;  - resulbp('f') = fstat</para></listitem>
+<listitem><para>&#160;  - resulbp('p') = p</para></listitem>
+<listitem><para>&#160;  - resulbp('df') = df</para></listitem>
+<listitem><para>&#160;  - resulbp('f_pvalue')=f_pvalue</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ Computes a Lagrange multiplier autocorrelation test of order p (see Godfrey, L. G. (1978). Testing for higher order serial correlation in regression equations when the regressors include lagged dependent variables. Econometrica, 46, 1303-1313). Results are stored in a tlist and displayed on screen.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+bounds('1964q3','1989q2');
+rols=ols('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet', 'lagts(1,lm1-lp-ly)', 'const');
+// performs ols for Hendry and Ericsson (1991) equation 6
+ 
+rbp=arlm(rols,4)
+// Example is taken from hendryericsson. It provides the Lagrange multiplier autocorrelation test of order 4
+// for Hendry and Ericsson preferred equation, whose estimation result has been saved in tlist rols.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

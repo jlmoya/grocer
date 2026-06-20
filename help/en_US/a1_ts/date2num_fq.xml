@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="date2num_fq" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>date2num_fq </refname>
+               <refpurpose>transforms a date into a number and its frequency </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[num,fq]=date2num_fq(dat)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+<listitem><para>*  <term> dat </term> =     a date string</para></listitem>
+<listitem><para>*  <term> indw </term> =     'w' if the date is given as a day date but corresponds to a week (optional)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> num </term> =     the numerical representation of the dates</para></listitem>
+<listitem><para>*  <term> fq </term> =     its frequency</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Transforms a date into its numerical representation and its frequency.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+[num,fq]=date2num_fq('1985q4')
+// return the numerical representation and frequency of the quarterly date '1985q4'
+ 
+num,fq]= date2num_fq ('2002a')
+// return the numerical representation and frequency of the yearly date '2002a'.
+ 
+[num,fq]= date2num_fq ('97m12')
+// return the numerical representation and frequency of the monthly date '97m12'.
+ 
+[num,fq]= date2num_fq ('2002/03/15','w')
+// return the numerical representation and frequency of the daily date '2000/03/15'.
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2007
+        </refsection>
+</refentry>

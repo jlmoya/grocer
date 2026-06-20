@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="garch_sigt" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>garch_sigt </refname>
+               <refpurpose>Generates garch sigmas </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>sigt=garch_sigt(y,x,param,nar,nma)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> y </term> =    data vector </para></listitem>
+<listitem><para>*  <term> x </term> =    data matrix</para></listitem>
+<listitem><para>*  <term> param </term> =    vector of parameters</para></listitem>
+<listitem><para>*  <term> nar </term> =    # of ar parameters</para></listitem>
+<listitem><para>*  <term> nma </term> =    # of ma parameters</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term> sigt</term>  =   (nx1) vector of sigma(t) estimates   </para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Generates garch model sigmas over time given maximum likelihood estimates.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/garchd.dat')
+ 
+bounds('1949q1','1983q4')
+r1 = ols('gnpdef','cte','lagts(gnpdef)','lagts(2,gnpdef)','lagts(3,gnpdef)','lagts(4,gnpdef)');
+bet = r1('beta');
+s = r1('sige');
+[y,namey,x]=explouniv('gnpdef',list('cte','lagts(gnpdef)','lagts(2,gnpdef)','lagts(3,gnpdef)','lagts(4,gnpdef)'));
+parm=[bet ; s ; 0 ; 0 ]
+ 
+sigt = garch_sigt(y,x,parm,1,1);
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

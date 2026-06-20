@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="johansen" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>johansen </refname>
+               <refpurpose>Johansen cointegration tests </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[result]=johansen(k,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>* <term>k</term>= number of lagged difference terms used when computing the estimator</para></listitem>
+<listitem><para>* <term>argi</term>= arguments which can be:</para></listitem>
+<listitem><para>&#160;-&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;-&#160;a&#160;real&#160;(nx1)&#160;vector</para></listitem>
+<listitem><para>&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nx1)&#160;real&#160;vector&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;-&#160;the&#160;string&#160;'exo_st=exo_st1,exo_st2,...exo_stn'&#160;where&#160;exo_sti&#160;is&#160;the&#160;name&#160;of&#160;an&#160;exogenous&#160;variable&#160;to&#160;be&#160;added&#160;to&#160;the&#160;short&#160;run&#160;dynamic&#160;of&#160;the&#160;VAR</para></listitem>
+<listitem><para>&#160;-&#160;the&#160;string&#160;'exo_lt=exo_lt1,exo_lt2,...exo_ltn'&#160;where&#160;exo_lti&#160;is&#160;the&#160;name&#160;of&#160;an&#160;exogenous&#160;variable&#160;to&#160;be&#160;added&#160;to&#160;the&#160;cointegrating&#160;vectors</para></listitem>
+<listitem><para>&#160;-&#160;the&#160;string&#160;'NBoot=n'&#160;where&#160;n&#160;is&#160;the&#160;number&#160;of&#160;bootstrap&#160;draws&#160;(default:&#160;999)</para></listitem>
+<listitem><para>&#160;-&#160;the&#160;string&#160;'max_nonzeros=n'&#160;where&#160;n&#160;is&#160;the&#160;maximum&#160;number&#160;of&#160;zeros&#160;a&#160;variable&#160;must&#160;have&#160;to&#160;be&#160;considered&#160;as&#160;a&#160;dummy&#160;(default:&#160;4)</para></listitem>
+<listitem><para>&#160;-&#160;the&#160;string&#160;'stat_meth=asym'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;use&#160;asymptotic&#160;critical&#160;tables&#160;instead&#160;of&#160;the&#160;bootstrapped&#160;default&#160;ones</para></listitem>
+<listitem><para>&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;-&#160;the&#160;string&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> result </term> =  a results tlist:</para></listitem>
+<listitem><para>&#160;   -result('namey') = the name of the variables (m x 1)</para></listitem>
+<listitem><para>&#160;   -result('y') = matrix of values for the variables (m x 1)</para></listitem>
+<listitem><para>&#160;   -result('namexo_lt') = the name of the exogenous variables in the cointegrating vectors</para></listitem>
+<listitem><para>&#160;   -result('exo_lt') = the matrix of the exogenous variables in the cointegrating vectors</para></listitem>
+<listitem><para>&#160;   -result('namexo_st') = the name of the exogenous variables in the short run dynamicS of the VAR</para></listitem>
+<listitem><para>&#160;   -result('exo_st') = the matrix of the exogenous variables in the short run dynamicS of the VAR</para></listitem>
+<listitem><para>&#160;   -result('dy') = the matrix of the differentiated endogenous variables</para></listitem>
+<listitem><para>&#160;   -result('exo') = the matrix of the variables in the short run dynamics (lagged diffErentiated endogenous variables + short run exogenous variables)</para></listitem>
+<listitem><para>&#160;   -result('lagy') = the matrix of the variables in the cointegrating relations (lagged endogenous variables + long run exogenous variables)</para></listitem>
+<listitem><para>&#160;   -result('nobs') = # of observations</para></listitem>
+<listitem><para>&#160;   -result('nvar') = # of variables</para></listitem>
+<listitem><para>&#160;   -result('nlags') = # of lags of the VAR</para></listitem>
+<listitem><para>&#160;   -result('eig') = eigenvalues (m x 1)</para></listitem>
+<listitem><para>&#160;   -result('evec') = eigenvectors (m x m)</para></listitem>
+<listitem><para>&#160;   -result('pi') = coefficients of the short run dynamics</para></listitem>
+<listitem><para>&#160;   -result('lr1') = likelihood ratio trace statistic for r=0 to m-1 (m x 1) vector</para></listitem>
+<listitem><para>&#160;   -result('lr2') = maximum eigenvalue statistic for r=0 to m-1 (m x 1) vector</para></listitem>
+<listitem><para>&#160;   -result('dropna') = boolean indicating if NAs have been dropped</para></listitem>
+<listitem><para>&#160;   -result('nonna') = vector indicating position of non-NA values (if the option 'dropna' was active)</para></listitem>
+<listitem><para>&#160;   -result('max non zeros') = maximum number of zeros a variable had to be considered as a dummy</para></listitem>
+<listitem><para>&#160;   -result('NBoot') = # of bootstrap draws</para></listitem>
+<listitem><para>&#160;   -result('alpha') = value of the error correction coefficients</para></listitem>
+<listitem><para>&#160;   -result('cvt') = critical values for trace statistic (m x 3) vector [90% 95% 99%]</para></listitem>
+<listitem><para>&#160;   -result('cvm') = critical values for max eigen value statistic (3 x m) vector [90% 95% 99%]</para></listitem>
+<listitem><para>&#160;   -result('p trace') = p-value for the trace statistic calculated with the standard bootstrap method</para></listitem>
+<listitem><para>&#160;   -result('p lmax') = p-value for the lambda-max statistic calculated with the standard bootstrap method</para></listitem>
+<listitem><para>&#160;   -result('p double trace') = p-value for the trace statistic calculated with the double bootstrap method</para></listitem>
+<listitem><para>&#160;   -result('p double lmax') = p-value for the lambda-max statistic calculated with the double bootstrap method</para></listitem>
+<listitem><para>&#160;   -result('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;   -result('bounds') = if there is a time series in the regression, the bounds of the regression</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs Johansen cointegration tests.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'\data\juselius.dat')
+// create dummies used for regression p.111-112
+post83q1=dummy(['1973q1';'2003q1'],['1983q1';'2003q1']);
+dum75q4=dummy(['1973q1';'2003q1'],'1975q4')-0.5*dummy(['1973q1';'2003q1'],['1976q1';'1976q2']);
+dum76q4=dummy(['1973q1';'2003q1'],'1976q4');
+dum83q2=dummy(['1973q1';'2003q1'],'1983q2');
+dum83q1=dummy(['1973q1';'2003q1'],'1983q1');
+ 
+rj1=johansen(1,'dnk_Lm3rC','dnk_Lyr','dnk_DLpy','dnk_Rm','dnk_Rb','exo_lt=trend^1;post(1983q1)','exo_st=const;dum75q4;dum76q4;dum83q1')
+// Example taken from function johansen_d(). The number of lags in the VAR is set to 1.
+// The endogenous variables are 'dnk_Lm3rC','dnk_Lyr','dnk_DLpy','dnk_Rm','dnk_Rb'.
+// There are 2 exogenous variables in the cointegration space: a trend and a dummy (post(1983q1).
+// There are 4 exogenous variables in the short run dynamic: a constant and 3 dummies.
+ 
+load(GROCERDIR+'/data/datajpl.dat')
+[result] = johansen(9,'illinos','indiana','kentucky','michigan','ohio','pennsyvlania','tennesse', 'westvirginia','stat_meth=asym','exo_st=const')
+// Example with asymptotic critical tables, allowing to recover James Le Sage (http://www.spatial-econometrics.com/html/mbook.pdf) example.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002-2009
+        </refsection>
+</refentry>

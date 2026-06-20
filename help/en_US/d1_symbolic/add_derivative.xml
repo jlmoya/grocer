@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="add_derivative" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:01-Sept-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>add_derivative</refname>
+               <refpurpose>add a derivative to the list of analytic ones </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[]=add_derivative(func,deriv)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> func </term> =    a string vector, containing the names of the added functions</para></listitem>
+<listitem><para>*  <term> deriv </term> =    a string vector, containing the names of the corresponding derivatives</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing: names are added to the objects grocer_listfunctions and grocer_listderivatives in database: GROCERDIR+'param\symb_listfunc.dat'</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Adds a derivative to the list of analytic ones.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+function y=myfunc(x)
+y=x+2*sin(x)
+endfunction
+ 
+function y=myderiv(x)
+y=1+2*cos(x)
+endfunction
+ 
+ 
+add_derivative('myfunc','myderiv')
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2013
+        </refsection>
+</refentry>

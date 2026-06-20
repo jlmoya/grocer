@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="tsmat_names" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:07-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>tsmat_names</refname>
+               <refpurpose>Changes how the names of a tsmat are modified after an operation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>tsm=tsmat_names(opt)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> argi </term> =    nothing, 'trace' or 'var'</para></listitem>
+<listitem><para>&#160;&#160;-&#160;if&#160;nothing:&#160;load&#160;the&#160;default&#160;mode&#160;i.e.&#160;variable&#160;names&#160;remain&#160;the&#160;same&#160;after&#160;each&#160;operation</para></listitem>
+<listitem><para>&#160;&#160;-&#160;if&#160;'trace':&#160;operations&#160;made&#160;on&#160;the&#160;data&#160;are&#160;contained&#160;in&#160;the&#160;names;&#160;ex:&#160;a&#160;log&#160;transform&#160;on&#160;a&#160;tsmat&#160;with&#160;names&#160;x&#160;and&#160;y,&#160;will&#160;create&#160;a&#160;tsmat&#160;with&#160;names&#160;log(x)&#160;and&#160;log(y)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;if&#160;'reset':&#160;tsmat&#160;names&#160;are&#160;changed&#160;into&#160;'var1',...,'varn'&#160;after&#160;each&#160;operation</para></listitem>
+ 
+ 
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing, the corresponding functions are loaded </para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Changes how the names of a tsmat are modified after an operation.
+ 
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ tsmat_names('trace');// the 'trace' mode is selected: the type of each operation performed on a tsmat is specified in its name.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2009
+        </refsection>
+</refentry>

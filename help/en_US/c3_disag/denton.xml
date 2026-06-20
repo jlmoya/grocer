@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="denton" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>denton </refname>
+               <refpurpose>Multivariate temporal disaggregation with transversal constraint </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[y,res]=denton(namey,namex,namez,d,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> nameY </term> =  a (N x M) matrix, a list of M vectors or ts or a string vector representing names such objects</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;---&gt;&#160;M&#160;series&#160;of&#160;low&#160;frequency&#160;data&#160;with&#160;N&#160;observations</para></listitem>
+<listitem><para>*  <term> namex </term> =  a (n x M) matrix, a list of M vectors or ts or a string vector representing names such objects</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;---&gt;&#160;M&#160;series&#160;of&#160;high&#160;frequency&#160;data&#160;with&#160;n&#160;observations</para></listitem>
+<listitem><para>*  <term> namez </term> =  a (n x 1) vector or a ts</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;---&gt;&#160;high&#160;frequency&#160;transversal&#160;constraint</para></listitem>
+<listitem><para>*  <term> d </term> =  objective function to be minimized: volatility of</para></listitem>
+<listitem><para>&#160;&#160;-&#160;d=0&#160;---&gt;&#160;levels</para></listitem>
+<listitem><para>&#160;&#160;-&#160;d=1&#160;---&gt;&#160;first&#160;differences</para></listitem>
+<listitem><para>&#160;&#160;-&#160;d=2&#160;---&gt;&#160;second&#160;differences</para></listitem>
+<listitem><para>*  <term> argi</term> = an argument which can be</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'divfq=n'&#160;where&#160;n&#160;is&#160;the&#160;number&#160;of&#160;high&#160;frequency&#160;data&#160;points&#160;for&#160;each&#160;low&#160;frequency&#160;data&#160;points</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'ta=n'&#160;where&#160;n&#160;is&#160;the&#160;aggregation&#160;type:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;. n=-1&#160;(default)&#160;---&gt;&#160;sum&#160;(flow)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;. n=0&#160;---&gt;&#160;average&#160;(index)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;&#160;&#160;. n=i&#160;---&gt;&#160;i&#160;th&#160;element&#160;(stock)&#160;---&gt;&#160;interpolation</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> y </term> =  High frequency estimate</para></listitem>
+<listitem><para>*  <term> res </term> =  a results tlist with:</para></listitem>
+<listitem><para>&#160;   - res('meth')      = 'Multivariate Denton'</para></listitem>
+<listitem><para>&#160;   - res('ta')        = type of disaggregation</para></listitem>
+<listitem><para>&#160;   - res('nobs_lf')   = nobs. of low frequency data</para></listitem>
+<listitem><para>&#160;   - res('nobs_hf')   = nobs. of high-frequency data</para></listitem>
+<listitem><para>&#160;   - res('s')         = frequency conversion between low and high freq.</para></listitem>
+<listitem><para>&#160;   - res('diff')         = Degree of differencing</para></listitem>
+<listitem><para>&#160;   - res('y')         = high frequency estimate</para></listitem>
+<listitem><para>&#160;   - res('y_lf')         = low frequency data</para></listitem>
+<listitem><para>&#160;   - res('indicator')    = high frequency indicators</para></listitem>
+<listitem><para>&#160;   - res('tanvsersal')   = data for the transversal constraint</para></listitem>
+<listitem><para>&#160;   - res('namey')     = Name of the high frequency aggregate</para></listitem>
+<listitem><para>&#160;   - res('namex')     = Name of the low frequency indicators</para></listitem>
+<listitem><para>&#160;   - res('namez')        = Name of the high frequency transversal constraint</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Temporal disaggregation using the Denton method of multivariate temporal disaggregation with transversal constraint (high level function with vectors, matrices or ts and the possibility of default parameters).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+[y,res]=denton('Y','x','z',1,'ta=0','divfq=4');
+// Example taken from function denton_d. Provides monthly disaggregation of
+// a (23 x 2) matrix Y (representing 2 annual data) with (92x2) matrix x (representing 2 quarterly series)
+// and transversality constraint represented by the (92x1) matrix z.
+// Annual series are built by averaging quarterly series (ta=0) and the order of aggregation is given by the user.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2005
+        </refsection>
+</refentry>

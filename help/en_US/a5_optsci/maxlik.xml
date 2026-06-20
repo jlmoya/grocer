@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="maxlik" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>maxlik </refname>
+               <refpurpose>maximization function </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[results]=maxlik(func,xarg,varargin)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>* <term> func </term>= (minus likelihood) function to minimize </para></listitem>
+<listitem><para>* <term> xarg </term>= parameter vector fed to func</para></listitem>
+<listitem><para>* <term> argi </term>=</para></listitem>
+<listitem><para>&#160;&#160;-&#160;optional&#160;arguments&#160;passed&#160;for&#160;infoz</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;*&#160;'maxit=x'&#160;to&#160;set&#160;the&#160;maximum&#160;#&#160;iterations&#160;(default&#160;100)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;*'btol=x'&#160;to&#160;set&#160;the&#160;convergence&#160;criterium&#160;for&#160;b&#160;(default&#160;1e-5)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;*'ftol=x'&#160;to&#160;set&#160;the&#160;convergence&#160;criterium&#160;for&#160;function&#160;(default&#160;1.49e-8)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;*'gtol=x'&#160;to&#160;set&#160;the&#160;convergence&#160;criterium&#160;for&#160;gradiant&#160;(default&#160;1.49e-8)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;*'dirtol=x'&#160;to&#160;set&#160;the&#160;maximum&#160;change&#160;on&#160;b&#160;authorized&#160;during&#160;an&#160;iteration&#160;(default&#160;1)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;*'cond=x'&#160;to&#160;set&#160;the&#160;maximum&#160;condition&#160;number&#160;authorized&#160;for&#160;hessian&#160;matrix&#160;(default&#160;1000)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;*'lambda=x'&#160;to&#160;set&#160;lambda&#160;in&#160;the&#160;GN/Marq&#160;hess&#160;option&#160;(default&#160;0.01)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;*'delta=x'&#160;to&#160;set&#160;the&#160;increment&#160;used&#160;in&#160;the&#160;numz&#160;func&#160;(default&#160;0.01)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;*&#160;&#160;&#160;'optprt=0'&#160;not&#160;to&#160;print&#160;the&#160;cause&#160;of&#160;the&#160;stop&#160;(default&#160;1)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;*&#160;&#160;&#160;'hess=namefunc'&#160;to&#160;set&#160;the&#160;name&#160;of&#160;an&#160;hessian&#160;update&#160;function&#160;(default&#160;hessz)</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;*'grad=namefunc'&#160;to&#160;set&#160;the&#160;name&#160;of&#160;a&#160;gradiant&#160;function&#160;(default&#160;numz0)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;or:&#160;arguments&#160;(if&#160;any)&#160;other&#160;than&#160;xarg&#160;passed&#160;to&#160;func</para></listitem>
+ 
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* <term> results</term> = a result list with:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;results('meth')&#160;&#160;=&#160;infoz(hess)</para></listitem>
+<listitem><para>  = 'dfp', 'bfgs', 'gn', 'marq', 'sd' (from input)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;results('hess')&#160;&#160;=&#160;numerical&#160;hessian&#160;at&#160;the&#160;optimum</para></listitem>
+<listitem><para>&#160;&#160;-&#160;results('bhist')&#160;=&#160;history&#160;of&#160;b&#160;at&#160;each&#160;iteration</para></listitem>
+<listitem><para>&#160;&#160;-&#160;results('b')&#160;&#160;&#160;&#160;&#160;=&#160;parameter&#160;value&#160;at&#160;the&#160;optimum</para></listitem>
+<listitem><para>&#160;&#160;-&#160;results('f')&#160;&#160;&#160;&#160;&#160;=&#160;objective&#160;function&#160;value&#160;at&#160;the&#160;optimum</para></listitem>
+<listitem><para>&#160;&#160;-&#160;results('g')&#160;&#160;&#160;&#160;&#160;=&#160;gradient&#160;at&#160;the&#160;optimum</para></listitem>
+<listitem><para>&#160;&#160;-&#160;results('dg')&#160;&#160;&#160;&#160;=&#160;change&#160;in&#160;gradient</para></listitem>
+<listitem><para>&#160;&#160;-&#160;results('db')&#160;&#160;&#160;&#160;=&#160;change&#160;in&#160;b&#160;parameters</para></listitem>
+<listitem><para>&#160;&#160;-&#160;results('df')&#160;&#160;&#160;&#160;=&#160;change&#160;in&#160;objective&#160;function</para></listitem>
+<listitem><para>&#160;&#160;-&#160;results('iter')&#160;&#160;=&#160;#&#160;of&#160;iterations&#160;taken</para></listitem>
+<listitem><para>&#160;&#160;-&#160;results('time')&#160;&#160;=&#160;time&#160;(in&#160;seconds)&#160;needed&#160;to&#160;find&#160;solution</para></listitem>
+<listitem><para>&#160;&#160;-&#160;results('infoz')&#160;=&#160;infoz&#160;(options&#160;used)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Maximizes a (minus log likelihood) function func must take the form func(b,varargin) where:
+<para>b        = parameter vector (k x 1) </para>
+<para>varargin = arguments passed to the function </para>
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+1) rd=maxlik('f_ssr',init,chdelta, varargin(:),chftol)
+ 2) oresult = maxlik('to_llike',b0,y,x,vtrunc,lopt(:))
+3) oresult = maxlik('filter0',param,func,y,x,F,varargin(:))
+ 
+These examples are taken from the functions nls, tobit and kalman. The functions maximized are f_ssr, to_llike and filter. The initial parameters are respectively init, b0 and param. In example 2 and 3, y, x and vtrunc (in example 2) or F (in example 3) are the parameters other than b0 of function to_llike. chdelta, chftol, lopt(:) are varargin(:) are options for maxlik.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

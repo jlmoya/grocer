@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="deming" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:01-Déc.-2018$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>deming</refname>
+               <refpurpose>deming linear estimation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=deming(namey,namex,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>namey</term> = a time series, a real (n x 1) vector or a string equal to the name of a time series or a (n x 1) real vector between quotes</para></listitem>
+<listitem><para>*  <term>namex</term> = a time series, a real (n x 1) vector or a string equal to the name of a time series or a (n x 1) real vector between quotes</para></listitem>
+<listitem><para>*  <term>arg1,...,argn</term> = arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  the string 'lambda=xx' where xx is the assumed ratio of the error variance of t to x (default: 1)</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  the string 'alpha=xx' where xx is the level of the confidence interval</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  the string 'noprint' if the user doesn't want to print the results of the regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;-  'dropna' if the user wants to remove the NA values from the data</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>res</term> = a results tlist with</para></listitem>
+<listitem><para>&#160;&#160;&#160;- res('meth') = 'deming'</para></listitem>
+<listitem><para>&#160;&#160;&#160;- res('y') = the y vector of endogenous variables</para></listitem>
+<listitem><para>&#160;&#160;&#160;- res('x') = the x vector of exogenous variables</para></listitem>
+<listitem><para>&#160;&#160;&#160;- res('errors variance ratio') = the assumed ratio of the measurement errors of y and x</para></listitem>
+<listitem><para>&#160;&#160;&#160;- res('Estimated x values') = the estimated "true" x values</para></listitem>
+<listitem><para>&#160;&#160;&#160;- res('Estimated y values') = the estimated "true" y values</para></listitem>
+<listitem><para>&#160;&#160;&#160;- res('regression st. error') = Standard error of regression estimate</para></listitem>
+<listitem><para>&#160;&#160;&#160;- res('coeff st. error') = estimate of standard error of the slope and intercept</para></listitem>
+<listitem><para>&#160;&#160;&#160;- res('tstat') = Sutnedt's T of the estimated coefficients</para></listitem>
+<listitem><para>&#160;&#160;&#160;- res(string(100*alpha)+'% confidence interval') = the confidence interval of the coefficients at the chosen level REFERENCE: Anders Christian Jenson in a May 2007 description of the Deming regression function for MethComp (web: http:staff.pubhealth.ku.dk/~bxc/MethComp/Deming.pdf)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs a linear Deming regression to find the linear coefficients: y = b(1) + b(2)*x under the assumptions that x and y *both* contain measurement error with measurement error variance related as lambda = sigma2_y/sigma2_x (sigma2_x and sigma2_y is the measurement error variance of the x and y variables, respectively).
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+// provides the deming regression presented at:
+// http://www.real-statistics.com/regression/deming-regression/deming-regression-basic-concepts/
+load(GROCERDIR+'\deming_d.dat')
+res = deming('y','x','lambda=0.4')
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2018
+        </refsection>
+</refentry>

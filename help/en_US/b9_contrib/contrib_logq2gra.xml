@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="contrib_logq2gra" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>contrib_logq2gra </refname>
+               <refpurpose>contributions to an annual growth rate </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[list_contrib_a_unb,list_contrib_a_bal,list_conttrim,mainf]=contrib_logq2gra(namey,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =    a string representing the name of a ts</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =   </para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;list&#160;of&#160;3&#160;elements:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;the&#160;name&#160;of&#160;the&#160;variable&#160;whose&#160;contribution&#160;is&#160;to&#160;be&#160;calculated</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;the&#160;Autoregressive&#160;part&#160;of&#160;the&#160;equation</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.the&#160;Moving&#160;Average&#160;part&#160;relative&#160;to&#160;the&#160;considered&#160;variable</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'prt=xxx'&#160;where&#160;xxx&#160;can&#160;be:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; .'trim'&#160;if&#160;the&#160;user&#160;wants&#160;the&#160;quarterly&#160;contributions&#160;to&#160;be&#160;printed</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 'mainf'&#160;if&#160;the&#160;user&#160;wants&#160;the&#160;Infinite&#160;Moving&#160;Average&#160;approximation&#160;to&#160;be&#160;printed</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 'unbal'&#160;if&#160;the&#160;user&#160;wants&#160;the&#160;annual&#160;contributions&#160;before&#160;rebalancing&#160;to&#160;be&#160;printed</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 'cont'&#160;if&#160;the&#160;user&#160;wants&#160;the&#160;annual&#160;contributions&#160;after&#160;rebalancing&#160;to&#160;be&#160;printed</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.' all'&#160;if&#160;the&#160;user&#160;wants&#160;all&#160;these&#160;results&#160;to&#160;be&#160;printed</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> list_contrib_a_unb </term> =    list of the unbalanced yearly contributions</para></listitem>
+<listitem><para>*  <term> list_contrib_a_bal </term> =    list of the balanced yearly contributions</para></listitem>
+<listitem><para>*  <term> list_conttrim </term> =    list of the quarterly contributions</para></listitem>
+<listitem><para>*  <term> mainf </term> =    the matrix of infinite moving averages</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Calculates contributions of exogenous variables to the annual growth rate of an endogenous variable when the econometric equation is estimated on the logarithm of the quarterly observations of the variable.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/bdhenderic.dat') ;
+m1=exp(lm1)
+ 
+// set the estimation bounds
+bounds('1964q3','1989q2')
+ 
+// estimate the model by ols and save the results in the tlist
+// rols; names are entered between quotes, in order that their
+// names appears on the printed results
+ 
+rols=ols('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet'...
+,'lagts(1,lm1-lp-ly)','cte')
+ 
+// retrieve the coeficients of the regression
+coef=rols('beta')
+ 
+// calculate the residual over the whole period
+resid=delts(lm1-lp)-coef(1)*delts(lp)-coef(2)*delts(lagts(1,lm1-lp-ly))-coef(3)*rnet...
+-coef(4)*lagts(1,lm1-lp-ly)-coef(5)
+ 
+bounds() ;
+ 
+// calculate the ma infinite approximations
+mainf_lp=mainf([1+coef(2)+coef(4) ; -coef(2)],[1+coef(1) ; -1-coef(1)-coef(2)-coef(4) ; coef(2) ],200)
+mainf_ly=mainf([1+coef(2)+coef(4) ; -coef(2)],[0 ; -coef(2)-coef(4) ; coef(2) ],200)
+mainf_resid=mainf([1+coef(2)+coef(4) ; -coef(2)],1,200)
+mainf_rnet=coef(3)*mainf_resid
+ 
+// calculate the contributions
+contrib_lp=contrib(delts(lp),mainf_lp)
+contrib_ly=contrib(delts(ly),mainf_ly)
+contrib_resid=contrib(delts(resid),mainf_resid)
+contrib_rnet=contrib(delts(rnet),mainf_rnet)
+ 
+// now calculates annual growthr contributions
+ 
+he_lp_list=list('lp',[1+coef(2)+coef(4) ; -coef(2)],[1+coef(1) ; -1-coef(1)-coef(2)-coef(4) ; coef(2) ])
+he_ly_list=list('ly',[1+coef(2)+coef(4) ; -coef(2)],[0 ; -coef(2)-coef(4) ; coef(2) ])
+he_rnet_list=list('rnet',[1+coef(2)+coef(4) ; -coef(2)],coef(3))
+he_resid_list=list('resid',[1+coef(2)+coef(4) ; -coef(2)],1)
+ 
+[listcont_unbal,listcont_bal]=contrib_logq2gra('m1',he_lp_list,he_ly_list,he_rnet_list,he_resid_list,'prt=all')
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2004
+        </refsection>
+</refentry>

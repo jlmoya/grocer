@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="prtauto_univ" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>prtauto_univ </refname>
+               <refpurpose>prints some automatic() results </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>prtauto_univ(results,namemod,test,out)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> results </term> =    a tlist provided by function automatic</para></listitem>
+ 
+<listitem><para>*  <term> namemod </term> =    the name of the sub-results to print in the results tlist ('initial model', 'stage 0 model', 'stage 1 union model', 'stage 2 union model', 'final model')</para></listitem>
+<listitem><para>*  <term> test </term> =    %t if the user wants to print the specification tests results ; %f if not</para></listitem>
+<listitem><para>*  <term> out </term> =    the file where the results are printed</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* nothing, just print the results</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Prints the sub-results named namemod in a tlist provided by automatic when there there is only one regression in the corresponding field (i.e initial, stage0, union or final model).
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'/data/bdhenderic.dat') ;
+ 
+bounds('1964q3','1989q2')
+// column HE in table 9 of Hendry and Krozlig paper
+//r=ols('delts(lm1-lp)','lagts(lm1-lp-ly)','delts(lp)','rnet','delts(lagts(lm1-lp-ly))','cte')
+ 
+// this example allows the user to recover
+// the results of columns Final model A and Final model B
+// in table 9 of Hendry and Krozlig paper
+ 
+[r1]=automatic('delts(lm1-lp)','lagts(lm1-lp-ly)',...
+'delts(lp)',...
+'rnet',...
+'delts(lagts(lm1-lp))','delts(lagts(2,lm1-lp))','delts(lagts(3,lm1-lp))','delts(lagts(4,lm1-lp))',...
+'delts(ly)','delts(lagts(1,ly))','delts(lagts(2,ly))','delts(lagts(3,ly))','delts(lagts(4,ly))',...
+'delts(delts(lp))','delts(delts(lagts(1,lp)))','delts(delts(lagts(2,lp)))','delts(delts(lagts(3,lp)))','delts(delts(lagts(4,lp)))',...
+'delts(rnet)','delts(lagts(1,rnet))','delts(lagts(2,rnet))','delts(lagts(3,rnet))','delts(lagts(4,rnet))',...
+'const','prt=nothing')
+ 
+prtauto_univ(r1,'stage 1 union model',%t)
+// displays on screen (no fourth argument) the stage 1 union model results including specification tests.
+ 
+prtauto_univ(r1,'final model',%f)
+// displays on screen (no fourth argument) the final model results without specification tests.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

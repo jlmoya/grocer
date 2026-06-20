@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="olspec" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>olspec </refname>
+               <refpurpose>ordinary least squares with specification tests </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rols]=olspec(namey,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =   a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> argi </term> =   arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx1)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nxk)&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nxk)&#160;real&#160;vector&#160;or&#160;matrix&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;list&#160;of&#160;such&#160;elements</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;display&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'arlm(n)'&#160;where&#160;n&#160;is&#160;the&#160;order&#160;of&#160;the&#160;AR&#160;Lagrange&#160;multiplier&#160;test&#160;if&#160;the&#160;user&#160;wants&#160;another&#160;lag&#160;than&#160;4</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'test=x1,...,xp'&#160;where&#160;xi&#160;is&#160;the&#160;name&#160;of&#160;a&#160;test&#160;function&#160;('jbnorm',&#160;'dornhans',&#160;'chowtest',&#160;'predfailin',&#160;'arlm',&#160;'hetero_sq'&#160;or&#160;'reset')</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rols </term> =   a results tlist with</para></listitem>
+<listitem><para>&#160;  - rols('meth')  = 'ols'</para></listitem>
+<listitem><para>&#160;  - rols('y')     = y data vector</para></listitem>
+<listitem><para>&#160;  - rols('x')     = x data matrix</para></listitem>
+<listitem><para>&#160;  - rols('nobs')  = # observations</para></listitem>
+<listitem><para>&#160;  - rols('nvar')  = # variables</para></listitem>
+<listitem><para>&#160;  - rols('beta')  = bhat</para></listitem>
+<listitem><para>&#160;  - rols('yhat')  = yhat</para></listitem>
+<listitem><para>&#160;  - rols('resid') = residuals</para></listitem>
+<listitem><para>&#160;  - rols('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;  - rols('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - rols('sigu')  = sum of squared residuals</para></listitem>
+<listitem><para>&#160;  - rols('ser')  = standard error of the regression</para></listitem>
+<listitem><para>&#160;  - rols('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;  - rols('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;  - rols('dw')    = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;  - rols('condindex') = multicolinearity cond index</para></listitem>
+<listitem><para>&#160;  - rols('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;  - rols('rsqr')  = rsquared</para></listitem>
+<listitem><para>&#160;  - rols('rbar')  = rbar-squared</para></listitem>
+<listitem><para>&#160;  - rols('f')    = F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;  - rols('pvaluef') = its significance level</para></listitem>
+<listitem><para>&#160;  - rols('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;  - rols('namey') = name of the y variable</para></listitem>
+<listitem><para>&#160;  - rols('namex') = name of the x variables</para></listitem>
+<listitem><para>&#160;  - rols('bounds') = if there is a timeseries in the regression, the bounds of the regression</para></listitem>
+<listitem><para>&#160;  - rols('name_test') = the names of the specification</para></listitem>
+<listitem><para>&#160;  - rols('spec_test') = a matrix with the values of the statistics of the specification tests in column 1 and the corresponding p-values in column 2</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+A function that performs ordinary least squares and specification tests: they can be standard (Chow in-sample stability tests computed at 50% and 90% of the sample; Doornik and Hansen normality test; heteroskedasticity test called xi² by D.F. Hendry;
+AutoRegressive Lagrange multiplier test with 4 lags) or chosen by the user among the following: 'jbnorm', 'dornhans', 'chowtest', 'predfailin', 'arlm', 'hetero_sq' and 'reset'.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/macros/grocer/db/bdhenderic.dat') ;bounds('1964q3','1989q2');
+rols=olspec('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet','lagts(1,lm1-lp-ly)','cte')
+//provides the estimation of Hendry and Ericsson prefered equation along with the 5 default specification tests.
+rols=olspec('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet','lagts(1,lm1-lp-ly)','cte','arlm(2)')
+// The same as above, except for the autocorrelation test, which is performed with 2 lags.
+rols=olspec('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet','lagts(1,lm1-lp-ly)','cte','test=doornhans,arlm(2),reset')
+// Provides the estimation of Hendry and Ericsson prefered equation along with the Doornik and Hansen normality test,
+// the autocorrelation test performed with 2 lag and Ramsey's reset test.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2004
+        </refsection>
+</refentry>

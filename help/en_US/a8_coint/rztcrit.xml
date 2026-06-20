@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="rztcrit" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>rztcrit </refname>
+               <refpurpose>critical values for the cadf Zt statistic </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[crit]=rztcrit(nobs,k,p)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>* <term>nobs</term>= # of observations</para></listitem>
+<listitem><para>* <term>k</term>= # of variables in x-matrix from cadf()</para></listitem>
+<listitem><para>* <term>p</term>= order of time polynomial in the null-hypothesis</para></listitem>
+<listitem><para>&#160;&#160;-&#160;p&#160;=&#160;&#160;0,&#160;for&#160;constant&#160;term</para></listitem>
+<listitem><para>&#160;&#160;-&#160;p&#160;=&#160;&#160;1,&#160;for&#160;constant&#160;plus&#160;time-trend</para></listitem>
+<listitem><para>&#160;&#160;-&#160;p&#160;=&#160;2,&#160;3&#160;or&#160;4&#160;for&#160;higher&#160;order&#160;time&#160;trend&#160;polynomial</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* <term>crit</term>=  a (6 x 1) vector of critical values: [1% 5% 10% 90% 95% 99%] quintiles</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes critical values for the Zt statistic used in cadf().
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+rescadf('crit')=rztcrit(rescadf('nobs'),size(rols('x'),2)-grocer_p-1,grocer_p)
+// A somehow complex example taken from cadf.
+crit=rzcrit(100,4,1)
+// Provides the critical values for a cointegrating relation with 100 observations, 4 variables and a simple time trend.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

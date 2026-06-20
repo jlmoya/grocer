@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="search_cte" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>search_cte</refname>
+               <refpurpose>find the indexes of constant colums </refpurpose>
+   </refnamediv>
+         <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[xlag]=search_cte(x,n,init)</synopsis>
+        </refsynopsisdiv>
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+           <term>Input</term>
+<listitem><para>*  <term> x </term> =   a (n x k) real matrix</para></listitem>
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+          <varlistentry>          <term>Output</term>
+<listitem><para>*  <term> indcte</term>  =   a (p x 1) vector of integers</para></listitem>
+          </varlistentry>
+          </variablelist>
+        </refsection>
+         <refsection>
+               <title>DESCRIPTION</title>
+Finds the indexes of the constant colums in a matrix.
+        </refsection>
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+search_cte([grand(15,2,'nor',0,1) ones(15,1)])// Returns 3. 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2005 
+        </refsection>
+</refentry>

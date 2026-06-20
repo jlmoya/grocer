@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="rolirf" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:13-Fév-2014$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>rolirf</refname>
+               <refpurpose>Calculates Impulse Response Function for rolling VAR </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=rolirf(results,S,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> results </term> =    results tlist returned by VAR</para></listitem>
+<listitem><para>*  <term> S </term> =    scalar for number of periods in IRF</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =    optional arguments:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'mres=x'&#160;where&#160;x&#160;=&#160;chol1&#160;(cholesky&#160;decomposition)&#160;x&#160;=&#160;chol2&#160;(triangular&#160;factorisation)&#160;x&#160;=&#160;original&#160;(original&#160;residuals)&#160;(default&#160;=&#160;chol1)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'meth=x'&#160;where&#160;x&#160;=&#160;asym&#160;(asymptotic&#160;formula)&#160;x&#160;=&#160;mc1&#160;(Monte-Carlo&#160;simulations&#160;using&#160;draws&#160;from&#160;the&#160;coefficients)&#160;(default&#160;=&#160;asym)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'niter=x'&#160;where&#160;x=&#160;#&#160;iterations&#160;for&#160;the&#160;Monte-Carlo&#160;simulations&#160;(if&#160;any;&#160;default=1000)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'size=x'&#160;where&#160;x&#160;=&#160;significance&#160;level&#160;for&#160;the&#160;confidence&#160;band&#160;(default&#160;=0.05)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  res</term>  =    a results tlist with</para></listitem>
+<listitem><para>&#160;   - res('meth') = 'rolling irf'</para></listitem>
+<listitem><para>&#160;   - res('rolling var results') = the rolling Var results tlist entered as input to rolrif</para></listitem>
+<listitem><para>&#160;   - res('mres') = decomposition method</para></listitem>
+<listitem><para>&#160;   - res('T') = # of periods represented</para></listitem>
+<listitem><para>&#160;   - res('IRF') = (nrolling x (S+1) x T) impulse response functions (with nrolling = # of rolling VAR estimated)</para></listitem>
+<listitem><para>&#160;   - res('IRF_LOW') = (nrolling x (S+1) x T) lower range of impulse response confidence band</para></listitem>
+<listitem><para>&#160;   - res('IRF_UPP') = (nrolling x (S+1) x T) upper range of impulse response confidence band</para></listitem>
+<listitem><para>&#160;   - res('PHI') = (nrolling x N*p x T) matrix of coefficients</para></listitem>
+<listitem><para>&#160;   - res('msg') = message inidicating the nature of the decomposition</para></listitem>
+<listitem><para>&#160;   - res('size') = size of the confidence band</para></listitem>
+<listitem><para>&#160;   - res('ans_var 1 to_shock 1') ... until res('ans_var n to_shock n') = a (nrolling x N*p x T) matrix collecting all irf of one variabel at a time to a shock at a time</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Calculates Impulse Response Function for rolling VAR.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+global GROCERDIR;
+load(GROCERDIR+'\data\france_maunf_survey.dat')
+bounds()
+resrolvar=rolvar(6,'endo=fra_past_output;fra_exp_output','nper=120','start_firstbound=1990m1','end_firstbound=2004m1')
+resirf=rolirf(resrolvar,20)
+// Example taken from function rovar_d; after estimating rolling VAR estimates with France past output balance and France expected output balance
+// with estimations starting in 1990m1 for 120 periods, then in 1990m2 for 120 periods ... until 2004m1 for 120 periods
+// and 6 lags, calculates the corresponding IRFs until the 20th period
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2014
+        </refsection>
+</refentry>

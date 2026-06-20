@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="arlm0_multi" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:25-Août-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>arlm0_multi</refname>
+               <refpurpose>LM multivariate test of autocorrelation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[lmf,pvalue]=arlm0_multi(res,lags,np)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>res</term> =    results tlist from a first stage estimation</para></listitem>
+<listitem><para>*  <term>lags</term> =    vector of lags of residuals in the second stage estimation</para></listitem>
+<listitem><para>*  <term>np</term> =    unused argument (but put here for compatibility with other testing functions)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>lmf</term>  =    value of the statistic</para></listitem>
+<listitem><para>*  <term>pvalue</term>  =    its p-value</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs a LM multivariate test of autocorrelation.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+global GROCERDIR;
+load(GROCERDIR+'/data/lutk1.dat')
+bounds('1960q4','1978q4')
+results=VAR(2,'endo=delts(log(rfa_inv));delts(log(rfa_inc));delts(log(rfa_cons))')
+[lmf,pvalue]=arlm0_multi(results,1:2) // test the autocorrelation at lags 1 and 2
+[lmf,pvalue]=arlm0_multi(results,2) // test the autocorrelation at lag 2 only
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2013
+        </refsection>
+</refentry>

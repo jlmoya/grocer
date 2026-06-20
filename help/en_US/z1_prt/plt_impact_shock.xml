@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="plt_impact_shock" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:15-Avr.-2019$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>plt_impact_shock</refname>
+               <refpurpose>plots the result of a shock simulation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>plt_impact_shock(db1,db2,boun,vari,transf,tit,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>db1</term> = a tsmat, representing the baseline</para></listitem>
+<listitem><para>*  <term>db2</term>= a tsmat, representing the database resulting from the simulation of the shock</para></listitem>
+<listitem><para>*  <term>bound</term> = a [2 x 1] string vector, the simulation bounds</para></listitem>
+<listitem><para>*  <term>vari</term> = a [n x 1] string vector, collecting the variable names belonging to the simulated model and the databases db1 and db2 that will be displayed</para></listitem>
+<listitem><para>*  <term>transf</term> = a [n x 1] string vector, collecting the ways the variables will be compared ('pcer' for in percentages, 'er' for in differences)</para></listitem>
+<listitem><para>*  <term>tit</term> = a string, the title of the graph</para></listitem>
+<listitem><para>*  <term>arg1,...,argn</term> = optional arguments that can be 'leg=x' if the user wants its own legend or any variable argument to function pltseries0</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* Nothing: results are displayed on screen</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Plots results of the a simulation of a shock on a model.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+global GROCERDIR
+ // load the model small:
+ load(GROCERDIR+'data\small.dat')
+ // load the simulation results small_cale
+ load(GROCERDIR+'data\small_db.dat')
+ // recover the simulated database
+ small_cale_db=small_cale('simulation results');
+ // make a 1% shock on the world demand
+ sh_demmon=simul_shock(small,small_cale_db,'1981q1','2006q4',...
+ list('demmon','pcer',1),'from=1980q1')
+ // recover the corresponding simulated database
+ sh_demmon_db=sh_demmon('simulation results');
+ // plots the results of the shock simulation on variables td_pib1 and
+ // td_p6_d1 (in percentage)
+ plt_impact_shock(small_cale_db,sh_demmon_db,['1981q1';'2006q4'],...
+ ['td_p6_d1';'td_pib1'],['pcer';'pcer'],'impact of a 1% shock on world demand')
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2019
+        </refsection>
+</refentry>

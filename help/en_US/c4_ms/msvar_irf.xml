@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="msvar_irf" xml:lang="en"
+    xmlns="http://docbook.org/ns/docbook"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:ns4="http://www.w3.org/1999/xhtml"
+    xmlns:mml="http://www.w3.org/1998/Math/MathML"
+    xmlns:db="http://docbook.org/ns/docbook">
+    <info>
+        <pubdate>$LastChangedDate:05-Sept.-2015$</pubdate>
+    </info>
+    <refnamediv>
+        <refname>msvar_irf</refname>
+        <refpurpose>impulse response functions (irf) for a Markov-switching VAR model </refpurpose>
+    </refnamediv>
+ 
+    <refsynopsisdiv>
+        <title>CALLING SEQUENCE</title>
+        <synopsis>resirf=msvar_irf(res,hor,arg1,...,argn)</synopsis>
+    </refsynopsisdiv>
+ 
+    <refsection>
+        <title>PARAMETERS</title>
+        <variablelist>
+            <varlistentry>
+ 
+                <term>Input</term>
+ 
+<listitem><para>*  <term> res </term> =    a tlist result from a ms var estimation</para></listitem>
+<listitem><para>*  <term> hor </term> =    a scalar, the horizon of the irf (note that the shocks are supposed to happen at time 0; therefore (hor+1) impulses are calculated)</para></listitem>
+<listitem><para>*  <term> mres </term> =    optional argument that can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;x&#160;=&#160;chol1&#160;(cholesky&#160;decomposition)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;x&#160;=&#160;chol2&#160;(triangular&#160;factorisation)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;x&#160;=&#160;original&#160;(original&#160;residuals)</para></listitem>
+<listitem><para>     (default = chol1)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+            </varlistentry>
+ 
+            <varlistentry>
+ 
+                <term>Output</term>
+ 
+<listitem><para>*  <term> resirf </term> =    a result tlist with:</para></listitem>
+<listitem><para>&#160;   - resirf('meth') = 'msvar irf'</para></listitem>
+<listitem><para>&#160;   - resirf('msvar res') = the input ms var results tlist</para></listitem>
+<listitem><para>&#160;   - resirf('# irf') = the horizon of the irf calculations</para></listitem>
+<listitem><para>&#160;   - resirf('nb states') = the # of states</para></listitem>
+<listitem><para>&#160;   - resirf('nb irf') = the # of different AR parts</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . 1 if they do not switch</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . the # states if they switch</para></listitem>
+<listitem><para>&#160;   - resirf('sigma switch') = the # of switching variances</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . 1 if they do not switch</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160; . the # states if they switch</para></listitem>
+<listitem><para>1) if both are equal to 1 then:</para></listitem>
+<listitem><para>&#160;   - resirf('irf') = the only set of impulse response function, a (nvar.hor x nvar) matrix:</para></listitem>
+<listitem><para>&#160; [IRF(t =   0)</para></listitem>
+<listitem><para>&#160; . </para></listitem>
+<listitem><para>&#160; . </para></listitem>
+<listitem><para>&#160; . </para></listitem>
+<listitem><para>&#160; IRF(t=hor)]</para></listitem>
+<listitem><para>&#160; with nvar =  # of endogenous variables in the VAR</para></listitem>
+<listitem><para>2) if resirf('nb states') ~= 1 or resirf('sigma switch') ~= 1 then:</para></listitem>
+<listitem><para>&#160;   - resirf('irf state # 1') until resirf('irf state # ''nstates''')=</para></listitem>
+<listitem><para>&#160;  the set of impulse response functions, each a (nvar.hor x nvar) matrix:</para></listitem>
+<listitem><para>&#160;  [IRF(t =   0)</para></listitem>
+<listitem><para>&#160; . </para></listitem>
+<listitem><para>&#160; . </para></listitem>
+<listitem><para>&#160; . </para></listitem>
+<listitem><para>&#160; IRF(t=hor)]</para></listitem>
+<listitem><para>&#160; conditional of the original state where the process starts</para></listitem>
+ 
+ 
+            </varlistentry>
+        </variablelist>
+    </refsection>
+ 
+    <refsection>
+        <title>DESCRIPTION</title>
+        Provides the impulse response functions (irf) from a Markov-switching VAR.
+ 
+    </refsection>
+ 
+    <refsection>
+        <title>EXAMPLE</title>
+        <programlisting role="example"><![CDATA[
+            load(GROCERDIR+'\data\anas.dat')
+ 
+            bounds('1984m2','2003m1')
+            nb_states=2;
+            switch_var=2;
+            var_opt=3;
+ 
+            // the most interesting case: AR coefficients are swicthing
+            r1=ms_var('all',2,['delts(log(ipi))' ; 'delts(log(helpwanted))' ; 'delts(log(revu))'],nb_states,switch_var,var_opt)
+            resirf1=msvar_irf(r1,10)
+            pltmsirf1(resirf1)
+ 
+            // the case when only constants and variances switch
+            r2=ms_var('const',2,['delts(log(ipi))' ; 'delts(log(helpwanted))' ; 'delts(log(revu))'],nb_states,switch_var,var_opt)
+            resirf2=msvar_irf(r2,10)
+            pltmsirf1(resirf2)
+ 
+            // the case when only constants switch
+            switch_var=1;
+            r3=ms_var('const',2,['delts(log(ipi))' ; 'delts(log(helpwanted))' ; 'delts(log(revu))'],nb_states,switch_var,var_opt)
+            resirf3=msvar_irf(r3,10)
+            pltmsirf1(resirf3)
+            ]]></programlisting>
+    </refsection>
+ 
+    <refsection>
+        <title>AUTHOR</title>
+        Eric Dubois 2011
+    </refsection>
+</refentry>

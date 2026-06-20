@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="tvpvar_diagnos" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:05-Sept.-2015$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>tvp_var_diagnos</refname>
+               <refpurpose>computes MCMC convergence diagnostics for TVP VAR </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[results]=tvp_var_diagnos(res,obj,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> res </term> =    a tvp var results tlist</para></listitem>
+<listitem><para>*  <term> obj </term> =    a string, the name of the examined field in the tvp var</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =    optional arguemnts that can be</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'nautcorr=x'&#160;where&#160;x&#160;is&#160;the&#160;order&#160;of&#160;the&#160;autocorrelation</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'nautcorr=x'&#160;where&#160;x&#160;is&#160;the&#160;order&#160;of&#160;the&#160;autocorrelation&#160;tested&#160;for&#160;the&#160;draws</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'npct_taper=x'&#160;where&#160;x&#160;is&#160;the&#160;%&#160;used&#160;to&#160;taper&#160;the&#160;window&#160;in&#160;t&#160;for&#160;Geweke's&#160;test</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'n_groups=x'&#160;where&#160;x&#160;is&#160;the&#160;number&#160;of&#160;draws&#160;that&#160;are&#160;aggregated&#160;before&#160;performing&#160;the&#160;correlations</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'q=x'&#160;where&#160;x&#160;is&#160;the&#160;quantile&#160;of&#160;the&#160;quantity&#160;of&#160;interest&#160;in&#160;Raftery&#160;test&#160;(default:&#160;0.025)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'r=x'&#160;where&#160;x&#160;is&#160;the&#160;level&#160;of&#160;precision&#160;desired&#160;in&#160;Raftery&#160;test&#160;(default:&#160;0.025)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'s=x'&#160;where&#160;x&#160;is&#160;the&#160;required&#160;probability&#160;of&#160;attaining&#160;the&#160;required&#160;accuracy&#160;r&#160;(default:&#160;0.95)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'noprint'&#160;if&#160;the&#160;user&#160;does&#160;not&#160;want&#160;to&#160;print&#160;the&#160;results</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  results </term> =    a results tlist with:</para></listitem>
+<listitem><para>&#160;   - results('meth') = 'tvp var convergence diagnostics'</para></listitem>
+<listitem><para>&#160;   - results('object') = the type of results that is diagnosed</para></listitem>
+<listitem><para>&#160;   - results('auto order') = the autocorrelation order of the autocorrelation diagnostic</para></listitem>
+<listitem><para>&#160;   - results('autocorrelation') = autocorrelation estimates</para></listitem>
+<listitem><para>&#160;   - results('Geweke tests') = results tlist from the Geweke's convergence diagnostics</para></listitem>
+<listitem><para>&#160;   - results('Raftery tests') = results tlist from the Raftery and Lewis convergence diagnostics</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes MCMC convergence diagnostics for some type of results (At, Bt, S, Q, W or Htstd) from a tvp-var results.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ stacksize('max')
+load(GROCERDIR+'\data\primiceri.dat')
+mkdir(GROCERDIR+'\temp')
+nlag=2
+bounds('1953q3','1963q2')
+prior=tvpvar_prior0(nlag,4,4,0.01,0.01,0.1,['Inflation';'Unemployment';'rate_3m'])
+ 
+ 
+bounds('1963q3','2001q3')
+res=Hetero_TVP_VAR(nlag,['Inflation';'Unemployment';'rate_3m'],10000,2000,prior,path,2000)
+tvpvar_diagnos(res,'At')
+// Provides MCMC convergence diagnoses on Primeceri (2005) TVP VAR for the coefficients of the
+// contemporaneous endogenous variables of the structural transformation of the VAR
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2015
+        </refsection>
+</refentry>

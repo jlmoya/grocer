@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="pfixed" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:01-Sept.-2013$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>pfixed</refname>
+               <refpurpose>Panel equation regressions </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>res=pfixed(namey,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> namey </term> =    a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes (this last case is the only one authorized if you are using a 'panel data' tlist, see below)</para></listitem>
+<listitem><para>*  <term> arg1 </term> = </para></listitem>
+<listitem><para>&#160;&#160;-&#160;either&#160;a&#160;'panel&#160;data'&#160;tlist&#160;(generally&#160;imported&#160;from&#160;a&#160;.csv&#160;database&#160;by&#160;function&#160;impexc2bd)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;or&#160;an&#160;endogenous&#160;variable&#160;taking&#160;the&#160;form&#160;of&#160;a&#160;time&#160;series,&#160;a&#160;real&#160;(nx1)&#160;vector&#160;or&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nx1)&#160;real&#160;vector&#160;between&#160;quotes</para></listitem>
+<listitem><para>* <term>arg2,...,argn</term> = </para></listitem>
+<listitem><para>&#160;&#160;-&#160;if&#160;first&#160;input&#160;of&#160;arg1,...,argn&#160;was&#160;a&#160;'panel&#160;data'&#160;tlist&#160;then:&#160;other&#160;input&#160;are&#160;optional&#160;and&#160;can&#160;be:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. either 'x=name1;...;namep' where name1,...,namep are a subset of the names of the variables that are in the database</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. the string 'nameid=name1,..., namen' where name1,...,namen are names of individuals present in the database</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. or the string 'noprint' if the user does not want to print the estimation results</para></listitem>
+<listitem><para>&#160;&#160;-&#160;if&#160;first&#160;input&#160;of&#160;arg1,...,argn&#160;was&#160;an&#160;endegnous&#160;variable&#160;then&#160;either:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. a time series</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. a real (nxk) matrix</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. a (k x 1) string vector of names of time series, vectors or matrices</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. the string 'id=v' where v is the vector of individuals attached to the y and x data (this argument must be present somewhere in the list of variables arguments)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'hac=ccm'&#160;for&#160;"clustered"&#160;covariance&#160;matrix&#160;of&#160;Arellano&#160;(1987)&#160;recommended&#160;when&#160;T&#160;is&#160;fixed&#160;and&#160;N&#160;large&#160;but&#160;"works"&#160;also&#160;when&#160;T&#160;is&#160;large&#160;and&#160;N&#160;fixed&#160;see&#160;Hansen&#160;C.&#160;B.&#160;(2007)&#160;(reference&#160;below)&#160;or&#160;'hac=nw'&#160;for&#160;a&#160;Newey-west&#160;type&#160;estimator&#160;recommended&#160;when&#160;T&#160;is&#160;large&#160;and&#160;N&#160;fixed&#160;(see&#160;references)&#160;or&#160;'hac=mbb'&#160;for&#160;a&#160;moving&#160;block&#160;bootstrap&#160;etimation&#160;of&#160;the&#160;symetric&#160;percentile-t&#160;confidence&#160;interval&#160;of&#160;the&#160;betas</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'nboot=xxx'&#160;number&#160;of&#160;bootstrap&#160;replications&#160;when&#160;'hac=mbb'&#160;(default=999)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'alpha=xxx'&#160;with&#160;0&lt;xxx&lt;1&#160;the&#160;confidence&#160;level&#160;(default=0.95)&#160;for&#160;the&#160;symetric&#160;percentile-t&#160;confidence&#160;interval</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'win=xxx'&#160;the&#160;length&#160;of&#160;the&#160;Barlett&#160;window&#160;kernel&#160;estimator&#160;(default&#160;=&#160;automatic&#160;selection&#160;by&#160;Andrews&#160;(1991)&#160;method&#160;using&#160;an&#160;AR(1)&#160;model)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;the&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  res </term> =    a tlist with</para></listitem>
+<listitem><para>&#160;&#160;-res('meth')  =   'panel with random effects'</para></listitem>
+<listitem><para>&#160;&#160;-res('y')  =    y data vector</para></listitem>
+<listitem><para>&#160;&#160;-res('x')  =    x data matrix</para></listitem>
+<listitem><para>&#160;&#160;-res('nobs')  =    nobs</para></listitem>
+<listitem><para>&#160;&#160;-res('nvar')  =    nvars</para></listitem>
+<listitem><para>&#160;&#160;-res('beta')  =    bhat</para></listitem>
+<listitem><para>&#160;&#160;-res('yhat')  =    yhat</para></listitem>
+<listitem><para>&#160;&#160;-res('resid')  =    residuals</para></listitem>
+<listitem><para>&#160;&#160;-res('vcovar')  =    estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;&#160;-res('sige')  =    estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;&#160;-res('sige')  =    estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;&#160;-res('ser')  =    standard error of the regression</para></listitem>
+<listitem><para>&#160;&#160;-res('tstat')  =    t-stats</para></listitem>
+<listitem><para>&#160;&#160;-res('pvalue')  =    pvalue of the betas</para></listitem>
+<listitem><para>&#160;&#160;-res('condindex')  =    multicolinearity cond index</para></listitem>
+<listitem><para>&#160;&#160;-res('prescte')  =    boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;&#160;-res('rsqr')  =    rsquared</para></listitem>
+<listitem><para>&#160;&#160;-res('rbar')  =    rbar-squared</para></listitem>
+<listitem><para>&#160;&#160;-res('f')  =    F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;&#160;-res('pvaluef')  =    its significance level</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs HAC or standard fixed effects estimation for panel data (for balanced or unbalanced data).
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ load(GROCERDIR+'\macros\grocer\db\judgepanel.dat') ;
+ r2 = pfixed('y',judgepanel);
+ // Example is taken from function panel_d. Provides fixed panel estimation on Judge et alii example.
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2005 and Emmanuel Michaux 2012
+        </refsection>
+</refentry>

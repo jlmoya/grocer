@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="theilbv" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:28-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>theilbv</refname>
+               <refpurpose>Performs Theil-Goldberger for theilbv model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>results=theilbv(nlag,tight,weight,decay,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> y </term> =    nobs x 1 input vector                          </para></listitem>
+<listitem><para>*  <term> x </term> =    nobs x nvar input explanatory variables matrix</para></listitem>
+<listitem><para>*  <term> nobs </term> =    # of observations</para></listitem>
+<listitem><para>*  <term> neqs </term> =    # of equations</para></listitem>
+<listitem><para>*  <term> eqn  </term> =    # equation number</para></listitem>
+<listitem><para>*  <term> nlag </term> =    the lag length of the VAR</para></listitem>
+<listitem><para>*  <term> theta </term> =    Litterman's tightness hyperparameter</para></listitem>
+<listitem><para>*  <term> weight </term> =    Litterman's weight (matrix or scalar)</para></listitem>
+<listitem><para>*  <term> decay </term> =    Litterman's lag decay  =    lag^(-decay)</para></listitem>
+<listitem><para>*  <term> scale  </term> =    scaling vector (determined in bvar)</para></listitem>
+<listitem><para>*  <term> scale2 </term> =    scaling vector (determined in bvar)</para></listitem>
+<listitem><para>*  <term> nx     </term> =    # of deterministic variables excluding constant term</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> results </term> =    a results tlist with:</para></listitem>
+<listitem><para>&#160;&#160;.&#160;results('meth')&#160;&#160;=&#160;'bvar'</para></listitem>
+<listitem><para>&#160;&#160;.&#160;results('beta')&#160;&#160;=&#160;bhat</para></listitem>
+<listitem><para>&#160;&#160;.&#160;results('tstat')&#160;=&#160;t-statistics</para></listitem>
+<listitem><para>&#160;&#160;.&#160;results('tprob')&#160;=&#160;t-probabilities</para></listitem>
+<listitem><para>&#160;&#160;.&#160;results('yhat')&#160;&#160;=&#160;yhat</para></listitem>
+<listitem><para>&#160;&#160;.&#160;results('resid')&#160;=&#160;residuals</para></listitem>
+<listitem><para>&#160;&#160;.&#160;results('sige')&#160;&#160;=&#160;e'*e/(n-k)</para></listitem>
+<listitem><para>&#160;&#160;.&#160;results('rsqr')&#160;&#160;=&#160;rsquared</para></listitem>
+<listitem><para>&#160;&#160;.&#160;results('rbar')&#160;&#160;=&#160;rbar-squared</para></listitem>
+<listitem><para>&#160;&#160;.&#160;results('nobs')&#160;&#160;=&#160;nobs</para></listitem>
+<listitem><para>&#160;&#160;.&#160;results('nvar')&#160;&#160;=&#160;nvar</para></listitem>
+<listitem><para>&#160;&#160;.&#160;results('xpxi)&#160;&#160;&#160;=&#160;inv(x'*x)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs Theil-Goldberger for bvar model. Used in function bvar1.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+bresult = theilbv(yvec,ymat,nlag,neqs,i,tight,weight,decay,scale2,scale,nx);
+ 
+// Example taken from function bvar1. Should not have many other uses!
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

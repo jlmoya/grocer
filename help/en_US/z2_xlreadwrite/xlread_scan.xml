@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Scilab ( http://www.scilab.org/ ) - This file is part of Scilab
+ * Copyright (C) 2018 - Stéphane MOTTELET
+ *
+ * This file is hereby licensed under the terms of the GNU GPL v2.0,
+ * For more information, see the COPYING file which you should have received
+ * along with this program.
+ *
+ -->
+<refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" xmlns:scilab="http://www.scilab.org" xml:lang="en" xml:id="xlread_scan">
+    <refnamediv>
+        <refname>xlread_scan</refname>
+        <refpurpose>Auxiliary function used by xlread</refpurpose>
+    </refnamediv>
+    <refsynopsisdiv>
+        <title>Syntax</title>
+        <synopsis>
+          [value,text] = xlread_scan(data,isText,isNum,tightFlag)
+        </synopsis>
+  </refsynopsisdiv>
+    <refsection>
+        <title>Arguments</title>
+        <variablelist>
+          <varlistentry>
+                <term>data,isText,isNum</term>
+                <listitem>
+                    <para>These parameters are described as the outputs of <link linkend="xlread_data">xlread_data</link>.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                  <term>tightFlag</term>
+                  <listitem>
+                      <para>a boolean. If <term>tightFlag</term> is true, then the <term>value,text</term> matrices tightly enclose the region where data of the corresponding type is found. This is the case when the <term>range</term> is not specified in the <term>xlread</term> call.
+                      </para>
+                  </listitem>
+              </varlistentry>
+            <varlistentry>
+                <term>text</term>
+                <listitem>
+                    <para>a matrix of strings containing the textual data found in the sheet at specfied range.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+              <term>value</term>
+              <listitem>
+                  <para>a matrix of numbers containing the numerical data found in the sheet at specfied range.
+                  </para>
+              </listitem>
+          </varlistentry>
+        </variablelist>
+    </refsection>
+    <refsection>
+        <title>Description</title>
+        <para>
+ This low level function is called by the main <term>xlread</term> function (see the dedicated <link linkend="xlread">help page</link>) but it can be used after calling <term>xlread_data</term> and some subsequent raw data processing.
+</para>
+    </refsection>
+    <refsection role="see also">
+        <title>See also</title>
+        <simplelist type="inline">
+          <member>
+              <link linkend="xlread">xlread</link>
+          </member>
+          <member>
+              <link linkend="xlread_data">xlread_data</link>
+          </member>
+          <member>
+              <link linkend="xlwrite">xlwrite</link>
+          </member>
+          <member>
+              <link linkend="xlinfo">xlinfo</link>
+          </member>
+        </simplelist>
+    </refsection>
+    <refsection>
+        <title>Bibliography</title>
+        <para>This function is based on POI library (<ulink url="http://poi.apache.org/">http://poi.apache.org/</ulink>).
+        </para>
+    </refsection>
+</refentry>
+

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="predfailin0" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>predfailin0  </refname>
+               <refpurpose>Chow predictive failure test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[fstat,f_pvalue,dfnum,dfden]=predfailin0(res,n1,np)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> resulols </term> =    a results tlist from a first stage estimation</para></listitem>
+<listitem><para>*  <term> n1 </term> =    # of observations of the sub-period</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> fstat </term> =    value of the test statistic</para></listitem>
+<listitem><para>*  <term> f_pvalue </term> =    its p-value</para></listitem>
+<listitem><para>*  <term> dfnum </term> =    # dof of the numerator</para></listitem>
+<listitem><para>*  <term> dfden </term> =    # dof of the denominator</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ Computes in-sample Chow predictive failure test. Results are stored as numbers and are not displayed on screen.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+bounds('1964q3','1989q2')
+// column HE in table 9 of Hendry and Krozlig paper
+rols=ols('delts(lm1-lp)','lagts(lm1-lp-ly)','delts(lp)','rnet','delts(lagts(lm1-lp-ly))','cte')
+[fstat,f_pvalue,dfnum,dfden]=predfailin0(rols,50)
+ 
+//Useful mainly for programming purpose (since jbnorm does much more).
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

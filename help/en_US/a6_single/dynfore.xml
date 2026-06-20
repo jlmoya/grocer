@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="dynfore" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>dynfore </refname>
+               <refpurpose>Dynamic simulation of an equation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[p]=dynfore(res,endo,bounds)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> res </term> =   result tlist</para></listitem>
+<listitem><para>*  <term> endo </term> =   a string, the name of the endogenous variable</para></listitem>
+<listitem><para>*  <term> bounds </term> =   the bounds over which to perform the simulation</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> p </term> =   forecast</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Provides a dynamic forecast from an equation estimated by ols(), hwhite(), olst(), lad(),.... The name of the lhs (the field 'namey' in the result tlist saved in the process of estimation) must begin with the name of the endogenous variable or by one or several functions applied successively among the functions delts, growthr or one of the functions defined in the database GROCERDIR+'/macros/db/define_func.dat', applied to the endogenous variable. All data must exist in the working environment.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+rhe=hendryericsson();p=dynfore(rhe,'lm1',['1985q1';'1988q4'])
+// provides the dynamic simulation of Hendry and Ericsson money demand equation over the period 1985q1 to 1988q4.
+// The endogenous variable is here lm1. Note that the rhs has the form foo(endogenous[...]) where foo is here delts.
+ 
+rhe2=ols((delts(log(m1)-log(p))','delts(log(p))','delts(lagts(1,log(m1)-log(p)-log(y)))','rnet'...
+,'lagts(1,log(m1)-log(p)-log(y))','cte');p=dynfore(rhe2,'m1',['1985q1';'1988q4'])
+// provides the same simualtion except that the endogenous variable is now m1 and not lm1=log(m1) (and p is therefore m1 simulated).
+// The rhs is now of the form foo1(foo2(endogenous[...])) where foo1 is now delts and foo2 log.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2009
+        </refsection>
+</refentry>

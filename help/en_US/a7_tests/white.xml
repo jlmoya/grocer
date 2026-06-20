@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="white" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>white </refname>
+               <refpurpose>White's heteroskedasticity test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[resulwhite]=white(resulols,np)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> resulols </term> =    results tlist from a first stage estimation returns a tlist</para></listitem>
+<listitem><para>*  <term> np </term> =    'noprint' if the user does not want to display the results (optional argument!)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> resulwhite </term> =    a results tlist with:</para></listitem>
+<listitem><para>&#160;  - resulwhite('meth')   = 'white'</para></listitem>
+<listitem><para>&#160;  - resultwhite('resul1st') = results tlist of the first stage regression</para></listitem>
+<listitem><para>&#160;  - resulwhite('f') = White statistic (Fisher form)</para></listitem>
+<listitem><para>&#160;  - resulwhite('p') = p-value of the test</para></listitem>
+<listitem><para>&#160;  - resulwhite('dfnum') = degrees of freedom of the numerator</para></listitem>
+<listitem><para>&#160;  - resulwhite('dfden') = degrees of freedom of the denominator</para></listitem>
+<listitem><para>&#160;  - resulwhite('f_pvalue') = p-value of the test</para></listitem>
+<listitem><para>&#160;  - resulwhite('chistat') = p-value of the test</para></listitem>
+<listitem><para>&#160;  - resulwhite('f_chistat') = p-value of the test</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ Computes the value of White's heteroskedasticity test (see White, H. (1980)  "A heteroskedastic-consistent covariance matrix estimator and a direct test for heteroskedasticity", Econometrica, 48, 817-838). Results are stored in a tlist and displayed on screen if the user  has not given as second argument 'noprint'.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+bounds('1964q3','1989q2');
+rols=ols('delts(lm1-lp)','delts(lp)','delts(lagts(1,lm1-lp-ly))','rnet', 'lagts(1,lm1-lp-ly)', 'const');
+r=white(rols)
+ 
+// This example stores in tlist r, and displays on screen, White's test on regression results stored in he.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

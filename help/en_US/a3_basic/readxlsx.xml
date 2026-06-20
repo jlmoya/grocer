@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="readxlsx" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:08-Mars-2021$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>readxlsx</refname>
+               <refpurpose>Reads an Excel file </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>S = readxlsx(filename,sheet)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  filename = a string, the name of the Excel file</para></listitem>
+<listitem><para>*  sheet = a string or a number, indicating the sheet to select in the Excel file</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  S = a mlist file ot type xls with fields 'name', 'text' and 'value'</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+r
+Reads xls or xlsx files into Scilab.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+global GROCERDIR ;
+// read the CPB World Trade monitor for June 2020 (downloaded from the CPB website) 
+// available in Grocer data folder
+S=readxlsx(GROCERDIR+'\data\CPB-World-Trade-Monitor-June-2020.xlsx');
+// recover the content of the first sheet of the xlxs file
+S1=S.sheets(1);
+// recover the text cells
+S1_txt=S1.text;
+// recover the value cells
+S1_val=S1.value;
+// read only the inpro_out sheet
+S=readxlsx(GROCERDIR+'\data\CPB-World-Trade-Monitor-June-2020.xlsx','inpro_out');
+// which can be done also as follows
+S=readxlsx(GROCERDIR+'\data\CPB-World-Trade-Monitor-June-2020.xlsx',2)
+
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2021
+        </refsection>
+</refentry>

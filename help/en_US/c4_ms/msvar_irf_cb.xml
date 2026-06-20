@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="msvar_irf_cb" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:05-Sept.-2015$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>msvar_irf_cb</refname>
+               <refpurpose>msvar irf with confidence bands </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>resirfcb=msvar_irf_cb(res,hor,niter,siz,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> res </term> =    a tlist result from a ms var estimation</para></listitem>
+<listitem><para>*  <term> hor </term> =    a scalar, the horizon of the irf (note that the shocks are supposed to happen at time 0; therefore (hor+1) impulses are calculated)</para></listitem>
+<listitem><para>*  <term> niter </term> =    number of iterations</para></listitem>
+<listitem><para>*  <term> siz </term> =    siz of confidence bands</para></listitem>
+<listitem><para>*  <term> mres </term> =    optional argument that can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;x&#160;=&#160;chol1&#160;(cholesky&#160;decomposition)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;x&#160;=&#160;chol2&#160;(triangular&#160;factorisation)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;x&#160;=&#160;original&#160;(original&#160;residuals)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;x&#160;=&#160;soriginal&#160;(standardized&#160;(one&#160;standard&#160;deviation&#160;shock)&#160;uncorrelated&#160;residuals)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;x&#160;=&#160;girf&#160;(Generalized&#160;Impulse&#160;Response&#160;based&#160;on&#160;Pesaran&#160;and&#160;Shin)&#160;(default&#160;=&#160;soriginal)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+ 
+<listitem><para>*  <term>  resirf </term> =    a result tlist with:</para></listitem>
+<listitem><para>&#160;&#160; - resirf('meth') =    'msvar cb irf'</para></listitem>
+<listitem><para>&#160;&#160; - resirf('msvar cb res') =    the input ms var results tlist</para></listitem>
+<listitem><para>&#160;&#160; - resirf('# irf') =    the horizon of the irf calculations</para></listitem>
+<listitem><para>&#160;&#160; - resirf('nb states') =    the # of states</para></listitem>
+<listitem><para>&#160;&#160; - resirf('nb irf') =    the # of different AR parts</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 1 if they do not switch</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. the # states if they switcch</para></listitem>
+<listitem><para>&#160;&#160; - resirf('sigma switch') =    the # of switching wariances</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. 1 if they do not switch</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;. the # states if they switch</para></listitem>
+<listitem><para>&#160;&#160; - resirf('irf part state') =    the partial impulse response</para></listitem>
+<listitem><para>&#160;&#160; - resirf('irf full state') =    the full impulse response</para></listitem>
+<listitem><para>&#160;&#160; - resirf('irf part lower cb') =    the lower part of the confidence band for the partial impulse response</para></listitem>
+<listitem><para>&#160;&#160; - resirf('irf full lower cb') =    the lower part of the confidence band for the full impulse response</para></listitem>
+<listitem><para>&#160;&#160; - resirf('irf part upper cb') =    the upper part of the confidence band for the partial impulse response</para></listitem>
+<listitem><para>&#160;&#160; - resirf('irf full upper cb') =    the upper part of the confidence band for the full imptulse response</para></listitem>
+<listitem><para>&#160;&#160; - resirf('irf part median') =    the median part of the confidence band for the partial impulse response</para></listitem>
+<listitem><para>&#160;&#160; - resirf('irf full median') =    the median part of the confidence band for the full impulse response</para></listitem>
+<listitem><para>&#160;&#160; - resirf('irf part state # i') =    partial impulse response for state i</para></listitem>
+<listitem><para>&#160;&#160; - resirf('irf full state # i') =    the full impulse response for state i</para></listitem>
+<listitem><para>&#160;&#160; - resirf('irf part lower cb state # i') =    lower part of the confidence band for partial impulse response of state i</para></listitem>
+<listitem><para>&#160;&#160; - resirf('irf part upper cb state # i') =    upper part of the confidence band for partial impulse response of state i</para></listitem>
+<listitem><para>&#160;&#160; - resirf('irf part median state # i') =    median partial impulse response of state i</para></listitem>
+<listitem><para>&#160;&#160; - resirf('irf full lower cb state # i') =    lower part of the confidence band for full impulse response of state i</para></listitem>
+<listitem><para>&#160;&#160; - resirf('irf full upper cb state # i') =    upper part of the confidence band for full impulse response of state i</para></listitem>
+<listitem><para>&#160;&#160; - resirf('irf full median state # i') =    median full impulse response of state i</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Calculates confidence bands for impulse response functions for a Markov-switching VAR.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+global GROCERDIR ;
+load(GROCERDIR+'\data\msirf_d.dat')
+rms=ms_var('all',2,['100*delts(log(us_gdp))','us_un'],2,2,3)
+rirf_cb=irf_cb(rms,20,99,0.1)
+// example taken from function msvar_irf_d: provides irf confidence bands for the msvar
+// estimate stored in tlist rms, at a 20 periods (quarters ) horizon, with 99 draws
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Stefan Fiesel 2015
+        </refsection>
+</refentry>

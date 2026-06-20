@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="aggreg1" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>aggreg1 </refname>
+               <refpurpose>Generates a temporal aggregation matrix </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[C]=aggreg1(N,s,opt)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> N </term> =    number of low frequency data</para></listitem>
+<listitem><para>*  <term> s </term> =    frequency conversion</para></listitem>
+<listitem><para>*  <term> opt </term> =    type of temporal aggregation:</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;opt&#160;=&#160;-1&#160;---&gt;&#160;sum&#160;(flow)</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;opt&#160;=&#160;0&#160;---&gt;&#160;average&#160;(index)</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;opt&#160;=&#160;k&#160;---&gt;&#160;k-th&#160;element&#160;(k&gt;=1&#160;and&#160;k&lt;=s)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> C </term> =    (N x sN) temporal aggregation matrix</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Generates a temporal aggregation matrix: applied to a high frequency series, the function will generate the corresponding low frequency series, by averaging, adding or extrapolating the high frequency values.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+x=grand(44,1,'nor',0,1)
+X=aggreg1(x,4,0)
+ 
+// Aggregates the series x from quarterly to annual (conversion from frequency 4 to 1) by taking the mean of the quarterly data.
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2005
+        </refsection>
+</refentry>

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="explovars" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>explovars</refname>
+               <refpurpose>explosion of a sequence of variables </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[namexos,listts,vecy,indts,ndvec,indcte,nvar,listtsmat,indtsmat]=explovars(names,defname)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> names </term> =   either</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;list&#160;of&#160;variables,&#160;each&#160;element&#160;could&#160;be&#160;a&#160;timeseries,&#160;a&#160;real&#160;vector,&#160;a&#160;real&#160;matrix&#160;or&#160;a&#160;string&#160;(the&#160;name&#160;of&#160;a&#160;variable&#160;with&#160;one&#160;of&#160;the&#160;types&#160;cited&#160;above,&#160;between&#160;quotes)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;matrix&#160;of&#160;strings,&#160;each&#160;one&#160;being&#160;the&#160;name&#160;of&#160;a&#160;variable</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'cte',&#160;'const'&#160;or&#160;'trend^p'</para></listitem>
+<listitem><para>*  <term> defname </term> =   default name of variables</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> namexos </term> =   a (k x 1) string vector</para></listitem>
+<listitem><para>*  <term> listts </term> =   a list of ts</para></listitem>
+<listitem><para>*  <term> vecy </term> =   a (n x k) matrix of real values</para></listitem>
+<listitem><para>*  <term> indts </term> =   a (k1 x 1) vector of integers that indicates the indexes of the ts in the original list</para></listitem>
+<listitem><para>*  <term> indvec </term> =   a (k2 x 1) vector of integers that indicates the indexes of the real vectors in the original list</para></listitem>
+<listitem><para>*  <term> indcte </term> =   a (k3 x 1) vector of integers that indicates the indexes of the terms 'cte' or 'const' in the original list</para></listitem>
+<listitem><para>*  <term> nvar </term> =   # of variables in the list</para></listitem>
+<listitem><para>*  <term> listtsmat </term> =   a list of tsmat</para></listitem>
+<listitem><para>*  <term> indtsmat </term> =   a (k4 x 1) vector of integers that indicates the indexes of the tsmat in the original list</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+From a list of series retrieve their names or give them names if they don't have (when an element is not string), store the ts in a list, store the values of the vectors and matrices in a unique matrix, store the index of the ts, the index of the vectors and the index of the 'cte' or 'const' string.
+
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+[namei,listtsi,grocer_veci,indtsi,indveci,indctei,ni,listtsmati,indtsmati]=explovars(grocer_li,grocer_named(grocer_i))// Example taken from function explon. grocer_li is here the i-th list of variables. If it is a ts, then grocer_listtsy is the list containing this ts, grocer_y is empty, grocer_indtsy is equal to 1, grocer_indvecy is empty, grocer_indctey is empty. If it is a vector, then grocer_listtsy is empty, grocer_y is the corresponding vector, grocer_indtsy is empty, grocer_indvecy is equal to 1, grocer_indctey is empty and grocer_indctey is equal to 1. If it has been entered as 'cte', then grocer_listtsy, grocer_y, grocer_indtsy and grocer_indvecy are all empty and grocer_indctey is equal to 1.
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2005-2009
+        </refsection>
+</refentry>

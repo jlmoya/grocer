@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="olsc" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>olsc </refname>
+               <refpurpose>Cochrane-Orcutt estimation of an autocorrelated model </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rolsc=olsc(namey, arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =   a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> argi </term> =   an argument which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;time&#160;series</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx1)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nxk)&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nxk)&#160;real&#160;vector&#160;or&#160;matrix&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;list&#160;of&#160;such&#160;elements</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;display&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'maxit=n'&#160;where&#160;n&#160;is&#160;the&#160;maximum&#160;number&#160;of&#160;iterations&#160;that&#160;can&#160;be&#160;performed&#160;(default&#160;=&#160;100)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'crit=n'&#160;where&#160;crit&#160;is&#160;the&#160;convergence&#160;criterion,&#160;used&#160;to&#160;assess&#160;if&#160;the&#160;difference&#160;between&#160;successive&#160;values&#160;of&#160;the&#160;autocorrelation&#160;coefficient&#160;is&#160;significant&#160;(default=sqrt(%eps))</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rolsc </term> =   a results tlist with</para></listitem>
+<listitem><para>&#160;  - rolsc('meth')  = 'Cochrane-Orcutt'</para></listitem>
+<listitem><para>&#160;  - rolsc('y')     = y data vector</para></listitem>
+<listitem><para>&#160;  - rolsc('x')     = x data matrix</para></listitem>
+<listitem><para>&#160;  - rolsc('nobs')  = # observations</para></listitem>
+<listitem><para>&#160;  - rolsc('nvar')  = # variables</para></listitem>
+<listitem><para>&#160;  - rolsc('beta')  = bhat</para></listitem>
+<listitem><para>&#160;  - rolsc('yhat')  = yhat</para></listitem>
+<listitem><para>&#160;  - rolsc('resid') = residuals</para></listitem>
+<listitem><para>&#160;  - rolsc('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;  - rolsc('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - rolsc('sigu')  = sum of squared residuals</para></listitem>
+<listitem><para>&#160;  - rolsc('ser')  = standard error of the regression</para></listitem>
+<listitem><para>&#160;  - rolsc('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;  - rolsc('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;  - rolsc('dw')    = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;  - rolsc('condindex') = multicolinearity cond index</para></listitem>
+<listitem><para>&#160;  - rolsc('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;  - rolsc('rsqr')  = rsquared</para></listitem>
+<listitem><para>&#160;  - rolsc('rbar')  = rbar-squared</para></listitem>
+<listitem><para>&#160;  - rolsc('f')    = F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;  - rolsc('pvaluef') = its significance level</para></listitem>
+<listitem><para>&#160;  - rolsc('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;  - rolsc('namey') = name of the y variable</para></listitem>
+<listitem><para>&#160;  - rolsc('namex') = name of the x variables</para></listitem>
+<listitem><para>&#160;  - rolsc('bounds') = if there is a timeseries in the regression, the bounds of the regression</para></listitem>
+<listitem><para>&#160;  - rolsc('rho') = estimated first order autocorrelation of residuals</para></listitem>
+<listitem><para>&#160;  - rolsc('trho') = its Student t</para></listitem>
+<listitem><para>&#160;  - rolsc('iterout') = a (niter x 3) matrix giving for each</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes Cochrane-Orcutt ols regression for AR1 errors. Endogenous variable must be given first, as a vector, a ts, between quotes (if the user wants to keep the name of the variable in the tlist result and for the printings) or not. Exogenous variables are given after, in one of the formats authorized for the endogenous one, or in matrix format. The program displays on screen various results (coefficients, tstat, R², Durbin and Watson, first order autocorrelation of residuals,...) except if the user has entered the argument 'noprint' anywhere after the first argument.
+ 
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load('grocer/bdexamples/bdhenderic.dat') ; bounds('1964q3','1989q2') ; rolsc=olsc('delts(lm1-lp)','delts(lp)','rnet','lagts(1,lm1-lp-ly)','cte')
+// This example, taken from olsar1_d, shows the estimation of first order autocorrelated model on Hendry and Ericsson (1991) preferred specification
+// from which the variable 'delts(lagts(1,lm1-lp-ly))' has been withdrawn.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

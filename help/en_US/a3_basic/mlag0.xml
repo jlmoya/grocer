@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="mlag0" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>mlag0</refname>
+               <refpurpose>lag of a matrix </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[xlag]=mlag0(x,n,init)</synopsis>
+        </refsynopsisdiv>
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+           <term>Input</term>
+<listitem><para>*  <term> x </term> =   a matrix (or vector), nobs x nvar</para></listitem>
+<listitem><para>*  <term> n </term> =   # of contiguous lags for each vector in x</para></listitem>
+<listitem><para>*  <term> init </term> =   (optional) scalar value to feed initial missing values (default  =   0)</para></listitem>
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+          <varlistentry>
+          <term>Output</term>
+ 
+<listitem><para>*  <term> xlag </term> =   a matrix of lags (nobs x nvar*nlag)</para></listitem><listitem><para> collected as: x1(t-1), x1(t-2), ... x1(t-nlag), x2(t-1), ... x2(t-nlag),...</para></listitem>
+          </varlistentry>
+          </variablelist>
+        </refsection>
+        <refsection>
+               <title>DESCRIPTION</title>
+Generates a matrix of n lags from a matrix (or vector) containing a set of vectors (for use in var routines):the same as mlag but without tests on the inputs.
+
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+x1=ones(7,1);x2=[1:7]';y = mlag0([x1 x2],2,4)//returns:
+//
+//!   4.    4.    4.    4. !
+//!   1.    4.    1.    4. !
+//!   1.    1.    2.    1. !
+//!   1.    1.    3.    2. !
+//!   1.    1.    4.    3. !
+//!   1.    1.    5.    4. !
+//!   1.    1.    6.    5. !
+ 
+elag = mlag0(rols('resid'),nobse/6);// Example taken from var1: takes the residuals from a regression and stores all lags from 1 to nobse/6 to prepare the calculation of the Box-Pierce statistics.
+               ]]></programlisting>
+        </refsection>
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

@@ -1,0 +1,117 @@
+// Copyright (C) 2009 - DIGITEO - Pierre MARECHAL <pierre.marechal@scilab.org>
+//
+// This file must be used under the terms of the CeCILL.
+// This source file is licensed as described in the file COPYING, which
+// you should have received as part of this distribution.  The terms
+// are also available at
+// http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
+
+global GROCERDIR ;
+grocer_path=strsubst(get_absolute_file_path("grocer.start"),'\','/');
+GROCERDIR=strsubst(grocer_path,'/etc','/');
+
+// Grocer directory
+// =============================================================================
+load(GROCERDIR+filesep()+'param'+filesep()+'GROCER_version.dat')
+
+mprintf("Loading Grocer "+GROCER_version+"  Dubois, Emmanuel Michaux and al. 2002-"+GROCER_Cyear+"\n");
+mprintf("http://grocer.toolbox.free.fr/grocer.html\n");
+mprintf(" \n");
+mprintf("Grocer is distributed under CeCill license (http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt) and using Grocer entails accepting the terms of the license\n");
+mprintf(" \n");
+	
+// Load  functions library
+// =============================================================================
+
+mprintf("\tLoad macros\n");
+pathmacros         = pathconvert( GROCERDIR + "/macros");
+
+gr_automaticlib    = lib(pathmacros + "automatic"    + filesep());
+gr_basiclib        = lib(pathmacros + "basic"        + filesep());
+gr_bmalib          = lib(pathmacros + "bma"          + filesep());
+gr_cointscilib     = lib(pathmacros + "cointsci"     + filesep());
+gr_contriblib      = lib(pathmacros + "contrib"      + filesep());
+gr_cycleslib       = lib(pathmacros + "cycles"       + filesep());
+gr_diagnoslib      = lib(pathmacros + "diagnos"      + filesep());
+gr_disaglib        = lib(pathmacros + "disag"        + filesep());
+gr_distriblib      = lib(pathmacros + "distrib"      + filesep());
+gr_e4lib           = lib(pathmacros + "e4"           + filesep());
+gr_factorslib      = lib(pathmacros + "factors"      + filesep());
+gr_garchlib        = lib(pathmacros + "garch"        + filesep());
+gr_gauss2sci       = lib(pathmacros + "gauss2sci"    + filesep());
+gr_gauss_mimics    = lib(pathmacros + "gauss_mimics" + filesep());
+gr_gmmlib          = lib(pathmacros + "gmm"          + filesep());
+gr_johansenlib     = lib(pathmacros + "johansen"     + filesep());
+gr_kalmanlib       = lib(pathmacros + "kalman"       + filesep());
+gr_likescilib      = lib(pathmacros + "likesci"      + filesep());
+gr_mslib           = lib(pathmacros + "ms"           + filesep());
+gr_modellib        = lib(pathmacros + "model"        + filesep());
+gr_multilib        = lib(pathmacros + "multi"        + filesep());
+gr_optscilib       = lib(pathmacros + "optsci"       + filesep());
+gr_panellib        = lib(pathmacros + "panel"        + filesep());
+gr_panel_unitrlib  = lib(pathmacros + "panel_unitr"  + filesep());
+gr_pltg_newlib     = lib(pathmacros + "pltg_new"     + filesep());
+gr_prtgroclib      = lib(pathmacros + "prtgroc"      + filesep());
+gr_qualitativelib  = lib(pathmacros + "qualitative"  + filesep());
+gr_reg_genelib     = lib(pathmacros + "reg_gene"     + filesep());
+gr_singlelib       = lib(pathmacros + "single"       + filesep());
+gr_symboliclib     = lib(pathmacros + "symbolic"       + filesep());
+gr_tslib           = lib(pathmacros + "ts"           + filesep());
+gr_tsmatlib        = lib(pathmacros + "tsmat"           + filesep());
+gr_tvpvarlib       = lib(pathmacros + "tvp_var"           + filesep());
+gr_varlib          = lib(pathmacros + "var"          + filesep());
+gr_varmalib        = lib(pathmacros + "varma"        + filesep());
+
+if getversion("scilab")(1) >= 6 then
+
+   write(%io(2),' loading xlreadwrite ');
+   write(%io(2),' https://gitlab.com/mottelet/xlreadwrite')
+
+   gr_xlrwlib         = lib(pathmacros + "xlreadwrite"  + filesep());
+    
+
+  jars=["lib/activation-1.1.1.jar"
+         "lib/commons-codec-1.13.jar"
+         "lib/commons-collections4-4.4.jar"
+         "lib/commons-compress-1.19.jar"
+         "lib/commons-logging-1.2.jar"
+         "lib/commons-math3-3.6.1.jar"
+         "lib/jaxb-api-2.3.1.jar"
+         "lib/jaxb-core-2.3.0.1.jar"
+         "lib/jaxb-impl-2.3.2.jar"
+         "lib/junit-4.12.jar"
+         "lib/log4j-1.2.17.jar"
+         "lib/SparseBitSet-1.2.jar"
+         "ooxml-lib/curvesapi-1.06.jar"
+         "ooxml-lib/xmlbeans-3.1.0.jar"
+         "poi-4.1.2.jar"
+         "poi-examples-4.1.2.jar"
+         "poi-excelant-4.1.2.jar"
+         "poi-ooxml-4.1.2.jar"
+         "poi-ooxml-schemas-4.1.2.jar"
+         "poi-scratchpad-4.1.2.jar"];
+
+   xlwriteClassPath=['poi_library/poi-4.1.2/'+jars];
+   // javaclasspath() is disabled in -nwni/-nogui (CLI) mode; the Excel xlreadwrite
+   // feature needs the full GUI. Guard so the econometrics core still loads in CLI.
+   if getscilabmode() == "STD" then
+      classPath=javaclasspath();
+      javaclasspath([classPath;GROCERDIR+filesep()+'thirdparty'+filesep()+xlwriteClassPath]);
+   end
+end
+
+// Load and add help chapter
+// =============================================================================
+
+if or(getscilabmode() == ["NW";"STD"]) then
+	mprintf("\tLoad help\n");
+	path_addchapter = pathconvert(GROCERDIR+"/jar");
+	if ( isdir(path_addchapter) <> [] ) then
+		add_help_chapter("Grocer", path_addchapter, %F);
+		clear add_help_chapter;
+	end
+	clear path_addchapter;
+end
+
+clear pathmacros;
+clear etc_tlbx;

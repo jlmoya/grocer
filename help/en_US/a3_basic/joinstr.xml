@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="joinstr" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>joinstr</refname>
+               <refpurpose>concatenation of strings and strings vectors </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>car=joinstr(varargin)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+<listitem><para>* objects which can be strings or column vectors of strings; each vector must have the same size </para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term> car </term> =    a string </para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+(similar to the one with the same name in portable troll). Concatenate elements which can be strings or matrix of strings; when some arguments are vectors of string, then the function creates a string for each element of the vector by concatenating it with the arguments of size 1 (the last one notwithstanding), in the order they are given by the user; then the function concatenates these strings with the last element as a separator. Very useful, but for experts. 
+
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+namex=['x1' 'x2']; namec=['a1' '(a2-a1)'];str=joinstr('namec','*','namex','+')// returns str='a1*x1+(a2-a1)*x2'
+ 
+joinstr('(',res('namex'),')*(',string(res('beta')),')+')+')'// takes the names of variables from, say, an ols regression, multiply each name by the value of the corresponding estimated coefficient and them adds all.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

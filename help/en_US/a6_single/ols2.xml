@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ols2" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ols2 </refname>
+               <refpurpose>ordinary least squares </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rols]=ols2(y,x)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> y </term> =    dependent variable vector (nobs x 1)</para></listitem>
+<listitem><para>*  <term> x </term> =    independent variables matrix (nobs x nvar)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rols </term> =    a tlist with</para></listitem>
+<listitem><para>&#160;  - rols('meth')  = 'ols'</para></listitem>
+<listitem><para>&#160;  - rols('y')     = y data vector</para></listitem>
+<listitem><para>&#160;  - rols('x')     = x data matrix</para></listitem>
+<listitem><para>&#160;  - rols('nobs')  = nobs</para></listitem>
+<listitem><para>&#160;  - rols('nvar')  = nvars</para></listitem>
+<listitem><para>&#160;  - rols('beta')  = bhat</para></listitem>
+<listitem><para>&#160;  - rols('yhat')  = yhat</para></listitem>
+<listitem><para>&#160;  - rols('resid') = residuals</para></listitem>
+<listitem><para>&#160;  - rols('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;  - rols('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - rols('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - rols('ser')  = standard error of the regression</para></listitem>
+<listitem><para>&#160;  - rols('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;  - rols('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;  - rols('dw')    = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;  - rols('condindex') = multicolinearity cond index</para></listitem>
+<listitem><para>&#160;  - rols('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;  - rols('rsqr')  = rsquared</para></listitem>
+<listitem><para>&#160;  - rols('rbar')  = rbar-squared</para></listitem>
+<listitem><para>&#160;  - rols('f')    = F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;  - rols('pvaluef') = its significance level</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+ Least-squares regression when variables looks like in the textbook. The results tlist contains all the results recorded by ols, except the fields 'namey', 'namex', 'prests', and, naturally, 'bounds'.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+x=grand(15,3,'nor',0,1)
+y=x*ones(3,1)+grand(15,1,'nor',0,1)
+rols=ols2(y,x)
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

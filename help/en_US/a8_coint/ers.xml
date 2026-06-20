@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="ers" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>ers </refname>
+               <refpurpose>Elliott-Rothenberg-Stock unit root test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>resers=ers(namey,p,l,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+<listitem><para>*  <term> namey </term> =   a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> p </term> =   order of time polynomial in the null-hypothesis</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;p&#160;=&#160;&#160;0,&#160;for&#160;constant&#160;term</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;p&#160;=&#160;&#160;1,&#160;for&#160;constant&#160;plus&#160;time-trend</para></listitem>
+<listitem><para>*  <term> l </term> =   # of lags of the ERS test</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =   optional arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'noprint'if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;print&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;&#160;-&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term> rers </term> =   a results tlist with:</para></listitem>
+<listitem><para>&#160;  - resers('meth')  = 'ers'</para></listitem>
+<listitem><para>&#160;  - resers('y')     = y data vector of the auxiliary regression</para></listitem>
+<listitem><para>&#160;  - resers('x')     = x data matrix of the auxiliary regression</para></listitem>
+<listitem><para>&#160;  - resers('nobs')  = # observations</para></listitem>
+<listitem><para>&#160;  - resers('nvar')  = # variables</para></listitem>
+<listitem><para>&#160;  - resers('beta')  = bhat</para></listitem>
+<listitem><para>&#160;  - resers('yhat')  = yhat</para></listitem>
+<listitem><para>&#160;  - resers('resid') = residuals of the auxiliary regression</para></listitem>
+<listitem><para>&#160;  - resers('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;  - resers('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - resers('sigu')  = sum of squared residuals</para></listitem>
+<listitem><para>&#160;  - resers('ser')  = standard error of the regression</para></listitem>
+<listitem><para>&#160;  - resers('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;  - resers('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;  - resers('dw')    = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;  - resers('condindex') = multicolinearity cond index</para></listitem>
+<listitem><para>&#160;  - resers('prescte') = boolean indicating the absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;  - resers('pvaluef') = its significance level</para></listitem>
+<listitem><para>&#160;  - resers('test p-value') = the (approximate) p-value of the test</para></listitem>
+<listitem><para>&#160;  - resers('prests') = boolean indicating the presence or absence of a time series in the regression</para></listitem>
+<listitem><para>&#160;  - resers('namey') = name of the y variable of the auxiliary regression</para></listitem>
+<listitem><para>&#160;  - resers('namex') = name of the x variables of the auxiliary regression</para></listitem>
+<listitem><para>&#160;  - resers('bounds') = if there is a timeseries in the regression, the bounds of the regression</para></listitem>
+<listitem><para>&#160;  - resers('like') = log-likelihood of the regression</para></listitem>
+<listitem><para>&#160;  - resers('dropna') = boolean indicating if NAs have been droped</para></listitem>
+<listitem><para>&#160;  - resers('nonna') = vector indicating position of non-NA values (if the option 'dropna' was active)</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Carries out Elliott-Rothenberg-Stock (ERS) test on a time series. The p-value have been tabulated using an extension of Y-W Cheung and K.S Lai (1995) ("Lag Order and Critical Values of a modified Dickey-Fuller test", Oxford Bulletin of Economics and Statistics, vol. 50, n&#186;3, pp. 411-419.) method.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/macros/grocer/db/bdhenderic.dat') ;
+bounds('1964q1','1989q2')
+ers('ly',1,4)
+ers('delts(ly)',0,4)
+// Example taken from function ers_d. The nature of series ly is asserted, first by testing if it is trend-stationary
+// (the result is negative), then if its first difference is level-stationary (the result is positive).
+// 4 lags of the first difference of the tested variable are introduced.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2006-2007
+        </refsection>
+</refentry>

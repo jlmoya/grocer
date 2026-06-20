@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="diebmar" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>diebmar </refname>
+               <refpurpose>Diebold and Mariano test for predictive accuracy </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>rdb = diebmar(namey,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =    observed vector TS: a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term> argi </term> =    arguments which can be:</para></listitem>
+<listitem><para>&#160;&#160;-&#160;2&#160;time&#160;series&#160;(the&#160;first&#160;serie&#160;is&#160;the&#160;benchmark&#160;model)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx2)&#160;vector</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;real&#160;(nx2)&#160;matrix</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;string&#160;equal&#160;to&#160;the&#160;name&#160;of&#160;a&#160;time&#160;series&#160;or&#160;a&#160;(nx2)&#160;real&#160;vector&#160;or&#160;matrix&#160;between&#160;quotes</para></listitem>
+<listitem><para>&#160;&#160;-&#160;a&#160;list&#160;of&#160;such&#160;elements</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'smallc&#160;=1'&#160;if&#160;the&#160;user&#160;want&#160;to&#160;perform&#160;a&#160;small&#160;sample&#160;correction&#160;will&#160;be&#160;done&#160;(optional;&#160;default&#160;=&#160;0:&#160;no&#160;small&#160;sample&#160;correction)</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'trunc&#160;=&#160;xx'&#160;truncation&#160;point&#160;of&#160;the&#160;bartlett&#160;window&#160;(optional;&#160;default&#160;=&#160;floor(5*nobs^0.25))</para></listitem>
+<listitem><para>&#160;&#160;-&#160;the&#160;string&#160;'noprint'&#160;if&#160;the&#160;user&#160;doesn't&#160;want&#160;to&#160;display&#160;the&#160;results&#160;of&#160;the&#160;regression</para></listitem>
+<listitem><para>&#160;&#160;-&#160;'dropna'&#160;if&#160;the&#160;user&#160;wants&#160;to&#160;remove&#160;the&#160;NA&#160;values&#160;from&#160;the&#160;data</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rdb </term> =    a results tlist with</para></listitem>
+<listitem><para>&#160;  - rdb('meth') = 'diebmar'</para></listitem>
+<listitem><para>&#160;  - rdb('y') = input forecasted series</para></listitem>
+<listitem><para>&#160;  - rdb('x') = forecasts resp. under the null hypothesis and forecast under the alternative hypothesis</para></listitem>
+<listitem><para>&#160;  - rdb('namey') = name of forecasted serie</para></listitem>
+<listitem><para>&#160;  - rdb('namex') = names of forecasts resp. under the null hypothesis and under the alternative hypothesis</para></listitem>
+<listitem><para>&#160;  - rdb('mse') = vector of MSE</para></listitem>
+<listitem><para>&#160;  - rdb('stat') = value of the Diebold-Mariano statistics</para></listitem>
+<listitem><para>&#160;  - rdb('pvalue') = p-value of the Diebold-Mariano statistics</para></listitem>
+<listitem><para>&#160;  - rdb('smallc') = flag for a small sample correction</para></listitem>
+<listitem><para>&#160;  - rdb('trunc') = truncation lag of the Barlett window</para></listitem>
+<listitem><para>&#160;  - rdb('prests') = flag for the presence of time series</para></listitem>
+<listitem><para>&#160;  - rdb('bounds') = if there is a timeseries in the forecast, the bounds of the regression</para></listitem>
+<listitem><para>&#160;  - rdb('dropna') = boolean indicating if NAs have been droped</para></listitem>
+<listitem><para>&#160;  - rdb('nonna') = vector indicating position of non-NAs (if the option 'dropna' was active)</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+A function that computes Diebold and Mariano test for predictive accuracy while allowing for small sample correction as
+ proposed by Harvey et al.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+bounds('1979q1','2003q4');
+ri = rolreg('delts(log(y))','ypast','delts(yfut)','cte',...
+'dates=[''1992q1'',''2003q4'']','hstep=1');
+rb = rolreg('delts(log(y))','delts(lagts(log(y)))','delts(lagts(2,log(y)))','cte',...
+'dates=[''1992q1'',''2003q4'']','hstep=1');
+bounds();
+ 
+y_indic =ri('yfor');
+y_bench = rb('yfor');
+ 
+bounds('1992q2','2003q4'); 	// select an appropriate sample period
+ 
+rdb=diebmar('delts(log(y))','y_bench','y_indic','smallc=1','trunc=4")
+//Examples taken from function diebmar_d(). The forecasted series is delts(log(y)), the benchmark series is y_bench, the alternative
+one is y_indic. Here, a small sample correction is performed and the Barlett window is truncated at 4 lags.
+rdb=diebmar('delts(log(y))','y_bench','y_indic','smallc=1')
+// Now, a small sample correction is performed and the Barlett window is automatically determined
+rdb=diebmar('delts(log(y))','y_bench','y_indic')
+// Now, no small sample correction is performed and the Barlett window is the same as in example 2.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux/ Eric Dubois 2004-2007
+        </refsection>
+</refentry>

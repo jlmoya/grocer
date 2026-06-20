@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="gauss2sci" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:08-Aug-2011$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>gauss2sci</refname>
+               <refpurpose>Gauss to Scilab translation </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>gauss2sci(filein,lib,verbose)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> filein </term> =  a string, the name of a file collecting Gauss programs and scripts</para></listitem>
+<listitem><para>*  <term> lib </term> =  a string, the name of the library where the files resulting from the translation are put</para></listitem>
+<listitem><para>*  <term> verbose </term> =  a boolean, indicating whether the Gauss lines of codes are displayed as they are translated (optional: %f if not given)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* Nothing: the result of the translation is splitted into numerous files, one that gathers the lines of code corresponding to a script and one file per Gauss procedure.</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs a partial and imperfect, even if substantial, translation of a Gauss file collecting Gauss programs and scripts. The result of the translation is splitted into numerous files, one that gathers the lines of code corresponding to a script and one file per Gauss program, whose name is the program name, suffixed by .sci.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+gauss2sci('c:/qreg/qreg.src','c:/qreg.sci')
+// Suppose that you have put in the library 'c:/qreg' the qreg.scr file
+// taken from Thierry Roncalli qreg library (http://www.thierry-roncalli.com/).
+// Then the translation results in a file qreg.sce which, in this case, gathers the comments
+// put before each function to describe what it does; 5 files _qreg_solvelp1.sci, _qreg_solvelp.sci,
+// localqreg.sci, qreg.sci and setqreg.sci that are the translation of the 5 procedures
+// with the same name (less the suffix '.sci') that you can find in the file qreg.src.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2011
+        </refsection>
+</refentry>

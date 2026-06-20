@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<refentry version="5.0-subset Scilab" xml:id="invpd" xml:lang="en"
+ 
+          xmlns="http://docbook.org/ns/docbook"
+ 
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+ 
+          xmlns:svg="http://www.w3.org/2000/svg"
+ 
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+ 
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+ 
+          xmlns:db="http://docbook.org/ns/docbook">
+ 
+  <info>
+ 
+     <pubdate>$LastChangedDate:2-Nov-2009$</pubdate>
+ 
+   </info>
+ 
+   <refnamediv>
+ 
+       <refname>invpd</refname>
+ 
+               <refpurpose>mimic Gauss function invpd </refpurpose>
+ 
+   </refnamediv>
+ 
+ 
+ 
+        <refsynopsisdiv>
+ 
+               <title>CALLING SEQUENCE</title>
+ 
+               <synopsis>[xi]=invpd(x)</synopsis>
+ 
+        </refsynopsisdiv>
+ 
+ 
+ 
+        <refsection>
+ 
+           <title>PARAMETERS</title>
+ 
+           <variablelist>
+ 
+           <varlistentry>
+ 
+ 
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> x </term> =    a square matrix </para></listitem>
+ 
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+ 
+ 
+          <varlistentry>
+ 
+ 
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> xi </term> =    inverse of x </para></listitem>
+ 
+ 
+ 
+          </varlistentry>
+ 
+          </variablelist>
+ 
+        </refsection>
+ 
+ 
+ 
+        <refsection>
+ 
+               <title>DESCRIPTION</title>
+ 
+A dummy function to mimic Gauss invpd simply returns the inverse, with no checking for positive definiteness.
+ 
+ 
+ 
+        </refsection>
+ 
+ 
+ 
+        <refsection>
+ 
+               <title>EXAMPLE</title>
+ 
+              <programlisting role="example"><![CDATA[
+ 
+Y=invpd(x)
+ 
+ 
+ 
+               ]]></programlisting>
+ 
+        </refsection>
+ 
+ 
+ 
+        <refsection>
+ 
+               <title>AUTHOR</title>
+ 
+Eric Dubois 2002
+ 
+        </refsection>
+ 
+</refentry>
+ 

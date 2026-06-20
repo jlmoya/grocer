@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="numz0" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>numz0 </refname>
+               <refpurpose>numerical derivative </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[g]=numz0(namefunc,param,k,g,delta,varargin)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namefunc </term> =   name of function namefunc with the parameters as first argument  </para></listitem>
+<listitem><para>*  <term> param </term> =   point where the derivative is calculated</para></listitem>
+<listitem><para>*  <term> k </term> =   dimension of param</para></listitem>
+<listitem><para>*  <term> g </term> =   a pre-determinated matrix with dimension (k,n) where n is the dimension of namefunc</para></listitem>
+<listitem><para>*  <term> delta </term> =   the Increment used to evaluate the derivative</para></listitem>
+<listitem><para>*  <term> argi </term> =   argument other than param in function namefunc</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> g </term> =   numerical derivative</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Calculate a numerical derivative of function namefunc at point param.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+1) eqn=numz0('ssr',ols0(y,x),size(x,2),ones(size(x,2)),1E-5,y,x)
+2)chg='numz0('''+func+''',xarg,k,ik,infoz(''delta''), varargin(:))';execstr(chg)
+// The first example provides the value of the normal equations evaluated at the ols estimator:
+// the results should be approximately (since numz0 calculates a numerical derivative) 0.
+// Example 2, taken from maxlik, provides a numerical derivative of function func, at value xarg,
+// of dimension (k x 1), with an increment taken from infoz.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

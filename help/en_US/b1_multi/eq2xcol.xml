@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="eq2xcol" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>eq2xcol </refname>
+               <refpurpose>Transformation of a system of equations into a matrix vector </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[x,boundsvarb,prests]=eq2xcol(grocer_a,listeq,uneven,dropna)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> grocer_a </term> =    the vector of coefficients where the equations must be evaluated</para></listitem>
+<listitem><para>*  <term> listeq </term> =    the list of equations in string form</para></listitem>
+<listitem><para>*  <term> uneven </term> =    a boolean indicating whether the equations should keep their time bounds or must have common bounds</para></listitem>
+<listitem><para>*  <term> dropna </term> =    a boolean indicating whether the program should keep only lines of matrices y and x with non NA values</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> x </term> =    the X matrix in the regression represented by the system of equations embedded in listeq</para></listitem>
+<listitem><para>*  <term> boundsvarb </term> =    the bounds of the regressions (if any)</para></listitem>
+<listitem><para>*  <term> prests </term> =    a boolean indicating whether there is a ts in the equations</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Transforms a list of strings into the column vector equal to the evaluation of the list of equations contained in grocer_listeq at point grocer_a. The coefficients must be named grocer_a(i) in the equations. Used in function explosys.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+rols=ols('lm1','ly','lp','rnet','const')
+[grocer_x,grocer_boundsvarb,grocer_prests]=eq2xcol(-rols('beta'),'lm1-grocer_a(1)*ly-grocer_a(2)*lp-grocer_a(3)*rnet-grocer_a(4)',%f,%f)
+ 
+// this example stores in a vector the residuals of the first stage cointegration relationship between lm1, ly, lp and rnet,
+// as well as the corresponding time bounds and the presence of a ts
+ 
+x=-numz0(eq2xcol,ones(grocer_ncoef,1),grocer_ncoef,...
+ones(grocer_ncoef,grocer_totalnobs),1,grocer_listeq,grocer_unequal,grocer_dropna)'
+ 
+// This last example is taken from explosys and cannot be run alone, but shows a useful application. Eq2xcol is
+// given as an entry in function numz0 in order to calculate the x matrix as the first derivative
+// of the vector of equations with respect to the coefficients: it is evaluated at vector ones(grocer_ncoef,1).
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="garch_trans" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>garch_trans </refname>
+               <refpurpose>Transforms garch parameters </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>param=garch_trans(param,k)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term> param </term> =    [b ; a0 ; ar ; ma]</para></listitem>
+<listitem><para>*  <term> k </term> =    size(b,1)</para></listitem>
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+<listitem><para>*  <term> param </term> =    vector of transformed parameters</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Function to transform the a0,ar(p),ma(q) parameters of a garch(p,q) in order that the variance is always positive.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+oad(GROCERDIR+'/data/garchd.dat')
+ 
+bounds('1949q1','1983q4')
+r1 = ols('gnpdef','cte','lagts(gnpdef)','lagts(2,gnpdef)','lagts(3,gnpdef)','lagts(4,gnpdef)');
+bet = r1('beta');
+s = r1('ser');
+[y,namey,x]=explouniv('gnpdef',list('cte','lagts(gnpdef)','lagts(2,gnpdef)','lagts(3,gnpdef)','lagts(4,gnpdef)'));
+p=[bet ; s ; 0 ; 0 ]
+parmd = garch_trans(p,5);
+ 
+// parmd is the values of the parameters at ols solution
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

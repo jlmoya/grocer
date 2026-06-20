@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="newton_XY16_sp" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:03-Mars-2019$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>newton_XY16_sp</refname>
+               <refpurpose>find the 0 of a function by Xiao and Yin (2016) method </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[xs,fs,maxfs]=newton_XY16_sp(x0,func,Jac,indJac,ftol,itermax,alphamin)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>x0</term> = a (n x 1) vector of starting values</para></listitem>
+<listitem><para>*  <term>func</term> = a function, whose 0 is searched</para></listitem>
+<listitem><para>*  <term>Jac</term> = a function, performing the non zero values of the Jacobian of this function (with the rhs as an output)</para></listitem>
+<listitem><para>*  <term>indJac</term> = a (K x 2) matrix, collecting the non zero indexes of the Jacobian</para></listitem>
+<listitem><para>*  <term>ftol</term> = the convergence criterion for the function value</para></listitem>
+<listitem><para>*  <term>itermax</term> = the maxmimum number for the function calls</para></listitem>
+<listitem><para>*  <term>alphamin</term> = the minimum value used to dampen the step when convergence is not acheived</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term>xs</term> = the value of the parameter at solution</para></listitem>
+<listitem><para>*  <term>fs</term> = the value of the function at solution</para></listitem>
+<listitem><para>*  <term>maxfs</term> = the maximum value of the absolute function at solution</para></listitem>
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Finds the 0 of an equation using the variant of the Newton method provided by X. Y. Xiao and H. W. Yin,  “Increasing the order of convergence for iterative methods
+ to solve nonlinear systems,” Calcolo. A, Quarterly on Numerical Analysis and Theory of Computation, vol. 53, no. 3, pp. 285–300, 2016. Adpated to a problem when the Jacobian is sparse.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+// Search the zero of function test_func in the optsci folder. The function codes the problem 7 provided by
+// Sharma, Sharma and Bahl (2016), An improved Newton–Traub composition for solving systems of nonlinear equations,
+// Applied Mathematics and Computation, N. 290, p. 98-110.
+// The function to minimize is:
+// x(i)x(i+1)=1 for i=1:98
+// x(99)x(1)=1
+// The corresponding Jacobian function is coded in function test_Jac_sp
+// Starting values are the ones provided in the paper: -4*ones(99,1)
+// Convergence criterion is set to 1e-10, maximum # of iterations is set to 1000, minimum value used to dampen the step is set to
+ 
+ 
+ind_sp=[[1:99 1:99]' , [1:99 2:99 1]']; 
+[x0,f0,maxf0]=newton_XY16_sp(-4*ones(99,1),newton_testfunc_sp,newton_testJac_sp,ind_sp,1e-8,100,0.05)
+ 
+ 
+// Provides the expected result x0 =-1*ones(99,1) and f0=0 
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+&#201;ric Dubois 2019
+        </refsection>
+</refentry>

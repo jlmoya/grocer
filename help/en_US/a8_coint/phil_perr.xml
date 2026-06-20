@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="phil_perr" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>phil_perr </refname>
+               <refpurpose>Phillips-Perron unit-root test </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[result]=phil_perr(namey,p,l,np,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+ 
+<listitem><para>*  <term>namey</term> = a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes</para></listitem>
+<listitem><para>*  <term>p</term> = order of time polynomial in the null-hypothesis</para></listitem>
+<listitem><para>&#160;&#160;-p&#160;=&#160;&#160;0,&#160;for&#160;constant&#160;term</para></listitem>
+<listitem><para>&#160;&#160;-p&#160;=&#160;&#160;1,&#160;for&#160;constant&#160;plus&#160;time-trend</para></listitem>
+<listitem><para>*  <term> l </term>= (optional) truncation lag of the Newey-West window  default: l  =    floor(5*nobs^0.25)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>* result tlist with:</para></listitem>
+<listitem><para>&#160;  - result('meth')  = 'phillips-perron'</para></listitem>
+<listitem><para>&#160;  - result('y')     = y data vector</para></listitem>
+<listitem><para>&#160;  - result('x')     = x data matrix</para></listitem>
+<listitem><para>&#160;  - result('nobs')  = nobs</para></listitem>
+<listitem><para>&#160;  - result('nvar')  = nvars</para></listitem>
+<listitem><para>&#160;  - result('beta')  = bhat</para></listitem>
+<listitem><para>&#160;  - result('yhat')  = yhat</para></listitem>
+<listitem><para>&#160;  - result('resid') = residuals</para></listitem>
+<listitem><para>&#160;  - result('vcovar') = estimated variance-covariance matrix of beta</para></listitem>
+<listitem><para>&#160;  - result('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - result('sige')  = estimated variance of the residuals</para></listitem>
+<listitem><para>&#160;  - result('ser')  = standard error of the regression</para></listitem>
+<listitem><para>&#160;  - result('tstat') = t-stats</para></listitem>
+<listitem><para>&#160;  - result('pvalue') = pvalue of the betas</para></listitem>
+<listitem><para>&#160;  - result('dw')    = Durbin-Watson Statistic</para></listitem>
+<listitem><para>&#160;  - result('condindex') = multicolinearity cond index</para></listitem>
+<listitem><para>&#160;  - result('prescte') = boolean indicating the presence or absence of a constant in the regression</para></listitem>
+<listitem><para>&#160;  - result('rsqr')  = rsquared</para></listitem>
+<listitem><para>&#160;  - result('rbar')  = rbar-squared</para></listitem>
+<listitem><para>&#160;  - result('f')    = F-stat for the nullity of coefficients other than the constant</para></listitem>
+<listitem><para>&#160;  - result('pvaluef') = its significance level</para></listitem>
+<listitem><para>&#160;  - result('zalpha') = Phillips-Peron statistic, autocorrelation/heteroskedasticity corrected value for the unit-root coefficient based on a Dickey-Fuller regression</para></listitem>
+<listitem><para>&#160;  - result('zt') = Phillips-Peron statistic, autocorrelation/heteroskedasticity corrected t-ratio for the unit-root coefficient based on a Dickey-Fuller regression</para></listitem>
+<listitem><para>&#160;  - result('crit_al')  = (3 x 1) vector of critical values [1% 5% 10%] quintiles for zalpha</para></listitem>
+<listitem><para>&#160;  - result('crit_t')  = (3 x 1) vector of critical values [1% 5% 10%] quintiles for zt</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Computes Phillips-Perron test of the unit-root hypothesis based on a Dickey-Fuller/ Augmented Dickey-Fuller regression.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ 
+load(GROCERDIR+'/data/bdhenderic.dat');
+bounds('1964q3','1989q2');
+r=phil_perr('lm1',0,15)
+r=phil_perr('lm1',1)
+ 
+// Examples taken from fucntion phil_perr_d.
+// Example 1 provides the Phillips-Peron test for variable lm1, whitout trend and with a 15 length for the Newey-West window.
+// Example 2 provides the Phillips-Peron test for variable lm1, whit trend and with a default length for the Newey-West window.
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2002
+        </refsection>
+</refentry>

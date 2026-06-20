@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="gmmAndMon" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:22-Oct-2009$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>gmmAndMon </refname>
+               <refpurpose>Andrews-Monahan HAC estimators </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[band,uout,D,eflag] = gmmAndMon(gmmopt,e,M,Z)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>* <term>gmmopt</term> = tlist from GMM estimation which revelant arguments are</para></listitem>
+<listitem><para>&#160;&#160;-&#160;gmmopt('prt')&#160;=&#160;printing&#160;(0=none)&#160;&#160;&#160;&#160;&#160;[1]</para></listitem>
+<listitem><para>&#160;&#160;-&#160;gmmopt('aminfo')=&#160;a&#160;list&#160;with&#160;fields:</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;aminfo('p')&#160;=&#160;autoregressive&#160;lags&#160;(p&lt;=1&#160;for&#160;arma&#160;models)&#160;[1]</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;aminfo('q')&#160;=&#160;moving&#160;average&#160;lags&#160;[0]</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;aminfo('vardum')=&#160;1&#160;for&#160;VAR(p)&#160;(overrides&#160;q)&#160;[0]</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;aminfo('nowhite')&#160;=&#160;1&#160;suppresses&#160;pre-whitening&#160;[0]</para></listitem>
+<listitem><para>&#160;&#160;&#160;&#160;.&#160;aminfo('diagdum')&#160;=1&#160;for&#160;diagnostic&#160;graphs&#160;[0]</para></listitem>
+ 
+<listitem><para>*  <term> e </term> =        matrix of residuals (we want its spectral density)</para></listitem>
+<listitem><para>*  <term> M </term> =        Jacobian (derivative of moments)</para></listitem>
+<listitem><para>*  <term> Z </term> =    instruments</para></listitem>
+ 
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term>  band </term> =        bandwidth determined from the data</para></listitem>
+<listitem><para>*  <term>  uout </term> =        matrix of whitened residuals</para></listitem>
+<listitem><para>*  <term>  D </term> =    matrix to 're-color' spectral density of whitened resids</para></listitem>
+<listitem><para>*  <term>  eflag </term> =    1 if an error in estimating ARMA model, else 0</para></listitem>
+ 
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Calculates objects needed by gmmS for Andrews-Monahan HAC estimate.
+ 
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+ [band,u,D,amerr] = gmmAndMon(gmmopt,e,M,Z);
+//Example taken from gmmS:
+ 
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Emmanuel Michaux 2007
+        </refsection>
+</refentry>

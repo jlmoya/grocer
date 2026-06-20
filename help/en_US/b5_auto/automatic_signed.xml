@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry version="5.0-subset Scilab" xml:id="automatic_signed" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns4="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+     <pubdate>$LastChangedDate:30-Aug-2011$</pubdate>
+   </info>
+   <refnamediv>
+       <refname>automatic_signed</refname>
+               <refpurpose>automatic general to specific regression with sign constraints on coefficients </refpurpose>
+   </refnamediv>
+ 
+        <refsynopsisdiv>
+               <title>CALLING SEQUENCE</title>
+               <synopsis>[rd,rf]=automatic_signed(namey,listx,signx,arg1,...,argn)</synopsis>
+        </refsynopsisdiv>
+ 
+        <refsection>
+           <title>PARAMETERS</title>
+           <variablelist>
+           <varlistentry>
+ 
+           <term>Input</term>
+ 
+<listitem><para>*  <term> namey </term> =    a time series, a real (nx1) vector or a string equal to the name of a time series or a (nx1) real vector between quotes* results  =    an automatic tlist results</para></listitem>
+<listitem><para>*  <term> listx </term> =    a matrix of exogenous variables, under as a (T x k) real matrix or a (T x 1) string vector of names</para></listitem>
+<listitem><para>*  <term> signx </term> =    a (T x 1) vector of -1, 1 or %nan values, each value indicating the expected sign of the coefficients, -1 for negative, +1 positive and %nan for indifferent.</para></listitem>
+<listitem><para>*  <term> arg1,...,argn </term> =    any option to automatic (see function automatic for details)</para></listitem>
+ 
+ 
+ 
+<listitem><para>&#160;</para></listitem>
+ 
+           </varlistentry>
+ 
+          <varlistentry>
+ 
+          <term>Output</term>
+ 
+<listitem><para>*  <term> rd </term> =    a results tlist with:</para></listitem>
+<listitem><para>&#160;    - rd('meth') = 'signed automatic'</para></listitem>
+<listitem><para>&#160;    - rd('starting automatic') = original automatic results tlist</para></listitem>
+<listitem><para>&#160;    - rd('ending automatic') = final automatic results tlist that is with all coefficient fo the good sign</para></listitem>
+<listitem><para>&#160;    - rd('removed var') = a string vector, the variables that have been removed</para></listitem>
+<listitem><para>*  <term> rf </term> =    the results tlist of the final model</para></listitem>
+ 
+ 
+          </varlistentry>
+          </variablelist>
+        </refsection>
+ 
+        <refsection>
+               <title>DESCRIPTION</title>
+Performs the automatic selection of a model by least-squares regression as in Hendry and Krozlig, while imposing the sign of selected coefficients.
+        </refsection>
+ 
+        <refsection>
+               <title>EXAMPLE</title>
+              <programlisting role="example"><![CDATA[
+load(GROCERDIR+'\data\conjfra.dat')
+ 
+bounds('1991q3','2008q2','2009q3','2011q2')
+tests='test=predfailin(0.9),doornhans,arlm(4),hetero_sq'
+signx=ones(size(listx,2),1)
+[r1,rf1]=automatic_signed('growthr(fra_gdp)',listx,signx,'comp=const','strategy=liberal',tests)
+ 
+// Example taken from function automatic_signed_d. Sign of all free coefficients are imposed positive. quantile(x,[0.025 ; 0.5 ; 0.975])
+ 
+               ]]></programlisting>
+        </refsection>
+ 
+        <refsection>
+               <title>AUTHOR</title>
+Eric Dubois 2011
+        </refsection>
+</refentry>
